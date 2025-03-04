@@ -9,7 +9,7 @@ module.exports = {
     organizationName: 'JupiterMetaZK',
     projectName: 'docs',
     trailingSlash: false,
-
+    themes: ['@docusaurus/theme-mermaid'],
     themeConfig: {
         navbar: {
             title: 'JupiterMetaZK',
@@ -22,8 +22,11 @@ module.exports = {
                 { href: 'https://github.com/JupiterMetaZK/docs', label: 'GitHub', position: 'right' },
             ],
         },
+        mermaid: {
+            theme: { light: 'default', dark: 'dark' }, // Enables light/dark mode support
+        },
     },
-
+    
     presets: [
         [
             '@docusaurus/preset-classic',
@@ -38,4 +41,7 @@ module.exports = {
             },
         ],
     ],
+    markdown: {
+        mermaid: true,  // ✅ Officially enabling MermaidJS
+    },
 };

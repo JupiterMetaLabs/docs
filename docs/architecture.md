@@ -10,7 +10,7 @@ JupiterMetaZK employs a **three-layer architecture**:
 
 1. **Enterprise Layer** – User interactions, enterprise workflows, and high-level application logic.
 2. **Chain Layer** – **ZK-Rollups, SNARK/STARK computations, and DID-based verifiable credentials**.
-3. **Bridge Layer** – Commits transactions to **Ethereum, Rubix, and Solana**.
+3. **Bridge Layer** – Commits transactions to **Ethereum**.
 
 ```mermaid
 flowchart TB
