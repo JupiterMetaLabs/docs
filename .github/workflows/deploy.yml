@@ -3,7 +3,10 @@ name: Deploy Docusaurus to GitHub Pages
 on:
   push:
     branches:
-      - main  # Runs when changes are pushed to the `main` branch
+      - main  # Runs on every push to the `main` branch
+
+permissions:
+  contents: write  # Allow write access for pushing to gh-pages
 
 jobs:
   deploy:
