@@ -9,9 +9,9 @@ export default function Home() {
   return (
     <Layout title="JupiterMetaZK Documentation" description="Scalable, Privacy-Preserving Layer 2 Blockchain">
       
-      {/* Google Analytics Tag */}
+      {/* SEO & Open Graph Meta Tags */}
       <Head>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-8N3L9Z2Z9X"></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-8N3L9Z2Z9X"></script>
         <script>
           {`
             window.dataLayer = window.dataLayer || [];
@@ -20,6 +20,32 @@ export default function Home() {
             gtag('config', 'G-8N3L9Z2Z9X');
           `}
         </script>
+        {/* 🌐 SEO Metadata */}
+        <title>JupiterMetaZK - Next-Gen Blockchain Platform</title>
+        <meta name="description" content="JupiterMetaZK is an Ethereum Layer 2 blockchain with Zero-Knowledge Proofs, Decentralized Identity, and Hybrid Multi-Layer Consensus for privacy, scalability, and security." />
+        <meta name="keywords" content="JupiterMetaZK, Blockchain, Ethereum Layer 2, ZK Proofs, Web3, Decentralized Identity, L2 Blockchain, Crypto, Smart Contracts, zkjm, scalable blockchain, high throughput blockchain, gossip protocol, raft, bloom filters, nnss" />
+        <meta name="author" content="JupiterMetaZK" />
+        <link rel="canonical" href="https://zkjm.io/" />
+
+        {/* 🌐 Favicon */}
+        <link rel="icon" type="image/png" href="https://storage.googleapis.com/super-j/679b7e4648c7a998d458130e/favicon.png" />
+        <link rel="apple-touch-icon" href="https://storage.googleapis.com/super-j/679b7e4648c7a998d458130e/favicon.png" />
+
+        {/* 🌐 Open Graph (OG) Meta Tags for Social Sharing */}
+        <meta property="og:title" content="JupiterMetaZK - Next-Gen Blockchain Platform" />
+        <meta property="og:description" content="Scalable, private, and secure Ethereum Layer 2 blockchain with Zero-Knowledge Proofs and Decentralized Identity." />
+        <meta property="og:url" content="https://zkjm.io/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://storage.googleapis.com/super-j/images/jmzk-ogimage.png" />
+        <meta property="og:image:alt" content="JupiterMetaZK" />
+        <meta property="og:site_name" content="JupiterMetaZK" />
+
+        {/* 🌐 Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="JupiterMetaZK - Next-Gen Blockchain Platform" />
+        <meta name="twitter:description" content="Ethereum Layer 2 blockchain with privacy, scalability, and ZK Proofs." />
+        <meta name="twitter:image" content="https://storage.googleapis.com/super-j/images/jmzk-ogimage.png" />
+        <meta name="twitter:site" content="@JupiterMetaZK" />
       </Head>
 
       {/* 🚀 Hero Section with Darkened Background Image */}
