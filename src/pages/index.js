@@ -2,12 +2,26 @@ import React from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Head from '@docusaurus/Head';
 
 export default function Home() {
   const { siteConfig } = useDocusaurusContext();
   return (
     <Layout title="JupiterMetaZK Documentation" description="Scalable, Privacy-Preserving Layer 2 Blockchain">
       
+      {/* Google Analytics Tag */}
+      <Head>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-8N3L9Z2Z9X"></script>
+        <script>
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-8N3L9Z2Z9X');
+          `}
+        </script>
+      </Head>
+
       {/* 🚀 Hero Section with Darkened Background Image */}
       <header 
         className="hero hero--primary relative"
@@ -34,7 +48,7 @@ export default function Home() {
             JupiterMetaZK Documentation
           </h1>
 
-          <p className="hero__subtitle" >
+          <p className="hero__subtitle" style={{ color: 'var(--ifm-font-color-base)' }}>
             Scalable, privacy-preserving blockchain solutions with <strong>ZK Proofs</strong> & <strong>Decentralized Identity</strong>.
           </p>
           
