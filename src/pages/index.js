@@ -46,7 +46,23 @@ export default function Home() {
         <meta name="twitter:description" content="Ethereum Layer 2 blockchain with privacy, scalability, and ZK Proofs." />
         <meta name="twitter:image" content="https://storage.googleapis.com/super-j/images/jmzk-ogimage.png" />
         <meta name="twitter:site" content="@JupiterMetaZK" />
+
+        {/* Google Translate Widget */}
+        <script type="text/javascript">
+          {`
+            function googleTranslateElementInit() {
+              new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,hi,ta,te,ml,kn,zh-CN,fr,de,es,it,ko,ja,ru,ar',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+              }, 'google_translate_element');
+            }
+          `}
+        </script>
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
       </Head>
+
+      
 
       {/* 🚀 Hero Section with Darkened Background Image */}
       <header 
@@ -106,6 +122,18 @@ export default function Home() {
               <p>Build on Ethereum with full EVM compatibility and easy-to-use SDKs.</p>
             </div>
           </div>
+          {/* Google Translate Dropdown - Fixed Position */}
+      <div id="google_translate_element" 
+        style={{ 
+          position: 'fixed', 
+          top: '10px', 
+          right: '20px', 
+          zIndex: 1000, 
+          backgroundColor: 'rgba(0, 0, 0, 0.6)', 
+          padding: '5px', 
+          borderRadius: '5px' 
+        }}
+      ></div>
         </section>
       </main>
     </Layout>

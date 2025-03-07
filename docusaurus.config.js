@@ -19,20 +19,20 @@ module.exports = {
                 alt: 'ZKJM Logo',
                 src: 'img/jmzk-logo.png',
             },
-            items: [
-                { type: 'doc', docId: 'intro', position: 'left', label: 'Docs' },
-                { href: 'https://zkjm.io', label: 'ZKJM Website', position: 'right' },
-                { href: 'https://github.com/JupiterMetaZK/docs', label: 'GitHub', position: 'right' },
-            ],
+            // items: [
+            //     { type: 'doc', docId: 'intro', position: 'left', label: 'Docs' },
+            //     { href: 'https://zkjm.io', label: 'ZKJM Website', position: 'right' },
+            //     { href: 'https://github.com/JupiterMetaZK/docs', label: 'GitHub', position: 'right' },
+            // ],
         },
         footer: {
             // style: 'dark',
             links: [
                 {
-                    title: 'Docs',
+                    title: 'Links',
                     items: [
-                        { label: 'Introduction', to: '/docs/intro' },
-                        { label: 'Architecture', to: '/docs/architecture' },
+                        { label: 'JupiterMetaZK', to: 'https://zkjm.io' },
+                        { label: 'GitHub', to: 'https://github.com/JupiterMetaZK/docs' },
                     ],
                 },
                 // {
