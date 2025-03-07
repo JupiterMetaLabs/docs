@@ -1,4 +1,91 @@
-/* Custom CSS */
-body {
-    font-family: Arial, sans-serif;
-}
+/* Custom styling to match ZKJM.io */
+
+:root {
+    --ifm-color-primary: #71a2e6;
+    --ifm-color-primary-dark: #8074d9;
+    --ifm-color-primary-darker: #df77a8;
+    --ifm-color-primary-light: #71a2e6;
+    --ifm-color-primary-lighter: #8074d9;
+  }
+  
+  /* Light Mode */
+  :root[data-theme='light'] {
+    --ifm-background-color: #ffffff;
+    --ifm-font-color-base: #000000;
+    --ifm-navbar-background-color: rgba(255, 255, 255, 0.8);
+    --ifm-footer-background-color: #f5f5f5;
+  }
+  
+  /* Dark Mode */
+  :root[data-theme='dark'] {
+    --ifm-background-color: #181818;
+    --ifm-font-color-base: #E0E0E0;
+    --ifm-navbar-background-color: rgba(0, 0, 0, 0.8);
+    --ifm-footer-background-color: #0F0F0F;
+  }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--ifm-background-color);
+    color: var(--ifm-font-color-base);
+  }
+  
+  .navbar {
+    background-color: var(--ifm-navbar-background-color);
+    box-shadow: none;
+  }
+  
+  .footer {
+    background-color: var(--ifm-footer-background-color);
+    color: var(--ifm-font-color-base);
+  }
+  
+  .footer__title, .footer__link-item {
+    color: var(--ifm-font-color-base);
+  }
+  
+  /* .footer__link-item:hover {
+    color: var(--ifm-color-primary);
+  } */
+  
+  .hero {
+    position: relative;
+    text-align: center;
+    padding: 3rem 0;
+    color: white;
+    overflow: hidden;
+  }
+  
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background: url('https://superj.s3.ap-south-2.amazonaws.com/frontend-public/Logs-final/Bg_Horizontal.mp4') no-repeat center center/cover; */
+    z-index: -1;
+    opacity: 0.5;
+  }
+  
+  .button {
+    background-color: var(--ifm-color-primary);
+    border-radius: 50px;
+    padding: 12px 24px;
+    font-weight: bold;
+    color: #ffffff;
+    border: none;
+  }
+  
+  .button:hover {
+    background-color: var(--ifm-color-primary-dark);
+  }
+  
+  /* [data-theme='light'] .button {
+    background-color: #4CAF50;
+    color: #ffffff;
+  }
+  
+  [data-theme='light'] .button:hover {
+    background-color: #388E3C;
+  } */

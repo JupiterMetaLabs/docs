@@ -4,7 +4,7 @@ title: Use Cases
 sidebar_label: Use Cases
 ---
 
-# 🏆 Use Cases
+# Use Cases
 
 ### **User Onboarding & Reward Redemption**
 1. User joins **SuperJ** and gets a **JM DID**.

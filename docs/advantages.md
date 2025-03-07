@@ -14,9 +14,9 @@ sidebar_label: Advantages
 ✅ **Zero-Knowledge Proofs** allow **high throughput & privacy**.  
 ✅ **Fraud-proof mechanisms** for **trustless off-chain computation**.  
 
-## **Multi-Chain Interoperability**
+<!-- ## **Multi-Chain Interoperability**
 ✅ **Rubix**: Gas-fee-less transactions.  
 ✅ **EVM**: Ethereum ecosystem compatibility.  
-✅ **Solana**: High throughput transactions.  
+✅ **Solana**: High throughput transactions.   -->
 
-[Explore Implementation Roadmap →](./roadmap.md)
+<!-- [Explore Implementation Roadmap →](./roadmap.md) -->

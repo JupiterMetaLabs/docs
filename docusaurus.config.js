@@ -1,32 +1,57 @@
 module.exports = {
     title: 'JupiterMetaZK Documentation',
-    tagline: 'Official Documentation for JupiterMetaZK',
+    tagline: 'Scalable, Privacy-Preserving Layer 2 Blockchain',
     url: 'https://docs.zkjm.io',
     baseUrl: '/',
     onBrokenLinks: 'warn',
     onBrokenMarkdownLinks: 'warn',
-    favicon: 'img/favicon.ico', // Ensure the favicon is in /static/img/
+    favicon: 'img/favicon.ico',
     organizationName: 'JupiterMetaZK',
     projectName: 'docs',
     trailingSlash: false,
+
     themes: ['@docusaurus/theme-mermaid'],
+
     themeConfig: {
         navbar: {
             title: 'JupiterMetaZK',
             logo: {
-                alt: 'JupiterMetaZK Logo',
-                src: 'img/jmzk-logo.png', // Ensure this matches the file in /static/img/
+                alt: 'ZKJM Logo',
+                src: 'img/jmzk-logo.png',
             },
             items: [
                 { type: 'doc', docId: 'intro', position: 'left', label: 'Docs' },
+                { href: 'https://zkjm.io', label: 'ZKJM Website', position: 'right' },
                 { href: 'https://github.com/JupiterMetaZK/docs', label: 'GitHub', position: 'right' },
             ],
         },
-        mermaid: {
-            theme: { light: 'default', dark: 'dark' }, // Enables light/dark mode support
+        footer: {
+            // style: 'dark',
+            links: [
+                {
+                    title: 'Docs',
+                    items: [
+                        { label: 'Introduction', to: '/docs/intro' },
+                        { label: 'Architecture', to: '/docs/architecture' },
+                    ],
+                },
+                // {
+                //     title: 'Community',
+                //     items: [
+                //         { label: 'Twitter', href: 'https://twitter.com/zkjm' },
+                //         { label: 'GitHub', href: 'https://github.com/JupiterMetaZK' },
+                //     ],
+                // },
+            ],
+            copyright: `© ${new Date().getFullYear()} JupiterMetaZK. All Rights Reserved.`,
+        },
+        colorMode: {
+            defaultMode: 'dark', // Ensuring default dark mode to match ZKJM.io
+            disableSwitch: false,
+            respectPrefersColorScheme: true,
         },
     },
-    
+
     presets: [
         [
             '@docusaurus/preset-classic',
@@ -41,7 +66,6 @@ module.exports = {
             },
         ],
     ],
-    markdown: {
-        mermaid: true,  // ✅ Officially enabling MermaidJS
-    },
+
+    markdown: { mermaid: true },
 };
