@@ -22,7 +22,32 @@ module.exports = {
         'zk',
         'did',
         'tokenomics',
-      ],
+        'seednode-core',
+        {
+          type: 'category',
+          label: 'JMDT Decentralized Node',
+          collapsed: true,
+          items: [
+            'jmdt-node',
+            'seednode',
+            'node-selection',
+            'avc',
+            'bft',
+            'sequencer',
+            'block',
+            'block-gRPC',
+            'smart-contract',
+            'gETH',
+            'db_ops',
+            'crdt',
+            'did-module',
+            'logging',
+            'cli',
+            'explorer',
+          ],
+        },
+        'mempool-routing-engine',
+      ]
     },
     {
       type: 'category',
@@ -41,4 +66,4 @@ module.exports = {
       ],
     },
   ],
-};
+}
