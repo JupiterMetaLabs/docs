@@ -21,6 +21,7 @@ module.exports = {
       items: [
         'zk',
         'did',
+        'did-registry',
         'tokenomics',
         'seednode-core',
         {
