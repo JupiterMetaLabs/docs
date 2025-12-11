@@ -1,12 +1,12 @@
 module.exports = {
-    title: 'JupiterMetaZK Documentation',
+    title: 'JMDT Documentation',
     tagline: 'Scalable, Privacy-Preserving Layer 2 Blockchain',
     url: 'https://docs.zkjm.io',
     baseUrl: '/',
     onBrokenLinks: 'warn',
     onBrokenMarkdownLinks: 'warn',
-    favicon: 'img/favicon.ico',
-    organizationName: 'JupiterMetaZK',
+    favicon: 'img/Frame_12.png',
+    organizationName: 'JupiterMeta',
     projectName: 'docs',
     trailingSlash: false,
 
@@ -14,10 +14,11 @@ module.exports = {
 
     themeConfig: {
         navbar: {
-            title: 'JupiterMetaZK',
+            title: '',
             logo: {
-                alt: 'ZKJM Logo',
-                src: 'img/jmzk-logo.png',
+                alt: 'JMDT Logo',
+                src: 'img/jmdt_logo_dark.png',
+                srcDark: 'img/jmdt_logo.png',
             },
             // items: [
             //     { type: 'doc', docId: 'intro', position: 'left', label: 'Docs' },
@@ -31,7 +32,7 @@ module.exports = {
                 {
                     title: 'Links',
                     items: [
-                        { label: 'JupiterMetaZK', to: 'https://zkjm.io' },
+                        { label: 'JMDT', to: 'https://zkjm.io' },
                         { label: 'GitHub', to: 'https://github.com/JupiterMetaZK/docs' },
                     ],
                 },
@@ -43,7 +44,7 @@ module.exports = {
                 //     ],
                 // },
             ],
-            copyright: `© ${new Date().getFullYear()} JupiterMetaZK. All Rights Reserved.`,
+            copyright: `© ${new Date().getFullYear()} JMDT. All Rights Reserved.`,
         },
         colorMode: {
             defaultMode: 'dark', // Ensuring default dark mode to match ZKJM.io

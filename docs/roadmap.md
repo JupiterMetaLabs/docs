@@ -6,7 +6,7 @@ sidebar_label: Roadmap
 
 # Roadmap
 
-## **ZKJM Development Roadmap**
+## **JMDT Development Roadmap**
 
 ### **🚀 Phase 1:**
 ✔ Research & Development on **ZKPs & DID-based querying**
@@ -16,11 +16,11 @@ sidebar_label: Roadmap
 ### **🚀 Phase 2:**
 ✔ Develop **zk-rollup aggregator**
 ✔ Beta testing with **enterprise partners**
-✔ Launch **ZKJM Testnet**
+✔ Launch **JMDT Testnet**
 
 ### **🚀 Phase 3:**
 ✔ **Mainnet launch**
 ✔ Expansion to **multi-chain interoperability**
 ✔ Onboarding **large-scale enterprise solutions**
 
-<!-- [Learn More About ZKJM](./intro.md) -->
+<!-- [Learn More About  JMDT](./intro.md) -->

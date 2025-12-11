@@ -5,9 +5,9 @@ sidebar_label: Architecture
 ---
 # Architecture
 
-## **JupiterMetaZK Architecture Overview**
+## **JMDT Architecture Overview**
 
-ZKJM's architecture is structured around key components that ensure **scalability, security, and privacy**:
+JMDT's architecture is structured around key components that ensure **scalability, security, and privacy**:
 
 
 ```mermaid
@@ -22,15 +22,15 @@ graph TD
 	   style L1 fill:#ADD8EA,stroke:#000,stroke-width:2px;
 	   
 
-    %% Layer 2 ZKJM
-    subgraph L2["**JupiterMetaZK**"]
-    B1["JupiterMetaZK Core"]
+    %% Layer 2 JMDT
+    subgraph L2["**JMDT**"]
+    B1["JMDT Core"]
     B2["ZK-Rollups"]
     B3["NNSS Consensus"]
     B4["DID Authentication"]
     B5["Immutable Ledger"]
     B6["Mining"]
-    B7["ZKJM Token Accounts"]
+    B7["JMDT Token Accounts"]
     end
     style L2 fill:#FFEEFF,stroke:#000,stroke-width:2px;
     

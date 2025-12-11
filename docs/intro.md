@@ -1,17 +1,17 @@
 ---
 id: intro
-title: JupiterMetaZK Docs
+title: JMDT Docs
 sidebar_label: Introduction
 
 ---
 
 # Introduction
 
-## What is JupiterMetaZK (ZKJM)?
+## What is Jupiter Meta Data Token (JMDT)?
 
-JupiterMetaZK (ZKJM) is an **Ethereum-based Layer 2 (L2) blockchain** designed to enhance **scalability, privacy, and security** for decentralized applications (dApps) and enterprise use cases. By leveraging **Zero-Knowledge Proofs (ZKPs), Decentralized Identity (DID), and the Non-Negotiable Sequential Synchronization (NNSS) consensus mechanism**, ZKJM provides a highly efficient and interoperable blockchain infrastructure.
+Jupiter Meta Data Token (JMDT) is an **Ethereum-based Layer 2 (L2) blockchain** designed to enhance **scalability, privacy, and security** for decentralized applications (dApps) and enterprise use cases. By leveraging **Zero-Knowledge Proofs (ZKPs), Decentralized Identity (DID), and the Non-Negotiable Sequential Synchronization (NNSS) consensus mechanism**, JMDT provides a highly efficient and interoperable blockchain infrastructure.
 
-### **Why Choose ZKJM?**
+### **Why Choose JMDT?**
 -  **Zero-Knowledge Proofs (ZKPs):** Enables private transactions and computations without exposing sensitive data.
 -  **Decentralized Identity (DID):** W3C-standardized identifiers for secure and PII-protected user authentication.
 - **Layer 2 Scaling:** Optimized throughput using **zk-rollups** and immutable ledger-based state synchronization.

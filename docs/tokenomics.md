@@ -6,13 +6,13 @@ sidebar_label: Tokenomics
 
 # Tokenomics
 
-## **ZKJM Token Model**
+## **JMDT Token Model**
 
-ZKJM operates on a **limited-supply ERC-20 token model**, with tokens utilized for **governance, staking, and incentivization**.
+JMDT operates on a **limited-supply ERC-20 token model**, with tokens utilized for **governance, staking, and incentivization**.
 
 ### **Token Distribution**
 - 🎯 **20% Pre-mined** (Based on SuperJ app data and pre-mainnet enterprise onboarding)
-  - **10%** Reserved for **ZKJM Foundation & R&D**
+  - **10%** Reserved for **JMDT Foundation & R&D**
   - **5%** Incentives for **early adopters and partners**
   - **5%** Listed on **exchanges for liquidity**
 - 🎯 **80% of supply** mined **progressively**, ensuring fair distribution
