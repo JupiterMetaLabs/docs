@@ -131,3 +131,4 @@ dist
 build/
 static/.DS_Store
 .DS_Store
+static/docs-content.json

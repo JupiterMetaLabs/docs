@@ -1,7 +1,44 @@
+// Load .env file into process.env (falls back gracefully if file is missing)
+require('dotenv').config();
+
+// ── Generate docs-content.json for the AI chatbot ────────────────────────────
+// Runs every time Docusaurus starts or builds. Reads all .md files from /docs
+// and writes them to /static/docs-content.json so the widget can fetch them.
+(function generateDocsContent() {
+  const fs   = require('fs');
+  const path = require('path');
+  const docsDir   = path.join(__dirname, 'docs');
+  const outputDir = path.join(__dirname, 'static');
+  try {
+    const files = fs.readdirSync(docsDir)
+      .filter(f => f.endsWith('.md') || f.endsWith('.mdx'))
+      .sort();
+    const pages = files.map(file => ({
+      name: file.replace(/\.mdx?$/, ''),
+      content: fs.readFileSync(path.join(docsDir, file), 'utf-8'),
+    }));
+    fs.writeFileSync(
+      path.join(outputDir, 'docs-content.json'),
+      JSON.stringify({ pages })
+    );
+    console.log(`[chatbot] Indexed ${pages.length} doc pages → static/docs-content.json`);
+  } catch (e) {
+    console.warn('[chatbot] Could not generate docs-content.json:', e.message);
+  }
+})();
+
 module.exports = {
     title: 'JMDT Documentation',
+
+    // ── Chatbot Widget API Key ────────────────────────────────────────────────
+    // Add your Gemini API key to .env:  GEMINI_API_KEY=your_key_here
+    // .env is git-ignored — never commit it.
+    customFields: {
+        geminiApiKey: process.env.GEMINI_API_KEY || '',
+    },
+
     tagline: 'Scalable, Privacy-Preserving Layer 2 Blockchain',
-    url: 'https://docs.zkjm.io',
+    url: 'https://docs.jmdt.io',
     baseUrl: '/',
     onBrokenLinks: 'warn',
     onBrokenMarkdownLinks: 'warn',
@@ -32,8 +69,8 @@ module.exports = {
                 {
                     title: 'Links',
                     items: [
-                        { label: 'JMDT', to: 'https://zkjm.io' },
-                        { label: 'GitHub', to: 'https://github.com/JupiterMetaZK/docs' },
+                        { label: 'JMDT', to: 'https://jmdt.io' },
+                        { label: 'GitHub', to: 'https://github.com/JupiterMetaLabs/docs' },
                     ],
                 },
                 // {
@@ -59,7 +96,7 @@ module.exports = {
             {
                 docs: {
                     sidebarPath: require.resolve('./sidebars.js'),
-                    editUrl: 'https://github.com/JupiterMetaZK/docs/edit/main/',
+                    editUrl: 'https://github.com/JupiterMetaLabs/docs/edit/main/',
                 },
                 theme: {
                     customCss: require.resolve('./src/css/custom.css'),
