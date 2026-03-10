@@ -9,19 +9,73 @@ require('dotenv').config();
   const path = require('path');
   const docsDir   = path.join(__dirname, 'docs');
   const outputDir = path.join(__dirname, 'static');
+
+  function slugify(text) {
+    return text.toString().toLowerCase()
+      .replace(/\s+/g, '-')           
+      .replace(/[^\w\-]+/g, '')       
+      .replace(/\-\-+/g, '-')         
+      .replace(/^-+/, '')             
+      .replace(/-+$/, '');            
+  }
+
   try {
     const files = fs.readdirSync(docsDir)
       .filter(f => f.endsWith('.md') || f.endsWith('.mdx'))
       .sort();
-    const pages = files.map(file => ({
-      name: file.replace(/\.mdx?$/, ''),
-      content: fs.readFileSync(path.join(docsDir, file), 'utf-8'),
-    }));
+
+    const allSections = [];
+
+    let sectionId = 0;
+    files.forEach(file => {
+      const content = fs.readFileSync(path.join(docsDir, file), 'utf-8');
+      const fileName = file.replace(/\.mdx?$/, '');
+      
+      const lines = content.split('\n');
+      let currentTitle = fileName.charAt(0).toUpperCase() + fileName.slice(1);
+      
+      const fmMatch = content.match(/^title: (.*)$/m);
+      if (fmMatch) currentTitle = fmMatch[1].trim();
+
+      let currentContent = [];
+      let currentAnchor = '';
+      
+      lines.forEach(line => {
+        const match = line.match(/^(#+)\s+(.*)$/);
+        if (match) {
+          if (currentContent.length > 0) {
+            allSections.push({
+              id: sectionId++,
+              name: fileName,
+              title: currentTitle,
+              content: currentContent.join('\n').trim(),
+              anchor: currentAnchor
+            });
+          }
+          currentTitle = match[2].trim();
+          currentAnchor = slugify(currentTitle);
+          currentContent = [];
+        } else {
+          currentContent.push(line);
+        }
+      });
+      
+      if (currentContent.length > 0) {
+        allSections.push({
+          id: sectionId++,
+          name: fileName,
+          title: currentTitle,
+          content: currentContent.join('\n').trim(),
+          anchor: currentAnchor
+        });
+      }
+    });
+
     fs.writeFileSync(
       path.join(outputDir, 'docs-content.json'),
-      JSON.stringify({ pages })
+      JSON.stringify({ pages: allSections })
     );
-    console.log(`[chatbot] Indexed ${pages.length} doc pages → static/docs-content.json`);
+    console.log(`[chatbot] Indexed ${allSections.length} doc sections → static/docs-content.json`);
   } catch (e) {
     console.warn('[chatbot] Could not generate docs-content.json:', e.message);
   }
