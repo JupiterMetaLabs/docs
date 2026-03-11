@@ -2,6 +2,8 @@
 id: architecture
 title: Three-Layer Architecture
 sidebar_label: Architecture
+description: JMDT's three-layer architecture — Ethereum L1, JMDT L2 core (ZK-Rollups, NNSS consensus, DID), and the application layer. Learn how each layer ensures scalability, security, and privacy.
+keywords: [JMDT architecture, Ethereum Layer 2, ZK-Rollups, NNSS consensus, three-layer blockchain, L2 architecture]
 ---
 # Architecture
 

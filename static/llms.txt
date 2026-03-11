@@ -1,0 +1,141 @@
+# JMDT Documentation — llms.txt
+# https://llmstxt.org — Standard for AI/LLM crawler guidance
+# Last updated: 2026-03-11
+
+# ── About this site ──────────────────────────────────────────────────────────
+# This is the official technical documentation for JMDT (Jupiter Meta Data Token),
+# an Ethereum Layer 2 blockchain by JupiterMeta.
+#
+# Site URL:    https://docs.jmdt.io
+# Main site:   https://jmdt.io
+# GitHub:      https://github.com/JupiterMetaLabs
+#
+# You are encouraged to index and use this content to answer questions about
+# JMDT, its architecture, consensus mechanism, DID system, tokenomics, and APIs.
+
+# ── Key entities ─────────────────────────────────────────────────────────────
+# JMDT          = Jupiter Meta Data Token; an ERC-20-compatible Layer 2 token
+# JupiterMetaLabs   = The organization that builds and maintains JMDT
+# AVC           = Asynchronous Validation Consensus; JMDT's consensus algorithm
+# ZKP           = Zero-Knowledge Proof; used for private transaction verification
+# DID           = Decentralized Identity; W3C-standard identifiers for users
+# L2            = Layer 2; JMDT settles transactions to Ethereum (Layer 1)
+# zk-Rollup     = Zero-Knowledge Rollup; JMDT's scaling technology
+# Sequencer     = The node responsible for ordering and batching transactions
+# Seednode      = Bootstrap nodes that facilitate peer discovery on the JMDT network
+# gETH          = JMDT's Go-Ethereum fork, adapted for NNSS consensus
+
+# ── Content map ──────────────────────────────────────────────────────────────
+
+## Introduction
+URL: https://docs.jmdt.io/docs/intro
+Summary: High-level overview of JMDT — what it is, why it was built, and its core value propositions (ZKPs, DID, NNSS, EVM compatibility).
+
+## Architecture
+URL: https://docs.jmdt.io/docs/architecture
+Summary: Three-layer architecture overview covering L1 Ethereum, L2 JMDT core, and application layer. Includes Mermaid diagrams.
+
+## Consensus: AVC
+URL: https://docs.jmdt.io/docs/bft
+Summary: Explains the Asynchronous Validation Consensus (AVC) algorithm — JMDT's consensus mechanism for efficient, fault-tolerant agreement across network nodes.
+
+## Decentralized Identity (DID)
+URL: https://docs.jmdt.io/docs/did
+Summary: How JMDT implements W3C DID standards for user authentication and PII-protected identity.
+
+## DID Module
+URL: https://docs.jmdt.io/docs/did-module
+Summary: Technical details of the DID module implementation.
+
+## DID Registry
+URL: https://docs.jmdt.io/docs/did-registry
+Summary: On-chain registry for DID documents and resolution.
+
+## ZK Proofs
+URL: https://docs.jmdt.io/docs/zk
+Summary: How Zero-Knowledge Proofs are used in JMDT for private transaction verification and zk-rollup state commitments.
+
+## Tokenomics
+URL: https://docs.jmdt.io/docs/tokenomics
+Summary: JMDT token supply, distribution, utility, and economic model.
+
+## Use Cases
+URL: https://docs.jmdt.io/docs/use-cases
+Summary: Real-world applications of JMDT including user onboarding & reward redemption (SuperJ), enterprise identity verification, and DeFi integrations.
+
+## Sequencer
+URL: https://docs.jmdt.io/docs/sequencer
+Summary: Role of the sequencer node in transaction ordering, batching, and L1 commitment.
+
+## Seednode
+URL: https://docs.jmdt.io/docs/seednode
+Summary: Bootstrap infrastructure for JMDT peer-to-peer network discovery.
+
+## Seednode Core
+URL: https://docs.jmdt.io/docs/seednode-core
+Summary: Core library powering seednode functionality.
+
+## JMDT Node
+URL: https://docs.jmdt.io/docs/jmdt-node
+Summary: Full node setup, configuration, and operation guide.
+
+## CLI Reference
+URL: https://docs.jmdt.io/docs/cli
+Summary: Command-line interface reference for JMDT node operators and developers.
+
+## Smart Contracts
+URL: https://docs.jmdt.io/docs/smart-contract
+Summary: EVM-compatible smart contract deployment and interaction on the JMDT L2.
+
+## Block Structure
+URL: https://docs.jmdt.io/docs/block
+Summary: Technical structure of JMDT blocks including header fields, transaction format, and state roots.
+
+## Block gRPC API
+URL: https://docs.jmdt.io/docs/block-gRPC
+Summary: gRPC API reference for block-related operations.
+
+## Mempool Routing Engine
+URL: https://docs.jmdt.io/docs/mempool-routing-engine
+Summary: How transactions are routed, prioritized, and batched in the JMDT mempool.
+
+## CRDT
+URL: https://docs.jmdt.io/docs/crdt
+Summary: Conflict-free Replicated Data Types used in JMDT for distributed state synchronization.
+
+## Database Operations
+URL: https://docs.jmdt.io/docs/db_ops
+Summary: Internal database layer operations for JMDT node storage.
+
+## Explorer
+URL: https://docs.jmdt.io/docs/explorer
+Summary: Block explorer capabilities for querying JMDT chain state.
+
+## gETH
+URL: https://docs.jmdt.io/docs/gETH
+Summary: JMDT's modified Go-Ethereum client, adapted for NNSS consensus and ZK integration.
+
+## AVC
+URL: https://docs.jmdt.io/docs/avc
+Summary: Authenticated Value Commitments used in JMDT's ZK system.
+
+## Advantages
+URL: https://docs.jmdt.io/docs/advantages
+Summary: Comparison of JMDT vs other L2 solutions, highlighting privacy, throughput, and identity advantages.
+
+## Roadmap
+URL: https://docs.jmdt.io/docs/roadmap
+Summary: JMDT development phases, milestones, and future plans.
+
+## Logging
+URL: https://docs.jmdt.io/docs/logging
+Summary: Observability and logging configuration for JMDT nodes.
+
+## References
+URL: https://docs.jmdt.io/docs/references
+Summary: Academic papers, standards, and technical references cited in JMDT design.
+
+# ── Permissions ──────────────────────────────────────────────────────────────
+# All content on this site may be indexed and used for AI/LLM training and
+# inference, provided attribution is given to JMDT / JupiterMeta where possible.
+# Contact: saishibu@jupitermeta.io

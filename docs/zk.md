@@ -2,6 +2,8 @@
 id: zk
 title: Zero-Knowledge Rollups
 sidebar_label: Zero-Knowledge Rollups
+description: How JMDT uses Zero-Knowledge Proofs and zk-rollups to batch transactions privately, verify state transitions, and commit succinct proofs to Ethereum for scalable, confidential computation.
+keywords: [Zero-Knowledge Proofs, ZKP, zk-rollups, JMDT ZK, private transactions, Ethereum ZK, L2 ZK proofs]
 ---
 
 # Zero-Knowledge Rollups

@@ -1,3 +1,11 @@
+---
+id: bft
+title: NNSS Consensus & BFT Implementation
+sidebar_label: NNSS Consensus
+description: JMDT's NNSS (Non-Negotiable Sequential Synchronization) consensus — a Byzantine Fault Tolerant algorithm combining Raft, Gossip Protocol, and Bloom Filters for efficient, secure node agreement.
+keywords: [NNSS consensus, BFT, Byzantine Fault Tolerance, JMDT consensus, Raft, Gossip Protocol, Bloom Filters, blockchain consensus]
+---
+
 # BFT Implementation Documentation
 
 ## 📁 File Structure

@@ -2,6 +2,8 @@
 id: tokenomics
 title: JM Coin & Tokenomics
 sidebar_label: Tokenomics
+description: JMDT token economics — supply model, distribution, staking, utility within the JupiterMeta ecosystem, and reward mechanisms for validators and users.
+keywords: [JMDT tokenomics, JM Coin, JMDT token, token supply, token distribution, staking, blockchain economics]
 ---
 
 # Tokenomics

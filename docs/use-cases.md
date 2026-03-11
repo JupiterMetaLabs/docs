@@ -2,6 +2,8 @@
 id: use-cases
 title: Use Cases
 sidebar_label: Use Cases
+description: Real-world use cases for JMDT — from user onboarding and reward redemption via SuperJ, to enterprise identity verification with DID credentials, and privacy-preserving DeFi applications.
+keywords: [JMDT use cases, blockchain identity, SuperJ rewards, DID enterprise, DeFi privacy, Layer 2 applications]
 ---
 
 # Use Cases

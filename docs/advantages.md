@@ -2,6 +2,8 @@
 id: advantages
 title: Advantages & Differentiators
 sidebar_label: Advantages
+description: Why choose JMDT? Comparing JMDT's privacy, scalability, and identity features against other Ethereum Layer 2 solutions — Optimism, Arbitrum, Polygon zkEVM, and others.
+keywords: [JMDT advantages, Layer 2 comparison, ZK vs Optimistic rollups, JMDT vs Polygon, privacy blockchain comparison, Ethereum L2 differentiators]
 ---
 
 # 🚀 Advantages of JMZK
