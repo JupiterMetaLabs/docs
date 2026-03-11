@@ -152,6 +152,24 @@ module.exports = {
             disableSwitch: false,
             respectPrefersColorScheme: true,
         },
+
+        // ── SEO: Global default meta tags injected on every page ─────────────
+        metadata: [
+            { name: 'description', content: 'JMDT is an Ethereum Layer 2 blockchain with Zero-Knowledge Proofs, Decentralized Identity (DID), and AVC consensus for privacy, scalability, and security.' },
+            { name: 'keywords', content: 'JMDT, Jupiter Meta Data Token, Ethereum Layer 2, ZK Proofs, Zero-Knowledge Proofs, Decentralized Identity, DID, L2 Blockchain, zk-rollups, AVC, smart contracts, Web3, privacy blockchain, scalable blockchain' },
+            { name: 'author', content: 'JupiterMetaLabs' },
+            { name: 'robots', content: 'index, follow' },
+            // Open Graph defaults for all doc pages
+            { property: 'og:type', content: 'website' },
+            { property: 'og:site_name', content: 'JMDT Documentation' },
+            { property: 'og:image', content: 'https://docs.jmdt.io/img/og-new.png' },
+            { property: 'og:image:width', content: '1200' },
+            { property: 'og:image:height', content: '630' },
+            // Twitter Card defaults for all pages
+            { name: 'twitter:card', content: 'summary_large_image' },
+            { name: 'twitter:site', content: '@JMDT' },
+            { name: 'twitter:image', content: 'https://docs.jmdt.io/img/og-new.png' },
+        ],
     },
 
     presets: [
@@ -176,24 +194,6 @@ module.exports = {
                 },
             },
         ],
-    ],
-
-    // ── SEO: Global default meta tags injected on every page ─────────────────
-    metadata: [
-        { name: 'description', content: 'JMDT is an Ethereum Layer 2 blockchain with Zero-Knowledge Proofs, Decentralized Identity (DID), and NNSS consensus for privacy, scalability, and security.' },
-        { name: 'keywords', content: 'JMDT, Jupiter Meta Data Token, Ethereum Layer 2, ZK Proofs, Zero-Knowledge Proofs, Decentralized Identity, DID, L2 Blockchain, zk-rollups, NNSS, smart contracts, Web3, privacy blockchain, scalable blockchain' },
-        { name: 'author', content: 'JupiterMeta' },
-        { name: 'robots', content: 'index, follow' },
-        // Open Graph defaults for all doc pages
-        { property: 'og:type', content: 'website' },
-        { property: 'og:site_name', content: 'JMDT Documentation' },
-        { property: 'og:image', content: 'https://docs.jmdt.io/img/og-new.png' },
-        { property: 'og:image:width', content: '1200' },
-        { property: 'og:image:height', content: '630' },
-        // Twitter Card defaults for all pages
-        { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:site', content: '@JMDT' },
-        { name: 'twitter:image', content: 'https://docs.jmdt.io/img/og-new.png' },
     ],
 
     markdown: { mermaid: true },
