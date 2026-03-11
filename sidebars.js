@@ -12,6 +12,7 @@ module.exports = {
         'intro',
         'architecture',
         'advantages',
+        'get-jmdt',
       ],
     },
     {
@@ -30,6 +31,7 @@ module.exports = {
           collapsed: true,
           items: [
             'jmdt-node',
+            'running-a-node',
             'seednode',
             'node-selection',
             'avc',

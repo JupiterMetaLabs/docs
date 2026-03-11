@@ -3,79 +3,98 @@ id: sequencer
 title: Sequencer Module
 sidebar_label: Sequencer
 description: JMDT's Sequencer module — responsible for consensus orchestration, buddy node selection, vote collection, BFT consensus execution, and transaction ordering on the JMDT Layer 2 network.
-keywords: [JMDT sequencer, transaction ordering, consensus orchestration, BFT, Layer 2 sequencer, buddy nodes]
+keywords: [JMDT sequencer, transaction ordering, consensus orchestration, BFT, Layer 2 sequencer, buddy nodes, JMDN]
 ---
 
 # Sequencer Module
 
+> *The Truth Layer for Verifiable Information — transaction ordering and consensus orchestration on JMDT L2.*
+
+The **Sequencer** is the orchestration core of the JMDT Layer 2 chain. It drives the AVC consensus cycle: selecting buddy node committees via VRF, creating PubSub channels, collecting BuddyVotes, executing BFT consensus, and batching DAG state transitions into zk-proofs for L1 anchoring.
+
+The Sequencer runs as a core component inside the **JMDN** (JMDT Decentralised Node) binary.
+
+---
+
 ## Overview
 
-The Sequencer module provides consensus orchestration for the JMZK network. It manages buddy node selection, consensus initiation, vote collection, and BFT consensus execution.
-
-## Purpose
-
 The Sequencer module enables:
+
 - Consensus orchestration for block validation
-- Buddy node selection and management
+- Buddy node selection and management using VRF
 - Vote collection from buddy nodes
 - BFT consensus execution
 - PubSub channel management for consensus
-- CRDT synchronization for buddy nodes
+- CRDT synchronisation for buddy node state
+
+---
 
 ## Key Components
 
 ### 1. Consensus
-**File:** `Consensus.go`
+
+**File:** `JMDN/Sequencer/Consensus.go`
 
 Main consensus orchestration:
-- `NewConsensus`: Create new consensus instance
-- `Start`: Start consensus process
-- `QueryBuddyNodes`: Query and select buddy nodes
-- `RequestSubscriptionPermission`: Request subscription from buddy nodes
-- `CreatePubSubChannel`: Create PubSub channel for consensus
+
+- `NewConsensus` — Create a new consensus instance
+- `Start` — Begin the consensus process for a block
+- `QueryBuddyNodes` — Select buddy nodes via VRF for the current round
+- `RequestSubscriptionPermission` — Request subscription from selected buddy nodes
+- `CreatePubSubChannel` — Create the private PubSub channel for consensus
 
 ### 2. Communication
-**File:** `Communication.go`
+
+**File:** `JMDN/Sequencer/Communication.go`
 
 Communication with buddy nodes:
-- `AskForSubscription`: Ask buddy nodes to subscribe to consensus channel
-- `RequestVoteResultsFromBuddies`: Request vote results from buddy nodes
-- `StartBFTConsensus`: Start BFT consensus process
+
+- `AskForSubscription` — Ask buddy nodes to subscribe to the consensus channel
+- `RequestVoteResultsFromBuddies` — Collect vote results from the buddy committee
+- `StartBFTConsensus` — Trigger the BFT consensus phase
 
 ### 3. Router
-**File:** `Router/Router.go`
+
+**File:** `JMDN/Sequencer/Router/Router.go`
 
 Routing for consensus operations:
-- Message routing
-- Vote aggregation
+
+- Message routing across JMDN peers
+- Vote aggregation and tallying
 - Response handling
 
 ### 4. Metadata
-**File:** `Metadata/Metadata.go`
+
+**File:** `JMDN/Sequencer/Metadata/Metadata.go`
 
 Consensus metadata management:
+
 - Block metadata
 - Vote metadata
-- Consensus state
+- Consensus state tracking
 
 ### 5. Triggers
-**File:** `Triggers/`
+
+**File:** `JMDN/Sequencer/Triggers/`
 
 Consensus triggers:
-- `Triggers.go`: Trigger management
-- `Maps.go`: Vote result maps
+
+- `Triggers.go` — Trigger management for consensus phases
+- `Maps.go` — Vote result maps
+
+---
 
 ## Key Functions
 
 ### Start Consensus
 
 ```go
-// Start consensus process
+// Start consensus process for a block
 func (c *Consensus) Start(block *config.ZKBlock) error {
-    // Query buddy nodes
+    // Query buddy nodes via VRF
     // Create PubSub channel
-    // Request subscriptions
-    // Collect votes
+    // Request subscriptions from selected buddies
+    // Collect BuddyVotes
     // Execute BFT consensus
 }
 ```
@@ -83,120 +102,113 @@ func (c *Consensus) Start(block *config.ZKBlock) error {
 ### Query Buddy Nodes
 
 ```go
-// Query and select buddy nodes
+// Select buddy committee using VRF
 func (c *Consensus) QueryBuddyNodes() error {
     // Use VRF to select buddy nodes
-    // Connect to buddy nodes
-    // Populate peer list
+    // Connect to selected peers
+    // Populate main and backup peer lists
 }
 ```
 
 ### Request Vote Results
 
 ```go
-// Request vote results from buddy nodes
+// Collect votes from the current buddy committee
 func RequestVoteResultsFromBuddies() error {
     // Request votes from all buddy nodes
     // Collect vote results
-    // Aggregate votes
+    // Aggregate with quorum check: q = ⌈2k/3⌉
 }
 ```
+
+---
 
 ## Usage
 
 ### Create Consensus Instance
 
 ```go
-import "gossipnode/Sequencer"
+import "JMDN/Sequencer"
 
-// Create consensus instance
+// Initialise peer list
 peerList := Sequencer.PeerList{
     MainPeers:   []peer.ID{},
     BackupPeers: []peer.ID{},
 }
+
+// Create consensus instance
 consensus := Sequencer.NewConsensus(peerList, host)
 ```
 
 ### Start Consensus
 
 ```go
-// Start consensus for block
+// Start consensus for a block
 err := consensus.Start(block)
 if err != nil {
     log.Error(err)
 }
 ```
 
+---
+
 ## Integration Points
 
-### AVC Module
-- Uses BFT for consensus execution
-- Integrates with buddy nodes
-- Uses node selection for buddy selection
+- **AVC Module** — Uses BFT for consensus execution; see [AVC Module →](/docs/avc)
+- **PubSub** — Uses PubSub for consensus messaging and private channel management
+- **Messaging** — Uses the messaging layer for vote collection
+- **Block Module** — Initiates consensus for each new block; receives consensus results
+- **zkVM** — Batches validated transactions into RISC Zero STARK proofs for L1
 
-### PubSub Module
-- Uses PubSub for consensus messaging
-- Creates private channels for consensus
-- Manages subscriptions
-
-### Messaging Module
-- Uses messaging for vote collection
-- Integrates with direct messaging
-
-### Block Module
-- Initiates consensus for block validation
-- Receives consensus results
+---
 
 ## Configuration
 
-Key configuration in `config/`:
-- `MaxMainPeers`: Maximum main buddy nodes (default: 13)
-- `MaxBackupPeers`: Maximum backup buddy nodes (default: 10)
-- `ConsensusTimeout`: Consensus timeout (default: 20 seconds)
-- `PubSub_ConsensusChannel`: Consensus channel name
-- `Pubsub_CRDTSync`: CRDT sync channel name
+Key configuration in `JMDN/config/`:
+
+| Constant | Default | Description |
+|---|---|---|
+| `MaxMainPeers` | 13 | Maximum main buddy nodes per round |
+| `MaxBackupPeers` | 10 | Maximum backup buddy nodes |
+| `ConsensusTimeout` | 20s | Consensus timeout |
+| `PubSub_ConsensusChannel` | — | Consensus channel name |
+| `Pubsub_CRDTSync` | — | CRDT sync channel name |
+
+---
 
 ## Error Handling
 
-The module includes comprehensive error handling:
-- Buddy node selection errors
+The module includes comprehensive error handling for:
+
+- Buddy node selection failures
 - Subscription errors
-- Vote collection errors
+- Vote collection timeouts
 - BFT consensus errors
 
-## Logging
-
-Sequencer operations are logged to:
-- Application logs
-- Consensus logs
-- Error logs
+---
 
 ## Security
 
-- Buddy node authentication
-- Vote signature verification
-- BFT consensus security
-- Private channel access control
+- Buddy node authentication via BLS signatures
+- Vote signature verification before aggregation
+- BFT consensus guarantees safety under Byzantine failures
+- Private PubSub channel access control per consensus round
+
+---
 
 ## Performance
 
-- Efficient buddy node selection
-- Concurrent vote collection
-- Optimized BFT execution
-- PubSub channel management
+- Efficient VRF-based buddy node selection
+- Concurrent vote collection from the full committee
+- Optimised BFT execution for ~3–10s L2 finality
+- PubSub channel lifecycle management per block
+
+---
 
 ## Testing
 
 Test files:
-- `Sequencer_test.go`: Sequencer operation tests
+
+- `JMDN/Sequencer/Sequencer_test.go` — Sequencer operation tests
 - Integration tests
 - Consensus simulation tests
-
-## Future Enhancements
-
-- Enhanced consensus algorithms
-- Improved buddy node selection
-- Better error recovery
-- Performance optimizations
-- Additional consensus mechanisms
-
