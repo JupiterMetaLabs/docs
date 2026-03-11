@@ -161,12 +161,108 @@ module.exports = {
                 docs: {
                     sidebarPath: require.resolve('./sidebars.js'),
                     editUrl: 'https://github.com/JupiterMetaLabs/docs/edit/main/',
+                    // ── AEO: Breadcrumb structured data for every doc page ─────────
+                    breadcrumbs: true,
+                },
+                // ── SEO: Sitemap auto-generation ─────────────────────────────────
+                sitemap: {
+                    changefreq: 'weekly',
+                    priority: 0.8,
+                    ignorePatterns: ['/tags/**'],
+                    filename: 'sitemap.xml',
                 },
                 theme: {
                     customCss: require.resolve('./src/css/custom.css'),
                 },
             },
         ],
+    ],
+
+    // ── SEO: Global default meta tags injected on every page ─────────────────
+    metadata: [
+        { name: 'description', content: 'JMDT is an Ethereum Layer 2 blockchain with Zero-Knowledge Proofs, Decentralized Identity (DID), and NNSS consensus for privacy, scalability, and security.' },
+        { name: 'keywords', content: 'JMDT, Jupiter Meta Data Token, Ethereum Layer 2, ZK Proofs, Zero-Knowledge Proofs, Decentralized Identity, DID, L2 Blockchain, zk-rollups, NNSS, smart contracts, Web3, privacy blockchain, scalable blockchain' },
+        { name: 'author', content: 'JupiterMeta' },
+        { name: 'robots', content: 'index, follow' },
+        // Open Graph defaults for all doc pages
+        { property: 'og:type', content: 'website' },
+        { property: 'og:site_name', content: 'JMDT Documentation' },
+        { property: 'og:image', content: 'https://docs.jmdt.io/img/og-new.png' },
+        { property: 'og:image:width', content: '1200' },
+        { property: 'og:image:height', content: '630' },
+        // Twitter Card defaults for all pages
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:site', content: '@JMDT' },
+        { name: 'twitter:image', content: 'https://docs.jmdt.io/img/og-new.png' },
+    ],
+
+    // ── SEO + AEO: Global JSON-LD structured data (Organization + WebSite) ───
+    headTags: [
+        {
+            tagName: 'script',
+            attributes: { type: 'application/ld+json' },
+            innerHTML: JSON.stringify({
+                '@context': 'https://schema.org',
+                '@graph': [
+                    {
+                        '@type': 'Organization',
+                        '@id': 'https://jmdt.io/#organization',
+                        name: 'JupiterMeta',
+                        url: 'https://jmdt.io',
+                        logo: {
+                            '@type': 'ImageObject',
+                            url: 'https://docs.jmdt.io/img/jmdt_logo.png',
+                        },
+                        sameAs: [
+                            'https://github.com/JupiterMetaLabs',
+                        ],
+                        description: 'JupiterMeta builds JMDT — a privacy-preserving, scalable Ethereum Layer 2 blockchain using Zero-Knowledge Proofs and Decentralized Identity.',
+                    },
+                    {
+                        '@type': 'WebSite',
+                        '@id': 'https://docs.jmdt.io/#website',
+                        url: 'https://docs.jmdt.io',
+                        name: 'JMDT Documentation',
+                        description: 'Official technical documentation for the JMDT Ethereum Layer 2 blockchain.',
+                        publisher: { '@id': 'https://jmdt.io/#organization' },
+                        inLanguage: 'en-US',
+                        // AEO: enables Sitelinks Search Box in Google
+                        potentialAction: {
+                            '@type': 'SearchAction',
+                            target: {
+                                '@type': 'EntryPoint',
+                                urlTemplate: 'https://docs.jmdt.io/search?q={search_term_string}',
+                            },
+                            'query-input': 'required name=search_term_string',
+                        },
+                    },
+                    {
+                        '@type': 'SoftwareApplication',
+                        '@id': 'https://jmdt.io/#software',
+                        name: 'JMDT — Jupiter Meta Data Token',
+                        applicationCategory: 'BlockchainApplication',
+                        operatingSystem: 'Ethereum Layer 2',
+                        description: 'JMDT is a privacy-preserving Ethereum Layer 2 blockchain leveraging Zero-Knowledge Proofs (ZKPs), Decentralized Identity (DID), and the NNSS consensus mechanism.',
+                        url: 'https://jmdt.io',
+                        author: { '@id': 'https://jmdt.io/#organization' },
+                        offers: {
+                            '@type': 'Offer',
+                            price: '0',
+                            priceCurrency: 'USD',
+                        },
+                        featureList: [
+                            'Zero-Knowledge Proofs (ZKPs)',
+                            'Decentralized Identity (DID)',
+                            'NNSS Consensus Algorithm',
+                            'EVM Compatibility',
+                            'zk-Rollups',
+                            'Immutable Storage',
+                            'Privacy-Preserving Queries',
+                        ],
+                    },
+                ],
+            }),
+        },
     ],
 
     markdown: { mermaid: true },

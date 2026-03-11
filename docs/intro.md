@@ -2,7 +2,8 @@
 id: intro
 title: JMDT Docs
 sidebar_label: Introduction
-
+description: Introduction to JMDT — an Ethereum Layer 2 blockchain using Zero-Knowledge Proofs, Decentralized Identity (DID), and the NNSS consensus algorithm for scalable, privacy-preserving decentralized applications.
+keywords: [JMDT, Jupiter Meta Data Token, Ethereum Layer 2, Zero-Knowledge Proofs, Decentralized Identity, DID, NNSS, zk-rollups, L2 blockchain]
 ---
 
 # Introduction

@@ -133,6 +133,88 @@ function googleTranslateElementInit() {
 `}
         </script>
         <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+        {/* ── AEO: FAQ Structured Data ─────────────────────────────────── */}
+        <script type="application/ld+json">{`
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is JMDT?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "JMDT (Jupiter Meta Data Token) is an Ethereum-based Layer 2 blockchain designed for scalability, privacy, and security. It uses Zero-Knowledge Proofs (ZKPs), Decentralized Identity (DID), and the NNSS (Non-Negotiable Sequential Synchronization) consensus algorithm to provide a highly efficient, privacy-preserving blockchain infrastructure."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is NNSS consensus?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "NNSS (Non-Negotiable Sequential Synchronization) is JMDT's hybrid consensus algorithm that integrates Raft, Gossip Protocol, and Bloom Filters for efficient, fault-tolerant data synchronization across network nodes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does JMDT use Zero-Knowledge Proofs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "JMDT uses ZKPs to enable private transactions and computations without exposing sensitive data. ZK-Rollups batch multiple transactions into a single proof committed to Ethereum Layer 1, achieving high throughput while preserving privacy."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is Decentralized Identity (DID) on JMDT?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "JMDT implements W3C-standard Decentralized Identifiers (DIDs) for secure, PII-protected user authentication. DID credentials are stored on Layer 2 and can be shared across multiple platforms without exposing personal data."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is JMDT compatible with Ethereum smart contracts?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. JMDT is fully EVM-compatible, meaning existing Ethereum smart contracts can be deployed on JMDT without modification. It supports seamless integration with Ethereum DeFi applications and enterprise solutions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does JMDT commit transactions to Ethereum Layer 1?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "JMDT dynamically commits batched transactions to Ethereum based on optimal gas fees and block time, using zk-rollup proofs to ensure finality and security on L1 while keeping transaction costs low."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the use cases for JMDT?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "JMDT supports user onboarding and reward redemption (e.g., via SuperJ platform), enterprise identity verification using DID credentials, privacy-preserving DeFi applications, and any dApp requiring high throughput with data privacy."
+      }
+    }
+  ]
+}
+        `}</script>
+
+        {/* ── AEO: BreadcrumbList for homepage ─────────────────────────── */}
+        <script type="application/ld+json">{`
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "JMDT Docs",
+      "item": "https://docs.jmdt.io"
+    }
+  ]
+}
+        `}</script>
       </Head>
 
       {/* 🚀 Modern Hero Section */}

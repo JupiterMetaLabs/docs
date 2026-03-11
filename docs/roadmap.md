@@ -2,6 +2,8 @@
 id: roadmap
 title: Implementation Roadmap
 sidebar_label: Roadmap
+description: JMDT development roadmap — phased milestones covering testnet launch, mainnet deployment, DID ecosystem expansion, DeFi integrations, and long-term protocol evolution.
+keywords: [JMDT roadmap, blockchain roadmap, JupiterMeta milestones, JMDT mainnet, JMDT testnet, development phases]
 ---
 
 # Roadmap

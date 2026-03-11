@@ -1,3 +1,11 @@
+---
+id: sequencer
+title: Sequencer Module
+sidebar_label: Sequencer
+description: JMDT's Sequencer module — responsible for consensus orchestration, buddy node selection, vote collection, BFT consensus execution, and transaction ordering on the JMDT Layer 2 network.
+keywords: [JMDT sequencer, transaction ordering, consensus orchestration, BFT, Layer 2 sequencer, buddy nodes]
+---
+
 # Sequencer Module
 
 ## Overview

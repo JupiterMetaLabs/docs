@@ -2,7 +2,8 @@
 id: did
 title: Decentralized Identity
 sidebar_label: Decentralized Identity
-
+description: JMDT's Decentralized Identity (DID) system — W3C-standard identifiers for PII-protected user authentication, credential storage on Layer 2, and cross-platform identity sharing without exposing personal data.
+keywords: [Decentralized Identity, DID, W3C DID, JMDT DID, blockchain identity, self-sovereign identity, PII protection]
 ---
 
 # Decentralized Identity (DID)
