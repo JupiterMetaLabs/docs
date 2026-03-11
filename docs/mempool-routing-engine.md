@@ -1375,7 +1375,7 @@ Key metrics to monitor:
 - **CPU Usage**: Should stay below 70%
 - **Memory Usage**: Should stay below 80%
 - **Goroutine Count**: Monitor for goroutine leaks
-- **Response Time**: Should be < 100ms for most requests
+- **Response Time**: Should be &lt; 100ms for most requests
 - **Connection Count**: Monitor mempool connection health
 
 #### **Cost Optimization**

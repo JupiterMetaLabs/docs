@@ -19,7 +19,7 @@ The following table compares **Jupiter Meta Data Token (JMDT)** with leading L2 
 | Feature | **JMDT** | Polygon zkEVM | Starknet | Aztec Network | Hyperledger Fabric |
 |---|---|---|---|---|---|
 | **Layer Type** | L2 + L3 (Enterprise DAG) | L2 (zkEVM) | L2 (STARK Rollup) | L2 (Private zk-SNARKs) | Private Consortium |
-| **Scalability (TPS)** | 2,000+ (L2); 10K+ (L3 DAG) | 2,000–4,000 | 3,000+ | <100 (privacy bottleneck) | Depends on config |
+| **Scalability (TPS)** | 2,000+ (L2); 10K+ (L3 DAG) | 2,000–4,000 | 3,000+ | &lt;100 (privacy bottleneck) | Depends on config |
 | **Privacy Model** | zk-SNARK/STARK + DID + zkVM | zk-SNARKs | zk-STARKs (public) | zk-SNARKs (Private Tx) | No native privacy |
 | **ZK Circuit Strategy** | Rust + RISC Zero zkVM | Circom + Groth16 | Cairo VM | Circom + Aztec Noir | None |
 | **Finality Time (L2)** | ~3–10 sec | ~5–10 min | ~10–15 min | ~30–60 min | Instant (centralised) |
