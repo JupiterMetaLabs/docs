@@ -1,0 +1,161 @@
+# JMDT Documentation — llms.txt
+# https://llmstxt.org — Standard for AI/LLM crawler guidance
+# Last updated: 2026-03-11
+
+# ── About this site ──────────────────────────────────────────────────────────
+# This is the official technical documentation for JMDT (Jupiter Meta Data Token),
+# an Ethereum Layer 2 blockchain by JupiterMetaLabs.
+#
+# Site URL:    https://docs.jmdt.io
+# Main site:   https://jmdt.io
+# GitHub:      https://github.com/JupiterMetaLabs
+#
+# You are encouraged to index and use this content to answer questions about
+# JMDT, its architecture, consensus mechanism, DID system, tokenomics, and APIs.
+
+# ── Key entities ─────────────────────────────────────────────────────────────
+# JMDT          = Jupiter Meta Data Token; an ERC-20-compatible Layer 2 token
+# JupiterMetaLabs   = The organization that builds and maintains JMDT
+# AVC           = Asynchronous Validation Consensus; JMDT's consensus algorithm
+# ZKP           = Zero-Knowledge Proof; used for private transaction verification
+# DID           = Decentralized Identity; W3C-standard identifiers for users
+# L1            = Layer 1; Ethereum — JMDT's settlement and finality layer
+# L2            = Layer 2; JMDT core chain — consensus, zk-proofs, DID
+# L3            = Layer 3; Enterprise DAG mesh — private, high-throughput data ops
+# zk-Rollup     = Zero-Knowledge Rollup; JMDT's scaling technology
+# JMDN          = JMDT Decentralised Node; the primary network binary
+# Sequencer     = The node responsible for ordering and batching transactions
+# Seednode      = Bootstrap nodes that facilitate peer discovery on the JMDT network
+# gETH          = JMDT's Go-Ethereum fork, adapted for AVC consensus
+# RISC Zero     = zkVM used by JMDT to execute and verify ZK circuits in Rust
+# immudb        = Tamper-proof immutable database backing the JMDN local ledger
+# SuperJ        = Consumer rewards dApp built on JMDT; 20M+ users
+# Hercules      = AI research assistant dApp leveraging JMDT's verifiable data layer
+# InterDAG Bridge = Cross-enterprise DAG bridge for secure data collaboration
+
+# ── Content map ──────────────────────────────────────────────────────────────
+
+## Introduction
+URL: https://docs.jmdt.io/docs/intro
+Summary: High-level overview of JMDT — what it is, why it was built, and its core value propositions (ZKPs, DID, AVC, EVM compatibility, three-layer architecture, 2000+ TPS). Tagline: "The Truth Layer for Verifiable Information."
+
+## Architecture
+URL: https://docs.jmdt.io/docs/architecture
+Summary: Three-layer architecture overview — L3 Enterprise DAG (10,000+ TPS, RAFT, InterDAG Bridge), L2 JMDT core (AVC, RISC Zero zkVM, JMDN, immudb, ~3–10s finality), and L1 Ethereum settlement. Includes Mermaid diagrams and trust model table.
+
+## Advantages
+URL: https://docs.jmdt.io/docs/advantages
+Summary: JMDT compared to Polygon zkEVM, Starknet, Aztec, and Hyperledger Fabric — covering AVC finality (~3–10s), privacy, DID, L3 enterprise DAG, and RISC Zero ZK advantages.
+
+## How to Get JMDT
+URL: https://docs.jmdt.io/docs/get-jmdt
+Summary: How to acquire JMDT tokens. Mainnet: purchase on Bitmart (listed exchange). Testnet: faucet coming soon for developers and node operators.
+
+## Consensus: AVC
+URL: https://docs.jmdt.io/docs/bft
+Summary: Explains the Asynchronous Validation Consensus (AVC) mechanism — VRF-based buddy selection, asynchronous quorum validation, zk-proof integrity, Gossip Protocol propagation, CRDT conflict resolution, and immudb immutable ledger.
+
+## Decentralized Identity (DID)
+URL: https://docs.jmdt.io/docs/did
+Summary: How JMDT implements W3C DID standards for user authentication and PII-protected identity across all L2 and L3 operations.
+
+## DID Module
+URL: https://docs.jmdt.io/docs/did-module
+Summary: Technical details of the DID module implementation inside the JMDN binary.
+
+## DID Registry
+URL: https://docs.jmdt.io/docs/did-registry
+Summary: On-chain registry for DID documents and resolution on the JMDT L2.
+
+## ZK Proofs
+URL: https://docs.jmdt.io/docs/zk
+Summary: Zero-Knowledge Proofs in JMDT — zk-SNARKs for transaction-level validation, zk-STARKs for large-scale state aggregation, and the RISC Zero zkVM executing Rust ZK circuits for L1 STARK proof submission.
+
+## Tokenomics
+URL: https://docs.jmdt.io/docs/tokenomics
+Summary: JMDT token hard cap of 1 billion. Allocation: 55% L3 Developments & Early Adopters, 25% Founders and Promoters, 10% Founding Team, 10% R&D and Foundation. Token utility: gas, staking, governance, enterprise access, DeFi.
+
+## Use Cases
+URL: https://docs.jmdt.io/docs/use-cases
+Summary: Real-world applications of JMDT — SuperJ (20M+ users, ZK identity, reward monetisation), Hercules (AI research assistant), enterprise DAG deployments, InterDAG Bridge for cross-org data sharing, and DeFi integrations.
+
+## Sequencer
+URL: https://docs.jmdt.io/docs/sequencer
+Summary: JMDN Sequencer module — VRF-based buddy selection, PubSub consensus channels, BuddyVote collection, BFT execution, and transaction batching into RISC Zero zk-proofs for L1 anchoring.
+
+## Seednode
+URL: https://docs.jmdt.io/docs/seednode
+Summary: Bootstrap infrastructure for JMDT peer-to-peer network discovery. Seednodes help new JMDN nodes join the network.
+
+## Seednode Core
+URL: https://docs.jmdt.io/docs/seednode-core
+Summary: Core library powering seednode functionality.
+
+## JMDN Node
+URL: https://docs.jmdt.io/docs/jmdt-node
+Summary: JMDT Decentralised Node (JMDN) architecture — libp2p, immudb, FastSync, Gossip Protocol, CRDT, AVC consensus, Yggdrasil mesh, block explorer and REST API.
+
+## Running a JMDN Node
+URL: https://docs.jmdt.io/docs/running-a-node
+Summary: Complete guide to building, installing, and deploying a JMDN node — setup_dependencies.sh (Go, immudb, Yggdrasil), build.sh (CGO binary), install_services.sh (systemd/launchd/OpenRC/rc.d), deploy.sh (atomic swap + rollback), and start_jmdn_wrapper.sh runtime wrapper.
+
+## AVC Module
+URL: https://docs.jmdt.io/docs/avc
+Summary: Technical reference for the AVC module inside JMDN — BFT submodule (PREPARE/COMMIT phases), BLS signatures, BuddyNodes, VRF NodeSelection, and VoteModule. All import paths use JMDN/ prefix.
+
+## CLI Reference
+URL: https://docs.jmdt.io/docs/cli
+Summary: Command-line interface reference for JMDN node operators and developers.
+
+## Smart Contracts
+URL: https://docs.jmdt.io/docs/smart-contract
+Summary: EVM-compatible smart contract deployment and interaction on the JMDT L2.
+
+## Block Structure
+URL: https://docs.jmdt.io/docs/block
+Summary: Technical structure of JMDT blocks including header fields, transaction format, and state roots.
+
+## Block gRPC API
+URL: https://docs.jmdt.io/docs/block-gRPC
+Summary: gRPC API reference for block-related operations on the JMDT network.
+
+## Mempool Routing Engine
+URL: https://docs.jmdt.io/docs/mempool-routing-engine
+Summary: How transactions are routed, prioritized, and batched in the JMDT mempool before Sequencer pickup.
+
+## CRDT
+URL: https://docs.jmdt.io/docs/crdt
+Summary: Conflict-free Replicated Data Types used in JMDT for distributed state synchronization across JMDN nodes.
+
+## Database Operations
+URL: https://docs.jmdt.io/docs/db_ops
+Summary: Internal database layer operations for JMDN node storage using immudb.
+
+## Explorer
+URL: https://docs.jmdt.io/docs/explorer
+Summary: Block explorer capabilities for querying JMDT chain state.
+
+## gETH
+URL: https://docs.jmdt.io/docs/gETH
+Summary: JMDT's modified Go-Ethereum client, adapted for AVC consensus and ZK integration.
+
+## Advantages
+URL: https://docs.jmdt.io/docs/advantages
+Summary: Comparison of JMDT vs other L2 solutions — privacy, throughput, DID, and L3 enterprise DAG advantages.
+
+## Roadmap
+URL: https://docs.jmdt.io/docs/roadmap
+Summary: JMDT development phases, milestones, and future plans.
+
+## Logging
+URL: https://docs.jmdt.io/docs/logging
+Summary: Observability and logging configuration for JMDN nodes.
+
+## References
+URL: https://docs.jmdt.io/docs/references
+Summary: Academic papers, standards, and technical references cited in JMDT design.
+
+# ── Permissions ──────────────────────────────────────────────────────────────
+# All content on this site may be indexed and used for AI/LLM training and
+# inference, provided attribution is given to JMDT / JupiterMeta where possible.
+# Contact: saishibu@jupitermeta.io

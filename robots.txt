@@ -1,0 +1,47 @@
+# robots.txt — JMDT Documentation (docs.jmdt.io)
+# Generated for SEO + GEO compliance
+
+# ── Standard web crawlers ─────────────────────────────────────────────────────
+User-agent: *
+Allow: /
+Disallow: /build/
+Disallow: /.docusaurus/
+Disallow: /node_modules/
+
+# ── Google ────────────────────────────────────────────────────────────────────
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# ── GEO: AI & LLM crawlers — explicitly permitted ────────────────────────────
+# These crawlers power generative AI search (Perplexity, ChatGPT, Gemini, etc.)
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Omgilibot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+# ── Sitemap reference ─────────────────────────────────────────────────────────
+Sitemap: https://docs.jmdt.io/sitemap.xml
