@@ -1,6 +1,6 @@
 /* Custom styling for JMDT Docs - Modern "Deep Cyber" Aesthetic */
 
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
 
 :root {
   /* Core Brand Colors - Luminous & Deep */
@@ -18,8 +18,8 @@
   --ifm-color-primary-lighter: #8ec3ff;
   --ifm-color-primary-lightest: #add6ff;
 
-  --ifm-font-family-base: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
-  --ifm-heading-font-family: 'Space Grotesk', 'Outfit', sans-serif;
+  --ifm-font-family-base: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --ifm-heading-font-family: 'DM Sans', system-ui, sans-serif;
 
   /* Glassmorphism Variables */
   --glass-bg: rgba(20, 20, 30, 0.6);
