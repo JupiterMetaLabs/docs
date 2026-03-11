@@ -25,6 +25,10 @@ Thumbs.db
 README.md
 *.md
 
+# Environment variables
+.env
+.env.*
+
 # Docker files (don't copy into image)
 Dockerfile
 .dockerignore

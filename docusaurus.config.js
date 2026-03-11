@@ -98,7 +98,7 @@ module.exports = {
     // Add your Gemini API key to .env:  GEMINI_API_KEY=your_key_here
     // .env is git-ignored — never commit it.
     customFields: {
-        geminiApiKey: process.env.GEMINI_API_KEY || '',
+        geminiApiKey: process.env.GEMINI_API_KEY || 'DT_GEMINI_API_KEY_PLACEHOLDER',
     },
 
     tagline: 'Scalable, Privacy-Preserving Layer 2 Blockchain',
