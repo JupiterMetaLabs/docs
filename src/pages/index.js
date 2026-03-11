@@ -124,20 +124,6 @@ gtag('config', 'G-8N3L9Z2Z9X');
         <meta name="article:published_time" content="2025-01-01T00:00:00Z" />
         <meta name="article:modified_time" content="2026-03-11T00:00:00Z" />
 
-        {/* Google Translate Widget */}
-        <script type="text/javascript">
-          {`
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({
-    pageLanguage: 'en',
-    includedLanguages: 'en,hi,ta,te,ml,kn,zh-CN,fr,de,es,it,ko,ja,ru,ar',
-    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-  }, 'google_translate_element');
-}
-`}
-        </script>
-        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
         {/* ── AEO + SEO: Organization, WebSite, SoftwareApplication JSON-LD ── */}
         <script type="application/ld+json">{`
 {
@@ -392,21 +378,6 @@ function googleTranslateElementInit() {
 
         </div>
       </header>
-
-      {/* Google Translate Dropdown - Fixed Position */}
-      <div id="google_translate_element"
-        style={{
-          position: 'fixed',
-          top: '80px',
-          right: '20px',
-          zIndex: 1000,
-          backgroundColor: 'var(--glass-bg)',
-          backdropFilter: 'blur(10px)',
-          padding: '8px',
-          borderRadius: '8px',
-          border: '1px solid var(--glass-border)'
-        }}
-      ></div>
 
       {/* ── What is JMDT — visible content for crawlers ────────────────────── */}
       <main>
