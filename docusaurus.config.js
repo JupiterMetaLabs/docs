@@ -32,38 +32,48 @@ require('dotenv').config();
       const fileName = file.replace(/\.mdx?$/, '');
       
       const lines = content.split('\n');
-      let currentTitle = fileName.charAt(0).toUpperCase() + fileName.slice(1);
-      
+      let mainTitle = fileName.charAt(0).toUpperCase() + fileName.slice(1);
       const fmMatch = content.match(/^title: (.*)$/m);
-      if (fmMatch) currentTitle = fmMatch[1].trim();
+      if (fmMatch) mainTitle = fmMatch[1].trim();
 
+      let currentTitle = mainTitle;
       let currentContent = [];
       let currentAnchor = '';
       
       lines.forEach(line => {
+        // Match headers #, ##, ### (ignoring # for main title if it matches mainTitle)
         const match = line.match(/^(#+)\s+(.*)$/);
         if (match) {
-          if (currentContent.length > 0) {
+          const depth = match[1].length;
+          const title = match[2].trim();
+
+          // If we found a new header, push previous section
+          if (currentContent.length > 0 || currentTitle !== mainTitle) {
             allSections.push({
               id: sectionId++,
               name: fileName,
+              parentTitle: mainTitle,
               title: currentTitle,
               content: currentContent.join('\n').trim(),
               anchor: currentAnchor
             });
           }
-          currentTitle = match[2].trim();
+          currentTitle = title;
           currentAnchor = slugify(currentTitle);
           currentContent = [];
         } else {
-          currentContent.push(line);
+          // Filter out frontmatter delimiters
+          if (line.trim() !== '---') {
+            currentContent.push(line);
+          }
         }
       });
       
-      if (currentContent.length > 0) {
+      if (currentContent.length > 0 || currentTitle !== mainTitle) {
         allSections.push({
           id: sectionId++,
           name: fileName,
+          parentTitle: mainTitle,
           title: currentTitle,
           content: currentContent.join('\n').trim(),
           anchor: currentAnchor
@@ -88,7 +98,7 @@ module.exports = {
     // Add your Gemini API key to .env:  GEMINI_API_KEY=your_key_here
     // .env is git-ignored — never commit it.
     customFields: {
-        geminiApiKey: process.env.GEMINI_API_KEY || '',
+        geminiApiKey: process.env.GEMINI_API_KEY || 'DT_GEMINI_API_KEY_PLACEHOLDER',
     },
 
     tagline: 'Scalable, Privacy-Preserving Layer 2 Blockchain',

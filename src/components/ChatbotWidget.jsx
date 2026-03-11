@@ -10,7 +10,74 @@ import { useHistory } from '@docusaurus/router';
 import MiniSearch from 'minisearch';
 
 // ─── Constants ──────────────────────────────────────────────────────────────
-const SYSTEM_PROMPT = `You are Zara, the complete and official technical AI guide for JMDT (docs.jmdt.io). Answer questions about JMDT node deployment, configuration, networking, CLI usage, and troubleshooting. Give step-by-step instructions when asked how to do something. Use code blocks for commands. If you don't know something, say so and suggest checking docs.jmdt.io. Never answer questions unrelated to JMDT. Always base your answers on the documentation provided below.`;
+const SYSTEM_PROMPT = `
+You are Zara, the official documentation search assistant for JMDT (docs.jmdt.io).
+
+Your purpose is to help users find information that already exists in the JMDT documentation. You behave like an intelligent documentation search engine that retrieves and explains information from the provided documentation context.
+
+JMDT CORE CONCEPTS
+- **JMDT**: Ethereum-based Layer 2 (L2) blockchain focused on scalability and privacy.
+- **JMDN**: JMDT Decentralized Network node. Usually started via './jmdn' or './gossipnode'.
+- **Consensus**: NNSS (Non-Negotiable Sequential Synchronization), a hybrid of Raft, Gossip Protocol, and Bloom Filters.
+- **Privacy**: Uses Zero-Knowledge Proofs (ZKPs) and W3C-standard Decentralized Identity (DID).
+- **Storage**: Integrates ImmuDB (tamper-proof database).
+- **Sync**: FastSync protocol for efficient blockchain state synchronization.
+
+TERMINOLOGY MAPPING
+- 'JMDN' / 'node' / 'binary' -> Reference 'Running a Node' or 'CLI Module'.
+- 'flow of tokens' / 'distribution' -> Reference 'Tokenomics' (ERC-20 model, foundation, staking).
+- 'DID' -> Reference 'Decentralized Identity' or 'DID Module'.
+- 'FastSync' -> Efficient block synchronization via Bloom filters.
+- 'defaluts' -> Assume the user means 'defaults' in CLI flags or environment config.
+
+STRICT BEHAVIOR RULES
+
+1. SOURCE OF TRUTH
+Only use the retrieved JMDT documentation context in the current session.
+Do not use outside knowledge, assumptions, or training data.
+Do not invent commands, defaults, configuration values, steps, or explanations.
+
+2. SEARCH-FIRST BEHAVIOR
+Treat the user's message as a search query first.
+Users may make spelling mistakes, use incomplete wording, abbreviations, or slightly incorrect product terms.
+When a query appears misspelled or imprecise, try to interpret the likely intended meaning only from the available retrieved documentation context.
+Only make that interpretation if it is strongly supported by the retrieved context. Otherwise ask the user to clarify.
+
+3. DO NOT FAIL TOO EARLY
+Do not immediately say "I couldn't find that information" just because the wording is imperfect.
+First, try to map the query to the closest matching documented concept in the retrieved context.
+
+4. AMBIGUITY HANDLING
+If the question is vague, broad, or ambiguous, ask a short clarification question.
+If there is one highly likely interpretation supported by the documentation context, you may say:
+"If you mean [documented concept], here’s what the documentation says:"
+Then answer only from the documentation context.
+
+5. STRICT RAG BOUNDARY
+Every factual statement must be grounded in the retrieved documentation context.
+If something is not clearly present in the context, do not add it.
+Do not infer technical steps beyond what the docs explicitly say.
+
+6. NO GENERAL AI HELP
+Do not provide:
+- general coding help
+- architecture advice
+- best practices or troubleshooting guesses not present in docs
+- commands not explicitly shown in docs
+
+7. RESPONSE STYLE
+- Be concise, clear, and conversational.
+- Sound like a helpful documentation search assistant.
+- Use structured steps and code blocks where available in the docs.
+- Reproduce commands and configuration examples faithfully; do not modify them.
+
+8. WHEN NOTHING RELEVANT IS FOUND
+Only after trying to interpret the query against the retrieved context, say:
+"I couldn't find that in the current JMDT documentation. Please check docs.jmdt.io or try a more specific search."
+
+ROLE SUMMARY
+You are a JMDT documentation search assistant. You search, interpret, and explain only what exists in retrieved JMDT docs. Handle imperfect queries gracefully, but never go beyond the documentation context.
+`;
 
 const GEMINI_MODEL = 'gemini-3.1-flash-lite-preview';
 const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
@@ -37,20 +104,24 @@ function renderParts(text) {
 
 function InlineText({ line }) {
   const segments = [];
-  const re = /(`[^`]+`|\*\*[^*]+\*\*|\*[^*]+\*)/g;
+  const re = /(`[^`]+`|\*\*[^*]+\*\*|\*[^*]+\*|\[([^\]]+)\]\(([^)]+)\))/g;
   let last = 0;
   let m;
   while ((m = re.exec(line)) !== null) {
     if (m.index > last) segments.push(<span key={last}>{line.slice(last, m.index)}</span>);
     const val = m[0];
     if (val.startsWith('`')) {
-      segments.push(
-        <code key={m.index} style={styles.inlineCode}>{val.slice(1, -1)}</code>
-      );
+      segments.push(<code key={m.index} style={styles.inlineCode}>{val.slice(1, -1)}</code>);
     } else if (val.startsWith('**')) {
       segments.push(<strong key={m.index}>{val.slice(2, -2)}</strong>);
-    } else {
+    } else if (val.startsWith('*')) {
       segments.push(<em key={m.index}>{val.slice(1, -1)}</em>);
+    } else if (val.startsWith('[')) {
+      segments.push(
+        <a key={m.index} href={m[3]} target="_blank" rel="noopener noreferrer" style={styles.markdownLink}>
+          {m[2]}
+        </a>
+      );
     }
     last = m.index + val.length;
   }
@@ -72,14 +143,44 @@ function MessageContent({ content }) {
         }
         const lines = part.content.split('\n');
         return (
-          <p key={i} style={styles.textPara}>
-            {lines.map((line, j) => (
-              <React.Fragment key={j}>
-                <InlineText line={line} />
-                {j < lines.length - 1 && <br />}
-              </React.Fragment>
-            ))}
-          </p>
+          <div key={i}>
+            {lines.map((line, j) => {
+              const trimmed = line.trim();
+              
+              // Headers
+              const hMatch = line.match(/^(#+)\s+(.*)/);
+              if (hMatch) {
+                const level = hMatch[1].length;
+                const fontSize = level === 1 ? '22px' : level === 2 ? '18px' : '16px';
+                return (
+                  <div key={j} style={{ ...styles.markdownHeader, fontSize }}>
+                    <InlineText line={hMatch[2]} />
+                  </div>
+                );
+              }
+              
+              // List items
+              const lMatch = line.match(/^(\s*)([-*]|\d+\.)\s+(.*)/);
+              if (lMatch) {
+                return (
+                  <div key={j} style={styles.markdownListItem}>
+                    <InlineText line={lMatch[3]} />
+                  </div>
+                );
+              }
+              
+              // Empty line
+              if (!trimmed && j < lines.length - 1) return <div key={j} style={{ height: '8px' }} />;
+              if (!trimmed) return null;
+              
+              // Paragraph
+              return (
+                <p key={j} style={styles.textPara}>
+                  <InlineText line={line} />
+                </p>
+              );
+            })}
+          </div>
         );
       })}
     </div>
@@ -136,10 +237,10 @@ export default function ChatbotWidget() {
   
   const miniSearchRef = useRef(
     new MiniSearch({
-      fields: ['name', 'content', 'title'],
-      storeFields: ['name', 'content', 'title', 'anchor'],
+      fields: ['title', 'parentTitle', 'content', 'name'],
+      storeFields: ['title', 'parentTitle', 'content', 'name', 'anchor'],
       searchOptions: {
-        boost: { title: 3, name: 2 },
+        boost: { title: 4, parentTitle: 2, name: 1 },
         fuzzy: 0.2,
         prefix: true
       }
@@ -190,7 +291,11 @@ export default function ChatbotWidget() {
       setSelectedIndex(0);
       return;
     }
-    const results = miniSearchRef.current.search(query).slice(0, 6);
+
+    // Use raw query, let MiniSearch fuzzy and AI handle the rest
+    const cleanQuery = query.trim();
+
+    const results = miniSearchRef.current.search(cleanQuery).slice(0, 6);
     setSearchResults(results);
     setSelectedIndex(0);
   }, [query, view]);
@@ -252,8 +357,10 @@ export default function ChatbotWidget() {
   const clearChat = () => {
     setMessages([WELCOME_MESSAGE]);
     setQuery('');
+    setRecentChats([]); // Also clear recent conversations
     setView('search');
     localStorage.removeItem('jmdt_chat_history');
+    localStorage.removeItem('jmdt_recent_chats');
   };
 
   const handleNavigate = (res) => {
@@ -296,9 +403,11 @@ export default function ChatbotWidget() {
     setMessages(prev => [...prev, { role: 'assistant', content: '', streaming: true }]);
     abortRef.current = new AbortController();
 
-    const searchResultsForAI = miniSearchRef.current.search(userText).slice(0, 3);
+    const cleanQuery = userText.trim();
+
+    const searchResultsForAI = miniSearchRef.current.search(cleanQuery).slice(0, 4);
     const relevantContext = searchResultsForAI
-      .map(res => `=== ${res.name}.md [${res.title}] ===\n${res.content}`)
+      .map(res => `=== ${res.parentTitle} > ${res.title} ===\n${res.content}`)
       .join('\n\n');
 
     try {
@@ -397,9 +506,24 @@ export default function ChatbotWidget() {
         if (isInitial) {
            if (selectedIndex < recentDocs.length) {
              handleNavigate(recentDocs[selectedIndex]);
-           } else {
-             handleTriggerChat(recentChats[selectedIndex - recentDocs.length]);
-           }
+            } else {
+              const chatText = recentChats[selectedIndex - recentDocs.length];
+              setQuery(chatText);
+              setView('chat');
+              setSelectedIndex(0);
+              
+              // Find the message index to scroll to
+              setTimeout(() => {
+                const idx = [...messages].reverse().findIndex(m => m.role === 'user' && m.content === chatText);
+                if (idx !== -1) {
+                  const actualIdx = messages.length - 1 - idx;
+                  const el = document.getElementById(`msg-${actualIdx}`);
+                  el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                  messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+                }
+              }, 100);
+            }
         } else {
           if (query && selectedIndex === 0) {
             handleTriggerChat();
@@ -454,6 +578,18 @@ export default function ChatbotWidget() {
                 onKeyDown={handleKeyDown}
               />
               <div style={styles.headerRight}>
+                {view === 'search' && messages.length > 1 && (
+                  <div 
+                    style={styles.clearBtn} 
+                    onClick={() => {
+                      setView('chat');
+                      setTimeout(() => messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }), 50);
+                    }}
+                    title="View Chat History"
+                  >
+                    Zara Chat ✨
+                  </div>
+                )}
                 {view === 'chat' && <div style={styles.clearBtn} onClick={clearChat}>Clear</div>}
                 <div style={styles.escHint} onClick={() => setIsOpen(false)}>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
@@ -505,7 +641,23 @@ export default function ChatbotWidget() {
                               <div 
                                 key={`rc-${i}`} 
                                 style={{...styles.resultItem, ...(isSel ? styles.selectedItem : {})}} 
-                                onClick={() => handleTriggerChat(item)}
+                                onClick={() => {
+                                  setQuery(item);
+                                  setView('chat');
+                                  setSelectedIndex(0);
+                                  
+                                  // Targeted scrolling
+                                  setTimeout(() => {
+                                    const idx = [...messages].reverse().findIndex(m => m.role === 'user' && m.content === item);
+                                    if (idx !== -1) {
+                                      const actualIdx = messages.length - 1 - idx;
+                                      const el = document.getElementById(`msg-${actualIdx}`);
+                                      el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                    } else {
+                                      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+                                    }
+                                  }, 100);
+                                }}
                               >
                                 <div style={styles.resultIconWrapper}>
                                   <span style={{fontSize: '14px', opacity: 0.5}}>✨</span>
@@ -593,7 +745,11 @@ export default function ChatbotWidget() {
                     </div>
                   )}
                   {messages.map((msg, i) => (
-                    <div key={i} style={{ ...styles.msgRow, justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start' }}>
+                    <div 
+                      key={i} 
+                      id={`msg-${i}`}
+                      style={{ ...styles.msgRow, justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start' }}
+                    >
                       <div style={{ ...styles.bubble, ...(msg.role === 'user' ? styles.userBubble : styles.botBubble) }}>
                         <MessageContent content={msg.content} />
                         {msg.streaming && <span style={styles.cursor} />}
@@ -778,8 +934,12 @@ const styles = {
   poweredBy: { fontSize: '11px', color: 'rgba(255,255,255,0.3)' },
   brand: { color: '#71a2e6', fontWeight: 600 },
   inlineCode: { background: 'rgba(113, 162, 230, 0.1)', padding: '2px 4px', borderRadius: '4px', fontFamily: 'monospace', color: '#71a2e6' },
+  markdownLink: { color: '#71a2e6', textDecoration: 'none', fontWeight: 600 },
   codeBlock: { background: '#09090c', padding: '12px', borderRadius: '8px', overflowX: 'auto', border: '1px solid rgba(255,255,255,0.05)', margin: '8px 0', fontSize: '13px' },
-  textPara: { margin: '4px 0' },
+  textPara: { margin: '8px 0', lineHeight: '1.6' },
+  markdownHeader: { color: '#fff', fontWeight: 700, margin: '20px 0 10px', lineHeight: '1.3' },
+  markdownList: { margin: '8px 0', paddingLeft: '20px' },
+  markdownListItem: { margin: '6px 0', display: 'list-item', listStyleType: 'disc', listStylePosition: 'outside', marginLeft: '20px' },
   highlight: {
     background: 'transparent',
     color: '#71a2e6',

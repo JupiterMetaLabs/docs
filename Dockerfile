@@ -26,6 +26,10 @@ RUN npm install -g serve
 # Copy built static files from builder
 COPY --from=builder /app/build ./build
 
+# Copy entrypoint script
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
 # Create non-root user
 RUN addgroup -g 1001 -S nodejs && \
     adduser -S nodejs -u 1001 && \
@@ -41,6 +45,8 @@ EXPOSE 8080
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
   CMD wget --quiet --tries=1 --spider http://localhost:${PORT}/ || exit 1
+
+ENTRYPOINT ["docker-entrypoint.sh"]
 
 # Start serve on the PORT environment variable
 CMD ["sh", "-c", "serve -s build -l ${PORT}"]
