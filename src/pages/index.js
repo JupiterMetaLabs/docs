@@ -120,6 +120,10 @@ gtag('config', 'G-8N3L9Z2Z9X');
         <meta name="twitter:image" content="https://jmdt.io/og-new.png" />
         <meta name="twitter:site" content="@JMDT" />
 
+        {/* 🌐 Publish / Update Date (AEO: AI engines use this for freshness) */}
+        <meta name="article:published_time" content="2025-01-01T00:00:00Z" />
+        <meta name="article:modified_time" content="2026-03-11T00:00:00Z" />
+
         {/* Google Translate Widget */}
         <script type="text/javascript">
           {`
@@ -134,6 +138,77 @@ function googleTranslateElementInit() {
         </script>
         <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
+        {/* ── AEO + SEO: Organization, WebSite, SoftwareApplication JSON-LD ── */}
+        <script type="application/ld+json">{`
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://jmdt.io/#organization",
+      "name": "JupiterMetaLabs",
+      "url": "https://jmdt.io",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://docs.jmdt.io/img/jmdt_logo.png"
+      },
+      "sameAs": ["https://github.com/JupiterMetaLabs"],
+      "description": "JupiterMetaLabs builds JMDT — a privacy-preserving, scalable Ethereum Layer 2 blockchain using Zero-Knowledge Proofs and Decentralized Identity."
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://docs.jmdt.io/#website",
+      "url": "https://docs.jmdt.io",
+      "name": "JMDT Documentation",
+      "description": "Official technical documentation for the JMDT Ethereum Layer 2 blockchain.",
+      "publisher": { "@id": "https://jmdt.io/#organization" },
+      "inLanguage": "en-US",
+      "dateModified": "2026-03-11",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://docs.jmdt.io/search?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://docs.jmdt.io/#webpage",
+      "url": "https://docs.jmdt.io",
+      "name": "JMDT - Next-Gen Blockchain Network",
+      "description": "JMDT is an Ethereum Layer 2 blockchain with Zero-Knowledge Proofs, Decentralized Identity, and AVC consensus for privacy, scalability, and security.",
+      "isPartOf": { "@id": "https://docs.jmdt.io/#website" },
+      "publisher": { "@id": "https://jmdt.io/#organization" },
+      "dateModified": "2026-03-11",
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://jmdt.io/#software",
+      "name": "JMDT — Jupiter Meta Data Token",
+      "applicationCategory": "BlockchainApplication",
+      "operatingSystem": "Ethereum Layer 2",
+      "description": "JMDT is a privacy-preserving Ethereum Layer 2 blockchain leveraging Zero-Knowledge Proofs (ZKPs), Decentralized Identity (DID), and the AVC (Asynchronous Validation Consensus) mechanism.",
+      "url": "https://jmdt.io",
+      "author": { "@id": "https://jmdt.io/#organization" },
+      "dateModified": "2026-03-11",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "featureList": [
+        "Zero-Knowledge Proofs (ZKPs)",
+        "Decentralized Identity (DID)",
+        "AVC Consensus Algorithm",
+        "EVM Compatibility",
+        "zk-Rollups",
+        "Immutable Storage",
+        "Privacy-Preserving Queries"
+      ]
+    }
+  ]
+}
+        `}</script>
+
         {/* ── AEO: FAQ Structured Data ─────────────────────────────────── */}
         <script type="application/ld+json">{`
 {
@@ -145,15 +220,15 @@ function googleTranslateElementInit() {
       "name": "What is JMDT?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "JMDT (Jupiter Meta Data Token) is an Ethereum-based Layer 2 blockchain designed for scalability, privacy, and security. It uses Zero-Knowledge Proofs (ZKPs), Decentralized Identity (DID), and the NNSS (Non-Negotiable Sequential Synchronization) consensus algorithm to provide a highly efficient, privacy-preserving blockchain infrastructure."
+        "text": "JMDT (Jupiter Meta Data Token) is an Ethereum-based Layer 2 blockchain designed for scalability, privacy, and security. It uses Zero-Knowledge Proofs (ZKPs), Decentralized Identity (DID), and the AVC (Asynchronous Validation Consensus) algorithm to provide a highly efficient, privacy-preserving blockchain infrastructure."
       }
     },
     {
       "@type": "Question",
-      "name": "What is NNSS consensus?",
+      "name": "What is AVC consensus?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "NNSS (Non-Negotiable Sequential Synchronization) is JMDT's hybrid consensus algorithm that integrates Raft, Gossip Protocol, and Bloom Filters for efficient, fault-tolerant data synchronization across network nodes."
+        "text": "AVC (Asynchronous Validation Consensus) is JMDT's consensus algorithm designed for efficient, fault-tolerant agreement across network nodes in the JMDT Layer 2 blockchain."
       }
     },
     {
@@ -332,6 +407,127 @@ function googleTranslateElementInit() {
           border: '1px solid var(--glass-border)'
         }}
       ></div>
+
+      {/* ── What is JMDT — visible content for crawlers ────────────────────── */}
+      <main>
+        <section style={{ maxWidth: '900px', margin: '0 auto', padding: '4rem 1.5rem 2rem' }}>
+          <h2 style={{ fontSize: '2rem', fontWeight: '700', marginBottom: '1rem' }}>
+            What is JMDT?
+          </h2>
+          <p style={{ fontSize: '1.1rem', lineHeight: '1.8', marginBottom: '1rem' }}>
+            <strong>Jupiter Meta Data Token (JMDT)</strong> is an Ethereum-based Layer 2 (L2) blockchain
+            designed to enhance scalability, privacy, and security for decentralized applications (dApps)
+            and enterprise use cases. By leveraging <strong>Zero-Knowledge Proofs (ZKPs)</strong>,{' '}
+            <strong>Decentralized Identity (DID)</strong>, and the{' '}
+            <strong>AVC (Asynchronous Validation Consensus)</strong> mechanism, JMDT provides a highly
+            efficient and interoperable blockchain infrastructure.
+          </p>
+          <p style={{ fontSize: '1.1rem', lineHeight: '1.8', marginBottom: '1rem' }}>
+            JMDT is fully EVM-compatible, meaning developers can deploy existing Ethereum smart contracts
+            without modification. Transactions are batched via zk-rollups and committed to Ethereum
+            dynamically based on optimal gas fees, keeping costs low while maintaining L1-level security.
+            The immutable ledger ensures tamper-proof, verifiable data recording for every operation.
+          </p>
+          <p style={{ fontSize: '1.1rem', lineHeight: '1.8', marginBottom: '2.5rem' }}>
+            Built for enterprises and developers alike, JMDT's DID system follows W3C standards —
+            enabling PII-protected user authentication and cross-platform credential sharing without
+            exposing personal data on-chain.
+          </p>
+
+          {/* ── Explore the Docs — internal linking section ──────────────── */}
+          <h2 style={{ fontSize: '1.75rem', fontWeight: '700', marginBottom: '1rem' }}>
+            Explore the Documentation
+          </h2>
+          <p style={{ fontSize: '1rem', lineHeight: '1.8', marginBottom: '1.5rem' }}>
+            Dive into any section of the JMDT technical documentation:
+          </p>
+          <ul style={{ listStyle: 'none', padding: 0, display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '0.75rem', marginBottom: '3rem' }}>
+            {[
+              { label: 'Introduction', href: '/docs/intro', desc: 'Start here — overview of JMDT' },
+              { label: 'Architecture', href: '/docs/architecture', desc: 'Three-layer design' },
+              { label: 'AVC Consensus', href: '/docs/bft', desc: 'Consensus mechanism' },
+              { label: 'Zero-Knowledge Proofs', href: '/docs/zk', desc: 'ZK-Rollup details' },
+              { label: 'Decentralized Identity', href: '/docs/did', desc: 'DID & W3C standards' },
+              { label: 'Tokenomics', href: '/docs/tokenomics', desc: 'JM Coin model' },
+              { label: 'Use Cases', href: '/docs/use-cases', desc: 'Real-world applications' },
+              { label: 'Smart Contracts', href: '/docs/smart-contract', desc: 'EVM deployment' },
+              { label: 'Sequencer', href: '/docs/sequencer', desc: 'Transaction ordering' },
+              { label: 'Advantages', href: '/docs/advantages', desc: 'vs other L2 solutions' },
+              { label: 'Roadmap', href: '/docs/roadmap', desc: 'Development milestones' },
+              { label: 'CLI Reference', href: '/docs/cli', desc: 'Node operator commands' },
+            ].map(({ label, href, desc }) => (
+              <li key={href}>
+                <Link
+                  to={href}
+                  style={{
+                    display: 'block',
+                    padding: '0.75rem 1rem',
+                    borderRadius: '8px',
+                    border: '1px solid var(--glass-border, rgba(255,255,255,0.1))',
+                    textDecoration: 'none',
+                    transition: 'border-color 0.2s',
+                  }}
+                >
+                  <strong style={{ display: 'block', marginBottom: '0.2rem' }}>{label}</strong>
+                  <span style={{ fontSize: '0.85rem', opacity: 0.7 }}>{desc}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          {/* ── Visible FAQ section — addresses audit "FAQ Section: Not Found" ── */}
+          <h2 style={{ fontSize: '1.75rem', fontWeight: '700', marginBottom: '1.5rem' }}>
+            Frequently Asked Questions
+          </h2>
+
+          {[
+            {
+              q: 'What is JMDT?',
+              a: 'JMDT (Jupiter Meta Data Token) is an Ethereum-based Layer 2 blockchain designed for scalability, privacy, and security. It uses Zero-Knowledge Proofs (ZKPs), Decentralized Identity (DID), and the AVC consensus algorithm to deliver a high-throughput, privacy-preserving blockchain infrastructure for dApps and enterprise use cases.',
+            },
+            {
+              q: 'What is AVC consensus?',
+              a: 'AVC (Asynchronous Validation Consensus) is JMDT\'s consensus algorithm, engineered for efficient and fault-tolerant agreement across all network nodes, enabling the JMDT Layer 2 to process transactions reliably at scale.',
+            },
+            {
+              q: 'How does JMDT use Zero-Knowledge Proofs?',
+              a: 'JMDT uses ZKPs to enable private transactions and computations without exposing sensitive data. ZK-Rollups batch multiple transactions into a single succinct proof that is committed to Ethereum Layer 1, achieving high throughput while preserving user privacy.',
+            },
+            {
+              q: 'What is Decentralized Identity (DID) on JMDT?',
+              a: 'JMDT implements W3C-standard Decentralized Identifiers (DIDs) for secure, PII-protected user authentication. DID credentials are stored on Layer 2 and can be shared across multiple platforms without exposing personal data on-chain.',
+            },
+            {
+              q: 'Is JMDT compatible with Ethereum smart contracts?',
+              a: 'Yes. JMDT is fully EVM-compatible — existing Ethereum smart contracts can be deployed on JMDT without modification, supporting seamless integration with DeFi protocols and enterprise solutions.',
+            },
+            {
+              q: 'How does JMDT commit transactions to Ethereum?',
+              a: 'JMDT dynamically commits batched transactions to Ethereum based on optimal gas fees and block time, using zk-rollup proofs to ensure finality and security on L1 while keeping transaction costs low for end users.',
+            },
+            {
+              q: 'What are the main use cases for JMDT?',
+              a: 'JMDT supports user onboarding and reward redemption (via the SuperJ platform), enterprise identity verification using DID credentials, privacy-preserving DeFi applications, and any dApp requiring high throughput combined with strong data privacy guarantees.',
+            },
+          ].map(({ q, a }, i) => (
+            <div key={i} itemScope itemProp="mainEntity" itemType="https://schema.org/Question"
+              style={{ marginBottom: '1.75rem', paddingBottom: '1.75rem', borderBottom: '1px solid var(--glass-border, rgba(255,255,255,0.08))' }}>
+              <h3 itemProp="name" style={{ fontSize: '1.1rem', fontWeight: '600', marginBottom: '0.5rem' }}>
+                {q}
+              </h3>
+              <div itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
+                <p itemProp="text" style={{ fontSize: '1rem', lineHeight: '1.8', margin: 0, opacity: 0.85 }}>
+                  {a}
+                </p>
+              </div>
+            </div>
+          ))}
+
+          <p style={{ fontSize: '0.85rem', opacity: 0.5, marginTop: '2rem' }}>
+            Last updated: March 2026 · <Link to="/docs/intro">Read full documentation →</Link>
+          </p>
+        </section>
+      </main>
     </Layout>
   );
 }
