@@ -62,7 +62,7 @@ module.exports = {
     // },
     {
       type: 'category',
-      label: '🟢 Mainnet',
+      label: 'Mainnet',
       collapsed: false,
       items: [
         'mainnet/mainnet-overview',
@@ -73,7 +73,7 @@ module.exports = {
     },
     {
       type: 'category',
-      label: '🔵 Testnet',
+      label: 'Testnet',
       collapsed: false,
       items: [
         'testnet/testnet-overview',
