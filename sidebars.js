@@ -65,10 +65,10 @@ module.exports = {
       label: '🟢 Mainnet',
       collapsed: false,
       items: [
-        'mainnet-overview',
-        'mainnet-prerequisites',
-        'mainnet-install',
-        'mainnet-connect',
+        'mainnet/mainnet-overview',
+        'mainnet/mainnet-prerequisites',
+        'mainnet/mainnet-install',
+        'mainnet/mainnet-connect',
       ],
     },
     {
@@ -76,10 +76,10 @@ module.exports = {
       label: '🔵 Testnet',
       collapsed: false,
       items: [
-        'testnet-overview',
-        'testnet-prerequisites',
-        'testnet-install',
-        'testnet-connect',
+        'testnet/testnet-overview',
+        'testnet/testnet-prerequisites',
+        'testnet/testnet-install',
+        'testnet/testnet-connect',
       ],
     },
     {
