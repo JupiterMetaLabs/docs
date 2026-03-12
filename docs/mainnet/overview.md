@@ -95,7 +95,7 @@ This address is configured in your `jmdn.yaml` during node setup. See [Install &
 Running a mainnet node involves **real JMDT tokens** and connects to the live production network. Make sure you:
 
 - Have a server meeting the [hardware prerequisites](./prerequisites)
-- Have JMDT for staking and gas (acquire via [Bitmart](/docs/get-jmdt))
+- Have JMDT for gas fees (acquire via [Bitmart](/docs/get-jmdt))
 - Are familiar with the [JMDN build process](/docs/running-a-node)
 - Keep your node key and config files secured
 

@@ -26,9 +26,9 @@ The following table compares **Jupiter Meta Data Token (JMDT)** with leading L2 
 | **L1 Settlement** | Dynamic zk-rollup to L1 | Periodic zk-rollup | STARK rollup | Delayed zk-rollup | Not applicable |
 | **Data Availability** | zk-anchored + immudb logs | Ethereum DA Layer | On-chain calldata | On-chain | Off-chain (private) |
 | **Enterprise Readiness** | ✅ DAG layer, DID, privacy | ⚠️ Limited DID/enterprise SDKs | ⚠️ Limited identity & compliance | ❌ Not enterprise-ready | ✅ Proven enterprise use |
-| **Token Model** | JMDT (Governance + Utility) | MATIC (Gas & Staking) | STRK | AZTEC | None |
+| **Token Model** | JMDT (Utility) | MATIC (Gas & Staking) | STRK | AZTEC | None |
 | **Smart Contract Support** | Rust (zkVM) + Solidity | Solidity (zkEVM) | Cairo | Aztec Noir + limited Solidity | Chaincode (Go/Java) |
-| **Governance** | Foundation DAO | Off-chain + Foundation | TBD (future DAO) | Aztec Foundation | Centralised consortium |
+| **Governance** | JupiterMetaLabs Foundation | Off-chain + Foundation | TBD (future DAO) | Aztec Foundation | Centralised consortium |
 
 ---
 

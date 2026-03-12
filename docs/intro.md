@@ -55,7 +55,7 @@ Conventional blockchains struggle with performance, privacy, and real-world comp
 | **Security** | zkVM-based execution, AVC consensus, and stake-based accountability |
 | **Interoperability** | Fully compatible with Ethereum and Web3 SDKs |
 | **Efficiency** | Bloom Filters reduce propagation redundancy; zkRollups optimise gas fees for L1 finality |
-| **Governance** | JMDT token enables on-chain DAO governance and validator staking |
+| **Utility Token** | JMDT fuels gas fees, enterprise DAG access, and L2 commitments |
 
 ## JMDT at a Glance
 

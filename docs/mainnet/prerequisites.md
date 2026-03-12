@@ -82,7 +82,7 @@ sudo ufw reload
 Running a mainnet JMDN node requires JMDT for:
 
 - **Gas fees** — Paying for transactions you submit
-- **Staking** — Validators stake JMDT to participate in AVC consensus
+- **Enterprise access** — Paying for L3 DAG node allocations and data services
 
 Acquire JMDT on **Bitmart** — see [How to Get JMDT →](/docs/get-jmdt)
 

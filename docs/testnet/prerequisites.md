@@ -84,7 +84,7 @@ Testnet tokens are **free** — no purchase required.
 2. Connect your EVM-compatible wallet (MetaMask, etc.)
 3. Request testnet JMDT — instantly credited to your wallet
 
-In the meantime, you can run a testnet node without any tokens — tokens are only required once you begin submitting transactions or staking.
+In the meantime, you can run a testnet node without any tokens — tokens are only required once you begin submitting transactions.
 
 ---
 
