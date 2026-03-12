@@ -16,7 +16,7 @@ The architecture is divided into three core layers: **L3** (enterprise DAGs), **
 
 ```mermaid
 graph TD
-    subgraph L3["Layer 3 — Enterprise DAG & Consent Infrastructure"]
+    subgraph L3["Layer 3 — Enterprise DAG"]
         A1["Enterprise DAG Nodes (per org/dApp)"]
         A2["Pub/Sub DAG Mesh"]
         A3["InterDAG Bridge"]
@@ -26,7 +26,7 @@ graph TD
     end
     style L3 fill:#1a1a2e,stroke:#71a2e6,stroke-width:2px,color:#fff
 
-    subgraph L2["Layer 2 — ZK-Enabled State & Rollup Layer"]
+    subgraph L2["Layer 2 — ZK-Rollup & AVC"]
         B1["zk Engine (SNARK + STARK)"]
         B2["DID Engine"]
         B3["AVC Consensus Mechanism"]
@@ -39,7 +39,7 @@ graph TD
     end
     style L2 fill:#0d0d1a,stroke:#8074d9,stroke-width:2px,color:#fff
 
-    subgraph L1["Layer 1 — Ethereum Settlement"]
+    subgraph L1["Layer 1 — Ethereum"]
         C1["JMDT Smart Contracts"]
         C2["L1 Finality Commit"]
         C1 --> C2
