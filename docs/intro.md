@@ -33,10 +33,10 @@ Conventional blockchains struggle with performance, privacy, and real-world comp
 - **Layer 2 Scaling:** High-throughput zkRollup engine built using RISC Zero zkVM for verifiable Rust-based execution. Designed for faster settlements and large-scale concurrent transactions.
 
 - **AVC Consensus:** JMDT's **Asynchronous Validation Consensus** delivers:
-  - Scalable and secure block finality via quorum-based buddy voting
-  - Energy-efficient operation by eliminating mining
-  - Low-latency, fault-tolerant propagation via Gossip Protocol
-  - Seamless compatibility with DAG-based L3 enterprise extensions
+- Scalable and secure block finality via quorum-based buddy voting
+- Energy-efficient operation by eliminating mining
+- Low-latency, fault-tolerant propagation via Gossip Protocol
+- Seamless compatibility with DAG-based L3 enterprise extensions
 
 - **Ethereum Interoperability:** Full EVM compatibility — deploy existing Ethereum smart contracts on JMDT without modification. Supports DeFi, NFT marketplaces, DAOs, and enterprise solutions.
 

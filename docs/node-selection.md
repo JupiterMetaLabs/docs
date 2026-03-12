@@ -4,10 +4,10 @@ Production-ready VRF-based buddy node selection for distributed networks.
 
 ## Features
 
-- ✅ **VRF Buddy Selection** - Cryptographically secure, verifiable buddy selection
-- ✅ **gRPC Integration** - Connect to peer directory for node discovery
-- ✅ **Mnemonic Support** - Generate keys from BIP39 mnemonic phrases
-- ✅ **Production Ready** - Comprehensive error handling and validation
+- Yes **VRF Buddy Selection** - Cryptographically secure, verifiable buddy selection
+- Yes **gRPC Integration** - Connect to peer directory for node discovery
+- Yes **Mnemonic Support** - Generate keys from BIP39 mnemonic phrases
+- Yes **Production Ready** - Comprehensive error handling and validation
 
 ## Quick Start
 

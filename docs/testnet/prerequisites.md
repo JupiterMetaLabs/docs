@@ -29,12 +29,12 @@ The testnet has lighter requirements than mainnet since it carries no production
 
 | OS | Supported |
 |---|---|
-| Ubuntu 20.04 / 22.04 LTS | ✅ Recommended |
-| Debian 11 / 12 | ✅ |
-| RHEL / CentOS 8+ | ✅ |
-| macOS 12+ | ✅ |
-| FreeBSD 13+ | ✅ |
-| Windows | ❌ Not supported |
+| Ubuntu 20.04 / 22.04 LTS | Yes — Recommended |
+| Debian 11 / 12 | Yes |
+| RHEL / CentOS 8+ | Yes |
+| macOS 12+ | Yes |
+| FreeBSD 13+ | Yes |
+| Windows | No — Not supported |
 
 ---
 

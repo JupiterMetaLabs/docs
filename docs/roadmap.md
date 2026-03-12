@@ -10,19 +10,19 @@ keywords: [JMDT roadmap, blockchain roadmap, JupiterMeta milestones, JMDT mainne
 
 ## **JMDT Development Roadmap**
 
-### **🚀 Phase 1:**
-✔ Research & Development on **ZKPs & DID-based querying**
-✔ Implement **immutable ledger for data synchronization**
-✔ Deploy on **Ethereum Sepolia Testnet**
+### ** Phase 1:**
+Research & Development on **ZKPs & DID-based querying**
+Implement **immutable ledger for data synchronization**
+Deploy on **Ethereum Sepolia Testnet**
 
-### **🚀 Phase 2:**
-✔ Develop **zk-rollup aggregator**
-✔ Beta testing with **enterprise partners**
-✔ Launch **JMDT Testnet**
+### ** Phase 2:**
+Develop **zk-rollup aggregator**
+Beta testing with **enterprise partners**
+Launch **JMDT Testnet**
 
-### **🚀 Phase 3:**
-✔ **Mainnet launch**
-✔ Expansion to **multi-chain interoperability**
-✔ Onboarding **large-scale enterprise solutions**
+### ** Phase 3:**
+**Mainnet launch**
+Expansion to **multi-chain interoperability**
+Onboarding **large-scale enterprise solutions**
 
-<!-- [Learn More About  JMDT](./intro.md) -->
+<!-- [Learn More About JMDT](./intro.md) -->

@@ -2,36 +2,36 @@
 
 A high-performance control plane for decentralized mempool networks. The MRE provides deterministic transaction placement, replication, consensus, and retrieval across independent mempool nodes with high availability, fault tolerance, and low latency.
 
-## 🆕 Latest Updates
+## Latest Updates
 
-### 🚀 **Modern HRW Integration (v2.0)**
-- ✅ **HRW Manager**: Complete epoch-based HRW Manager with Redis Streams integration
-- ✅ **Dynamic Weight Updates**: Automatic HRW weight updates via `ChangeWeightage()` function
-- ✅ **Redis Streams Publishing**: Real-time transaction placement publishing to Redis Streams
-- ✅ **Epoch-based Configuration**: Historical transaction stability with dynamic weight updates
-- ✅ **Multi-format NodeID Support**: Flexible NodeID to ShardID conversion for various naming patterns
-- ✅ **Weight Scheduler Integration**: Automatic HRW Manager updates when new weights are calculated
-- ✅ **Reflection-based Integration**: Seamless HRW Manager integration without circular imports
+### **Modern HRW Integration (v2.0)**
+- Yes **HRW Manager**: Complete epoch-based HRW Manager with Redis Streams integration
+- Yes **Dynamic Weight Updates**: Automatic HRW weight updates via `ChangeWeightage()` function
+- Yes **Redis Streams Publishing**: Real-time transaction placement publishing to Redis Streams
+- Yes **Epoch-based Configuration**: Historical transaction stability with dynamic weight updates
+- Yes **Multi-format NodeID Support**: Flexible NodeID to ShardID conversion for various naming patterns
+- Yes **Weight Scheduler Integration**: Automatic HRW Manager updates when new weights are calculated
+- Yes **Reflection-based Integration**: Seamless HRW Manager integration without circular imports
 
-### 🔧 **Enhanced Features**
-- ✅ **HRW - Weights Algorithm**: Advanced weighted selection based on system metrics, mempool capacity, and fee affordability
-- ✅ **High Throughput Testing**: Enhanced test clients supporting 1000+ transactions per second
-- ✅ **Real-time Metrics**: Redis integration for live system and mempool metrics
-- ✅ **Latency-aware Routing**: Network latency measurement and exclusion of unreachable mempools
-- ✅ **Weight Scheduler**: Background process for periodic weight updates (configurable interval)
-- ✅ **Enhanced Go Client**: Multi-worker concurrent transaction testing with real-time statistics
-- ✅ **Python Test Clients**: Alternative test clients with async support and batch processing
-- ✅ **Flexible Server URLs**: Command-line URL arguments for testing different environments
-- ✅ **Integrated MRE Binary**: Single executable with all modules integrated
-- ✅ **Run-All Command**: Start all modules simultaneously with one command
-- ✅ **JSON Configuration**: Mempool addresses configurable via JSON file
-- ✅ **Redis Integration**: Real-time log storage and analytics with Redis
-- ✅ **Logging Server**: Dedicated NATS consumer with Redis persistence
-- ✅ **Unified CLI**: Single MRE binary with server, logging, and run-all subcommands
-- ✅ **Docker Support**: Redis container setup and testing
-- ✅ **Comprehensive Testing**: Full client-server integration tests
+### **Enhanced Features**
+- Yes **HRW - Weights Algorithm**: Advanced weighted selection based on system metrics, mempool capacity, and fee affordability
+- Yes **High Throughput Testing**: Enhanced test clients supporting 1000+ transactions per second
+- Yes **Real-time Metrics**: Redis integration for live system and mempool metrics
+- Yes **Latency-aware Routing**: Network latency measurement and exclusion of unreachable mempools
+- Yes **Weight Scheduler**: Background process for periodic weight updates (configurable interval)
+- Yes **Enhanced Go Client**: Multi-worker concurrent transaction testing with real-time statistics
+- Yes **Python Test Clients**: Alternative test clients with async support and batch processing
+- Yes **Flexible Server URLs**: Command-line URL arguments for testing different environments
+- Yes **Integrated MRE Binary**: Single executable with all modules integrated
+- Yes **Run-All Command**: Start all modules simultaneously with one command
+- Yes **JSON Configuration**: Mempool addresses configurable via JSON file
+- Yes **Redis Integration**: Real-time log storage and analytics with Redis
+- Yes **Logging Server**: Dedicated NATS consumer with Redis persistence
+- Yes **Unified CLI**: Single MRE binary with server, logging, and run-all subcommands
+- Yes **Docker Support**: Redis container setup and testing
+- Yes **Comprehensive Testing**: Full client-server integration tests
 
-## 🏗️ Architecture Overview
+## Architecture Overview
 
 The Mempool Routing Engine acts as a smart proxy between JMDT (JMDT) nodes and actual mempool servers, providing:
 
@@ -90,7 +90,7 @@ The Mempool Routing Engine acts as a smart proxy between JMDT (JMDT) nodes and a
                     └─────────────────────────┘
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -100,7 +100,7 @@ The Mempool Routing Engine acts as a smart proxy between JMDT (JMDT) nodes and a
 - Docker (for Redis container)
 - buf (for protobuf generation)
 
-### 🚀 Quick Start Command
+### Quick Start Command
 
 **Start all services with one command:**
 
@@ -122,14 +122,14 @@ cp mempoolAddress.example.json mempoolAddress.json
 ```
 
 **What this does:**
-- ✅ Starts gRPC server on port 8080
-- ✅ Starts logging server with all streams
-- ✅ Connects to NATS and Redis
-- ✅ Loads mempool configurations from `mempoolAddress.json`
-- ✅ Initializes all configured mempool connections
-- ✅ Ready to handle transactions immediately
+- Yes — Starts gRPC server on port 8080
+- Yes — Starts logging server with all streams
+- Yes — Connects to NATS and Redis
+- Yes — Loads mempool configurations from `mempoolAddress.json`
+- Yes — Initializes all configured mempool connections
+- Yes — Ready to handle transactions immediately
 
-### 📋 Mempool Configuration
+### Mempool Configuration
 
 The MRE uses a JSON configuration file to manage mempool server connections. This makes it easy to add, remove, or modify mempool servers without changing code.
 
@@ -199,11 +199,11 @@ vim mempoolAddress.json
 
 #### **Configuration Benefits**
 
-- 🔧 **Easy Management**: Add/remove mempools without code changes
-- 🌍 **Environment Specific**: Different configs for dev/staging/prod
-- 📝 **Descriptive**: Each mempool has a description field
-- 🔄 **Hot Swappable**: Change configs without rebuilding
-- 📊 **Better Logging**: Shows which config file is loaded
+- **Easy Management**: Add/remove mempools without code changes
+- **Environment Specific**: Different configs for dev/staging/prod
+- **Descriptive**: Each mempool has a description field
+- **Hot Swappable**: Change configs without rebuilding
+- **Better Logging**: Shows which config file is loaded
 
 ### Installation
 
@@ -477,7 +477,7 @@ The MRE binary supports multiple subcommands:
 - Tests HRW Manager integration with dynamic weight updates
 - Validates NodeID to ShardID conversion for various formats
 
-## 🚀 Running All Modules
+## Running All Modules
 
 ### Quick Start with `run-all`
 
@@ -534,7 +534,7 @@ If you prefer to run modules in separate terminals:
 ./MRE loggingServer -stream=all
 ```
 
-## 🧪 Testing
+## Testing
 
 ### High Throughput Testing
 
@@ -615,13 +615,13 @@ Use the shell script for easy testing with different configurations:
 
 #### **Test Features**
 
-- **🚀 High Performance**: Support for 1000+ transactions per second
-- **👥 Concurrent Workers**: Multiple worker threads/goroutines for parallel processing
-- **📊 Real-time Statistics**: Live success/failure rates and performance metrics
-- **🎯 Configurable Parameters**: Rate, duration, workers, batch size, server URL
-- **🔄 Multiple Test Modes**: Throughput, batch, stress testing
-- **📈 Performance Monitoring**: Rate efficiency, success rates, duration tracking
-- **🌐 Flexible Server URLs**: Test against different MRE instances
+- ** High Performance**: Support for 1000+ transactions per second
+- ** Concurrent Workers**: Multiple worker threads/goroutines for parallel processing
+- ** Real-time Statistics**: Live success/failure rates and performance metrics
+- ** Configurable Parameters**: Rate, duration, workers, batch size, server URL
+- ** Multiple Test Modes**: Throughput, batch, stress testing
+- ** Performance Monitoring**: Rate efficiency, success rates, duration tracking
+- ** Flexible Server URLs**: Test against different MRE instances
 
 #### **Performance Expectations**
 
@@ -719,27 +719,27 @@ grpcurl -plaintext -d '{
 
 ### Test Results
 
-✅ **Valid Transaction**: Successfully processed and forwarded to mempool
-✅ **Invalid Transaction**: Properly rejected with validation errors
-✅ **Batch Processing**: Handles multiple transactions efficiently
-✅ **Redis Integration**: Logs successfully stored and retrievable
-✅ **NATS Consumer**: Real-time log processing working
-✅ **Multi-Command CLI**: All subcommands functional
-✅ **HRW Weights Algorithm**: Advanced weighted selection working correctly
+Yes **Valid Transaction**: Successfully processed and forwarded to mempool
+Yes **Invalid Transaction**: Properly rejected with validation errors
+Yes **Batch Processing**: Handles multiple transactions efficiently
+Yes **Redis Integration**: Logs successfully stored and retrievable
+Yes **NATS Consumer**: Real-time log processing working
+Yes **Multi-Command CLI**: All subcommands functional
+Yes **HRW Weights Algorithm**: Advanced weighted selection working correctly
 
-## 📡 API Reference
+## API Reference
 
 ### gRPC Service Methods
 
 | Method | Description | Status |
 |--------|-------------|---------|
-| `OnReceiveFromJMDT` | Main method for receiving transactions from JMDT nodes | ✅ Implemented |
-| `GetTransaction` | Retrieve a specific transaction by hash | ✅ Implemented |
-| `SubmitTransaction` | Submit a single transaction | ⚠️ Not implemented |
-| `SubmitTransactions` | Submit multiple transactions | ⚠️ Not implemented |
-| `GetPendingTransactions` | Get pending transactions | ⚠️ Not implemented |
-| `GetMempoolStats` | Get mempool statistics | ⚠️ Not implemented |
-| `GetFeeStatistics` | Get fee statistics | ⚠️ Not implemented |
+| `OnReceiveFromJMDT` | Main method for receiving transactions from JMDT nodes | Yes — Implemented |
+| `GetTransaction` | Retrieve a specific transaction by hash | Yes — Implemented |
+| `SubmitTransaction` | Submit a single transaction | Partial — Not implemented |
+| `SubmitTransactions` | Submit multiple transactions | Partial — Not implemented |
+| `GetPendingTransactions` | Get pending transactions | Partial — Not implemented |
+| `GetMempoolStats` | Get mempool statistics | Partial — Not implemented |
+| `GetFeeStatistics` | Get fee statistics | Partial — Not implemented |
 
 ### Transaction Validation
 
@@ -747,15 +747,15 @@ The routing engine validates transactions against these criteria:
 
 - **Required Fields**: Hash, From, To, Value, Type, ChainId, Nonce, GasLimit
 - **Format Validation**:
-  - Hash: Must start with "0x" and be 66 characters
-  - Addresses: Must start with "0x" and be 42 characters
+- Hash: Must start with "0x" and be 66 characters
+- Addresses: Must start with "0x" and be 42 characters
 - **Empty Field Detection**: Trims whitespace and rejects empty fields
 
-## 🧮 HRW Weights Algorithm
+## HRW Weights Algorithm
 
 The MRE includes an advanced **Highest Random Weight (HRW)** algorithm for intelligent mempool routing. This algorithm calculates dynamic weights for each mempool node based on real-time system metrics, mempool capacity, and fee affordability.
 
-### 🎯 Algorithm Overview
+### Algorithm Overview
 
 The HRW weights algorithm provides:
 
@@ -769,13 +769,13 @@ The HRW weights algorithm provides:
 - **Resource Pressure Handling**: Inverted scoring for lower-is-better metrics
 - **Strictly Positive Weights**: Ensures consistent hashing for HRW
 
-### 📊 Weight Calculation Factors
+### Weight Calculation Factors
 
 The algorithm considers the following metrics:
 
 #### **System Metrics**
 - **CPU Usage**: Lower usage = higher weight (with moving average smoothing)
-- **Memory Usage**: Lower usage = higher weight  
+- **Memory Usage**: Lower usage = higher weight 
 - **Disk Usage**: Lower usage = higher weight
 - **Load Average**: Lower load = higher weight
 - **Network Latency**: Lower latency = higher weight (unreachable mempools excluded)
@@ -790,7 +790,7 @@ The algorithm considers the following metrics:
 - **Max Fee**: Maximum fee the transaction can pay
 - **Max Priority Fee**: Maximum priority fee for EIP-1559 transactions
 
-### 🔧 Configuration Parameters
+### Configuration Parameters
 
 The algorithm uses configurable parameters for tuning:
 
@@ -818,7 +818,7 @@ type WeightParams struct {
 }
 ```
 
-### ⚙️ Weight Scheduler Configuration
+### Weight Scheduler Configuration
 
 The weight scheduler runs in the background and periodically updates mempool weights:
 
@@ -841,7 +841,7 @@ The weight scheduler runs in the background and periodically updates mempool wei
 - **Automatic Exclusion**: Skips unreachable or high-latency mempools
 - **Detailed Logging**: Comprehensive logs of weight calculations and routing decisions
 
-### 🧪 Testing the Algorithm
+### Testing the Algorithm
 
 Test the HRW weights algorithm with sample data:
 
@@ -880,7 +880,7 @@ Test the HRW weights algorithm with sample data:
    This weight can be used for consistent hashing in mempool routing.
 ```
 
-### 🔄 Integration with Routing
+### Integration with Routing
 
 The calculated weights are used for:
 
@@ -889,7 +889,7 @@ The calculated weights are used for:
 3. **Performance Optimization**: Routes to best-performing mempools
 4. **Cost Optimization**: Considers fee affordability when transaction caps are provided
 
-### 📈 Performance Benefits
+### Performance Benefits
 
 - **Intelligent Routing**: Routes transactions to optimal mempools
 - **Load Distribution**: Prevents overloading of individual mempools
@@ -897,11 +897,11 @@ The calculated weights are used for:
 - **Real-time Adaptation**: Weights update based on current system state
 - **Fault Tolerance**: Automatically reduces weight of unhealthy nodes
 
-## 🚀 Modern HRW Manager Integration
+## Modern HRW Manager Integration
 
 The MRE now includes a **complete HRW Manager** with epoch-based configuration and Redis Streams integration for high-performance transaction routing.
 
-### 🎯 HRW Manager Features
+### HRW Manager Features
 
 - **Epoch-based Configuration**: Historical transaction placements remain stable while allowing dynamic weight updates
 - **Redis Streams Publishing**: Real-time transaction placement decisions published to Redis Streams
@@ -910,7 +910,7 @@ The MRE now includes a **complete HRW Manager** with epoch-based configuration a
 - **Weight Scheduler Integration**: Automatic HRW Manager updates when new weights are calculated
 - **Reflection-based Integration**: Seamless HRW Manager integration without circular imports
 
-### 🔄 HRW Manager Workflow
+### HRW Manager Workflow
 
 ```mermaid
 graph TD
@@ -926,7 +926,7 @@ graph TD
     J --> K[New Epoch Created]
 ```
 
-### 📊 HRW Manager Configuration
+### HRW Manager Configuration
 
 The HRW Manager is automatically initialized with mempool nodes:
 
@@ -948,7 +948,7 @@ config := HRW.Config{
 err = hrwManager.UpdateFromConfig(config)
 ```
 
-### 🔧 Dynamic Weight Updates
+### Dynamic Weight Updates
 
 When the Weight Scheduler calculates new weights, they are automatically applied to the HRW Manager:
 
@@ -967,7 +967,7 @@ func (ws *WeightScheduler) updateHRWManagerWeights(weights []MempoolWeight) {
 }
 ```
 
-### 🎯 NodeID to ShardID Conversion
+### NodeID to ShardID Conversion
 
 The system supports various NodeID formats:
 
@@ -976,7 +976,7 @@ The system supports various NodeID formats:
 - **Embedded numbers**: `"mempool1"` → shard ID `1`
 - **Hash-based fallback**: `"custom-node-abc"` → consistent hash-based shard ID
 
-### 📡 Redis Streams Integration
+### Redis Streams Integration
 
 Every transaction placement is automatically published to Redis Streams:
 
@@ -1001,7 +1001,7 @@ Every transaction placement is automatically published to Redis Streams:
 }
 ```
 
-### 🧪 Testing HRW Manager
+### Testing HRW Manager
 
 Test the complete HRW Manager integration:
 
@@ -1016,7 +1016,7 @@ Test the complete HRW Manager integration:
 ./mre all -server-port 8080 -redis localhost:6379
 ```
 
-### 📈 HRW Manager Benefits
+### HRW Manager Benefits
 
 - **Epoch Stability**: Historical transactions maintain their placement
 - **Dynamic Updates**: New transactions use updated weights
@@ -1025,7 +1025,7 @@ Test the complete HRW Manager integration:
 - **Automatic Integration**: No manual intervention required
 - **High Performance**: Optimized for 400K+ transactions per second
 
-## 🔧 Configuration
+## Configuration
 
 ### Server Configuration (`config.yml`)
 
@@ -1069,7 +1069,7 @@ mempoolConfigs := []struct {
 }
 ```
 
-## 📊 Monitoring
+## Monitoring
 
 ### NATS JetStream Streams
 
@@ -1126,7 +1126,7 @@ grpcurl -plaintext localhost:8080 list
 nats stream list --server=nats://localhost:4222
 ```
 
-## 🛠️ Development
+## Development
 
 ### Project Structure
 
@@ -1201,14 +1201,14 @@ make run-all SERVER_PORT=9090
 6. **HRW Algorithm Tuning**: Modify `WeightParams` in `internal/hrw/weights.go`
 7. **New Weight Factors**: Add new metrics to `SystemMetrics` or `MempoolMetrics`
 
-## 🔒 Security Considerations
+## Security Considerations
 
 - **Authentication**: Currently uses insecure credentials (development only)
 - **TLS**: Available for NATS communication (see TLS Setup section)
 - **Input Validation**: Comprehensive transaction validation implemented
 - **Rate Limiting**: Not implemented (consider adding)
 
-## 🔐 TLS Certificate Setup
+## TLS Certificate Setup
 
 The MRE supports TLS encryption for secure NATS communication. Use the included certificate generation script to create production-ready certificates.
 
@@ -1274,7 +1274,7 @@ The script creates the following certificate files:
 
 For detailed TLS setup instructions, see [NATS_README.md](NATS_README.md).
 
-## 🚀 Production Deployment
+## Production Deployment
 
 ### Docker Support
 
@@ -1300,9 +1300,9 @@ The MRE is designed for high-performance multi-threaded operation with parallel 
 
 | Mempool Count | Minimum vCPUs | Recommended vCPUs | Memory | Use Case |
 |---------------|---------------|-------------------|---------|----------|
-| 5 mempools    | 4 vCPUs       | 6-8 vCPUs        | 16-32 GB | Development |
-| 10 mempools   | 6 vCPUs       | 8-12 vCPUs       | 32-64 GB | Production |
-| **15 mempools** | **8 vCPUs**   | **12-16 vCPUs**  | **64-128 GB** | **High-traffic Production** |
+| 5 mempools | 4 vCPUs | 6-8 vCPUs | 16-32 GB | Development |
+| 10 mempools | 6 vCPUs | 8-12 vCPUs | 32-64 GB | Production |
+| **15 mempools** | **8 vCPUs** | **12-16 vCPUs** | **64-128 GB** | **High-traffic Production** |
 
 #### **GCP Instance Recommendations**
 
@@ -1437,7 +1437,7 @@ SERVICE_NAME=mempool-routing-engine
 ENVIRONMENT=production
 ```
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch
@@ -1445,11 +1445,11 @@ ENVIRONMENT=production
 4. Add tests
 5. Submit a pull request
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🆘 Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 

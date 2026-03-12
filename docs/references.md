@@ -4,7 +4,7 @@ title: References
 sidebar_label: references
 ---
 
-# 🏆 Use Cases
+# Use Cases
 
 ### **User Onboarding & Reward Redemption**
 1. User joins **SuperJ** and gets a **JM DID**.

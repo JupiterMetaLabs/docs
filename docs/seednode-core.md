@@ -1,11 +1,11 @@
 # Seed Node
 
-A decentralized **peer directory service** for the JMDT network.  
+A decentralized **peer directory service** for the JMDT network. 
 The system maps **PeerIDs → IPs/multiaddrs + metadata**, and optionally supports **human-readable names** (`alice.node.jmdt`) as aliases.
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Start PostgreSQL
 ```bash
@@ -49,69 +49,69 @@ go build -o bin/peer-ui cmd/peer-ui/main.go
 
 ---
 
-## ✨ Features
+## Features
 
-- **Canonical identity**:  
-  Every node is anchored to its **PeerID** (Ed25519-based).
-- **Alias support**:  
-  Human-friendly names like `alice.node.jmdt` mapped to PeerIDs (ENS-style).
-- **Peer records**:  
-  Store IPv4/IPv6, multiaddrs, neighbor connections, and binary status (`active/inactive`).
-- **V, R, S signature format**:  
-  Uses Ethereum-compatible V, R, S signature components for cryptographic verification.
-- **Auto-generated timestamps**:  
-  Timestamps are automatically generated server-side for consistency.
-- **Auto-active status**:  
-  New peer registrations are automatically marked as active.
-- **Signed updates**:  
-  Only the PeerID owner can update their record.
-- **Fast lookups**:  
-  PostgreSQL-based storage for fast and reliable reads.
-- **Durable source of truth**:  
-  PostgreSQL database stores all peer records and aliases.
-- **Dynamic liveness**:  
-  Heartbeat messages for real-time status tracking.
-- **Auditability**:  
-  Complete audit trail with timestamps and signatures.
-- **Binary Status System**:  
-  Simple active/inactive status with clear visual indicators.
-- **🆕 Automatic Database Setup**:  
-  Service automatically creates database and applies schema on startup.
-- **🆕 Health Checks**:  
-  Comprehensive PostgreSQL connectivity and database validation.
-- **🆕 Fail-Fast Design**:  
-  Service kills itself immediately if PostgreSQL is unavailable.
-- **🆕 IP Geolocation**:  
-  Automatic region detection from IPv4/IPv6 addresses using IP-API (free) or ipapi.co (paid).
-- **🆕 Neighbor Management**:  
-  Full CRUD operations for peer neighbor relationships with proper database normalization.
-- **🆕 Inactive Peer Reporting**:  
-  Comprehensive system for reporting and tracking inactive peers with configurable thresholds.
-- **🆕 Health Check System**:  
-  RPC-based health checks for individual peers with timeout and retry logic.
-- **🆕 Time Window Filtering**:  
-  Reports filtered by configurable time windows for better accuracy and performance.
-- **🆕 Buddy Management**:  
-  Recent buddy tracking with automatic limit management (39 records max) and smart cleanup.
+- **Canonical identity**: 
+Every node is anchored to its **PeerID** (Ed25519-based).
+- **Alias support**: 
+Human-friendly names like `alice.node.jmdt` mapped to PeerIDs (ENS-style).
+- **Peer records**: 
+Store IPv4/IPv6, multiaddrs, neighbor connections, and binary status (`active/inactive`).
+- **V, R, S signature format**: 
+Uses Ethereum-compatible V, R, S signature components for cryptographic verification.
+- **Auto-generated timestamps**: 
+Timestamps are automatically generated server-side for consistency.
+- **Auto-active status**: 
+New peer registrations are automatically marked as active.
+- **Signed updates**: 
+Only the PeerID owner can update their record.
+- **Fast lookups**: 
+PostgreSQL-based storage for fast and reliable reads.
+- **Durable source of truth**: 
+PostgreSQL database stores all peer records and aliases.
+- **Dynamic liveness**: 
+Heartbeat messages for real-time status tracking.
+- **Auditability**: 
+Complete audit trail with timestamps and signatures.
+- **Binary Status System**: 
+Simple active/inactive status with clear visual indicators.
+- ** Automatic Database Setup**: 
+Service automatically creates database and applies schema on startup.
+- ** Health Checks**: 
+Comprehensive PostgreSQL connectivity and database validation.
+- ** Fail-Fast Design**: 
+Service kills itself immediately if PostgreSQL is unavailable.
+- ** IP Geolocation**: 
+Automatic region detection from IPv4/IPv6 addresses using IP-API (free) or ipapi.co (paid).
+- ** Neighbor Management**: 
+Full CRUD operations for peer neighbor relationships with proper database normalization.
+- ** Inactive Peer Reporting**: 
+Comprehensive system for reporting and tracking inactive peers with configurable thresholds.
+- ** Health Check System**: 
+RPC-based health checks for individual peers with timeout and retry logic.
+- ** Time Window Filtering**: 
+Reports filtered by configurable time windows for better accuracy and performance.
+- ** Buddy Management**: 
+Recent buddy tracking with automatic limit management (39 records max) and smart cleanup.
 
 ---
 
-## 🔄 Recent Updates
+## Recent Updates
 
 ### Peer Directory v2 - Normalized Data Model (v4.0) - **MAJOR UPDATE**
 
 The peer directory has been completely refactored with a **normalized data model** and **enhanced neighbor management capabilities**:
 
 #### **What's New:**
-- **✅ Normalized Data Model**: Neighbors moved to separate `peer_neighbors` table
-- **✅ Enhanced Neighbor Management**: Full CRUD operations for neighbor relationships
-- **✅ Inactive Peer Reporting**: Comprehensive system for reporting inactive neighbors
-- **✅ Health Check System**: RPC-based health checks for individual peers
-- **✅ Time Window Filtering**: Reports filtered by configurable time windows
-- **✅ Missed Heartbeat Tracking**: Detailed tracking of consecutive missed heartbeats
-- **✅ Enhanced Registration**: Peers can be registered with initial neighbors
-- **✅ Improved Validation**: Comprehensive input validation and error handling
-- **✅ Database Optimization**: Proper indexes and constraints for performance
+- **Yes — Normalized Data Model**: Neighbors moved to separate `peer_neighbors` table
+- **Yes — Enhanced Neighbor Management**: Full CRUD operations for neighbor relationships
+- **Yes — Inactive Peer Reporting**: Comprehensive system for reporting inactive neighbors
+- **Yes — Health Check System**: RPC-based health checks for individual peers
+- **Yes — Time Window Filtering**: Reports filtered by configurable time windows
+- **Yes — Missed Heartbeat Tracking**: Detailed tracking of consecutive missed heartbeats
+- **Yes — Enhanced Registration**: Peers can be registered with initial neighbors
+- **Yes — Improved Validation**: Comprehensive input validation and error handling
+- **Yes — Database Optimization**: Proper indexes and constraints for performance
 
 #### **New gRPC Endpoints:**
 - `AddNeighbor` - Add a neighbor relationship
@@ -137,12 +137,12 @@ The peer directory has been completely refactored with a **normalized data model
 The service now includes **comprehensive database health checks and automatic setup**:
 
 #### **What's New:**
-- **✅ Automatic Database Creation**: Service creates the `jmns` database if it doesn't exist
-- **✅ Schema Auto-Application**: Automatically applies SQL schema if tables are missing
-- **✅ PostgreSQL Health Checks**: Validates PostgreSQL connectivity before starting
-- **✅ Fail-Fast Design**: Service kills itself immediately if PostgreSQL is unavailable
-- **✅ Safe Migration**: Handles existing databases without breaking views or functions
-- **✅ Comprehensive Logging**: Clear status indicators and error messages
+- **Yes — Automatic Database Creation**: Service creates the `jmns` database if it doesn't exist
+- **Yes — Schema Auto-Application**: Automatically applies SQL schema if tables are missing
+- **Yes — PostgreSQL Health Checks**: Validates PostgreSQL connectivity before starting
+- **Yes — Fail-Fast Design**: Service kills itself immediately if PostgreSQL is unavailable
+- **Yes — Safe Migration**: Handles existing databases without breaking views or functions
+- **Yes — Comprehensive Logging**: Clear status indicators and error messages
 
 #### **Default Configuration:**
 - **Database**: `jmns` (instead of `postgres`)
@@ -169,14 +169,14 @@ The service now includes **comprehensive database health checks and automatic se
 The peer directory has been **completely migrated from direct PostgreSQL connections to GORM ORM**:
 
 #### **What Changed:**
-- **✅ ORM Integration**: Replaced raw SQL with GORM for type-safe database operations
-- **✅ Automatic Migrations**: GORM AutoMigrate handles schema creation and updates
-- **✅ Type Safety**: Compile-time validation for all database operations
-- **✅ Better Error Handling**: Clear, actionable error messages
-- **✅ Maintainable Code**: Clean repository pattern with separation of concerns
-- **✅ JSON Support**: Proper JSONB handling for labels and metadata
-- **✅ Array Support**: PostgreSQL array types working seamlessly
-- **✅ Foreign Keys**: Proper relationship management between tables
+- **Yes — ORM Integration**: Replaced raw SQL with GORM for type-safe database operations
+- **Yes — Automatic Migrations**: GORM AutoMigrate handles schema creation and updates
+- **Yes — Type Safety**: Compile-time validation for all database operations
+- **Yes — Better Error Handling**: Clear, actionable error messages
+- **Yes — Maintainable Code**: Clean repository pattern with separation of concerns
+- **Yes — JSON Support**: Proper JSONB handling for labels and metadata
+- **Yes — Array Support**: PostgreSQL array types working seamlessly
+- **Yes — Foreign Keys**: Proper relationship management between tables
 
 #### **Technical Improvements:**
 - **Database Layer**: `pkg/peer/gorm_repository.go` - New GORM-based repository
@@ -194,17 +194,17 @@ The peer directory has been **completely migrated from direct PostgreSQL connect
 - **Query Optimization**: GORM handles query optimization and connection pooling
 
 #### **Backward Compatibility:**
-- **✅ API Unchanged**: All gRPC endpoints remain the same
-- **✅ Data Preserved**: Existing data is automatically migrated
-- **✅ Same Performance**: No performance degradation
-- **✅ Enhanced Reliability**: Better error handling and type safety
+- **Yes — API Unchanged**: All gRPC endpoints remain the same
+- **Yes — Data Preserved**: Existing data is automatically migrated
+- **Yes — Same Performance**: No performance degradation
+- **Yes — Enhanced Reliability**: Better error handling and type safety
 
 ### Binary Status System (v2.0)
 
 The peer directory uses a **simplified binary status system**:
 
-- **✅ Active (1)**: Peer is online and responding
-- **❌ Inactive (0)**: Peer is offline or unresponsive
+- **Yes — Active (1)**: Peer is online and responding
+- **No — Inactive (0)**: Peer is offline or unresponsive
 
 **Benefits:**
 - Cleaner UI with green/red status indicators
@@ -214,18 +214,18 @@ The peer directory uses a **simplified binary status system**:
 
 ---
 
-## 🌍 IP Geolocation (v3.2) - **NEW FEATURE**
+## IP Geolocation (v3.2) - **NEW FEATURE**
 
 The peer directory now includes **automatic IP geolocation** to identify regions from peer IP addresses:
 
 ### **What's New:**
-- **✅ Automatic Region Detection**: Detects region from IPv4/IPv6 addresses during peer registration
-- **✅ IP-API Integration**: Uses IP-API service by default (free, no API key required)
-- **✅ ipapi.co Support**: Optional paid service for higher rate limits
-- **✅ Fallback Strategy**: IP-API → Basic mapping → "unknown"
-- **✅ Non-Intrusive**: Only adds region if not already present in labels
-- **✅ Preserves Existing Data**: Won't overwrite existing region labels
-- **✅ IPv4 & IPv6 Support**: Handles both address types from multiaddrs
+- **Yes — Automatic Region Detection**: Detects region from IPv4/IPv6 addresses during peer registration
+- **Yes — IP-API Integration**: Uses IP-API service by default (free, no API key required)
+- **Yes ipapi.co Support**: Optional paid service for higher rate limits
+- **Yes — Fallback Strategy**: IP-API → Basic mapping → "unknown"
+- **Yes — Non-Intrusive**: Only adds region if not already present in labels
+- **Yes — Preserves Existing Data**: Won't overwrite existing region labels
+- **Yes — IPv4 & IPv6 Support**: Handles both address types from multiaddrs
 
 ### **Supported Services:**
 
@@ -317,17 +317,17 @@ For detailed setup instructions, see [GEOLOCATION_SETUP.md](GEOLOCATION_SETUP.md
 
 ---
 
-## ⚖️ Peer Weights System (v3.3) - **NEW FEATURE**
+## Peer Weights System (v3.3) - **NEW FEATURE**
 
 The peer directory now supports **peer weights** for priority-based routing and load balancing:
 
 ### **What's New:**
-- **✅ Weight Assignment**: Peers can be assigned numerical weights (0.0-1.0)
-- **✅ UpdatePeerWeights API**: New gRPC method to update peer weights
-- **✅ Database Storage**: Weights stored as REAL type in PostgreSQL
-- **✅ Signature Verification**: Weight updates require cryptographic signatures
-- **✅ Sequence Management**: Proper sequence number handling for updates
-- **✅ Type Safety**: Full type safety with float64 in Go, float in protobuf
+- **Yes — Weight Assignment**: Peers can be assigned numerical weights (0.0-1.0)
+- **Yes — UpdatePeerWeights API**: New gRPC method to update peer weights
+- **Yes — Database Storage**: Weights stored as REAL type in PostgreSQL
+- **Yes — Signature Verification**: Weight updates require cryptographic signatures
+- **Yes — Sequence Management**: Proper sequence number handling for updates
+- **Yes — Type Safety**: Full type safety with float64 in Go, float in protobuf
 
 ### **Use Cases:**
 - **Load Balancing**: Higher weights indicate more capable peers
@@ -351,24 +351,24 @@ grpcurl -plaintext -d '{
 - **Range**: 0.0 to 1.0 (recommended)
 - **Default**: 0.0 (no special weight)
 - **Examples**:
-  - `0.0` - Standard peer
-  - `0.5` - Medium priority
-  - `0.85` - High priority
-  - `1.0` - Maximum priority
+- `0.0` - Standard peer
+- `0.5` - Medium priority
+- `0.85` - High priority
+- `1.0` - Maximum priority
 
 ---
 
-## 👥 Buddy Management (v4.1) - **NEW FEATURE**
+## Buddy Management (v4.1) - **NEW FEATURE**
 
 The peer directory now includes **buddy management** functionality to maintain a list of recently interacted peers:
 
 ### **What's New:**
-- **✅ Recent Buddy Tracking**: Maintains a list of recently interacted peers
-- **✅ Automatic Limit Management**: Automatically maintains a maximum of 39 records
-- **✅ Smart Cleanup**: Removes oldest 13 records when limit is exceeded
-- **✅ Exclusion Filtering**: ListBuddy returns all peers except recent buddies
-- **✅ Transaction Safety**: All operations are wrapped in database transactions
-- **✅ Non-Existent Peer Handling**: Skips peers that don't exist in the system
+- **Yes — Recent Buddy Tracking**: Maintains a list of recently interacted peers
+- **Yes — Automatic Limit Management**: Automatically maintains a maximum of 39 records
+- **Yes — Smart Cleanup**: Removes oldest 13 records when limit is exceeded
+- **Yes — Exclusion Filtering**: ListBuddy returns all peers except recent buddies
+- **Yes — Transaction Safety**: All operations are wrapped in database transactions
+- **Yes — Non-Existent Peer Handling**: Skips peers that don't exist in the system
 
 ### **How It Works:**
 
@@ -449,7 +449,7 @@ grpcurl -plaintext -d '{}' localhost:17002 peerpb.PeerDirectory/ListBuddy
 
 ---
 
-## 🏗️ GORM Architecture
+## GORM Architecture
 
 ### Database Layer Structure
 
@@ -562,7 +562,7 @@ CREATE TABLE peer_records (
 - `neighbors`: Array of connected peer IDs
 - `current_status`: Binary status (1=active, 0=inactive)
 
-## 📦 Data Models
+## Data Models
 
 ### Signed Peer Record v3 (GORM)
 ```json
@@ -648,13 +648,13 @@ Test with grpcurl (install via `brew install grpcurl` on macOS):
 
 ```bash
 grpcurl -plaintext -d '{
-  "items": [{
-    "tx_hash": "0xtest001",
-    "epoch": 123,
-    "primary_shard_id": 5,
-    "replica_shard_ids": [6,7],
-    "routing_engine_id": "local-dev-1"
-  }]
+"items": [{
+"tx_hash": "0xtest001",
+"epoch": 123,
+"primary_shard_id": 5,
+"replica_shard_ids": [6,7],
+"routing_engine_id": "local-dev-1"
+}]
 }' localhost:17001 seednodepb.SeedNode/BatchUpsert
 ```
 
@@ -866,72 +866,72 @@ grpcurl -plaintext -d '{}' localhost:17002 peerpb.PeerDirectory/ListPeers
 
 # Register a new peer with neighbors (NEW)
 grpcurl -plaintext -d '{
-  "peerRecord": {
-    "peerId": "12D3KooWTestPeer123456789",
-    "multiaddrs": ["/ip4/127.0.0.1/tcp/4001/p2p/12D3KooWTestPeer123456789"],
-    "seq": 1,
-    "currentStatus": "PEER_STATUS_ACTIVE",
-    "labels": {"region": "local", "role": "testnode"},
-    "v": "0x00",
-    "r": "0x1234567890abcdef...",
-    "s": "0xabcdef1234567890..."
-  },
-  "neighbors": ["12D3KooWNeighbor1", "12D3KooWNeighbor2"]
+"peerRecord": {
+"peerId": "12D3KooWTestPeer123456789",
+"multiaddrs": ["/ip4/127.0.0.1/tcp/4001/p2p/12D3KooWTestPeer123456789"],
+"seq": 1,
+"currentStatus": "PEER_STATUS_ACTIVE",
+"labels": {"region": "local", "role": "testnode"},
+"v": "0x00",
+"r": "0x1234567890abcdef...",
+"s": "0xabcdef1234567890..."
+},
+"neighbors": ["12D3KooWNeighbor1", "12D3KooWNeighbor2"]
 }' localhost:17002 peerpb.PeerDirectory/RegisterPeer
 
 # Add a neighbor (NEW)
 grpcurl -plaintext -d '{
-  "peerId": "12D3KooWTestPeer123456789",
-  "neighborId": "12D3KooWNewNeighbor",
-  "v": "0x00",
-  "r": "0x1111111111111111...",
-  "s": "0x2222222222222222..."
+"peerId": "12D3KooWTestPeer123456789",
+"neighborId": "12D3KooWNewNeighbor",
+"v": "0x00",
+"r": "0x1111111111111111...",
+"s": "0x2222222222222222..."
 }' localhost:17002 peerpb.PeerDirectory/AddNeighbor
 
 # Get neighbors for a peer (NEW)
 grpcurl -plaintext -d '{
-  "peerId": "12D3KooWTestPeer123456789"
+"peerId": "12D3KooWTestPeer123456789"
 }' localhost:17002 peerpb.PeerDirectory/GetNeighbors
 
 # Report inactive neighbor (NEW)
 grpcurl -plaintext -d '{
-  "report": {
-    "reporterPeerId": "12D3KooWReporterPeer",
-    "subjectPeerId": "12D3KooWTestPeer123456789",
-    "lastSeenTimestamp": 1735689600,
-    "reason": "missed_heartbeats",
-    "reportedAt": 1735689700,
-    "missedHeartbeatCount": 3,
-    "v": "0x00",
-    "r": "0x5555555555555555...",
-    "s": "0x6666666666666666..."
-  }
+"report": {
+"reporterPeerId": "12D3KooWReporterPeer",
+"subjectPeerId": "12D3KooWTestPeer123456789",
+"lastSeenTimestamp": 1735689600,
+"reason": "missed_heartbeats",
+"reportedAt": 1735689700,
+"missedHeartbeatCount": 3,
+"v": "0x00",
+"r": "0x5555555555555555...",
+"s": "0x6666666666666666..."
+}
 }' localhost:17002 peerpb.PeerDirectory/ReportInactiveNeighbor
 
 # Check peer health (NEW)
 grpcurl -plaintext -d '{
-  "peerId": "12D3KooWTestPeer123456789"
+"peerId": "12D3KooWTestPeer123456789"
 }' localhost:17002 peerpb.PeerDirectory/CheckPeerHealth
 
 # Register a peer with alias in one operation
 grpcurl -plaintext -d '{
-  "peerRecord": {
-    "peerId": "12D3KooWTestPeer123456789",
-    "multiaddrs": ["/ip4/127.0.0.1/tcp/4001/p2p/12D3KooWTestPeer123456789"],
-    "seq": 1,
-    "currentStatus": "PEER_STATUS_ACTIVE",
-    "labels": {"region": "local", "role": "testnode"},
-    "v": "0x00",
-    "r": "0x1234567890abcdef...",
-    "s": "0xabcdef1234567890..."
-  },
-  "alias": {
-    "name": "alice.node.jmdt",
-    "peerId": "12D3KooWTestPeer123456789",
-    "v": "0x00",
-    "r": "0x9876543210fedcba...",
-    "s": "0xfedcba9876543210..."
-  }
+"peerRecord": {
+"peerId": "12D3KooWTestPeer123456789",
+"multiaddrs": ["/ip4/127.0.0.1/tcp/4001/p2p/12D3KooWTestPeer123456789"],
+"seq": 1,
+"currentStatus": "PEER_STATUS_ACTIVE",
+"labels": {"region": "local", "role": "testnode"},
+"v": "0x00",
+"r": "0x1234567890abcdef...",
+"s": "0xabcdef1234567890..."
+},
+"alias": {
+"name": "alice.node.jmdt",
+"peerId": "12D3KooWTestPeer123456789",
+"v": "0x00",
+"r": "0x9876543210fedcba...",
+"s": "0xfedcba9876543210..."
+}
 }' localhost:17002 peerpb.PeerDirectory/RegisterPeerWithAlias
 
 # Get peer by ID
@@ -939,16 +939,16 @@ grpcurl -plaintext -d '{"peerId": "12D3KooWTestPeer123456789"}' localhost:17002 
 
 # Update peer weights
 grpcurl -plaintext -d '{
-  "peerId": "12D3KooWTestPeer123456789",
-  "weights": 0.95,
-  "v": "0x1c",
-  "r": "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
-  "s": "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"
+"peerId": "12D3KooWTestPeer123456789",
+"weights": 0.95,
+"v": "0x1c",
+"r": "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+"s": "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"
 }' localhost:17002 peerpb.PeerDirectory/UpdatePeerWeights
 
 # Update recent buddy list
 grpcurl -plaintext -d '{
-  "peer_ids": ["12D3KooWTestPeer123456789", "12D3KooWAnotherPeer987654321"]
+"peer_ids": ["12D3KooWTestPeer123456789", "12D3KooWAnotherPeer987654321"]
 }' localhost:17002 peerpb.PeerDirectory/UpdateBuddy
 
 # List peers excluding recent buddies
@@ -956,13 +956,13 @@ grpcurl -plaintext -d '{}' localhost:17002 peerpb.PeerDirectory/ListBuddy
 
 # Send heartbeat
 grpcurl -plaintext -d '{
-  "heartbeat": {
-    "peerId": "12D3KooWTestPeer123456789",
-    "timestamp": 1735689600,
-    "status": "PEER_STATUS_ACTIVE",
-    "multiaddrs": ["/ip4/127.0.0.1/tcp/4001/p2p/12D3KooWTestPeer123456789"],
-    "signature": "heartbeat-signature"
-  }
+"heartbeat": {
+"peerId": "12D3KooWTestPeer123456789",
+"timestamp": 1735689600,
+"status": "PEER_STATUS_ACTIVE",
+"multiaddrs": ["/ip4/127.0.0.1/tcp/4001/p2p/12D3KooWTestPeer123456789"],
+"signature": "heartbeat-signature"
+}
 }' localhost:17002 peerpb.PeerDirectory/SendHeartbeat
 ```
 
@@ -970,53 +970,53 @@ grpcurl -plaintext -d '{
 
 ```
 seedNodes/
-├── cmd/                          # Application entry points
-│   ├── jmns-service/            # Main peer directory service
-│   ├── peer-ui/                 # Web UI for peer management
-│   ├── hrw-exporter/            # HRW exporter service
-│   ├── pg-cud-consumer/         # PostgreSQL CUD consumer
-│   └── seednode-grpc/           # Seed node gRPC service
-├── pkg/                         # Core packages
-│   ├── peer/                    # Peer directory implementation
-│   │   ├── models.go            # GORM database models
-│   │   ├── gorm_repository.go   # GORM repository layer
-│   │   ├── gorm_jmns_service.go # Main service implementation
-│   │   ├── peer_neighbor_repository.go # Neighbor management repository
-│   │   ├── inactive_neighbor_report_repository.go # Inactive reporting repository
-│   │   ├── inactive_neighbor_service.go # Inactive neighbor business logic
-│   │   ├── inactive_neighbor_config.go # Configuration for inactive reporting
-│   │   ├── peer_health_checker.go # Health check system
-│   │   ├── utils.go             # Utility functions
-│   │   ├── peer_directory_v2_test.go # Unit tests for v2 features
-│   │   ├── geolocation.go       # Basic geolocation service
-│   │   ├── geolocation_api.go   # HTTP API services
-│   │   ├── geolocation_config.go # Configuration management
-│   │   └── geolocation_test.go  # Unit tests
-│   ├── config/                  # Configuration management
-│   ├── hrw/                     # HRW (Hash Ring Weight) implementation
-│   ├── pgrepo/                  # PostgreSQL repository utilities
-│   └── rsclient/                # Redis Streams client
-├── api/                         # Protocol definitions
-│   ├── peer/                    # Peer directory gRPC API
-│   └── proto/                   # Redis Streams gRPC API
-├── sql/                         # Database schema
-│   └── schema.sql               # PostgreSQL schema definition
-├── test/                        # Test scripts and utilities
-│   ├── test_peer_directory_v2.sh # Peer Directory v2 comprehensive tests
-│   ├── test_schema_migration.sh  # Database schema migration tests
-│   ├── test_region_detection.sh # IP geolocation tests
-│   ├── test_register_peer.sh    # Peer registration tests
-│   ├── test_jmns_service.sh     # Service integration tests
-│   ├── test_db_health.sh        # Database health tests
-│   └── test_results_v2.md       # Test results documentation
-├── examples/                    # Example code and demos
-│   └── geolocation_demo.go      # IP geolocation demo
-├── scripts/                     # Setup and utility scripts
-├── bin/                         # Built binaries
-├── go.mod                       # Go module definition
-├── go.sum                       # Go module checksums
-├── README.md                    # This file
-└── GEOLOCATION_SETUP.md         # IP geolocation setup guide
+cmd/ # Application entry points
+jmns-service/ # Main peer directory service
+peer-ui/ # Web UI for peer management
+hrw-exporter/ # HRW exporter service
+pg-cud-consumer/ # PostgreSQL CUD consumer
+seednode-grpc/ # Seed node gRPC service
+pkg/ # Core packages
+peer/ # Peer directory implementation
+models.go # GORM database models
+gorm_repository.go # GORM repository layer
+gorm_jmns_service.go # Main service implementation
+peer_neighbor_repository.go # Neighbor management repository
+inactive_neighbor_report_repository.go # Inactive reporting repository
+inactive_neighbor_service.go # Inactive neighbor business logic
+inactive_neighbor_config.go # Configuration for inactive reporting
+peer_health_checker.go # Health check system
+utils.go # Utility functions
+peer_directory_v2_test.go # Unit tests for v2 features
+geolocation.go # Basic geolocation service
+geolocation_api.go # HTTP API services
+geolocation_config.go # Configuration management
+geolocation_test.go # Unit tests
+config/ # Configuration management
+hrw/ # HRW (Hash Ring Weight) implementation
+pgrepo/ # PostgreSQL repository utilities
+rsclient/ # Redis Streams client
+api/ # Protocol definitions
+peer/ # Peer directory gRPC API
+proto/ # Redis Streams gRPC API
+sql/ # Database schema
+schema.sql # PostgreSQL schema definition
+test/ # Test scripts and utilities
+test_peer_directory_v2.sh # Peer Directory v2 comprehensive tests
+test_schema_migration.sh # Database schema migration tests
+test_region_detection.sh # IP geolocation tests
+test_register_peer.sh # Peer registration tests
+test_jmns_service.sh # Service integration tests
+test_db_health.sh # Database health tests
+test_results_v2.md # Test results documentation
+examples/ # Example code and demos
+geolocation_demo.go # IP geolocation demo
+scripts/ # Setup and utility scripts
+bin/ # Built binaries
+go.mod # Go module definition
+go.sum # Go module checksums
+README.md # This file
+GEOLOCATION_SETUP.md # IP geolocation setup guide
 ```
 
 ## 🧪 Testing
@@ -1027,18 +1027,18 @@ All test files have been organized in the `test/` folder:
 
 ```
 test/
-├── test_db_health.sh      # Database health checks and auto-setup tests
-├── test_jmns_service.sh   # Comprehensive JMNS service tests
-├── test_register_peer.sh  # Peer registration tests
-└── test_results.md        # Test results and documentation
+test_db_health.sh # Database health checks and auto-setup tests
+test_jmns_service.sh # Comprehensive JMNS service tests
+test_register_peer.sh # Peer registration tests
+test_results.md # Test results and documentation
 ```
 
 ### Running Tests
 
 - **Database Health Check Tests** (NEW):
-  ```bash
-  # Test database health checks and automatic setup
-  ./test/test_db_health.sh
+```bash
+# Test database health checks and automatic setup
+./test/test_db_health.sh
   ```
   Tests:
   - PostgreSQL connection validation
@@ -1050,7 +1050,7 @@ test/
 - **JMNS Service Tests** (GORM-based):
 
 ```bash
-./test/test_jmns_service.sh  # Comprehensive test suite
+./test/test_jmns_service.sh # Comprehensive test suite
 ```
 
 
@@ -1064,14 +1064,14 @@ test/
 - **IP Geolocation** (NEW):
 
 ```bash
-./test/test_region_detection.sh  # Test IP geolocation functionality
+./test/test_region_detection.sh # Test IP geolocation functionality
 ```
 
 - **Peer Directory v2** (NEW):
 
 ```bash
-./test/test_peer_directory_v2.sh  # Test new normalized data model and features
-./test/test_schema_migration.sh  # Test database schema migration
+./test/test_peer_directory_v2.sh # Test new normalized data model and features
+./test/test_schema_migration.sh # Test database schema migration
 ```
 
 ### Test Coverage
@@ -1196,16 +1196,16 @@ Starting JMNS Service...
 PostgreSQL DSN: postgres://postgres:postgres@localhost:5432/jmns?sslmode=disable
 Schema path: sql/schema.sql
 Performing database health checks...
-✓ PostgreSQL connection successful
-✓ Database 'jmns' exists
-✓ Required tables exist
-✓ Database initialization completed successfully
+PostgreSQL connection successful
+Database 'jmns' exists
+Required tables exist
+Database initialization completed successfully
 Creating GORM JMNS service...
 Performing final database validation...
-✓ Database validation successful
-✓ Simple Peer Directory gRPC server starting on port 17002
-✓ Local PeerID: 12D3KooW...
-✓ Service ready to accept connections
+Database validation successful
+Simple Peer Directory gRPC server starting on port 17002
+Local PeerID: 12D3KooW...
+Service ready to accept connections
 ```
 
 ## Local Redis Streams and Postgres
