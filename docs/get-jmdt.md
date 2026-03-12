@@ -10,7 +10,7 @@ keywords: [get JMDT, buy JMDT, JMDT token, Bitmart JMDT, JMDT faucet, testnet to
 
 > *The Truth Layer for Verifiable Information — JMDT is the native token powering the JMDT Layer 2 network.*
 
-JMDT is the utility token of the JMDT Layer 2 — used for gas fees, staking, governance, and accessing enterprise data services. You can acquire JMDT on mainnet via a centralised exchange, or claim testnet tokens from the upcoming faucet.
+JMDT is the utility token of the JMDT Layer 2 — used for gas fees, L2 commitments, and accessing enterprise data services. You can acquire JMDT on mainnet via a centralised exchange, or claim testnet tokens from the upcoming faucet.
 
 ---
 
@@ -52,8 +52,6 @@ Once you have JMDT, here is what you can do with it:
 | Use Case | Description |
 |---|---|
 | **Gas fees** | Pay for transactions on the JMDT Layer 2 |
-| **Staking** | Stake JMDT to participate in AVC consensus as a validator |
-| **Governance** | Vote on protocol upgrades and network parameters |
 | **Enterprise access** | Pay for enterprise DAG node allocations and data services |
 | **DeFi** | Use JMDT in DeFi protocols built on the JMDT L2 |
 
@@ -63,7 +61,7 @@ For full token economics, see [Tokenomics →](/docs/tokenomics).
 
 ## Security Reminders
 
-- Only purchase JMDT from official, verified sources — always verify contract addresses from the [official JMDT website](https://jmdt.io)
+- Only purchase JMDT from official, verified sources — JMDT is the native token of the JMDT Layer 2 and does not have a separate ERC-20 contract address. Always verify you are on the official [jmdt.io](https://jmdt.io) site or the official Bitmart listing
 - Be cautious of phishing sites or unofficial "JMDT faucet" pages before the official faucet launches
 - Never share your private keys or seed phrase with anyone
 
