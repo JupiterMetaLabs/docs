@@ -62,6 +62,28 @@ module.exports = {
     // },
     {
       type: 'category',
+      label: '🟢 Mainnet',
+      collapsed: false,
+      items: [
+        'mainnet/overview',
+        'mainnet/prerequisites',
+        'mainnet/install',
+        'mainnet/connect',
+      ],
+    },
+    {
+      type: 'category',
+      label: '🔵 Testnet',
+      collapsed: false,
+      items: [
+        'testnet/overview',
+        'testnet/prerequisites',
+        'testnet/install',
+        'testnet/connect',
+      ],
+    },
+    {
+      type: 'category',
       label: 'Use Cases',
       collapsed: false,
       items: [

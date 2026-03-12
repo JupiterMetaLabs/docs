@@ -121,11 +121,20 @@ module.exports = {
                 src: 'img/jmdt_logo_dark.png',
                 srcDark: 'img/jmdt_logo.png',
             },
-            // items: [
-            //     { type: 'doc', docId: 'intro', position: 'left', label: 'Docs' },
-            //     { href: 'https://zkjm.io', label: 'ZKJM Website', position: 'right' },
-            //     { href: 'https://github.com/JupiterMetaZK/docs', label: 'GitHub', position: 'right' },
-            // ],
+            items: [
+                { type: 'doc', docId: 'intro', position: 'left', label: 'Docs' },
+                {
+                    type: 'dropdown',
+                    label: 'Networks',
+                    position: 'left',
+                    items: [
+                        { label: '🟢 Mainnet', to: '/docs/mainnet/overview' },
+                        { label: '🔵 Testnet', to: '/docs/testnet/overview' },
+                    ],
+                },
+                { href: 'https://jmdt.io', label: 'jmdt.io', position: 'right' },
+                { href: 'https://github.com/JupiterMetaLabs/docs', label: 'GitHub', position: 'right' },
+            ],
         },
         footer: {
             // style: 'dark',
