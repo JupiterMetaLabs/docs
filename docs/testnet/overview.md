@@ -107,7 +107,7 @@ Watch [jmdt.io](https://jmdt.io) for the faucet launch announcement.
 | RPC | `testnetrpc.jmdt.io` | `mainnetrpc.jmdt.io` |
 | Seed node | `34.134.156.196` | `34.174.94.172` |
 | Tokens | Free via faucet | Purchase on Bitmart |
-| Real value | ❌ None | ✅ Real JMDT |
+| Real value | No — None | Yes — Real JMDT |
 | L1 settlement | Ethereum Sepolia | Ethereum |
 
 ---

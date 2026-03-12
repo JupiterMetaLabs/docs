@@ -16,25 +16,25 @@ The Explorer module enables:
 
 ## Key Features
 
-### 🔍 **Address Management**
+### **Address Management**
 - List all addresses with pagination
 - View address details including balance, nonce, and account type
 - Transaction history for specific addresses
 - Search functionality to find addresses quickly
 
-### 📊 **Transaction Explorer**
+### **Transaction Explorer**
 - Browse all transactions with pagination
 - Transaction details including hash, from/to addresses, value, and block information
 - Filter by address to see transactions for specific accounts
 - Real-time transaction streaming via WebSocket
 
-### 🧱 **Block Explorer**
+### **Block Explorer**
 - List all blocks with pagination
 - Block details including hash, timestamp, and transaction count
 - Latest blocks with real-time updates
 - Missing block detection for network synchronization
 
-### 📈 **Network Statistics**
+### **Network Statistics**
 - Total blocks count
 - Total transactions count
 - Total addresses count

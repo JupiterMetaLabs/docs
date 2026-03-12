@@ -128,8 +128,8 @@ module.exports = {
                     label: 'Networks',
                     position: 'left',
                     items: [
-                        { label: '🟢 Mainnet', to: '/docs/mainnet/overview' },
-                        { label: '🔵 Testnet', to: '/docs/testnet/overview' },
+                        { label: 'Mainnet', to: '/docs/mainnet/overview' },
+                        { label: 'Testnet', to: '/docs/testnet/overview' },
                     ],
                 },
                 { href: 'https://jmdt.io', label: 'jmdt.io', position: 'right' },
