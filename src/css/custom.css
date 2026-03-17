@@ -1,71 +1,99 @@
 /* Custom styling for JMDT Docs - Modern "Deep Cyber" Aesthetic */
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
-  /* Core Brand Colors - Luminous & Deep */
-  --jm-primary: #71a2e6;
-  --jm-secondary: #8074d9;
-  --jm-accent: #df77a8;
-  --jm-bg-deep: #050508;
-  --jm-bg-alt: #0a0a12;
+  /* Neubrutalism Neubrutalism Colors */
+  --nb-orange: #FF6B35;
+  --nb-blue: #3B82F6;
+  --nb-yellow: #FFE600;
+  --nb-black: #000000;
+  --nb-white: #FFFFFF;
+  --nb-dark: #0A0A0A;
+
+  /* Core Brand Colors - Neubrutalism Shift */
+  --jm-primary: var(--nb-orange);
+  --jm-secondary: var(--nb-blue);
+  --jm-accent: var(--nb-yellow);
+  --jm-bg-deep: var(--nb-dark);
+  --jm-bg-alt: #121212;
+
+  /* Border & Shadow Tokens */
+  --nb-border-width: 2px;
+  --nb-border: var(--nb-border-width) solid var(--nb-black);
+  --nb-shadow: 4px 4px 0px 0px var(--nb-black);
+  --nb-shadow-hover: 6px 6px 0px 0px var(--nb-black);
+  --nb-shadow-pressed: 2px 2px 0px 0px var(--nb-black);
+  --nb-radius: 0px;
 
   --ifm-color-primary: var(--jm-primary);
-  --ifm-color-primary-dark: #5e8cc9;
-  --ifm-color-primary-darker: #547eb5;
-  --ifm-color-primary-darkest: #456895;
-  --ifm-color-primary-light: #84b8ff;
-  --ifm-color-primary-lighter: #8ec3ff;
-  --ifm-color-primary-lightest: #add6ff;
+  --ifm-color-primary-dark: #e65a2b;
+  --ifm-color-primary-darker: #cc4f25;
+  --ifm-color-primary-darkest: #993b1c;
+  --ifm-color-primary-light: #ff8559;
+  --ifm-color-primary-lighter: #ff916a;
+  --ifm-color-primary-lightest: #ffb79d;
 
-  --ifm-font-family-base: 'DM Sans', system-ui, -apple-system, sans-serif;
-  --ifm-heading-font-family: 'DM Sans', system-ui, sans-serif;
+  --ifm-font-family-base: 'Urbanist', system-ui, -apple-system, sans-serif;
+  --ifm-heading-font-family: 'Urbanist', system-ui, sans-serif;
 
-  /* Glassmorphism Variables */
-  --glass-bg: rgba(20, 20, 30, 0.6);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-  --glass-blur: blur(12px);
+  /* Glassmorphism Overrides (Removing soft effects) */
+  --glass-bg: var(--nb-white);
+  --glass-border: var(--nb-black);
+  --glass-shadow: var(--nb-shadow);
+  --glass-blur: none;
 
-  --ifm-navbar-height: 4rem;
+  --ifm-navbar-height: 4.5rem;
 
-  /* Dynamic text colors for hero/custom elements */
-  --hero-text-dynamic: #ffffff;
-  --hero-subtitle-dynamic: rgba(255, 255, 255, 0.9);
+  /* Dynamic text colors */
+  --hero-text-dynamic: var(--nb-white);
+  --hero-subtitle-dynamic: rgba(255, 255, 255, 0.95);
 }
 
 /* Dark Mode (Default preferred) */
 :root[data-theme='dark'] {
-  --ifm-background-color: var(--jm-bg-deep);
-  --ifm-background-surface-color: var(--jm-bg-alt);
-  --ifm-font-color-base: #e3e3e8;
-  --ifm-heading-color: #ffffff;
+  --ifm-background-color: var(--nb-dark);
+  --ifm-background-surface-color: #121212;
+  --ifm-font-color-base: #F8F9FA;
+  --ifm-heading-color: var(--nb-white);
 
-  --ifm-navbar-background-color: rgba(5, 5, 8, 0.7);
-  --ifm-footer-background-color: #030305;
+  --ifm-navbar-background-color: var(--nb-dark);
+  --ifm-footer-background-color: var(--nb-dark);
 
-  --ifm-menu-color: #a0a0b0;
+  --ifm-menu-color: #BDBDBD;
   --ifm-menu-color-active: var(--jm-primary);
+
+  --nb-border-color: var(--nb-white);
+  --nb-border: var(--nb-border-width) solid var(--nb-white);
+  --nb-shadow-color: var(--nb-yellow);
+  --nb-shadow: 4px 4px 0px 0px var(--nb-shadow-color);
+  --nb-shadow-hover: 6px 6px 0px 0px var(--nb-shadow-color);
+  
+  --glass-bg: var(--nb-dark);
+  --glass-border: var(--nb-white);
 }
 
 /* Light Mode */
 :root[data-theme='light'] {
-  --ifm-background-color: #f8f9fc;
-  --ifm-background-surface-color: #ffffff;
-  --ifm-font-color-base: #1a1a24;
-  --ifm-heading-color: #000000;
-  --ifm-navbar-background-color: rgba(255, 255, 255, 0.75);
-  --ifm-footer-background-color: #f0f2f5;
-  --jm-bg-deep: #ffffff;
+  --ifm-background-color: #F0F2F5;
+  --ifm-background-surface-color: var(--nb-white);
+  --ifm-font-color-base: var(--nb-black);
+  --ifm-heading-color: var(--nb-black);
+  --ifm-navbar-background-color: var(--nb-white);
+  --ifm-footer-background-color: #E9ECEF;
+  --jm-bg-deep: var(--nb-white);
 
-  /* Light mode glass overrides */
-  --glass-bg: rgba(255, 255, 255, 0.65);
-  --glass-border: rgba(0, 0, 0, 0.08);
-  /* More visible border in light mode */
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.06);
+  --nb-border-color: var(--nb-black);
+  --nb-border: var(--nb-border-width) solid var(--nb-black);
+  --nb-shadow-color: var(--nb-black);
+  --nb-shadow: 4px 4px 0px 0px var(--nb-shadow-color);
+  --nb-shadow-hover: 6px 6px 0px 0px var(--nb-shadow-color);
 
-  --hero-text-dynamic: #000000;
-  --hero-subtitle-dynamic: rgba(0, 0, 0, 0.8);
+  --glass-bg: var(--nb-white);
+  --glass-border: var(--nb-black);
+
+  --hero-text-dynamic: var(--nb-black);
+  --hero-subtitle-dynamic: rgba(0, 0, 0, 0.9);
 }
 
 /* Global Styles */
@@ -138,14 +166,15 @@ h6 {
 
 /* Navbar */
 .navbar {
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border-bottom: 1px solid var(--glass-border);
+  backdrop-filter: none;
+  border-bottom: var(--nb-border);
+  background-color: var(--ifm-navbar-background-color);
 }
 
 .navbar__brand {
-  font-weight: 700;
+  font-weight: 900;
   letter-spacing: -0.01em;
+  text-transform: uppercase;
 }
 
 /* Hero Section */
@@ -154,78 +183,68 @@ h6 {
   position: relative;
   overflow: hidden;
   color: var(--ifm-font-color-base);
-  /* Ensure text inherits correctly */
 }
 
 /* Buttons */
 .button {
-  border-radius: 8px;
-  font-weight: 700;
-  /* Bolder text */
-  letter-spacing: 0.03em;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: var(--nb-radius);
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  transition: all 0.1s ease;
   text-transform: uppercase;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  border: var(--nb-border);
+  box-shadow: var(--nb-shadow);
+}
+
+.button:active {
+  transform: translate(2px, 2px);
+  box-shadow: var(--nb-shadow-pressed);
 }
 
 .button--primary {
-  color: #ffffff !important;
-  background-color: var(--jm-secondary);
-  border: 1px solid transparent;
+  color: var(--nb-black) !important;
+  background-color: var(--nb-yellow);
 }
 
 .button--primary:hover {
-  background-color: var(--jm-accent);
-  color: #ffffff !important;
-  box-shadow: 0 0 20px rgba(223, 119, 168, 0.4);
+  background-color: var(--nb-orange);
+  color: var(--nb-black) !important;
+  box-shadow: var(--nb-shadow-hover);
+  transform: translate(-1px, -1px);
 }
 
 .button--secondary {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(4px);
-  color: #ffffff !important;
-  /* Enforce white in dark mode */
+  background: var(--nb-white);
+  color: var(--nb-black) !important;
 }
 
 [data-theme='light'] .button--secondary {
-  background: rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  color: #000000 !important;
-  /* Enforce black in light mode */
+  background: var(--nb-white);
 }
 
 .button--secondary:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.5);
-  color: #ffffff !important;
-  box-shadow: 0 0 20px rgba(113, 162, 230, 0.3);
+  background: var(--nb-blue);
+  color: var(--nb-white) !important;
+  box-shadow: var(--nb-shadow-hover);
+  transform: translate(-1px, -1px);
 }
 
-[data-theme='light'] .button--secondary:hover {
-  background: rgba(0, 0, 0, 0.1);
-  border-color: rgba(0, 0, 0, 0.2);
-  color: #000000 !important;
-}
-
-/* Feature Cards & Glass Panels */
+/* Feature Cards & Brutalist Panels */
 .glass-panel {
   background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
-  border-radius: 16px;
+  backdrop-filter: none;
+  border: var(--nb-border);
+  box-shadow: var(--nb-shadow);
+  border-radius: var(--nb-radius);
   padding: 2rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
 .glass-panel:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.15);
-  /* Softer shadow */
-  border-color: var(--jm-secondary);
+  transform: translate(-2px, -2px);
+  box-shadow: var(--nb-shadow-hover);
+  border-color: var(--nb-border-color);
 }
 
 /* Footer */
