@@ -146,13 +146,14 @@ module.exports = {
                         { label: 'GitHub', to: 'https://github.com/JupiterMetaLabs/docs' },
                     ],
                 },
-                // {
-                //     title: 'Community',
-                //     items: [
-                //         { label: 'Twitter', href: 'https://twitter.com/zkjm' },
-                //         { label: 'GitHub', href: 'https://github.com/JupiterMetaZK' },
-                //     ],
-                // },
+                {
+                    title: 'Community',
+                    items: [
+                        { label: 'LinkedIn', href: 'https://www.linkedin.com/company/jmdt-blockchain' },
+                        { label: 'Twitter', href: 'https://x.com/JMDT_Blockchain' },
+                        { label: 'Discord', href: 'https://discord.gg/ntNU3Qed' },
+                    ],
+                },
             ],
             copyright: `© ${new Date().getFullYear()} JMDT. All Rights Reserved.`,
         },

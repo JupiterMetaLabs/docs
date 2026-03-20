@@ -521,3 +521,528 @@ h6 {
   height: 6px;
   width: 24px;
 }
+
+/* Navbar: Google Translate widget (prevents overlap with links) */
+.navbarTranslateWidget {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 140px;
+  margin-left: 0.75rem;
+}
+
+.navbarTranslateWidget * {
+  font-family: var(--ifm-font-family-base) !important;
+}
+
+/* Google widget usually injects a .goog-te-gadget-simple wrapper */
+#google_translate_element .goog-te-gadget-simple {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--ifm-font-color-base) !important;
+}
+
+#google_translate_element select,
+#google_translate_element a,
+#google_translate_element span {
+  color: var(--ifm-font-color-base) !important;
+}
+
+/* If an iframe is used, keep it within navbar height */
+#google_translate_element iframe {
+  max-height: 40px !important;
+}
+
+/* Home page: jmdt.io-inspired neubrutalism */
+.button--lg {
+  padding: 0.95rem 1.4rem;
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.homeStaticBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.homeStaticMesh {
+  position: absolute;
+  width: 640px;
+  height: 640px;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.14;
+}
+
+.homeStaticMesh--primary {
+  top: -20%;
+  left: -18%;
+  background: radial-gradient(circle, var(--jm-primary), transparent 70%);
+}
+
+.homeStaticMesh--accent {
+  bottom: -18%;
+  right: -20%;
+  background: radial-gradient(circle, var(--jm-accent), transparent 70%);
+}
+
+.homeStaticMesh--secondary {
+  top: 12%;
+  right: 6%;
+  width: 520px;
+  height: 520px;
+  opacity: 0.12;
+  background: radial-gradient(circle, var(--jm-secondary), transparent 70%);
+}
+
+.homeStaticGrid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.25;
+}
+
+.homeStaticNoise {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1.2px);
+  background-size: 18px 18px;
+  opacity: 0.08;
+}
+
+[data-theme='light'] .homeStaticGrid {
+  background-image:
+    linear-gradient(to right, rgba(0, 0, 0, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+}
+
+[data-theme='light'] .homeStaticNoise {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.16) 1px, transparent 1.2px);
+}
+
+.homeStaticBg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 30%, rgba(255, 230, 0, 0.08), transparent 55%);
+  opacity: 0.35;
+}
+
+.homeHero {
+  min-height: 100vh;
+  padding: 6rem 0 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.homeContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.homeHeroGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+@media (min-width: 997px) {
+  .homeHeroGrid {
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 3rem;
+    align-items: start;
+  }
+}
+
+.homeHeroCopy {
+  position: relative;
+  z-index: 2;
+}
+
+.homeHeroSide {
+  position: relative;
+  z-index: 2;
+}
+
+.homeHeroLogoWrap {
+  margin-bottom: 1.25rem;
+}
+
+.homeEyebrow {
+  font-size: 1rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--nb-yellow);
+  font-weight: 900;
+  margin-bottom: 1rem;
+}
+
+.homeH1 {
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  line-height: 0.95;
+  font-size: clamp(2.6rem, 5vw, 4.7rem);
+  margin: 0 0 1.25rem 0;
+}
+
+.homeSubtitle {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin: 0;
+  max-width: 720px;
+}
+
+.homeAccentOrange {
+  color: var(--nb-orange) !important;
+}
+
+.homeAccentBlue {
+  color: var(--nb-blue) !important;
+}
+
+.homeAccentYellow {
+  color: var(--nb-yellow) !important;
+}
+
+.homeCtaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+
+.homeMetricsRow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.9rem;
+  margin-top: 2rem;
+}
+
+@media (min-width: 768px) {
+  .homeMetricsRow {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.homeMetricCard {
+  padding: 1.1rem 1.25rem !important;
+  text-align: center;
+}
+
+.homeMetricValue {
+  font-size: 1.55rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+.homeMetricLabel {
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.92;
+}
+
+.homeStatement {
+  padding: 1.8rem !important;
+}
+
+.homeStatementTitle {
+  font-size: 1.25rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.75rem;
+}
+
+.homeStatementLead {
+  font-weight: 750;
+  line-height: 1.75;
+  opacity: 0.92;
+  margin-bottom: 1.25rem;
+}
+
+.homeIconGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.8rem;
+}
+
+@media (min-width: 420px) {
+  .homeIconGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.homeIconRow {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 0.85rem;
+  align-items: center;
+  font-weight: 850;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.homeIconRowIcon {
+  width: 44px;
+  height: 44px;
+  border: var(--nb-border);
+  box-shadow: var(--nb-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--nb-radius);
+  background: var(--glass-bg);
+}
+
+.homeIconRowTitle {
+  line-height: 1.3;
+  font-size: 0.95rem;
+}
+
+.homeMain {
+  position: relative;
+  z-index: 1;
+}
+
+.homeSection {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+
+.homeSectionTitle {
+  font-size: 2rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin: 0 0 1rem 0;
+}
+
+.homeSectionLead {
+  font-size: 1.05rem;
+  line-height: 1.85;
+  font-weight: 750;
+  opacity: 0.95;
+  margin: 0 0 1.75rem 0;
+}
+
+.homePillarGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .homePillarGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.homePillar {
+  padding: 1.8rem !important;
+}
+
+.homePillarNumber {
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.9rem;
+  color: var(--jm-secondary);
+  margin-bottom: 0.65rem;
+}
+
+.homePillarTitle {
+  font-size: 1.25rem;
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.8rem;
+}
+
+.homePillarDesc {
+  margin: 0;
+  line-height: 1.8;
+  font-weight: 750;
+  opacity: 0.92;
+}
+
+.homeCardGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .homeCardGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.homeStackCard {
+  padding: 2rem 1.75rem !important;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.homeStackIconWrap {
+  width: 56px;
+  height: 56px;
+  border: var(--nb-border);
+  box-shadow: var(--nb-shadow);
+  border-radius: var(--nb-radius);
+  background: var(--glass-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.homeStackLevel {
+  font-size: 0.9rem;
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.homeStackTitle {
+  font-size: 1.25rem;
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.homeStackDesc {
+  margin: 0;
+  line-height: 1.8;
+  font-weight: 750;
+  opacity: 0.92;
+}
+
+.homeCardGrid--insights {
+  grid-template-columns: repeat(1, 1fr);
+}
+
+@media (min-width: 640px) {
+  .homeCardGrid--insights {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 980px) {
+  .homeCardGrid--insights {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.homeInsightCard {
+  display: block;
+  text-decoration: none;
+  padding: 1.6rem 1.4rem !important;
+}
+
+.homeInsightLabel {
+  font-weight: 950;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+}
+
+.homeInsightDesc {
+  font-weight: 800;
+  opacity: 0.9;
+  line-height: 1.7;
+  margin-bottom: 1.1rem;
+}
+
+.homeInsightArrow {
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.8rem;
+}
+
+.homeFaqGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .homeFaqGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.homeFaqItem {
+  padding: 1.8rem !important;
+}
+
+.homeFaqIndex {
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.85rem;
+  color: var(--jm-secondary);
+  margin-bottom: 0.6rem;
+}
+
+.homeFaqQ {
+  font-size: 1.05rem;
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.8rem;
+  line-height: 1.35;
+}
+
+.homeFaqA {
+  margin: 0;
+  line-height: 1.8;
+  font-weight: 750;
+  opacity: 0.92;
+}
+
+.homeSection--community {
+  padding-bottom: 5rem;
+}
+
+.homeCommunityPanel {
+  padding: 2rem !important;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.homeCommunityTitle {
+  font-size: 1.25rem;
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.homeCommunityButton {
+  width: fit-content;
+}
