@@ -38,23 +38,6 @@ export default function Root({ children }) {
     <>
       {children}
 
-      {/* ── Google Translate — fixed in navbar, site-wide ─────────────── */}
-      <div
-        id="google_translate_element"
-        style={{
-          position: 'fixed',
-          top: '2.25rem',            /* Center of the 4.5rem navbar */
-          right: '120px',           /* Moved left to avoid hiding links */
-          transform: 'translateY(-50%)',
-          zIndex: 9999,
-          backgroundColor: 'var(--nb-white)',
-          padding: '2px 4px',
-          borderRadius: '0px',
-          border: 'var(--nb-border)',
-          boxShadow: 'var(--nb-shadow-pressed)',
-        }}
-      />
-
       <ChatbotWidget />
     </>
   );
