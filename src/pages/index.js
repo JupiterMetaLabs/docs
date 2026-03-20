@@ -8,37 +8,89 @@ import Lenis from 'lenis';
 import clsx from 'clsx';
 import ThemeAwareHeroLogo from '../components/ThemeAwareHeroLogo';
 
+// SVG icon components — no emoji
+const IconShield = () => (
+  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M12 2L3 7v5c0 5.25 3.75 10.05 9 11 5.25-.95 9-5.75 9-11V7l-9-5z" />
+    <path d="M9 12l2 2 4-4" />
+  </svg>
+);
+
+const IconLayers = () => (
+  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <polygon points="12 2 2 7 12 12 22 7 12 2" />
+    <polyline points="2 17 12 22 22 17" />
+    <polyline points="2 12 12 17 22 12" />
+  </svg>
+);
+
+const IconCode = () => (
+  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <polyline points="16 18 22 12 16 6" />
+    <polyline points="8 6 2 12 8 18" />
+  </svg>
+);
+
+const IconNetwork = () => (
+  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <circle cx="12" cy="5" r="2" />
+    <circle cx="5" cy="19" r="2" />
+    <circle cx="19" cy="19" r="2" />
+    <line x1="12" y1="7" x2="5" y2="17" />
+    <line x1="12" y1="7" x2="19" y2="17" />
+    <line x1="5" y1="19" x2="19" y2="19" />
+  </svg>
+);
+
 const FeatureList = [
   {
-    title: 'Privacy-Preserving',
-    icon: '🔐',
-    color: 'bg-blue-500/20',
+    title: 'THE TRUTH LAYER',
+    Icon: IconShield,
+    color: 'var(--nb-orange)',
     description: (
       <>
-        Zero-Knowledge Proofs (ZKPs) ensure your transactions remain secure and confidential, protecting user data without compromising transparency.
+        Every record committed to JMDT is immutable and verifiable. Tamper-proof data integrity, backed by Ethereum settlement — building a permanent foundation of trust.
       </>
     ),
   },
   {
-    title: 'High Scalability',
-    icon: '⚡',
-    color: 'bg-purple-500/20',
+    title: 'ZERO-KNOWLEDGE PRIVACY',
+    Icon: IconLayers,
+    color: 'var(--nb-blue)',
     description: (
       <>
-        Layer 2 rollups provide lightning-fast transaction throughput and minimal gas fees, making blockchain accessible for everyone.
+        ZK-Rollups batch transactions into succinct proofs committed to Ethereum Layer 1, achieving high throughput while keeping sensitive data completely private.
       </>
     ),
   },
   {
-    title: 'Developer-Friendly',
-    icon: '🛠',
-    color: 'bg-pink-500/20',
+    title: 'DECENTRALIZED IDENTITY',
+    Icon: IconNetwork,
+    color: 'var(--nb-yellow)',
     description: (
       <>
-        Full EVM compatibility means you can deploy existing Ethereum smart contracts instantly using the tools you already know and love.
+        W3C-standard Decentralized Identifiers (DIDs) enable PII-protected user authentication and cross-platform credential sharing without exposing personal data on-chain.
       </>
     ),
   },
+  {
+    title: 'EVM COMPATIBLE',
+    Icon: IconCode,
+    color: 'var(--nb-orange)',
+    description: (
+      <>
+        Full Ethereum Virtual Machine compatibility — deploy existing Solidity contracts without modification using Hardhat, Foundry, or any standard EVM toolchain.
+      </>
+    ),
+  },
+];
+
+const NetworkStats = [
+  { label: 'Mainnet Chain ID', value: '7000700' },
+  { label: 'Testnet Chain ID', value: '8000800' },
+  { label: 'Settlement', value: 'Ethereum' },
+  { label: 'Consensus', value: 'AVC' },
+  { label: 'Compatibility', value: 'EVM' },
 ];
 
 export default function Home() {
@@ -46,7 +98,6 @@ export default function Home() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
-    // Initialize Lenis for smooth scrolling
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -80,7 +131,7 @@ export default function Home() {
   const activeFeature = FeatureList[activeIndex];
 
   return (
-    <Layout title="JMDT Documentation" description="Scalable, Privacy-Preserving Layer 2 Blockchain">
+    <Layout title="JMDT Documentation" description="The Truth Layer for Verifiable Information — Ethereum Layer 2 blockchain with Zero-Knowledge Proofs and Decentralized Identity.">
 
       {/* SEO & Open Graph Meta Tags */}
       <Head>
@@ -93,38 +144,39 @@ gtag('js', new Date());
 gtag('config', 'G-8N3L9Z2Z9X');
 `}
         </script>
-        {/* 🌐 SEO Metadata */}
-        <title>JMDT - Next-Gen Blockchain Network</title>
-        <meta name="description" content="JMDT is an Ethereum Layer 2 blockchain with Zero-Knowledge Proofs, Decentralized Identity, and Hybrid Multi-Layer Consensus for privacy, scalability, and security." />
-        <meta name="keywords" content="JMDT, Blockchain, Ethereum Layer 2, ZK Proofs, Web3, Decentralized Identity, L2 Blockchain, Crypto, Smart Contracts, JMDT, scalable blockchain, high throughput blockchain, gossip protocol, raft, bloom filters, nnss" />
-        <meta name="author" content="JMDT" />
-        <link rel="canonical" href="https://jmdt.io/" />
 
-        {/* 🌐 Favicon */}
+        {/* SEO Metadata */}
+        <title>JMDT — The Truth Layer for Verifiable Information</title>
+        <meta name="description" content="JMDT is an Ethereum Layer 2 blockchain with Zero-Knowledge Proofs, Decentralized Identity, and AVC consensus — delivering privacy, scalability, and tamper-proof data integrity." />
+        <meta name="keywords" content="JMDT, Blockchain, Ethereum Layer 2, ZK Proofs, Web3, Decentralized Identity, L2 Blockchain, Smart Contracts, AVC consensus, JMDN node, zk-rollup, Truth Layer, JupiterMetaLabs" />
+        <meta name="author" content="JupiterMetaLabs" />
+        <link rel="canonical" href="https://docs.jmdt.io/" />
+
+        {/* Favicon */}
         <link rel="icon" type="image/png" href="/img/Frame_12.png" />
         <link rel="apple-touch-icon" href="/img/Frame_12.png" />
 
-        {/* 🌐 Open Graph (OG) Meta Tags for Social Sharing */}
-        <meta property="og:title" content="JMDT - Next-Gen Blockchain Network" />
-        <meta property="og:description" content="Scalable, private, and secure Ethereum Layer 2 blockchain with Zero-Knowledge Proofs and Decentralized Identity." />
-        <meta property="og:url" content="https://jmdt.io/" />
+        {/* Open Graph */}
+        <meta property="og:title" content="JMDT — The Truth Layer for Verifiable Information" />
+        <meta property="og:description" content="Privacy-preserving, scalable Ethereum Layer 2 blockchain with Zero-Knowledge Proofs and Decentralized Identity." />
+        <meta property="og:url" content="https://docs.jmdt.io/" />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="https://jmdt.io/og-new.png" />
-        <meta property="og:image:alt" content="JMDT" />
-        <meta property="og:site_name" content="JMDT" />
+        <meta property="og:image:alt" content="JMDT — The Truth Layer" />
+        <meta property="og:site_name" content="JMDT Docs" />
 
-        {/* 🌐 Twitter Card Meta Tags */}
+        {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="JMDT - Next-Gen Blockchain Network" />
-        <meta name="twitter:description" content="Ethereum Layer 2 blockchain with privacy, scalability, and ZK Proofs." />
+        <meta name="twitter:title" content="JMDT — The Truth Layer for Verifiable Information" />
+        <meta name="twitter:description" content="Ethereum Layer 2 blockchain with ZK proofs, Decentralized Identity, and AVC consensus." />
         <meta name="twitter:image" content="https://jmdt.io/og-new.png" />
         <meta name="twitter:site" content="@JMDT" />
 
-        {/* 🌐 Publish / Update Date (AEO: AI engines use this for freshness) */}
+        {/* Publish / Update Date */}
         <meta name="article:published_time" content="2025-01-01T00:00:00Z" />
-        <meta name="article:modified_time" content="2026-03-11T00:00:00Z" />
+        <meta name="article:modified_time" content="2026-03-17T00:00:00Z" />
 
-        {/* ── AEO + SEO: Organization, WebSite, SoftwareApplication JSON-LD ── */}
+        {/* AEO + SEO: Organization, WebSite, SoftwareApplication JSON-LD */}
         <script type="application/ld+json">{`
 {
   "@context": "https://schema.org",
@@ -146,10 +198,10 @@ gtag('config', 'G-8N3L9Z2Z9X');
       "@id": "https://docs.jmdt.io/#website",
       "url": "https://docs.jmdt.io",
       "name": "JMDT Documentation",
-      "description": "Official technical documentation for the JMDT Ethereum Layer 2 blockchain.",
+      "description": "Official technical documentation for the JMDT Ethereum Layer 2 blockchain — The Truth Layer for Verifiable Information.",
       "publisher": { "@id": "https://jmdt.io/#organization" },
       "inLanguage": "en-US",
-      "dateModified": "2026-03-11",
+      "dateModified": "2026-03-17",
       "potentialAction": {
         "@type": "SearchAction",
         "target": {
@@ -163,11 +215,11 @@ gtag('config', 'G-8N3L9Z2Z9X');
       "@type": "WebPage",
       "@id": "https://docs.jmdt.io/#webpage",
       "url": "https://docs.jmdt.io",
-      "name": "JMDT - Next-Gen Blockchain Network",
-      "description": "JMDT is an Ethereum Layer 2 blockchain with Zero-Knowledge Proofs, Decentralized Identity, and AVC consensus for privacy, scalability, and security.",
+      "name": "JMDT — The Truth Layer for Verifiable Information",
+      "description": "JMDT is an Ethereum Layer 2 blockchain with Zero-Knowledge Proofs, Decentralized Identity, and AVC consensus for privacy, scalability, and tamper-proof data integrity.",
       "isPartOf": { "@id": "https://docs.jmdt.io/#website" },
       "publisher": { "@id": "https://jmdt.io/#organization" },
-      "dateModified": "2026-03-11",
+      "dateModified": "2026-03-17",
       "inLanguage": "en-US"
     },
     {
@@ -179,7 +231,7 @@ gtag('config', 'G-8N3L9Z2Z9X');
       "description": "JMDT is a privacy-preserving Ethereum Layer 2 blockchain leveraging Zero-Knowledge Proofs (ZKPs), Decentralized Identity (DID), and the AVC (Asynchronous Validation Consensus) mechanism.",
       "url": "https://jmdt.io",
       "author": { "@id": "https://jmdt.io/#organization" },
-      "dateModified": "2026-03-11",
+      "dateModified": "2026-03-17",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
       "featureList": [
         "Zero-Knowledge Proofs (ZKPs)",
@@ -195,7 +247,7 @@ gtag('config', 'G-8N3L9Z2Z9X');
 }
         `}</script>
 
-        {/* ── AEO: FAQ Structured Data ─────────────────────────────────── */}
+        {/* AEO: FAQ Structured Data */}
         <script type="application/ld+json">{`
 {
   "@context": "https://schema.org",
@@ -254,14 +306,14 @@ gtag('config', 'G-8N3L9Z2Z9X');
       "name": "What are the use cases for JMDT?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "JMDT supports user onboarding and reward redemption (e.g., via SuperJ platform), enterprise identity verification using DID credentials, privacy-preserving DeFi applications, and any dApp requiring high throughput with data privacy."
+        "text": "JMDT supports enterprise identity verification using DID credentials, privacy-preserving DeFi applications, user onboarding and reward redemption via the SuperJ platform, and any dApp requiring high throughput with data privacy."
       }
     }
   ]
 }
         `}</script>
 
-        {/* ── AEO: BreadcrumbList for homepage ─────────────────────────── */}
+        {/* AEO: BreadcrumbList */}
         <script type="application/ld+json">{`
 {
   "@context": "https://schema.org",
@@ -278,13 +330,12 @@ gtag('config', 'G-8N3L9Z2Z9X');
         `}</script>
       </Head>
 
-      {/* 🚀 Modern Hero Section */}
+      {/* Hero Section */}
       <header className="hero relative flex flex-col items-center justify-center min-vh-100" style={{ minHeight: '100vh', paddingBottom: '4rem' }}>
 
-        {/* ✨ Dynamic Particles Background */}
         <ParticlesBackground />
 
-        {/* Ambient Background Meshes (Optional Overlay) */}
+        {/* Ambient gradient meshes */}
         <div className="bg-gradient-mesh" style={{ top: '-10%', left: '-10%', background: 'radial-gradient(circle, var(--jm-primary), transparent 70%)' }}></div>
         <div className="bg-gradient-mesh" style={{ bottom: '10%', right: '-10%', background: 'radial-gradient(circle, var(--jm-accent), transparent 70%)' }}></div>
 
@@ -296,22 +347,27 @@ gtag('config', 'G-8N3L9Z2Z9X');
               <ThemeAwareHeroLogo style={{ height: '100px', filter: 'drop-shadow(0 0 20px rgba(113, 162, 230, 0.4))' }} />
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight leading-tight">
+            <p style={{ fontSize: '1rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--nb-yellow)', fontWeight: 900, marginBottom: '1rem' }}>
+              The Truth Layer
+            </p>
+
+            <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tighter leading-none uppercase">
               Build on <span className="text-gradient d-block lg-inline">JMDT</span>
             </h1>
 
-            <p className="hero__subtitle text-xl max-w-xl mb-8 leading-relaxed text-subtitle-dynamic">
-              Scalable, privacy-preserving blockchain solutions powered by
-              <span className="font-bold text-dynamic"> Zero-Knowledge Proofs</span> &
-              <span className="font-bold text-dynamic"> Decentralized Identity</span>.
+            <p className="hero__subtitle text-xl max-w-xl mb-8 leading-relaxed text-subtitle-dynamic font-bold uppercase tracking-tight">
+              Privacy-preserving Ethereum Layer 2 blockchain — powered by
+              <span className="text-dynamic" style={{ color: 'var(--nb-orange)' }}> Zero-Knowledge Proofs</span>,{' '}
+              <span className="text-dynamic" style={{ color: 'var(--nb-blue)' }}> Decentralized Identity</span>, and
+              <span className="text-dynamic" style={{ color: 'var(--nb-yellow)' }}> AVC consensus</span>.
             </p>
 
             <div className="d-flex gap-4 mb-4 hero-buttons">
-              <Link className="button button--primary button--lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all" to="/docs/intro" style={{ backgroundColor: 'var(--jm-secondary)', border: 'none' }}>
+              <Link className="button button--primary button--lg" to="/docs/intro">
                 Start Building →
               </Link>
-              <Link className="button button--secondary button--lg backdrop-blur-md" to="https://zkjm.io">
-                Learn More
+              <Link className="button button--secondary button--lg" to="https://jmdt.io">
+                jmdt.io
               </Link>
             </div>
           </div>
@@ -323,11 +379,20 @@ gtag('config', 'G-8N3L9Z2Z9X');
               {/* Carousel Card */}
               <div className="w-full text-center" style={{ flex: 1 }}>
                 <div key={activeIndex} className="glass-panel carousel-card d-flex flex-col items-center justify-center p-8 feature-slide" style={{ minHeight: '340px' }}>
-                  <div className={`mb-6 p-5 rounded-full text-4xl ${activeFeature.color} shadow-lg`} style={{ width: 'fit-content', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}>
-                    {activeFeature.icon}
+                  <div
+                    className="mb-6 p-5"
+                    style={{
+                      width: 'fit-content',
+                      background: 'var(--nb-white)',
+                      border: 'var(--nb-border)',
+                      boxShadow: '4px 4px 0px 0px var(--nb-black)',
+                      color: activeFeature.color,
+                    }}
+                  >
+                    <activeFeature.Icon />
                   </div>
-                  <h3 className="text-2xl font-bold mb-3 text-gradient">{activeFeature.title}</h3>
-                  <p className="text-base opacity-90 text-dynamic leading-relaxed">{activeFeature.description}</p>
+                  <h3 className="text-2xl font-black mb-3 uppercase tracking-tighter" style={{ color: 'var(--nb-orange)' }}>{activeFeature.title}</h3>
+                  <p className="text-base font-bold text-dynamic leading-relaxed uppercase tracking-tight">{activeFeature.description}</p>
                 </div>
               </div>
 
@@ -341,7 +406,6 @@ gtag('config', 'G-8N3L9Z2Z9X');
                       top: `${activeIndex * (100 / FeatureList.length)}%`
                     }}
                   />
-                  {/* Click Zones */}
                   {FeatureList.map((_, idx) => (
                     <div
                       key={idx}
@@ -379,22 +443,53 @@ gtag('config', 'G-8N3L9Z2Z9X');
         </div>
       </header>
 
-      {/* ── What is JMDT — visible content for crawlers ────────────────────── */}
+      {/* Network Stats Bar */}
+      <div style={{
+        borderTop: '1px solid var(--glass-border)',
+        borderBottom: '1px solid var(--glass-border)',
+        background: 'var(--glass-bg)',
+        backdropFilter: 'blur(12px)',
+        padding: '1.25rem 0',
+      }}>
+        <div className="container">
+          <div style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            gap: '2rem',
+          }}>
+            {NetworkStats.map(({ label, value }) => (
+              <div key={label} style={{ textAlign: 'center', minWidth: '120px', padding: '1rem', border: 'var(--nb-border)', background: 'var(--nb-white)', color: 'var(--nb-black)', boxShadow: '4px 4px 0px 0px var(--nb-black)' }}>
+                <div style={{ fontSize: '1.2rem', fontWeight: 900, color: 'var(--nb-orange)', letterSpacing: '0.02em', textTransform: 'uppercase' }}>
+                  {value}
+                </div>
+                <div style={{ fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: '0.2rem' }}>
+                  {label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Main content */}
       <main>
+
+        {/* What is JMDT */}
         <section style={{ maxWidth: '900px', margin: '0 auto', padding: '4rem 1.5rem 2rem' }}>
           <h2 style={{ fontSize: '2rem', fontWeight: '700', marginBottom: '1rem' }}>
             What is JMDT?
           </h2>
           <p style={{ fontSize: '1.1rem', lineHeight: '1.8', marginBottom: '1rem' }}>
             <strong>Jupiter Meta Data Token (JMDT)</strong> is an Ethereum-based Layer 2 (L2) blockchain
-            designed to enhance scalability, privacy, and security for decentralized applications (dApps)
-            and enterprise use cases. By leveraging <strong>Zero-Knowledge Proofs (ZKPs)</strong>,{' '}
+            built as <strong>The Truth Layer for Verifiable Information</strong>. It delivers scalability,
+            privacy, and tamper-proof data integrity for decentralized applications and enterprise use cases —
+            leveraging <strong>Zero-Knowledge Proofs (ZKPs)</strong>,{' '}
             <strong>Decentralized Identity (DID)</strong>, and the{' '}
-            <strong>AVC (Asynchronous Validation Consensus)</strong> mechanism, JMDT provides a highly
-            efficient and interoperable blockchain infrastructure.
+            <strong>AVC (Asynchronous Validation Consensus)</strong> mechanism.
           </p>
           <p style={{ fontSize: '1.1rem', lineHeight: '1.8', marginBottom: '1rem' }}>
-            JMDT is fully EVM-compatible, meaning developers can deploy existing Ethereum smart contracts
+            JMDT is fully EVM-compatible — developers can deploy existing Ethereum smart contracts
             without modification. Transactions are batched via zk-rollups and committed to Ethereum
             dynamically based on optimal gas fees, keeping costs low while maintaining L1-level security.
             The immutable ledger ensures tamper-proof, verifiable data recording for every operation.
@@ -405,48 +500,89 @@ gtag('config', 'G-8N3L9Z2Z9X');
             exposing personal data on-chain.
           </p>
 
-          {/* ── Explore the Docs — internal linking section ──────────────── */}
+          {/* Explore the Docs */}
           <h2 style={{ fontSize: '1.75rem', fontWeight: '700', marginBottom: '1rem' }}>
             Explore the Documentation
           </h2>
           <p style={{ fontSize: '1rem', lineHeight: '1.8', marginBottom: '1.5rem' }}>
             Dive into any section of the JMDT technical documentation:
           </p>
-          <ul style={{ listStyle: 'none', padding: 0, display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '0.75rem', marginBottom: '3rem' }}>
-            {[
-              { label: 'Introduction', href: '/docs/intro', desc: 'Start here — overview of JMDT' },
-              { label: 'Architecture', href: '/docs/architecture', desc: 'Three-layer design' },
-              { label: 'AVC Consensus', href: '/docs/bft', desc: 'Consensus mechanism' },
-              { label: 'Zero-Knowledge Proofs', href: '/docs/zk', desc: 'ZK-Rollup details' },
-              { label: 'Decentralized Identity', href: '/docs/did', desc: 'DID & W3C standards' },
-              { label: 'Tokenomics', href: '/docs/tokenomics', desc: 'JM Coin model' },
-              { label: 'Use Cases', href: '/docs/use-cases', desc: 'Real-world applications' },
-              { label: 'Smart Contracts', href: '/docs/smart-contract', desc: 'EVM deployment' },
-              { label: 'Sequencer', href: '/docs/sequencer', desc: 'Transaction ordering' },
-              { label: 'Advantages', href: '/docs/advantages', desc: 'vs other L2 solutions' },
-              { label: 'Roadmap', href: '/docs/roadmap', desc: 'Development milestones' },
-              { label: 'CLI Reference', href: '/docs/cli', desc: 'Node operator commands' },
-            ].map(({ label, href, desc }) => (
-              <li key={href}>
-                <Link
-                  to={href}
-                  style={{
-                    display: 'block',
-                    padding: '0.75rem 1rem',
-                    borderRadius: '8px',
-                    border: '1px solid var(--glass-border, rgba(255,255,255,0.1))',
-                    textDecoration: 'none',
-                    transition: 'border-color 0.2s',
-                  }}
-                >
-                  <strong style={{ display: 'block', marginBottom: '0.2rem' }}>{label}</strong>
-                  <span style={{ fontSize: '0.85rem', opacity: 0.7 }}>{desc}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
+            {/* Documentation Links */}
+            <ul style={{ listStyle: 'none', padding: 0, display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '1rem', marginBottom: '3rem' }}>
+              {[
+                { label: 'INTRODUCTION', href: '/docs/intro', desc: 'Overview of JMDT' },
+                { label: 'ARCHITECTURE', href: '/docs/architecture', desc: 'Three-layer design' },
+                { label: 'AVC CONSENSUS', href: '/docs/avc', desc: 'Consensus mechanism' },
+                { label: 'ZK PROOFS', href: '/docs/zk', desc: 'ZK-Rollup details' },
+                { label: 'IDENTITY', href: '/docs/did', desc: 'DID & W3C Standards' },
+                { label: 'TOKENOMICS', href: '/docs/tokenomics', desc: 'Token model' },
+                { label: 'USE CASES', href: '/docs/use-cases', desc: 'Real-world apps' },
+                { label: 'SMART CONTRACTS', href: '/docs/smart-contract', desc: 'EVM deployment' },
+              ].map(({ label, href, desc }) => (
+                <li key={href}>
+                  <Link
+                    to={href}
+                    className="glass-panel"
+                    style={{
+                      display: 'block',
+                      padding: '1rem',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    <strong style={{ display: 'block', marginBottom: '0.5rem', fontSize: '1.1rem', color: 'var(--nb-orange)' }}>{label}</strong>
+                    <span style={{ fontSize: '0.9rem', opacity: 0.9, fontWeight: 700 }}>{desc}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
 
-          {/* ── Visible FAQ section — addresses audit "FAQ Section: Not Found" ── */}
+          {/* Node Setup — quick access */}
+          <h2 style={{ fontSize: '1.75rem', fontWeight: '700', marginBottom: '1rem' }}>
+            Run a Node
+          </h2>
+          <p style={{ fontSize: '1rem', lineHeight: '1.8', marginBottom: '1.5rem' }}>
+            Deploy a JMDN node and connect to the JMDT network — mainnet or testnet:
+          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1rem', marginBottom: '3rem' }}>
+            {[
+              {
+                label: 'Mainnet',
+                chainId: 'Chain ID 7000700',
+                href: '/docs/mainnet/overview',
+                desc: 'Production network — real JMDT tokens.',
+                color: 'var(--jm-primary)',
+              },
+              {
+                label: 'Testnet',
+                chainId: 'Chain ID 8000800',
+                href: '/docs/testnet/overview',
+                desc: 'Staging network — free faucet tokens, safe to experiment.',
+                color: 'var(--jm-accent)',
+              },
+            ].map(({ label, chainId, href, desc, color }) => (
+              <Link
+                key={href}
+                to={href}
+                style={{
+                  display: 'block',
+                  padding: '1.25rem 1.25rem',
+                  borderRadius: '10px',
+                  border: `1px solid ${color}40`,
+                  background: `${color}08`,
+                  textDecoration: 'none',
+                  transition: 'border-color 0.2s, background 0.2s',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+                  <strong style={{ fontSize: '1.05rem' }}>{label}</strong>
+                  <span style={{ fontSize: '0.75rem', color, fontWeight: 600, background: `${color}18`, padding: '0.2rem 0.6rem', borderRadius: '999px' }}>{chainId}</span>
+                </div>
+                <span style={{ fontSize: '0.9rem', opacity: 0.75 }}>{desc}</span>
+              </Link>
+            ))}
+          </div>
+
+          {/* FAQ */}
           <h2 style={{ fontSize: '1.75rem', fontWeight: '700', marginBottom: '1.5rem' }}>
             Frequently Asked Questions
           </h2>
@@ -454,11 +590,11 @@ gtag('config', 'G-8N3L9Z2Z9X');
           {[
             {
               q: 'What is JMDT?',
-              a: 'JMDT (Jupiter Meta Data Token) is an Ethereum-based Layer 2 blockchain designed for scalability, privacy, and security. It uses Zero-Knowledge Proofs (ZKPs), Decentralized Identity (DID), and the AVC consensus algorithm to deliver a high-throughput, privacy-preserving blockchain infrastructure for dApps and enterprise use cases.',
+              a: 'JMDT (Jupiter Meta Data Token) is an Ethereum-based Layer 2 blockchain and The Truth Layer for Verifiable Information. It uses Zero-Knowledge Proofs (ZKPs), Decentralized Identity (DID), and the AVC consensus algorithm to deliver high-throughput, privacy-preserving blockchain infrastructure for dApps and enterprise use cases.',
             },
             {
               q: 'What is AVC consensus?',
-              a: 'AVC (Asynchronous Validation Consensus) is JMDT\'s consensus algorithm, engineered for efficient and fault-tolerant agreement across all network nodes, enabling the JMDT Layer 2 to process transactions reliably at scale.',
+              a: "AVC (Asynchronous Validation Consensus) is JMDT's consensus algorithm, engineered for efficient and fault-tolerant agreement across all network nodes, enabling the JMDT Layer 2 to process transactions reliably at scale.",
             },
             {
               q: 'How does JMDT use Zero-Knowledge Proofs?',
@@ -478,7 +614,7 @@ gtag('config', 'G-8N3L9Z2Z9X');
             },
             {
               q: 'What are the main use cases for JMDT?',
-              a: 'JMDT supports user onboarding and reward redemption (via the SuperJ platform), enterprise identity verification using DID credentials, privacy-preserving DeFi applications, and any dApp requiring high throughput combined with strong data privacy guarantees.',
+              a: 'JMDT supports enterprise identity verification using DID credentials, privacy-preserving DeFi applications, user onboarding and reward redemption via the SuperJ platform, and any dApp requiring high throughput combined with strong data privacy guarantees.',
             },
           ].map(({ q, a }, i) => (
             <div key={i} itemScope itemProp="mainEntity" itemType="https://schema.org/Question"

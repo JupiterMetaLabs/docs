@@ -43,15 +43,15 @@ export default function Root({ children }) {
         id="google_translate_element"
         style={{
           position: 'fixed',
-          top: '2rem',            /* halfway down the 4rem navbar */
-          right: '72px',         /* leaves breathing room from right edge */
+          top: '2.25rem',            /* Center of the 4.5rem navbar */
+          right: '120px',           /* Moved left to avoid hiding links */
           transform: 'translateY(-50%)',
           zIndex: 9999,
-          backgroundColor: 'var(--glass-bg, rgba(20,20,30,0.6))',
-          backdropFilter: 'blur(10px)',
-          padding: '4px 8px',
-          borderRadius: '6px',
-          border: '1px solid var(--glass-border, rgba(255,255,255,0.08))',
+          backgroundColor: 'var(--nb-white)',
+          padding: '2px 4px',
+          borderRadius: '0px',
+          border: 'var(--nb-border)',
+          boxShadow: 'var(--nb-shadow-pressed)',
         }}
       />
 
