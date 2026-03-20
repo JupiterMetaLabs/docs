@@ -239,58 +239,90 @@ gtag('config', 'G-8N3L9Z2Z9X');
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is JMDT?",
+      "name": "What is JMDT's L3 DAG architecture?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "JMDT (Jupiter Meta Data Token) is an Ethereum-based Layer 2 blockchain designed for scalability, privacy, and security. It uses Zero-Knowledge Proofs (ZKPs), Decentralized Identity (DID), and the AVC (Asynchronous Validation Consensus) algorithm to provide a highly efficient, privacy-preserving blockchain infrastructure."
+        "text": "JMDT (Jupiter Meta Data Token) uses a Layer 3 Directed Acyclic Graph (DAG) architecture. Unlike linear blockchains, the DAG enables asynchronous verification and parallel processing, delivering ultra-high throughput (5,000+ TPS) and near-instant finality for real-time, high-frequency use cases."
       }
     },
     {
       "@type": "Question",
-      "name": "What is AVC consensus?",
+      "name": "How does Zero-Knowledge DID protect my privacy?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "AVC (Asynchronous Validation Consensus) is JMDT's consensus algorithm designed for efficient, fault-tolerant agreement across network nodes in the JMDT Layer 2 blockchain."
+        "text": "JMDT combines W3C-standard decentralized identity (DID) with zero-knowledge verification. This allows credentials to be validated without exposing personal data, so users can authenticate and share attestable proofs while keeping sensitive details off-chain."
       }
     },
     {
       "@type": "Question",
-      "name": "How does JMDT use Zero-Knowledge Proofs?",
+      "name": "What are the main utilities of the JMDT Token?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "JMDT uses ZKPs to enable private transactions and computations without exposing sensitive data. ZK-Rollups batch multiple transactions into a single proof committed to Ethereum Layer 1, achieving high throughput while preserving privacy."
+        "text": "The JMDT token is used to power the data economy: converting user-approved behavioral signals and app-level insights into verifiable, tradeable on-chain value. This supports incentives for authentic data contributions and privacy-first verification across the JMDT ecosystem."
       }
     },
     {
       "@type": "Question",
-      "name": "What is Decentralized Identity (DID) on JMDT?",
+      "name": "Is JMDT compatible with Ethereum/EVM?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "JMDT implements W3C-standard Decentralized Identifiers (DIDs) for secure, PII-protected user authentication. DID credentials are stored on Layer 2 and can be shared across multiple platforms without exposing personal data."
+        "text": "Yes. JMDT is fully EVM-compatible, meaning existing Ethereum smart contracts can be deployed on JMDT without modification."
       }
     },
     {
       "@type": "Question",
-      "name": "Is JMDT compatible with Ethereum smart contracts?",
+      "name": "What makes JMDT different from L2 solutions like Polygon or Optimism?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. JMDT is fully EVM-compatible, meaning existing Ethereum smart contracts can be deployed on JMDT without modification. It supports seamless integration with Ethereum DeFi applications and enterprise solutions."
+        "text": "JMDT combines ZK privacy, DID-based self-sovereign identity, and a dedicated Layer 3 DAG execution architecture alongside its asynchronous validation consensus. This focuses on verifiable data, privacy-preserving identity, and high-throughput finality beyond typical L2 rollup-only stacks."
       }
     },
     {
       "@type": "Question",
-      "name": "How does JMDT commit transactions to Ethereum Layer 1?",
+      "name": "What is 'On-Device AI' in the JMDT ecosystem?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "JMDT dynamically commits batched transactions to Ethereum based on optimal gas fees and block time, using zk-rollup proofs to ensure finality and security on L1 while keeping transaction costs low."
+        "text": "On-device AI runs locally on users' devices to generate insights and zk-attestable analytics without sending raw user data to the network. This helps preserve privacy while enabling edge analytics and proof-backed outcomes."
       }
     },
     {
       "@type": "Question",
-      "name": "What are the use cases for JMDT?",
+      "name": "Can enterprises use JMDT for KYC compliance?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "JMDT supports enterprise identity verification using DID credentials, privacy-preserving DeFi applications, user onboarding and reward redemption via the SuperJ platform, and any dApp requiring high throughput with data privacy."
+        "text": "Yes. Enterprises can leverage DID and zero-knowledge verification to confirm identities and credentials without exposing personal data. This supports compliance-first workflows while reducing privacy risk from unnecessary PII disclosure."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the JMDT network secure against quantum computing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "JMDT is designed with quantum-robust proof systems in mind (zk-STARK and zk-SNARK proof oracles) so verifiable computation can remain reliable under stronger adversarial assumptions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I set up the JMDT Testnet in my wallet?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "To add JMDT Testnet to an EVM wallet, use RPC URL https://testnetrpc.jmdt.io and Chain ID 8000800 (Network name: JMDT Testnet, Currency symbol: JMDT). After saving, switch your wallet to the Testnet network."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where can I get Testnet JMDT tokens?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Testnet JMDT tokens are free via the JMDT Faucet. The faucet is listed as coming soon in the Testnet documentation, and will provide tokens for development and testing."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I buy JMDT tokens?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "When JMDT mainnet tokens go live, they are listed as available for purchase on Bitmart (per the Testnet vs Mainnet documentation)."
       }
     }
   ]
