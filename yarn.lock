@@ -2007,6 +2007,21 @@
     utility-types "^3.10.0"
     webpack "^5.88.1"
 
+"@fontsource/ibm-plex-mono@^5.2.7":
+  version "5.2.7"
+  resolved "https://registry.npmjs.org/@fontsource/ibm-plex-mono/-/ibm-plex-mono-5.2.7.tgz"
+  integrity sha512-MKAb8qV+CaiMQn2B0dIi1OV3565NYzp3WN5b4oT6LTkk+F0jR6j0ZN+5BKJiIhffDC3rtBULsYZE65+0018z9w==
+
+"@fontsource/iosevka@^5.2.5":
+  version "5.2.5"
+  resolved "https://registry.npmjs.org/@fontsource/iosevka/-/iosevka-5.2.5.tgz"
+  integrity sha512-Zv/UHJodDug1LcnWv2u2+GPp3oWP3U6Xp16cJOsqqZQNsCu8sA/ttT331N0NypxBZ+7c8szlSRlYDcy9liZ8pw==
+
+"@fontsource/jersey-25@^5.2.8":
+  version "5.2.8"
+  resolved "https://registry.npmjs.org/@fontsource/jersey-25/-/jersey-25-5.2.8.tgz"
+  integrity sha512-hreXFGgtiWaGtmj4NEtC7jaBOEEx2oxCehMUAqi2bRakS500S41S10wS22pOtaVVGgaR1Iht6+gUfJWJrMEt+A==
+
 "@hapi/hoek@^9.0.0", "@hapi/hoek@^9.3.0":
   version "9.3.0"
   resolved "https://registry.npmjs.org/@hapi/hoek/-/hoek-9.3.0.tgz"

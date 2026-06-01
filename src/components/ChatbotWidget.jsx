@@ -548,9 +548,8 @@ export default function ChatbotWidget() {
   return (
     <>
       <button className="jmdt-fab" onClick={() => setIsOpen(true)} title="Quick Search & AI">
-        <span className="jmdt-fab-icon">🔍</span>
-        <span className="jmdt-fab-text">Search Docs </span>
-        <span className="jmdt-fab-key">⌘K</span>
+        <img src="/icons/search_icon.svg" alt="" width="18" height="18" className="jmdt-fab-icon" />
+        <span className="jmdt-fab-text">Search docs</span>
       </button>
 
       {isOpen && (
@@ -779,37 +778,39 @@ export default function ChatbotWidget() {
         @keyframes jmdt-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
         .jmdt-fab {
           position: fixed;
-          bottom: 24px;
-          right: 24px;
-          height: 48px;
-          background: rgba(15, 15, 25, 0.85);
-          backdrop-filter: blur(12px);
-          border: 1px solid rgba(113, 162, 230, 0.3);
-          border-radius: 12px;
-          color: #fff;
+          bottom: 56px;
+          right: 75px;
+          width: 119px;
+          height: 45px;
+          padding: 13px;
+          border-radius: 4px;
+          /* solid bg so button is visible against dark hero */
+          background: #1a1a1a;
+          /* gradient border via background-clip trick (border-image kills border-radius) */
+          background-image:
+            linear-gradient(#1a1a1a, #1a1a1a),
+            linear-gradient(180deg, rgba(6, 6, 6, 0.22) 0%, rgba(71, 42, 92, 0.22) 100%);
+          background-origin: padding-box, border-box;
+          background-clip: padding-box, border-box;
+          border: 1px solid transparent;
+          backdrop-filter: blur(3.9px);
+          box-shadow: 0px 2px 7.7px 0px rgba(124, 83, 164, 0.17);
           display: flex;
           align-items: center;
-          padding: 0 16px;
-          gap: 10px;
+          gap: 6px;
           cursor: pointer;
-          z-index: 1000;
-          transition: all 0.2s;
-          box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+          z-index: 9999;
         }
-        .jmdt-fab:hover {
-          border-color: #71a2e6;
-          transform: translateY(-2px);
-          box-shadow: 0 12px 32px rgba(113, 162, 230, 0.3);
-        }
-        .jmdt-fab-icon { font-size: 18px; }
-        .jmdt-fab-text { font-weight: 500; font-size: 14px; color: rgba(255,255,255,0.9); }
-        .jmdt-fab-key { 
-            font-size: 11px; 
-            padding: 2px 6px; 
-            background: rgba(255,255,255,0.1); 
-            border-radius: 4px; 
-            color: rgba(255,255,255,0.4); 
-            border: 1px solid rgba(255,255,255,0.1);
+        .jmdt-fab-icon { width: 18px; height: 18px; flex-shrink: 0; }
+        .jmdt-fab-text {
+          font-family: 'Iosevka', 'IBM Plex Mono', monospace;
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 20px;
+          letter-spacing: 0;
+          vertical-align: middle;
+          color: #717173;
+          white-space: nowrap;
         }
         .jmdt-chatbot-scrollbar::-webkit-scrollbar { width: 4px; }
         .jmdt-chatbot-scrollbar::-webkit-scrollbar-thumb { background: rgba(113, 162, 230, 0.2); border-radius: 4px; }
