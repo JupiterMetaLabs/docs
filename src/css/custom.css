@@ -1258,17 +1258,11 @@ a.navbar__item[href="/docs/intro"] {
 }
 
 .homeIconRowIcon {
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
-  opacity: 0.4;
-  color: #ffffff;
-}
-
-[data-theme='light'] .homeIconRowIcon {
-  color: #000000;
 }
 
 .homeIconRowTitle {
