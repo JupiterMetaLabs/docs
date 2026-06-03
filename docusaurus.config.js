@@ -115,7 +115,7 @@ module.exports = {
 
     themeConfig: {
         navbar: {
-            title: 'DOC',
+            title: '',
             logo: {
                 alt: 'JMDT Logo',
                 src: 'icons/jmdt_logo.svg',

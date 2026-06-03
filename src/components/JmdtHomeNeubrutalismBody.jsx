@@ -165,18 +165,16 @@ export default function JmdtHomeNeubrutalismBody() {
           {/* Left copy */}
           <div className="homeHeroCopy">
             <p className="homeEyebrow">
-              <ScrambleText
-                text="THE TRUTH LAYER FOR VERIFIABLE INFORMATION"
-                baseColor="#C4C7C8"
-                highlightColor="#FFFFFF"
-                triggerOnHover={true}
-                triggerOnMount={true}
-                style={{ letterSpacing: 0 }}
-              />
+              <ScrambleText text="THE" baseColor="#C4C7C8" triggerOnMount={true} />{' '}
+              <ScrambleText text="TRUTH" baseColor="#FFFFFF" triggerOnMount={true} />{' '}
+              <ScrambleText text="LAYER" baseColor="#C4C7C8" triggerOnMount={true} />{' '}
+              <ScrambleText text="FOR" baseColor="#FFFFFF" triggerOnMount={true} />{' '}
+              <ScrambleText text="VERIFIABLE" baseColor="#C4C7C8" triggerOnMount={true} />{' '}
+              <ScrambleText text="INFORMATION" baseColor="#FFFFFF" triggerOnMount={true} />
             </p>
 
             <h1 className="homeH1">
-              Build<br />On Jmdt
+              Build<br />On JMDT
             </h1>
 
             <p className="homeSubtitle">

@@ -79,12 +79,12 @@ ROLE SUMMARY
 You are a JMDT documentation search assistant. You search, interpret, and explain only what exists in retrieved JMDT docs. Handle imperfect queries gracefully, but never go beyond the documentation context.
 `;
 
-const GEMINI_MODEL = 'gemini-2.0-flash';
+const GEMINI_MODEL = 'gemini-3.5-flash';
 const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
 
 const WELCOME_MESSAGE = {
   role: 'assistant',
-  content: "Hi! I'm **Zara**, your JMDT AI Guide. Ask me anything about node deployment, CLI usage, networking, or configuration.",
+  content: "Hi! I'm **Zara**, your JMDT Docs Guide. Ask me anything about node deployment, CLI usage, networking, or configuration.",
 };
 
 // ─── Markdown Renderer ────────────────────────────────────────────────────────
