@@ -115,11 +115,11 @@ module.exports = {
 
     themeConfig: {
         navbar: {
-            title: '',
+            title: 'DOC',
             logo: {
                 alt: 'JMDT Logo',
-                src: 'img/jmdt_logo_dark.png',
-                srcDark: 'img/jmdt_logo.png',
+                src: 'icons/jmdt_logo.svg',
+                srcDark: 'icons/jmdt_logo.svg',
             },
             items: [
                 { type: 'doc', docId: 'intro', position: 'left', label: 'Docs' },

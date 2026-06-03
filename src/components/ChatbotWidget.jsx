@@ -79,7 +79,7 @@ ROLE SUMMARY
 You are a JMDT documentation search assistant. You search, interpret, and explain only what exists in retrieved JMDT docs. Handle imperfect queries gracefully, but never go beyond the documentation context.
 `;
 
-const GEMINI_MODEL = 'gemini-3.1-flash-lite-preview';
+const GEMINI_MODEL = 'gemini-2.0-flash';
 const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
 
 const WELCOME_MESSAGE = {
@@ -150,10 +150,8 @@ function MessageContent({ content }) {
               // Headers
               const hMatch = line.match(/^(#+)\s+(.*)/);
               if (hMatch) {
-                const level = hMatch[1].length;
-                const fontSize = level === 1 ? '22px' : level === 2 ? '18px' : '16px';
                 return (
-                  <div key={j} style={{ ...styles.markdownHeader, fontSize }}>
+                  <div key={j} style={styles.markdownHeader}>
                     <InlineText line={hMatch[2]} />
                   </div>
                 );
@@ -197,8 +195,7 @@ export default function ChatbotWidget() {
   const [view, setView] = useState('search');
   const [messages, setMessages] = useState(() => {
     try {
-      const saved = localStorage.getItem('jmdt_chat_history');
-      return saved ? JSON.parse(saved) : [WELCOME_MESSAGE];
+      return [WELCOME_MESSAGE];
     } catch (e) { return [WELCOME_MESSAGE]; }
   });
   const [query, setQuery] = useState('');
@@ -221,6 +218,7 @@ export default function ChatbotWidget() {
   });
 
   const messagesEndRef = useRef(null);
+  const chatViewRef = useRef(null);
   const inputRef = useRef(null);
   const abortRef = useRef(null);
 
@@ -231,9 +229,6 @@ export default function ChatbotWidget() {
   useEffect(() => {
     localStorage.setItem('jmdt_recent_chats', JSON.stringify(recentChats));
   }, [recentChats]);
-  useEffect(() => {
-    localStorage.setItem('jmdt_chat_history', JSON.stringify(messages));
-  }, [messages]);
   
   const miniSearchRef = useRef(
     new MiniSearch({
@@ -281,7 +276,12 @@ export default function ChatbotWidget() {
   }, [isOpen]);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    const el = chatViewRef.current;
+    if (!el) return;
+    const frame = requestAnimationFrame(() => {
+      el.scrollTop = el.scrollHeight;
+    });
+    return () => cancelAnimationFrame(frame);
   }, [messages]);
 
   useEffect(() => {
@@ -342,7 +342,7 @@ export default function ChatbotWidget() {
 
   const handleTriggerChat = (text = query) => {
     if (!text.trim()) return;
-    setQuery(text);
+    setQuery('');
     setView('chat');
     
     // Add to recent chats
@@ -449,6 +449,9 @@ export default function ChatbotWidget() {
             };
             return updated;
           });
+          requestAnimationFrame(() => {
+            if (chatViewRef.current) chatViewRef.current.scrollTop = chatViewRef.current.scrollHeight;
+          });
           if (i < fullText.length) setTimeout(tick, DELAY); else resolve();
         }
         tick();
@@ -535,11 +538,7 @@ export default function ChatbotWidget() {
       }
     } else if (view === 'chat' && e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
-      const text = inputRef.current?.value;
-      if (text) {
-        sendMessage(text);
-        inputRef.current.value = '';
-      }
+      if (query.trim()) handleTriggerChat(query);
     }
   };
 
@@ -554,17 +553,18 @@ export default function ChatbotWidget() {
 
       {isOpen && (
         <div style={styles.backdrop} onClick={() => setIsOpen(false)}>
-          <div style={styles.modal} onClick={e => e.stopPropagation()}>
+          {/* Width-lock wrapper — everything inside matches search bar width */}
+          <div style={styles.widthLock} onClick={e => e.stopPropagation()}>
+          {/* Search bar — standalone floating element */}
+          <div style={styles.searchBar}>
             <div style={styles.searchHeader}>
-              <div style={styles.searchIcon}>
-                {view === 'chat' ? (
-                   <div style={styles.backBtn} onClick={() => setView('search')}>
-                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-                   </div>
-                ) : (
-                  '🔍'
-                )}
-              </div>
+              {view === 'chat' ? (
+                <div style={styles.backBtn} onClick={() => setView('search')}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                </div>
+              ) : (
+                <img src="/icons/search_icon.svg" alt="" width="16" height="16" style={{ flexShrink: 0, opacity: 0.7 }} />
+              )}
               <input
                 ref={inputRef}
                 style={styles.searchInput}
@@ -572,180 +572,64 @@ export default function ChatbotWidget() {
                 value={query}
                 onChange={e => {
                   setQuery(e.target.value);
-                  if (view === 'chat' && e.target.value) setView('search');
                 }}
                 onKeyDown={handleKeyDown}
               />
-              <div style={styles.headerRight}>
-                {view === 'search' && messages.length > 1 && (
-                  <div 
-                    style={styles.clearBtn} 
-                    onClick={() => {
-                      setView('chat');
-                      setTimeout(() => messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }), 50);
-                    }}
-                    title="View Chat History"
-                  >
-                    Zara Chat ✨
-                  </div>
-                )}
-                {view === 'chat' && <div style={styles.clearBtn} onClick={clearChat}>Clear</div>}
-                <div style={styles.escHint} onClick={() => setIsOpen(false)}>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', flexShrink: 0 }}>
+                <div
+                  style={{
+                    ...styles.zaraChatBtn,
+                    ...((!query.trim() && view === 'search') ? styles.zaraChatBtnDisabled : {}),
+                  }}
+                  onClick={() => {
+                    if (!query.trim() && view === 'search') return;
+                    if (view === 'chat') clearChat();
+                    else { handleTriggerChat(); }
+                  }}
+                >
+                  <span style={styles.zaraChatBtnText}>ZARA CHAT</span>
                 </div>
+                <img
+                  src="/icons/close.svg"
+                  alt="Close"
+                  width="16"
+                  height="16"
+                  style={{ display: 'block', flexShrink: 0, cursor: 'pointer', opacity: 0.6 }}
+                  onClick={() => setIsOpen(false)}
+                />
               </div>
             </div>
+          </div>
 
-            <div className="jmdt-chatbot-scrollbar" style={styles.contentBody}>
+          {/* Content — separate floating card below the search bar */}
+          <div className="jmdt-no-scroll" style={styles.contentBody} onClick={e => e.stopPropagation()}>
               {view === 'search' ? (
-                <>
-                  {!query ? (
-                    <div style={styles.emptyState}>
-                      {recentDocs.length > 0 && (
-                        <>
-                          <div style={styles.recentLabel}>Recent</div>
-                          {recentDocs.map((item, i) => (
-                            <div 
-                              key={`rd-${item.id}`} 
-                              style={{...styles.resultItem, ...(selectedIndex === i ? styles.selectedItem : {})}} 
-                              onClick={() => handleNavigate(item)}
-                            >
-                              <div style={styles.resultIconWrapper}>
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{opacity: 0.4}}><path d="M12 8v4l3 3"></path><circle cx="12" cy="12" r="9"></circle></svg>
-                              </div>
-                              <div style={{flex: 1}}>
-                                <div style={styles.resultTitle}>{item.title}</div>
-                                <div style={styles.resultPath}>{item.name.charAt(0).toUpperCase() + item.name.slice(1)}</div>
-                              </div>
-                              <div 
-                                style={styles.removeItem} 
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  setRecentDocs(prev => prev.filter(d => d.id !== item.id));
-                                }}
-                              >
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                              </div>
-                            </div>
-                          ))}
-                        </>
-                      )}
-
-                      {recentChats.length > 0 && (
-                        <>
-                          <div style={styles.recentLabel}>Recent conversations</div>
-                          {recentChats.map((item, i) => {
-                            const isSel = selectedIndex === (recentDocs.length + i);
-                            return (
-                              <div 
-                                key={`rc-${i}`} 
-                                style={{...styles.resultItem, ...(isSel ? styles.selectedItem : {})}} 
-                                onClick={() => {
-                                  setQuery(item);
-                                  setView('chat');
-                                  setSelectedIndex(0);
-                                  
-                                  // Targeted scrolling
-                                  setTimeout(() => {
-                                    const idx = [...messages].reverse().findIndex(m => m.role === 'user' && m.content === item);
-                                    if (idx !== -1) {
-                                      const actualIdx = messages.length - 1 - idx;
-                                      const el = document.getElementById(`msg-${actualIdx}`);
-                                      el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                                    } else {
-                                      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-                                    }
-                                  }, 100);
-                                }}
-                              >
-                                <div style={styles.resultIconWrapper}>
-                                  <span style={{fontSize: '14px', opacity: 0.5}}>✨</span>
-                                </div>
-                                <div style={{flex: 1}}>
-                                  <div style={styles.resultTitle}>{item}</div>
-                                </div>
-                                <div 
-                                  style={styles.removeItem} 
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    setRecentChats(prev => prev.filter(c => c !== item));
-                                  }}
-                                >
-                                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                                </div>
-                              </div>
-                            );
-                          })}
-                        </>
-                      )}
-                      
-                      {recentDocs.length === 0 && recentChats.length === 0 && (
-                         <div style={{padding: '40px 20px', textAlign: 'center', opacity: 0.3, fontSize: '14px'}}>
-                           No recent searches or conversations.
-                         </div>
-                      )}
-                    </div>
-                  ) : (
-                    <div style={styles.resultsList}>
-                      <div 
-                        style={{...styles.askAiItem, ...(selectedIndex === 0 ? styles.selectedItem : {})}}
-                        onClick={() => handleTriggerChat()}
-                      >
-                        <div style={styles.sparkleIcon}>✨</div>
-                        <div>
-                          <div style={styles.askAiLabel}>Ask Zara: <span style={styles.queryHighlight}>{query}</span></div>
-                          <div style={styles.askAiSub}>Instant answers from documentation</div>
-                        </div>
+                <div style={styles.resultsList}>
+                  {query && (
+                    <div
+                      style={{...styles.askAiItem, ...(selectedIndex === 0 ? styles.selectedItem : {})}}
+                      onClick={() => handleTriggerChat()}
+                    >
+                      <div style={styles.sparkleIcon}>✦</div>
+                      <div>
+                        <div style={styles.askAiLabel}>Ask Zara: <span style={styles.queryHighlight}>{query}</span></div>
+                        <div style={styles.askAiSub}>Instant answers from documentation</div>
                       </div>
-
-                      {searchResults.map((res, i) => {
-                        const isSel = selectedIndex === (i + 1);
-                        const parentTitle = res.name.charAt(0).toUpperCase() + res.name.slice(1);
-                        const isMainDoc = res.title.toLowerCase() === parentTitle.toLowerCase();
-                        
-                        return (
-                          <div 
-                            key={res.id} 
-                            style={{...styles.resultItem, ...(isSel ? styles.selectedItem : {})}}
-                            onClick={() => handleNavigate(res)}
-                          >
-                             <div style={styles.resultIconWrapper}>
-                               {isMainDoc ? (
-                                 <span style={styles.resultTypeIcon}>#</span>
-                               ) : (
-                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{opacity: 0.4}}><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-                               )}
-                             </div>
-                             <div style={styles.docResultInfo}>
-                               <div style={styles.resultTitle}>
-                                 <HighlightText text={res.title} />
-                               </div>
-                               {!isMainDoc && (
-                                 <div style={styles.resultSnippet}>
-                                   <HighlightText text={getSnippet(res.content, query)} />
-                                 </div>
-                               )}
-                               <div style={styles.resultPath}>
-                                 {parentTitle}
-                               </div>
-                             </div>
-                          </div>
-                        );
-                      })}
                     </div>
                   )}
-                </>
+                </div>
               ) : (
-                <div style={styles.chatView}>
-                  <div style={styles.aiDisclaimer}>Answers are generated with AI which can make mistakes. Verify responses.</div>
-                  {messages.length > 1 && (
-                    <div style={styles.searchMeta}>
-                       <span style={{opacity: 0.5}}>🔍 Searched for "{query}"</span>
-                    </div>
-                  )}
+                <div ref={chatViewRef} className="jmdt-no-scroll" style={styles.chatView}>
+                  {/* Disclaimer */}
+                  <div style={styles.aiDisclaimer}>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{flexShrink:0,opacity:0.5}}><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    Answers are generated with AI which can make mistakes. Verify responses.
+                  </div>
+
+                  {/* Messages */}
                   {messages.map((msg, i) => (
-                    <div 
-                      key={i} 
+                    <div
+                      key={i}
                       id={`msg-${i}`}
                       style={{ ...styles.msgRow, justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start' }}
                     >
@@ -755,20 +639,21 @@ export default function ChatbotWidget() {
                       </div>
                     </div>
                   ))}
-                  <div ref={messagesEndRef} />
+                  <div ref={messagesEndRef} style={{height: 1}} />
                 </div>
               )}
-            </div>
+          </div>
+          </div>{/* end widthLock */}
 
-            <div style={styles.footer}>
-              <div style={styles.footerHints}>
-                <span><span style={styles.key}>↑↓</span> Navigate</span>
-                <span><span style={styles.key}>↵</span> Select</span>
-                <span><span style={styles.key}>ESC</span> Close</span>
-              </div>
-              <div style={styles.poweredBy}>
-                Powered by <span style={styles.brand}>Zara AI</span>
-              </div>
+          {/* Footer pinned to very bottom of viewport */}
+          <div style={styles.footer} onClick={e => e.stopPropagation()}>
+            <div style={styles.footerHints}>
+              <span><span style={styles.key}>↑↓</span> NAVIGATE</span>
+              <span><span style={styles.key}>↵</span> SELECT</span>
+              <span><span style={styles.key}>ESC</span> CLOSE</span>
+            </div>
+            <div style={styles.poweredBy}>
+              Powered by <span style={styles.brand}>Zara AI</span>
             </div>
           </div>
         </div>
@@ -803,7 +688,7 @@ export default function ChatbotWidget() {
         }
         .jmdt-fab-icon { width: 18px; height: 18px; flex-shrink: 0; }
         .jmdt-fab-text {
-          font-family: 'Iosevka', 'IBM Plex Mono', monospace;
+          font-family: 'Iosevka Charon Mono', 'Courier New', monospace;
           font-weight: 400;
           font-size: 12px;
           line-height: 20px;
@@ -812,8 +697,8 @@ export default function ChatbotWidget() {
           color: #717173;
           white-space: nowrap;
         }
-        .jmdt-chatbot-scrollbar::-webkit-scrollbar { width: 4px; }
-        .jmdt-chatbot-scrollbar::-webkit-scrollbar-thumb { background: rgba(113, 162, 230, 0.2); border-radius: 4px; }
+        /* Hide scrollbar in content area */
+        .jmdt-no-scroll::-webkit-scrollbar { display: none; }
       `}</style>
     </>
   );
@@ -823,60 +708,94 @@ const styles = {
   backdrop: {
     position: 'fixed',
     top: 0, left: 0, right: 0, bottom: 0,
-    background: 'rgba(0, 0, 0, 0.75)',
-    backdropFilter: 'blur(8px)',
+    background: 'rgba(0, 0, 0, 0.92)',
+    backdropFilter: 'blur(12px)',
+    WebkitBackdropFilter: 'blur(12px)',
     zIndex: 10000,
     display: 'flex',
-    justifyContent: 'center',
-    paddingTop: '80px',
+    flexDirection: 'column',
+    alignItems: 'center',
+    paddingTop: '140px',
   },
-  modal: {
-    width: '720px',
+  /* width-lock container — single source of truth for width */
+  widthLock: {
+    width: '567px',
     maxWidth: 'calc(100vw - 32px)',
-    background: '#111118',
-    borderRadius: '16px',
-    boxShadow: '0 32px 64px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.05)',
     display: 'flex',
     flexDirection: 'column',
-    maxHeight: 'calc(100vh - 120px)',
-    overflow: 'hidden',
-    fontFamily: "'Inter', system-ui, sans-serif",
+  },
+  /* search bar inherits width from widthLock */
+  searchBar: {
+    width: '100%',
+    height: '45px',
+    background: 'rgba(26, 27, 31, 0.72)',
+    border: '1px solid #222222',
+    borderRadius: '8px',
+    flexShrink: 0,
+    boxSizing: 'border-box',
+  },
+  /* content area — 32px below search bar, same width */
+  contentBody: {
+    width: '100%',
+    marginTop: '32px',
   },
   searchHeader: {
     display: 'flex',
     alignItems: 'center',
-    padding: '16px 20px',
-    borderBottom: '1px solid rgba(255,255,255,0.08)',
-    gap: '12px',
+    width: '100%',
+    height: '45px',
+    background: 'rgba(26, 27, 31, 0.72)',
+    padding: '0 13px',
+    gap: '10px',
+    borderRadius: '10px',
   },
-  searchIcon: { fontSize: '20px', opacity: 0.8 },
   searchInput: {
     flex: 1,
     background: 'transparent',
     border: 'none',
     color: '#fff',
-    fontSize: '18px',
+    fontSize: '12px',
+    fontFamily: "'Iosevka Charon Mono', 'Courier New', monospace",
+    fontWeight: 300,
+    letterSpacing: '0px',
     outline: 'none',
-    padding: '4px 0',
+    padding: '0',
   },
-  escHint: {
-    fontSize: '10px',
-    padding: '4px 8px',
-    background: 'rgba(255,255,255,0.05)',
-    border: '1px solid rgba(255,255,255,0.1)',
-    borderRadius: '4px',
-    color: 'rgba(255,255,255,0.4)',
+  zaraChatBtn: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '59px',
+    height: '21px',
+    padding: '2px 6px',
+    borderRadius: '2px',
+    background: 'linear-gradient(#0a0a0a, #0a0a0a) padding-box, linear-gradient(176.64deg, #ABABAB -176.68%, #000000 147.99%) border-box',
+    border: '1px solid transparent',
     cursor: 'pointer',
+    flexShrink: 0,
+    boxSizing: 'border-box',
   },
-  contentBody: {
-    flex: 1,
-    overflowY: 'auto',
-    padding: '12px 10px',
-    minHeight: '200px',
+  zaraChatBtnDisabled: {
+    cursor: 'not-allowed',
+    pointerEvents: 'none',
+  },
+  zaraChatBtnText: {
+    fontFamily: "'Iosevka Charon Mono', 'Courier New', monospace",
+    fontWeight: 300,
+    fontSize: '10px',
+    lineHeight: '15px',
+    letterSpacing: '0px',
+    textTransform: 'uppercase',
+    verticalAlign: 'middle',
+    background: 'linear-gradient(180deg, #C9C9C9 0%, #636363 100%)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+    whiteSpace: 'nowrap',
   },
   emptyState: { padding: '8px 10px' },
   recentLabel: { fontSize: '12px', color: 'rgba(255,255,255,0.3)', fontWeight: 600, padding: '12px 12px 8px' },
-  resultsList: { display: 'flex', flexDirection: 'column', gap: '4px' },
+  resultsList: { display: 'flex', flexDirection: 'column' },
   resultItem: {
     padding: '12px 16px',
     borderRadius: '10px',
@@ -886,59 +805,168 @@ const styles = {
     cursor: 'pointer',
     transition: 'background 0.15s',
   },
+  /* Suggestion card — exact Figma: 569×79, bg #13131694, border #131316, blur 50px */
   askAiItem: {
-    margin: '4px 8px 12px',
-    padding: '14px 18px',
-    background: 'rgba(113, 162, 230, 0.08)',
-    border: '1px solid rgba(113, 162, 230, 0.15)',
-    borderRadius: '12px',
+    width: '100%',
+    height: '79px',
+    padding: '0 16px',
+    background: 'rgba(19, 19, 22, 0.58)',
+    border: '1px solid #131316',
+    backdropFilter: 'blur(50px)',
+    WebkitBackdropFilter: 'blur(50px)',
+    borderRadius: '8px',
     display: 'flex',
     alignItems: 'center',
-    gap: '16px',
+    gap: '27px',
     cursor: 'pointer',
-    transition: 'all 0.2s',
+    boxSizing: 'border-box',
   },
   selectedItem: {
-    background: 'rgba(113, 162, 230, 0.15)',
-    boxShadow: 'inset 0 0 0 1px rgba(113, 162, 230, 0.3)',
+    background: 'rgba(19, 19, 22, 0.75)',
   },
-  sparkleIcon: { fontSize: '24px' },
-  askAiLabel: { fontSize: '15px', fontWeight: 600, color: '#fff' },
-  askAiSub: { fontSize: '12px', color: 'rgba(113, 162, 230, 0.8)', marginTop: '2px' },
-  queryHighlight: { color: '#71a2e6' },
+  sparkleIcon: {
+    fontSize: '20px',
+    color: '#818cf8',
+    flexShrink: 0,
+    lineHeight: 1,
+  },
+  askAiLabel: {
+    fontFamily: "'Iosevka Charon Mono', monospace",
+    fontSize: '12px',
+    fontWeight: 400,
+    color: '#e4e4f0',
+  },
+  askAiSub: {
+    fontFamily: "'Iosevka Charon Mono', monospace",
+    fontSize: '11px',
+    color: '#6366f1',
+    marginTop: '4px',
+    fontWeight: 300,
+  },
+  queryHighlight: { color: '#818cf8' },
   resultTypeIcon: { width: '24px', textAlign: 'center', color: 'rgba(255,255,255,0.2)', fontSize: '18px' },
   resultTitle: { fontSize: '14px', fontWeight: 500, color: '#e3e3e8' },
   resultPath: { fontSize: '11px', color: 'rgba(255,255,255,0.3)', marginTop: '2px' },
-  chatView: { padding: '16px', display: 'flex', flexDirection: 'column', gap: '16px' },
   msgRow: { display: 'flex' },
-  bubble: { maxWidth: '85%', padding: '12px 16px', borderRadius: '12px', fontSize: '14px', lineHeight: '1.6' },
-  userBubble: { background: 'linear-gradient(135deg, #4c4cff, #71a2e6)', color: '#fff' },
-  botBubble: { background: 'rgba(255,255,255,0.05)', color: '#e3e3e8', border: '1px solid rgba(255,255,255,0.05)' },
-  cursor: { display: 'inline-block', width: '6px', height: '14px', background: '#71a2e6', marginLeft: '4px', animation: 'jmdt-blink 0.8s infinite' },
+  bubble: {
+    fontFamily: "'Inter', '-apple-system', 'BlinkMacSystemFont', sans-serif",
+    fontWeight: 400,
+    fontSize: '14px',
+    lineHeight: '20px',
+    letterSpacing: '0px',
+  },
+  /* User bubble — exact Figma specs */
+  userBubble: {
+    background: 'linear-gradient(138.45deg, #5056FC 10.83%, #6E9BE8 100%)',
+    color: '#ffffff',
+    borderTopLeftRadius: '8px',
+    borderTopRightRadius: '2px',
+    borderBottomRightRadius: '8px',
+    borderBottomLeftRadius: '8px',
+    padding: '16px',
+    maxWidth: '320px',
+    fontFamily: "'Inter', '-apple-system', sans-serif",
+    fontSize: '14px',
+    fontWeight: 400,
+    lineHeight: '20px',
+  },
+  /* Bot bubble — exact Figma: 471px wide, bg #13131694, border #131316, radius 8px, padding 20px, gap 10px */
+  botBubble: {
+    background: 'rgba(19, 19, 22, 0.58)',
+    border: '1px solid #131316',
+    borderRadius: '8px',
+    padding: '20px',
+    gap: '10px',
+    color: '#d4d4dc',
+    width: '471px',
+    maxWidth: '100%',
+    backdropFilter: 'blur(50px)',
+    WebkitBackdropFilter: 'blur(50px)',
+    display: 'flex',
+    flexDirection: 'column',
+    boxSizing: 'border-box',
+    fontFamily: "'Inter', '-apple-system', sans-serif",
+    fontWeight: 300,
+    fontSize: '12px',
+    lineHeight: '18px',
+    letterSpacing: '0px',
+    verticalAlign: 'middle',
+  },
+  cursor: { display: 'inline-block', width: '6px', height: '14px', background: '#818cf8', marginLeft: '4px', animation: 'jmdt-blink 0.8s infinite' },
   footer: {
-    padding: '12px 20px',
-    borderTop: '1px solid rgba(255,255,255,0.05)',
-    background: 'rgba(0,0,0,0.2)',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    padding: '14px 24px',
+    borderTop: '1px solid rgba(255,255,255,0.06)',
+    background: 'rgba(12, 12, 13, 0.8)', /* #0C0C0DCC */
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  footerHints: { display: 'flex', gap: '16px', fontSize: '11px', color: 'rgba(255,255,255,0.3)' },
-  key: { 
-    padding: '2px 4px', 
-    background: 'rgba(255,255,255,0.08)', 
-    borderRadius: '3px', 
-    marginRight: '4px', 
-    color: 'rgba(255,255,255,0.5)',
-    fontWeight: 'bold'
+  footerHints: {
+    display: 'flex',
+    gap: '16px',
+    fontFamily: "'Iosevka Charon Mono', 'Courier New', monospace",
+    fontWeight: 300,
+    fontSize: '11px',
+    lineHeight: '15px',
+    letterSpacing: '0px',
+    verticalAlign: 'middle',
+    textTransform: 'uppercase',
+    color: '#C4C5D9',
   },
-  poweredBy: { fontSize: '11px', color: 'rgba(255,255,255,0.3)' },
-  brand: { color: '#71a2e6', fontWeight: 600 },
+  key: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '25px',
+    height: '15px',
+    paddingLeft: '4px',
+    paddingRight: '4px',
+    borderRadius: '2px',
+    border: '0.4px solid #333333',
+    background: 'linear-gradient(180deg, rgba(52, 53, 57, 0.32) 0%, rgba(145, 148, 159, 0.32) 100%)',
+    marginRight: '5px',
+    color: 'rgba(255,255,255,0.5)',
+    fontFamily: "'Iosevka Charon Mono', monospace",
+    fontSize: '10px',
+    boxSizing: 'border-box',
+  },
+  poweredBy: {
+    fontFamily: "'Iosevka Charon Mono', 'Courier New', monospace",
+    fontWeight: 400,
+    fontSize: '10px',
+    lineHeight: '15px',
+    letterSpacing: '0px',
+    verticalAlign: 'middle',
+    color: '#888888',
+  },
+  brand: {
+    fontFamily: "'Iosevka Charon Mono', 'Courier New', monospace",
+    fontWeight: 400,
+    fontSize: '10px',
+    lineHeight: '15px',
+    letterSpacing: '0px',
+    verticalAlign: 'middle',
+    color: '#FFFFFF',
+  },
   inlineCode: { background: 'rgba(113, 162, 230, 0.1)', padding: '2px 4px', borderRadius: '4px', fontFamily: 'monospace', color: '#71a2e6' },
-  markdownLink: { color: '#71a2e6', textDecoration: 'none', fontWeight: 600 },
+  markdownLink: { color: '#818cf8', textDecoration: 'none', fontWeight: 500 },
   codeBlock: { background: '#09090c', padding: '12px', borderRadius: '8px', overflowX: 'auto', border: '1px solid rgba(255,255,255,0.05)', margin: '8px 0', fontSize: '13px' },
   textPara: { margin: '8px 0', lineHeight: '1.6' },
-  markdownHeader: { color: '#fff', fontWeight: 700, margin: '20px 0 10px', lineHeight: '1.3' },
+  markdownHeader: {
+    fontFamily: "'Inter', '-apple-system', sans-serif",
+    fontWeight: 600,
+    fontSize: '10px',
+    lineHeight: '16px',
+    letterSpacing: '0.3px',
+    textTransform: 'uppercase',
+    verticalAlign: 'middle',
+    color: '#FFFFFF',
+    margin: '12px 0 6px',
+  },
   markdownList: { margin: '8px 0', paddingLeft: '20px' },
   markdownListItem: { margin: '6px 0', display: 'list-item', listStyleType: 'disc', listStylePosition: 'outside', marginLeft: '20px' },
   highlight: {
@@ -990,20 +1018,41 @@ const styles = {
     border: '1px solid rgba(255,255,255,0.1)',
     ':hover': { color: '#fff', background: 'rgba(255,255,255,0.1)' }
   },
-  aiDisclaimer: {
-    fontSize: '11px',
-    color: 'rgba(255,255,255,0.3)',
-    textAlign: 'center',
-    padding: '0 20px 8px',
-    borderBottom: '1px solid rgba(255,255,255,0.05)',
-    marginBottom: '8px',
+  chatView: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '18px',
+    padding: '12px 0 16px',
+    overflowY: 'scroll',
+    maxHeight: 'calc(100vh - 260px)',
+    scrollbarWidth: 'none',
+    msOverflowStyle: 'none',
   },
-  searchMeta: {
-    fontSize: '13px',
-    padding: '8px 4px',
+  aiDisclaimer: {
     display: 'flex',
     alignItems: 'center',
-    gap: '8px',
+    justifyContent: 'center',
+    gap: '6px',
+    fontFamily: "'Inter', '-apple-system', sans-serif",
+    fontWeight: 400,
+    fontSize: '10px',
+    lineHeight: '16px',
+    letterSpacing: '0px',
+    textAlign: 'center',
+    verticalAlign: 'middle',
+    color: '#C7C47B',
+    padding: '0 0 10px',
+    borderBottom: '1px solid rgba(255,255,255,0.05)',
+  },
+  searchMeta: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '6px',
+    fontFamily: "'Iosevka Charon Mono', monospace",
+    fontSize: '10px',
+    fontWeight: 300,
+    color: 'rgba(255,255,255,0.3)',
+    padding: '0 0 4px',
   },
   removeItem: {
     padding: '6px',

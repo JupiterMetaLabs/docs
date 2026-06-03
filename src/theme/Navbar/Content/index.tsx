@@ -1,8 +1,4 @@
-/**
- * Swizzle: inject Google Translate widget into the real navbar DOM
- * so it can't overlap/cut off navbar links.
- */
-import React, {type ReactNode} from 'react';
+import {type ReactNode} from 'react';
 import clsx from 'clsx';
 import {
   useThemeConfig,
@@ -14,16 +10,10 @@ import {
   useNavbarMobileSidebar,
 } from '@docusaurus/theme-common/internal';
 import NavbarItem, {type Props as NavbarItemConfig} from '@theme/NavbarItem';
-import NavbarColorModeToggle from '@theme/Navbar/ColorModeToggle';
-import SearchBar from '@theme/SearchBar';
 import NavbarMobileSidebarToggle from '@theme/Navbar/MobileSidebar/Toggle';
 import NavbarLogo from '@theme/Navbar/Logo';
-import NavbarSearch from '@theme/Navbar/Search';
-
-import styles from './styles.module.css';
 
 function useNavbarItems() {
-  // TODO temporary casting until ThemeConfig type is improved
   return useThemeConfig().navbar.items as NavbarItemConfig[];
 }
 
@@ -77,11 +67,8 @@ function NavbarContentLayout({
 
 export default function NavbarContent(): ReactNode {
   const mobileSidebar = useNavbarMobileSidebar();
-
   const items = useNavbarItems();
   const [leftItems, rightItems] = splitNavbarItems(items);
-
-  const searchBarItem = items.find((item) => item.type === 'search');
 
   return (
     <NavbarContentLayout
@@ -95,19 +82,8 @@ export default function NavbarContent(): ReactNode {
       right={
         <>
           <NavbarItems items={rightItems} />
-
-          {/* Google Translate widget mounts into this container (injected globally by Root.js) */}
-          <div id="google_translate_element" className="navbarTranslateWidget" />
-
-          <NavbarColorModeToggle className={styles.colorModeToggle} />
-          {!searchBarItem && (
-            <NavbarSearch>
-              <SearchBar />
-            </NavbarSearch>
-          )}
         </>
       }
     />
   );
 }
-

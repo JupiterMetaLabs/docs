@@ -1,12 +1,58 @@
 /* Custom styling for JMDT Docs - Modern "Deep Cyber" Aesthetic */
 
 @import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&family=Jersey+25&display=swap');
-@import "@fontsource/iosevka/300.css";
-@import "@fontsource/iosevka/400.css";
+
+@font-face {
+  font-family: 'Iosevka Charon Mono';
+  src: url('/fonts/IosevkaCharonMono-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Iosevka Charon Mono';
+  src: url('/fonts/IosevkaCharonMono-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Iosevka Charon Mono';
+  src: url('/fonts/IosevkaCharonMono-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Iosevka Charon Mono';
+  src: url('/fonts/IosevkaCharonMono-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Iosevka Charon Mono';
+  src: url('/fonts/IosevkaCharonMono-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Iosevka Charon Mono';
+  src: url('/fonts/IosevkaCharonMono-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
   /* Fonts */
-  --font-mono: 'Iosevka', 'IBM Plex Mono', 'JetBrains Mono', 'Courier New', monospace;
+  --font-mono: 'Iosevka Charon Mono', 'Courier New', monospace;
   --font-display: 'Jersey 25', 'Urbanist', sans-serif;
 
   /* Neubrutalism Neubrutalism Colors */
@@ -170,17 +216,307 @@ h6 {
   letter-spacing: -0.02em;
 }
 
+/* ── Navbar chip / dropdown shared styles ──────────────────────── */
+
+.nav-link {
+  font-family: 'Iosevka Charon Mono', ui-monospace, 'Menlo', monospace;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  vertical-align: middle;
+  text-decoration: none;
+  background: none;
+}
+
+.nav-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 9px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.04) 100%, rgba(255, 255, 255, 0.02) 100%),
+    linear-gradient(180deg, rgba(132, 132, 132, 0) 0%, rgba(34, 29, 29, 0) 100%);
+  backdrop-filter: blur(0px) saturate(180%);
+  -webkit-backdrop-filter: blur(0px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  color: #ffffff;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+    -1px 0 0 rgba(255, 120, 120, 0.04),
+    1px 0 0 rgba(120, 160, 255, 0.04);
+  transition:
+    border-color 150ms ease,
+    background 150ms ease,
+    color 150ms ease,
+    box-shadow 200ms ease;
+}
+
+.nav-chip:hover {
+  border-color: rgba(255, 255, 255, 0.14);
+  background:
+    linear-gradient(-36deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.06) 58%, rgba(255, 255, 255, 0.03) 100%),
+    linear-gradient(180deg, rgba(160, 160, 160, 0.25) 0%, rgba(48, 40, 40, 0.25) 100%);
+}
+
+.nav-chip-active,
+.nav-chip-active:hover {
+  background: linear-gradient(180deg, rgba(132, 132, 132, 0.2) 0%, rgba(255, 148, 9, 0.2) 100%);
+}
+
+/* ── Networks dropdown button ─────────────────────────────────── */
+.navbar__item.dropdown > .navbar__link {
+  font-family: 'Iosevka Charon Mono', ui-monospace, 'Menlo', monospace;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  vertical-align: middle;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 9px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.04) 100%, rgba(255, 255, 255, 0.02) 100%),
+    linear-gradient(180deg, rgba(132, 132, 132, 0) 0%, rgba(34, 29, 29, 0) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  color: #ffffff !important;
+  white-space: nowrap;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+    -1px 0 0 rgba(255, 120, 120, 0.04),
+    1px 0 0 rgba(120, 160, 255, 0.04);
+  transition: border-color 150ms ease, background 150ms ease, box-shadow 200ms ease;
+}
+
+.navbar__item.dropdown > .navbar__link:hover,
+.navbar__item.dropdown:hover > .navbar__link {
+  border-color: rgba(255, 255, 255, 0.14);
+  background:
+    linear-gradient(-36deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.06) 58%, rgba(255, 255, 255, 0.03) 100%),
+    linear-gradient(180deg, rgba(160, 160, 160, 0.25) 0%, rgba(48, 40, 40, 0.25) 100%);
+  color: #ffffff !important;
+}
+
+/* Active (open) state */
+.navbar__item.dropdown--show > .navbar__link {
+  background: linear-gradient(180deg, rgba(132, 132, 132, 0.2) 0%, rgba(255, 148, 9, 0.2) 100%) !important;
+  color: #f09819 !important;
+}
+
+/* Chevron — replace Docusaurus triangle with a rotatable one */
+.navbar__item.dropdown > .navbar__link::after {
+  border: none !important;
+  content: '';
+  display: inline-block;
+  width: 9px;
+  height: 6px;
+  background: url("data:image/svg+xml,%3Csvg width='9' height='6' viewBox='0 0 9 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L4.5 5L8 1' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  transition: transform 200ms ease;
+  vertical-align: middle;
+  margin-left: 0;
+}
+
+.navbar__item.dropdown--show > .navbar__link::after {
+  background: url("data:image/svg+xml,%3Csvg width='9' height='6' viewBox='0 0 9 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L4.5 5L8 1' stroke='%23ff8c42' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  transform: rotate(180deg);
+}
+
+/* ── Networks dropdown panel ─────────────────────────────────── */
+.navbar__item.dropdown .dropdown__menu {
+  background: #0a0a0a !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 4px !important;
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.6),
+    0 4px 20px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+  padding: 0 !important;
+  min-width: 141px;
+}
+
+.navbar__item.dropdown .dropdown__link {
+  font-family: 'Iosevka Charon Mono', ui-monospace, 'Menlo', monospace !important;
+  font-size: 12px !important;
+  letter-spacing: 1.1px !important;
+  text-transform: uppercase !important;
+  color: #E3E3E3 !important;
+  padding: 0 12px !important;
+  height: 30px;
+  line-height: 30px;
+  display: block;
+  transition: color 200ms ease, background 200ms ease;
+  border-radius: 0 !important;
+}
+
+.navbar__item.dropdown .dropdown__link:hover,
+.navbar__item.dropdown .dropdown__link--active {
+  color: #ECAA62 !important;
+  background: radial-gradient(100% 100% at 50% 50%, rgba(201, 112, 50, 0.18), transparent 50%) !important;
+}
+
+.navbar__item.dropdown .dropdown__link:first-child {
+  color: #ff8c42 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Dropdown panel */
+.buidl-dropdown-panel {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.04) 100%, rgba(255, 255, 255, 0.02) 100%),
+    linear-gradient(180deg, rgba(132, 132, 132, 0) 0%, rgba(34, 29, 29, 0) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.6),
+    0 4px 20px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.buidl-dropdown-inner {
+  background: #0a0a0a;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.dropdown-item {
+  display: block;
+  padding: 0 12px;
+  height: 30px;
+  line-height: 30px;
+  font-family: 'Iosevka Charon Mono', ui-monospace, 'Menlo', monospace;
+  font-size: 12px;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+  text-decoration: none !important;
+  color: #E3E3E3 !important;
+  transition: color 200ms ease, background 200ms ease;
+}
+
+.dropdown-item:hover {
+  color: #ECAA62 !important;
+  background: radial-gradient(100% 100% at 50% 50%, rgba(201, 112, 50, 0.18), transparent 50%);
+}
+
+.dropdown-item-first {
+  color: #ff8c42 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
 /* Navbar */
 .navbar {
   backdrop-filter: none;
-  border-bottom: var(--nb-border);
   background-color: var(--ifm-navbar-background-color);
+  padding: 25px 41px 16px;
+  border-bottom: 1px solid;
+  border-image-source: linear-gradient(90deg, rgba(153, 153, 153, 0.22) 0.96%, rgba(255, 255, 255, 0.1364) 55.29%, rgba(153, 153, 153, 0.22) 100%);
+  border-image-slice: 1;
+}
+
+.navbar__items--right {
+  gap: 25px;
 }
 
 .navbar__brand {
-  font-weight: 900;
-  letter-spacing: -0.01em;
+  margin-right: 0px;
+  gap: 0px;
+  align-items: center;
+}
+
+/* Logo image */
+.navbar__logo {
+  margin-right: 0;
+}
+
+/* "DOC" title */
+.navbar__title {
+  font-family: 'Iosevka Charon Mono', ui-monospace, 'Menlo', monospace;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 15px;
+  line-height: 16px;
+  letter-spacing: 3px;
+  text-align: center;
+  vertical-align: middle;
   text-transform: uppercase;
+  color: #ffffff !important;
+}
+
+/* Navbar — JMDT.IO & GitHub buttons */
+.navbar__items--right a.navbar__link[href="https://jmdt.io"],
+.navbar__items--right a.navbar__link[href="https://github.com/JupiterMetaLabs/docs"] {
+  font-family: 'Iosevka Charon Mono', ui-monospace, 'Menlo', monospace;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  vertical-align: middle;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 9px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.04) 100%, rgba(255, 255, 255, 0.02) 100%),
+    linear-gradient(180deg, rgba(132, 132, 132, 0) 0%, rgba(34, 29, 29, 0) 100%);
+  backdrop-filter: blur(0px) saturate(180%);
+  -webkit-backdrop-filter: blur(0px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  color: #ffffff !important;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+    -1px 0 0 rgba(255, 120, 120, 0.04),
+    1px 0 0 rgba(120, 160, 255, 0.04);
+  transition:
+    border-color 150ms ease,
+    background 150ms ease,
+    color 150ms ease,
+    box-shadow 200ms ease;
+  text-decoration: none !important;
+}
+
+.navbar__items--right a.navbar__link[href="https://jmdt.io"]:hover,
+.navbar__items--right a.navbar__link[href="https://github.com/JupiterMetaLabs/docs"]:hover {
+  border-color: rgba(255, 255, 255, 0.14);
+  background:
+    linear-gradient(-36deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.06) 58%, rgba(255, 255, 255, 0.03) 100%),
+    linear-gradient(180deg, rgba(160, 160, 160, 0.25) 0%, rgba(48, 40, 40, 0.25) 100%);
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+/* Hide Docusaurus default external link icon */
+.navbar__items--right a.navbar__link[href="https://jmdt.io"] svg,
+.navbar__items--right a.navbar__link[href="https://github.com/JupiterMetaLabs/docs"] svg {
+  display: none !important;
+}
+
+/* Inject white_arrow.svg after text */
+.navbar__items--right a.navbar__link[href="https://jmdt.io"]::after,
+.navbar__items--right a.navbar__link[href="https://github.com/JupiterMetaLabs/docs"]::after {
+  content: '';
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  background: url('/icons/white_arrow.svg') center / contain no-repeat;
+  flex-shrink: 0;
 }
 
 /* Hero Section */
