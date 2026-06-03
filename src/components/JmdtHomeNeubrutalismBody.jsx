@@ -161,7 +161,7 @@ export default function JmdtHomeNeubrutalismBody() {
       <header className="homeHero">
         <div className="homeHeroDots" aria-hidden="true" />
 
-        <div className="homeContainer homeHeroGrid">
+        <div className="section-container homeHeroGrid">
           {/* Left copy */}
           <div className="homeHeroCopy">
             <p className="homeEyebrow">
@@ -278,7 +278,7 @@ export default function JmdtHomeNeubrutalismBody() {
 
         {/* Stats bar */}
         <div className="homeHeroStatsBar">
-          <div className="homeStatsRow">
+          <div className="section-container homeStatsRow">
             {HERO_METRICS.map((m, i) => (
               <React.Fragment key={m.label}>
                 {i > 0 && <span className="homeStatDivider" aria-hidden="true" />}

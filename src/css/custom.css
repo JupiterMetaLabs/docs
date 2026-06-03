@@ -415,11 +415,49 @@ h6 {
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
+/* ── Section container ──────────────────────────────────────────── */
+.section-container {
+  width: 100%;
+  max-width: clamp(1030px, 69vw, 1600px);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+@media (max-width: 1078px) {
+  .section-container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+/* ── Large-screen font / spacing bumps ──────────────────────────── */
+@media (min-width: 1920px) {
+  .homeH1        { font-size: 72px; line-height: 72px; }
+  .homeSubtitle  { font-size: 13px; line-height: 20px; }
+  .homeEyebrow   { font-size: 13px; }
+  .homeStatementTitle { font-size: 22px; }
+  .homeHeroGrid  { gap: 6rem; }
+  .homeStatsRow  { padding-top: 36px; }
+  .homeStatDivider { margin: 0 48px; }
+}
+
+@media (min-width: 2560px) {
+  .homeH1        { font-size: 96px; line-height: 96px; }
+  .homeSubtitle  { font-size: 15px; line-height: 24px; }
+  .homeEyebrow   { font-size: 15px; }
+  .homeStatementTitle { font-size: 28px; }
+  .homeHeroGrid  { gap: 8rem; }
+  .homeStatsRow  { padding-top: 44px; }
+  .homeStatDivider { margin: 0 64px; }
+}
+
 /* Navbar */
 .navbar {
   backdrop-filter: none;
   background-color: var(--ifm-navbar-background-color);
-  padding: 25px 41px 16px;
+  padding: 25px 42px 16px;
   border-bottom: 1px solid;
   border-image-source: linear-gradient(90deg, rgba(153, 153, 153, 0.22) 0.96%, rgba(255, 255, 255, 0.1364) 55.29%, rgba(153, 153, 153, 0.22) 100%);
   border-image-slice: 1;
@@ -987,7 +1025,7 @@ a.navbar__item[href="/docs/intro"] {
     align-items: flex-start;
     justify-content: space-between;
     gap: 4rem;
-    padding: 0 100px;
+    padding: 0;
   }
 
   .homeHeroCopy {
@@ -1014,9 +1052,8 @@ a.navbar__item[href="/docs/intro"] {
   letter-spacing: 0;
   text-transform: uppercase;
   vertical-align: middle;
-  margin-bottom: 1rem;
   margin-top: 80px;
-  margin-bottom: 24px;
+  margin-bottom: 38px;
 }
 
 .eyeDim  { color: #C4C7C8; }
@@ -1251,19 +1288,7 @@ a.navbar__item[href="/docs/intro"] {
 .homeStatsRow {
   display: flex;
   align-items: center;
-  padding: 29px 100px 0;
-}
-
-@media (max-width: 996px) {
-  .homeStatsRow {
-    padding: 29px 48px 0;
-  }
-}
-
-@media (max-width: 639px) {
-  .homeStatsRow {
-    padding: 29px 24px 0;
-  }
+  padding-top: 29px;
 }
 
 .homeStatItem {
