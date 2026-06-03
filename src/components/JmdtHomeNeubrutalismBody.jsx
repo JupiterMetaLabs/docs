@@ -3,21 +3,21 @@ import Link from '@docusaurus/Link';
 import ScrambleText from './ScrambleText';
 
 const IconShield = () => (
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     <path d="M12 2L3 7v5c0 5.25 3.75 10.05 9 11 5.25-.95 9-5.75 9-11V7l-9-5z" />
     <path d="M9 12l2 2 4-4" />
   </svg>
 );
 
 const IconLock = () => (
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
     <path d="M7 11V7a5 5 0 0 1 10 0v4" />
   </svg>
 );
 
 const IconWifi = () => (
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     <path d="M1.42 9A16 16 0 0 1 22.58 9" />
     <path d="M5 12.55a11 11 0 0 1 14.08 0" />
     <path d="M10.54 17.09a5 5 0 0 1 2.92 0" />
@@ -200,6 +200,11 @@ export default function JmdtHomeNeubrutalismBody() {
                 JMDT.IO <img src="/icons/white_arrow.svg" alt="Arrow Right" className="" />
               </Link>
             </div>
+
+            <Link className="homeTelegramBtn" to="https://t.me/JMDT_token" target="_blank" rel="noopener noreferrer">
+              JOIN TELEGRAM GROUP
+              <img src="/icons/join_telegram_arrow.svg" alt="" width="15" height="10" />
+            </Link>
           </div>
 
           {/* Right card */}
@@ -229,7 +234,7 @@ export default function JmdtHomeNeubrutalismBody() {
               <div className="homeIconGrid">
                 <div className="homeIconRow">
                   <span className="homeIconRowIcon">
-                    <img src="/icons/tamper_icon.svg" alt="" width="22" height="22" />
+                    <img src="/icons/tamper_icon.svg" alt="" width="32" height="32" />
                   </span>
                   <span className="homeIconRowTitle">
                     <ScrambleText
@@ -242,7 +247,7 @@ export default function JmdtHomeNeubrutalismBody() {
                 </div>
                 <div className="homeIconRow">
                   <span className="homeIconRowIcon">
-                    <img src="/icons/zk_privacy_icon.svg" alt="" width="22" height="22" />
+                    <img src="/icons/zk_privacy_icon.svg" alt="" width="32" height="32" />
                   </span>
                   <span className="homeIconRowTitle">
                     <ScrambleText
@@ -255,7 +260,7 @@ export default function JmdtHomeNeubrutalismBody() {
                 </div>
                 <div className="homeIconRow">
                   <span className="homeIconRowIcon">
-                    <img src="/icons/self_sovereign_icon.svg" alt="" width="22" height="22" />
+                    <img src="/icons/self_sovereign_icon.svg" alt="" width="32" height="32" />
                   </span>
                   <span className="homeIconRowTitle">
                     <ScrambleText
@@ -287,7 +292,7 @@ export default function JmdtHomeNeubrutalismBody() {
         </div>
       </header>
 
-      <main className="homeMain">
+      {false && <main className="homeMain">
         <section className="homeSection">
           <h2 className="homeSectionTitle">Our Mission</h2>
           <p className="homeSectionLead">
@@ -364,7 +369,7 @@ export default function JmdtHomeNeubrutalismBody() {
             </a>
           </div>
         </section>
-      </main>
+      </main>}
     </>
   );
 }
