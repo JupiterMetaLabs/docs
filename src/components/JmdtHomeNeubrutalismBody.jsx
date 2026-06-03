@@ -161,7 +161,7 @@ export default function JmdtHomeNeubrutalismBody() {
       <header className="homeHero">
         <div className="homeHeroDots" aria-hidden="true" />
 
-        <div className="homeContainer homeHeroGrid">
+        <div className="section-container homeHeroGrid">
           {/* Left copy */}
           <div className="homeHeroCopy">
             <p className="homeEyebrow">
@@ -217,16 +217,9 @@ export default function JmdtHomeNeubrutalismBody() {
               <div className="homeStatementDivider" />
 
               <p className="homeStatementLead">
-                <span className="subDim">Enterprises </span>
-                <span className="subBright">Access </span>
-                <span className="subDim">Authentic </span>
-                <span className="subBright">Insights. </span>
-                <span className="subBright">Privacy </span>
-                <span className="subDim">is Absolute – </span>
-                <span className="subBright">Built On </span>
-                <span className="subDim">ZK Proofs and Self-</span>
-                <span className="subBright">Sovereign </span>
-                <span className="subDim">Identity.</span>
+                Enterprises <span className="stHighlight">Access</span> Authentic <span className="stHighlight">Insights</span>.<br />
+                <span className="stHighlight">Privacy</span> Is Absolute – <span className="stHighlight">Built On</span> ZK<br />
+                Proofs And Self-<span className="stHighlight">Sovereign</span> Identity.
               </p>
 
               <div className="homeStatementDivider" />
@@ -278,7 +271,7 @@ export default function JmdtHomeNeubrutalismBody() {
 
         {/* Stats bar */}
         <div className="homeHeroStatsBar">
-          <div className="homeStatsRow">
+          <div className="section-container homeStatsRow">
             {HERO_METRICS.map((m, i) => (
               <React.Fragment key={m.label}>
                 {i > 0 && <span className="homeStatDivider" aria-hidden="true" />}
