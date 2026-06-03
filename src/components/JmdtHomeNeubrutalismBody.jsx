@@ -1,9 +1,30 @@
 import React from 'react';
 import Link from '@docusaurus/Link';
-import JmdtHomeStaticBackground from './JmdtHomeStaticBackground';
-import ThemeAwareHeroLogo from './ThemeAwareHeroLogo';
+import ScrambleText from './ScrambleText';
 
-// SVG icon components — no emoji
+const IconShield = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M12 2L3 7v5c0 5.25 3.75 10.05 9 11 5.25-.95 9-5.75 9-11V7l-9-5z" />
+    <path d="M9 12l2 2 4-4" />
+  </svg>
+);
+
+const IconLock = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+  </svg>
+);
+
+const IconWifi = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M1.42 9A16 16 0 0 1 22.58 9" />
+    <path d="M5 12.55a11 11 0 0 1 14.08 0" />
+    <path d="M10.54 17.09a5 5 0 0 1 2.92 0" />
+    <circle cx="12" cy="20" r="1" fill="currentColor" />
+  </svg>
+);
+
 const IconDAG = () => (
   <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     <rect x="3" y="3" width="7" height="7" />
@@ -30,35 +51,10 @@ const IconEthereum = () => (
   </svg>
 );
 
-const IconShield = () => (
-  <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M12 2L3 7v5c0 5.25 3.75 10.05 9 11 5.25-.95 9-5.75 9-11V7l-9-5z" />
-    <path d="M9 12l2 2 4-4" />
-  </svg>
-);
-
-const IconPrivacy = () => (
-  <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-    <path d="M9.5 10.5l1.8 1.8 3.2-4" />
-  </svg>
-);
-
-const IconIdentity = () => (
-  <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <circle cx="12" cy="5" r="2" />
-    <circle cx="5" cy="19" r="2" />
-    <circle cx="19" cy="19" r="2" />
-    <line x1="12" y1="7" x2="5" y2="17" />
-    <line x1="12" y1="7" x2="19" y2="17" />
-    <line x1="5" y1="19" x2="19" y2="19" />
-  </svg>
-);
-
 const HERO_METRICS = [
-  { value: '5,000+', label: 'TPS', color: 'var(--nb-orange)' },
-  { value: '20M', label: 'Verified Users', color: 'var(--nb-blue)' },
-  { value: '100%', label: 'ZK Privacy', color: 'var(--nb-yellow)' },
+  { value: '5,000+', label: 'TPS' },
+  { value: '20M', label: 'Verified Users' },
+  { value: '100%', label: 'ZK Privacy' },
 ];
 
 const MISSION_PILLARS = [
@@ -103,7 +99,6 @@ const STACK_CARDS = [
   },
 ];
 
-// This repo doesn’t currently enable a blog plugin; we use existing docs routes as a stand-in for “Latest Insights”.
 const LATEST_INSIGHTS = [
   { label: 'INTRODUCTION', href: '/docs/intro', desc: 'Overview of JMDT' },
   { label: 'ARCHITECTURE', href: '/docs/architecture', desc: 'Three-layer design' },
@@ -136,7 +131,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "What is 'On-Device AI' in the JMDT ecosystem?",
-    a: 'On-device AI runs locally on users\' devices to generate insights and zk-attestable analytics without sending raw user data to the network. This helps preserve privacy while enabling edge analytics and proof-backed outcomes.',
+    a: "On-device AI runs locally on users' devices to generate insights and zk-attestable analytics without sending raw user data to the network. This helps preserve privacy while enabling edge analytics and proof-backed outcomes.",
   },
   {
     q: 'Can enterprises use JMDT for KYC compliance?',
@@ -148,94 +143,149 @@ const FAQ_ITEMS = [
   },
   {
     q: 'How do I set up the JMDT Testnet in my wallet?',
-    a: 'To add JMDT Testnet to an EVM wallet, use: RPC URL `https://testnetrpc.jmdt.io` and Chain ID `8000800` (Network name: `JMDT Testnet`, Currency symbol: `JMDT`). After saving, switch your wallet to the Testnet network.',
+    a: 'To add JMDT Testnet to an EVM wallet, use RPC URL https://testnetrpc.jmdt.io and Chain ID 8000800 (Network name: JMDT Testnet, Currency symbol: JMDT). After saving, switch your wallet to the Testnet network.',
   },
   {
     q: 'Where can I get Testnet JMDT tokens?',
-    a: 'Testnet JMDT tokens are free via the JMDT Faucet. The faucet is listed as “coming soon” in the Testnet documentation, and will provide tokens for development and testing.',
+    a: 'Testnet JMDT tokens are free via the JMDT Faucet. The faucet is listed as "coming soon" in the Testnet documentation, and will provide tokens for development and testing.',
   },
   {
     q: 'How do I buy JMDT tokens?',
-    a: 'When JMDT mainnet tokens go live, they are listed as available for purchase on Bitmart (per the Testnet vs Mainnet documentation).'
+    a: 'When JMDT mainnet tokens go live, they are listed as available for purchase on Bitmart (per the Testnet vs Mainnet documentation).',
   },
 ];
-
-function HomeIconRow({ Icon, title, color }) {
-  return (
-    <div className="homeIconRow" style={{ color }}>
-      <div className="homeIconRowIcon">
-        <Icon />
-      </div>
-      <div className="homeIconRowTitle">{title}</div>
-    </div>
-  );
-}
 
 export default function JmdtHomeNeubrutalismBody() {
   return (
     <>
       <header className="homeHero">
-        <JmdtHomeStaticBackground />
+        <div className="homeHeroDots" aria-hidden="true" />
 
         <div className="homeContainer homeHeroGrid">
+          {/* Left copy */}
           <div className="homeHeroCopy">
-            <div className="animate-float homeHeroLogoWrap">
-              <ThemeAwareHeroLogo
-                style={{
-                  height: '100px',
-                  filter: 'drop-shadow(0 0 20px rgba(113, 162, 230, 0.4))',
-                }}
+            <p className="homeEyebrow">
+              <ScrambleText
+                text="THE TRUTH LAYER FOR VERIFIABLE INFORMATION"
+                baseColor="#C4C7C8"
+                highlightColor="#FFFFFF"
+                triggerOnHover={true}
+                triggerOnMount={true}
+                style={{ letterSpacing: 0 }}
               />
-            </div>
-
-            <p className="homeEyebrow">The Truth Layer for Verifiable Information</p>
+            </p>
 
             <h1 className="homeH1">
-              Build on <span className="text-gradient">JMDT</span>
+              Build<br />On Jmdt
             </h1>
 
             <p className="homeSubtitle">
-              Privacy-preserving Ethereum Layer 2 blockchain — powered by{' '}
-              <span className="homeAccentOrange">Zero-Knowledge Proofs</span>,{' '}
-              <span className="homeAccentBlue">Decentralized Identity</span>, and{' '}
-              <span className="homeAccentYellow">AVC consensus</span>.
+              <span className="subDim">Privacy-</span><span className="subBright">Preserving </span>
+              <span className="subDim">Ethereum </span>
+              <span className="subBright">Layer 2 </span>
+              <span className="subDim">Blockchain –</span>
+              <br />
+              <span className="subBright">Powered by </span>
+              <span className="subDim">Zero-Knowledge </span>
+              <span className="subBright">Proofs, Decentralized</span>
+              <br />
+              <span className="subBright">Identity, </span>
+              <span className="subDim">and </span>
+              <span className="subBright">AVC Consensus.</span>
             </p>
 
             <div className="homeCtaRow">
-              <Link className="button button--primary button--lg" to="/docs/intro">
-                Start Building &rarr;
+              <Link className="homeBtnPrimary" to="/docs/intro">
+                Start Building <img src="/icons/black_right_arrow.svg" alt="Arrow Right" className="" />
               </Link>
-              <Link className="button button--secondary button--lg" to="https://jmdt.io">
-                jmdt.io &rarr;
+              <Link className="homeBtnSecondary" to="https://jmdt.io" target="_blank" rel="noopener noreferrer">
+                JMDT.IO <img src="/icons/white_arrow.svg" alt="Arrow Right" className="" />
               </Link>
-            </div>
-
-            <div className="homeMetricsRow">
-              {HERO_METRICS.map((m) => (
-                <div key={m.label} className="homeMetricCard glass-panel">
-                  <div className="homeMetricValue" style={{ color: m.color }}>
-                    {m.value}
-                  </div>
-                  <div className="homeMetricLabel">{m.label}</div>
-                </div>
-              ))}
             </div>
           </div>
 
+          {/* Right card */}
           <aside className="homeHeroSide">
-            <div className="homeStatement glass-panel">
-              <div className="homeStatementTitle">Verified humans own their data.</div>
-              <div className="homeStatementLead">
-                Enterprises access authentic insights. Privacy is absolute — built on ZK proofs and self-sovereign identity.
+            <div className="homeStatement">
+              <div className="homeStatementTitle">
+                Verified Humans Own<br />Their Data.
               </div>
 
+              <div className="homeStatementDivider" />
+
+              <p className="homeStatementLead">
+                <span className="subDim">Enterprises </span>
+                <span className="subBright">Access </span>
+                <span className="subDim">Authentic </span>
+                <span className="subBright">Insights. </span>
+                <span className="subBright">Privacy </span>
+                <span className="subDim">is Absolute – </span>
+                <span className="subBright">Built On </span>
+                <span className="subDim">ZK Proofs and Self-</span>
+                <span className="subBright">Sovereign </span>
+                <span className="subDim">Identity.</span>
+              </p>
+
+              <div className="homeStatementDivider" />
+
               <div className="homeIconGrid">
-                <HomeIconRow Icon={IconShield} title="Tamper-proof truth" color="var(--nb-yellow)" />
-                <HomeIconRow Icon={IconPrivacy} title="ZK privacy, end-to-end" color="var(--nb-blue)" />
-                <HomeIconRow Icon={IconIdentity} title="Self-sovereign identity" color="var(--nb-orange)" />
+                <div className="homeIconRow">
+                  <span className="homeIconRowIcon">
+                    <img src="/icons/tamper_icon.svg" alt="" width="22" height="22" />
+                  </span>
+                  <span className="homeIconRowTitle">
+                    <ScrambleText
+                      text="Tamper-Proof Truth"
+                      highlight="Truth"
+                      baseColor="#A2A2A2"
+                      highlightColor="#FFFFFF"
+                    />
+                  </span>
+                </div>
+                <div className="homeIconRow">
+                  <span className="homeIconRowIcon">
+                    <img src="/icons/zk_privacy_icon.svg" alt="" width="22" height="22" />
+                  </span>
+                  <span className="homeIconRowTitle">
+                    <ScrambleText
+                      text="ZK Privacy, End-To-End"
+                      highlight="Privacy,"
+                      baseColor="#A2A2A2"
+                      highlightColor="#FFFFFF"
+                    />
+                  </span>
+                </div>
+                <div className="homeIconRow">
+                  <span className="homeIconRowIcon">
+                    <img src="/icons/self_sovereign_icon.svg" alt="" width="22" height="22" />
+                  </span>
+                  <span className="homeIconRowTitle">
+                    <ScrambleText
+                      text="Self-Sovereign Identity"
+                      highlight="Sovereign"
+                      baseColor="#A2A2A2"
+                      highlightColor="#FFFFFF"
+                    />
+                  </span>
+                </div>
               </div>
             </div>
           </aside>
+        </div>
+
+        {/* Stats bar */}
+        <div className="homeHeroStatsBar">
+          <div className="homeStatsRow">
+            {HERO_METRICS.map((m, i) => (
+              <React.Fragment key={m.label}>
+                {i > 0 && <span className="homeStatDivider" aria-hidden="true" />}
+                <div className="homeStatItem">
+                  <div className="homeStatValue">{m.value}</div>
+                  <div className="homeStatLabel">{m.label}</div>
+                </div>
+              </React.Fragment>
+            ))}
+          </div>
         </div>
       </header>
 
@@ -245,7 +295,6 @@ export default function JmdtHomeNeubrutalismBody() {
           <p className="homeSectionLead">
             JupiterMetaLabs has built the Antidote: a Web3 ecosystem where verified humans contribute authentic data they own — and earn from insights that previously enriched everyone but them.
           </p>
-
           <div className="homePillarGrid">
             {MISSION_PILLARS.map((p) => (
               <div key={p.number} className="homePillar glass-panel">
@@ -278,7 +327,6 @@ export default function JmdtHomeNeubrutalismBody() {
         <section className="homeSection">
           <h2 className="homeSectionTitle">Latest Insights</h2>
           <p className="homeSectionLead">From the JMDT Labs — quick-start docs cards.</p>
-
           <div className="homeCardGrid homeCardGrid--insights">
             {LATEST_INSIGHTS.map((i) => (
               <Link key={i.href} to={i.href} className="homeInsightCard glass-panel">
@@ -322,4 +370,3 @@ export default function JmdtHomeNeubrutalismBody() {
     </>
   );
 }
-
