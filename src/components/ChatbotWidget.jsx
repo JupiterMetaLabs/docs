@@ -221,6 +221,7 @@ export default function ChatbotWidget() {
   const chatViewRef = useRef(null);
   const inputRef = useRef(null);
   const abortRef = useRef(null);
+  const shouldScrollRef = useRef(true);
 
   // Save persistence
   useEffect(() => {
@@ -277,12 +278,19 @@ export default function ChatbotWidget() {
 
   useEffect(() => {
     const el = chatViewRef.current;
-    if (!el) return;
+    if (!el || !shouldScrollRef.current) return;
     const frame = requestAnimationFrame(() => {
       el.scrollTop = el.scrollHeight;
     });
     return () => cancelAnimationFrame(frame);
   }, [messages]);
+
+  // Track whether the user is pinned to the bottom. If they scroll up,
+  // stop auto-scrolling so they can read previous messages.
+  const handleChatScroll = (e) => {
+    const el = e.currentTarget;
+    shouldScrollRef.current = el.scrollHeight - el.scrollTop - el.clientHeight < 80;
+  };
 
   useEffect(() => {
     if (view !== 'search') return;
@@ -344,6 +352,7 @@ export default function ChatbotWidget() {
     if (!text.trim()) return;
     setQuery('');
     setView('chat');
+    shouldScrollRef.current = true;
     
     // Add to recent chats
     setRecentChats(prev => {
@@ -450,7 +459,7 @@ export default function ChatbotWidget() {
             return updated;
           });
           requestAnimationFrame(() => {
-            if (chatViewRef.current) chatViewRef.current.scrollTop = chatViewRef.current.scrollHeight;
+            if (chatViewRef.current && shouldScrollRef.current) chatViewRef.current.scrollTop = chatViewRef.current.scrollHeight;
           });
           if (i < fullText.length) setTimeout(tick, DELAY); else resolve();
         }
@@ -552,7 +561,7 @@ export default function ChatbotWidget() {
       </button>
 
       {isOpen && (
-        <div style={styles.backdrop} onClick={() => setIsOpen(false)}>
+        <div style={styles.backdrop} data-lenis-prevent onClick={() => setIsOpen(false)}>
           {/* Width-lock wrapper — everything inside matches search bar width */}
           <div style={styles.widthLock} onClick={e => e.stopPropagation()}>
           {/* Search bar — standalone floating element */}
@@ -619,7 +628,7 @@ export default function ChatbotWidget() {
                   )}
                 </div>
               ) : (
-                <div ref={chatViewRef} className="jmdt-no-scroll" style={styles.chatView}>
+                <div ref={chatViewRef} className="jmdt-no-scroll" data-lenis-prevent style={styles.chatView} onScroll={handleChatScroll}>
                   {/* Disclaimer */}
                   <div style={styles.aiDisclaimer}>
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{flexShrink:0,opacity:0.5}}><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
@@ -810,10 +819,8 @@ const styles = {
     width: '100%',
     height: '79px',
     padding: '0 16px',
-    background: 'rgba(19, 19, 22, 0.58)',
+    background: 'rgba(19, 19, 22, 0.92)',
     border: '1px solid #131316',
-    backdropFilter: 'blur(50px)',
-    WebkitBackdropFilter: 'blur(50px)',
     borderRadius: '8px',
     display: 'flex',
     alignItems: 'center',
@@ -872,7 +879,7 @@ const styles = {
   },
   /* Bot bubble — exact Figma: 471px wide, bg #13131694, border #131316, radius 8px, padding 20px, gap 10px */
   botBubble: {
-    background: 'rgba(19, 19, 22, 0.58)',
+    background: 'rgba(19, 19, 22, 0.92)',
     border: '1px solid #131316',
     borderRadius: '8px',
     padding: '20px',
@@ -880,8 +887,6 @@ const styles = {
     color: '#d4d4dc',
     width: '471px',
     maxWidth: '100%',
-    backdropFilter: 'blur(50px)',
-    WebkitBackdropFilter: 'blur(50px)',
     display: 'flex',
     flexDirection: 'column',
     boxSizing: 'border-box',
