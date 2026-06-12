@@ -1052,7 +1052,12 @@ a.navbar__item[href="/docs/intro"] {
 */
 
 .homeHero {
-  height: calc(100vh - var(--ifm-navbar-height));
+  height: 100vh;
+  /* Navbar is position:fixed (out of flow) — pad the top so hero content
+     clears it, and use full 100vh so the stats bar lands at the viewport
+     bottom with no leftover gap. */
+  padding-top: var(--ifm-navbar-height);
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   background: #000;
