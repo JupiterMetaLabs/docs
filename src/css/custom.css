@@ -219,15 +219,17 @@ h6 {
 /* ── Navbar chip / dropdown shared styles ──────────────────────── */
 
 .nav-link {
-  font-family: 'Iosevka Charon Mono', ui-monospace, 'Menlo', monospace;
-  font-weight: 400;
+  font-family: 'Iosevka Charon Mono', monospace;
   font-size: 14px;
+  font-weight: 400;
   line-height: 20px;
   letter-spacing: 1.4px;
   text-transform: uppercase;
-  vertical-align: middle;
   text-decoration: none;
-  background: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.2s, opacity 0.2s;
 }
 
 .nav-chip {
@@ -236,67 +238,78 @@ h6 {
   gap: 10px;
   padding: 5px 9px;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.04) 100%, rgba(255, 255, 255, 0.02) 100%),
-    linear-gradient(180deg, rgba(132, 132, 132, 0) 0%, rgba(34, 29, 29, 0) 100%);
-  backdrop-filter: blur(0px) saturate(180%);
-  -webkit-backdrop-filter: blur(0px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+    linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.04) 100%),
+    linear-gradient(180deg, rgba(132,132,132,0) 0%, rgba(34,29,29,0) 100%);
+  border: 1px solid rgba(255,255,255,0.08);
   border-radius: 4px;
   color: #ffffff;
   cursor: pointer;
   white-space: nowrap;
   box-shadow:
-    0 4px 20px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.2),
-    -1px 0 0 rgba(255, 120, 120, 0.04),
-    1px 0 0 rgba(120, 160, 255, 0.04);
-  transition:
-    border-color 150ms ease,
-    background 150ms ease,
-    color 150ms ease,
-    box-shadow 200ms ease;
+    0 4px 20px rgba(0,0,0,0.3),
+    inset 0 1px 0 rgba(255,255,255,0.1),
+    inset 0 -1px 0 rgba(0,0,0,0.2);
+  transition: border-color 150ms ease, background 150ms ease;
 }
 
 .nav-chip:hover {
-  border-color: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255,255,255,0.14);
   background:
-    linear-gradient(-36deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.06) 58%, rgba(255, 255, 255, 0.03) 100%),
-    linear-gradient(180deg, rgba(160, 160, 160, 0.25) 0%, rgba(48, 40, 40, 0.25) 100%);
+    linear-gradient(-36deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.06) 58%),
+    linear-gradient(180deg, rgba(160,160,160,0.25) 0%, rgba(48,40,40,0.25) 100%);
 }
 
 .nav-chip-active,
 .nav-chip-active:hover {
-  background: linear-gradient(180deg, rgba(132, 132, 132, 0.2) 0%, rgba(255, 148, 9, 0.2) 100%);
+  background: linear-gradient(180deg, rgba(132,132,132,0.2) 0%, rgba(255,148,9,0.2) 100%);
+}
+
+.gradient-text {
+  background: linear-gradient(360deg, #ff512f 0%, #f09819 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.buidl-dropdown-inner {
+  background: #0a0a0a;
+  border-radius: 2.5px;
+  overflow: hidden;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.15s ease-out forwards;
 }
 
 /* ── Networks dropdown button ─────────────────────────────────── */
 .navbar__item.dropdown > .navbar__link {
-  font-family: 'Iosevka Charon Mono', ui-monospace, 'Menlo', monospace;
+  font-family: 'Iosevka Charon Mono', monospace;
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
   letter-spacing: 1.4px;
   text-transform: uppercase;
-  vertical-align: middle;
   display: inline-flex;
   align-items: center;
   gap: 10px;
   padding: 5px 9px;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.04) 100%, rgba(255, 255, 255, 0.02) 100%),
-    linear-gradient(180deg, rgba(132, 132, 132, 0) 0%, rgba(34, 29, 29, 0) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+    linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.04) 100%),
+    linear-gradient(180deg, rgba(132,132,132,0) 0%, rgba(34,29,29,0) 100%);
+  border: 1px solid rgba(255,255,255,0.08);
   border-radius: 4px;
   color: #ffffff !important;
   white-space: nowrap;
   box-shadow:
-    0 4px 20px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.2),
-    -1px 0 0 rgba(255, 120, 120, 0.04),
-    1px 0 0 rgba(120, 160, 255, 0.04);
-  transition: border-color 150ms ease, background 150ms ease, box-shadow 200ms ease;
+    0 4px 20px rgba(0,0,0,0.3),
+    inset 0 1px 0 rgba(255,255,255,0.1),
+    inset 0 -1px 0 rgba(0,0,0,0.2);
+  transition: border-color 150ms ease, background 150ms ease;
 }
 
 .navbar__item.dropdown > .navbar__link:hover,
@@ -453,18 +466,87 @@ h6 {
   .homeStatDivider { margin: 0 64px; }
 }
 
-/* Navbar */
+/* ── Navbar ─────────────────────────────────────────────────────── */
+:root {
+  --ifm-navbar-height: 73px;
+}
+
+@media (min-width: 997px) {
+  :root {
+    --ifm-navbar-height: 80px;
+  }
+}
+
 .navbar {
-  backdrop-filter: none;
-  background-color: var(--ifm-navbar-background-color);
-  padding: 25px 42px 16px;
-  border-bottom: 1px solid;
-  border-image-source: linear-gradient(90deg, rgba(153, 153, 153, 0.22) 0.96%, rgba(255, 255, 255, 0.1364) 55.29%, rgba(153, 153, 153, 0.22) 100%);
-  border-image-slice: 1;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  height: 73px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  background-image: linear-gradient(90deg, rgba(153,153,153,0.22), rgba(255,255,255,0.14), rgba(153,153,153,0.22));
+  background-size: 100% 1px;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  border-bottom: none;
+  border-image: none;
+  transition: transform 300ms ease;
+}
+
+/* Scrolled — blurred dark bg, border line preserved */
+.navbar--scrolled {
+  background-color: rgba(0,0,0,0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background-image: linear-gradient(90deg, rgba(153,153,153,0.22), rgba(255,255,255,0.14), rgba(153,153,153,0.22));
+  background-size: 100% 1px;
+  background-position: bottom;
+  background-repeat: no-repeat;
+}
+
+/* Hidden — slide up off screen on scroll-down */
+.navbar--hidden {
+  transform: translateY(-100%);
+}
+
+@media (min-width: 997px) {
+  .navbar {
+    height: 80px;
+    padding: 0 44px;
+  }
 }
 
 .navbar__items--right {
   gap: 25px;
+}
+
+/* Hide default Docusaurus toggle — HamburgerButton replaces it */
+.navbar__toggle {
+  display: none !important;
+}
+
+/* PriceChip — desktop only */
+.navbar__price-chip {
+  display: inline-flex;
+}
+
+@media (max-width: 996px) {
+  .navbar__price-chip {
+    display: none;
+  }
+}
+
+/* HamburgerButton — mobile only */
+.navbar__hamburger {
+  display: none;
+}
+
+@media (max-width: 996px) {
+  .navbar__hamburger {
+    display: flex;
+  }
 }
 
 /* Docs nav link */
@@ -1042,6 +1124,105 @@ a.navbar__item[href="/docs/intro"] {
   }
 }
 
+/* ── Mobile hero (≤996px) ───────────────────────────────────────── */
+@media (max-width: 996px) {
+  /* Let content flow naturally — no 100vh clip on tall mobile stacks */
+  .homeHero {
+    height: auto;
+    min-height: calc(100vh - var(--ifm-navbar-height));
+    overflow: visible;
+  }
+
+  /* Stretch all children to full width in column layout */
+  .homeHeroGrid {
+    align-items: stretch;
+  }
+
+  /* Flex order so search sits between copy and card */
+  .homeHeroCopy     { order: 1; width: 100%; }
+  .mobileSearchWrap { order: 2; width: 100%; }
+  .homeHeroSide     { order: 3; width: 100%; }
+
+  /* Reduced top margins so the stack stays tight on small screens */
+  .homeEyebrow { margin-top: 32px; }
+  .homeH1 { margin-bottom: 40px; }
+  .homeSubtitle { margin-bottom: 48px; }
+
+  /* CTA buttons: full-width stacked column */
+  .homeCtaRow {
+    flex-direction: column !important;
+    gap: 12px;
+    width: 100% !important;
+  }
+
+  .homeBtnPrimary,
+  .homeBtnSecondary {
+    width: 100% !important;
+    height: 52px;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+  }
+
+  /* Stats wrap into a 2-up grid, dividers hidden */
+  .homeStatsRow {
+    flex-wrap: wrap;
+    row-gap: 24px;
+  }
+
+  .homeStatItem {
+    flex: 0 0 45%;
+  }
+
+  .homeStatDivider {
+    display: none;
+  }
+
+}
+
+/* Mobile-only inline search box above the card.
+   Opens the same Zara overlay as the floating FAB. Hidden on desktop. */
+.mobileSearchWrap {
+  display: none;
+}
+
+.mobileSearchBox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  height: 56px;
+  padding: 0 20px;
+  border-radius: 10px;
+  background: #0d0d0d;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  font-family: 'Iosevka Charon Mono', monospace;
+  font-size: 14px;
+  letter-spacing: 0.03em;
+  color: rgba(255, 255, 255, 0.45);
+  text-align: left;
+}
+
+.mobileSearchBox img {
+  flex-shrink: 0;
+  opacity: 0.5;
+}
+
+@media (max-width: 996px) {
+  .mobileSearchWrap {
+    display: block;
+    width: 100%;
+    order: 2;
+    margin-top: 100px;
+  }
+
+  /* Hide the floating FAB on mobile — the inline box replaces it.
+     Desktop keeps the floating FAB unchanged. */
+  .jmdt-fab {
+    display: none !important;
+  }
+}
+
 /* Plain block elements — layout handled entirely by the parent grid */
 
 .homeEyebrow {
@@ -1181,7 +1362,8 @@ a.navbar__item[href="/docs/intro"] {
 /* ── Right card ─────────────────────────────────────────────────── */
 
 .homeStatement {
-  width: 440px;
+  width: 100%;
+  max-width: 440px;
   padding: 50px 45px;
   border-radius: 24px;
   background:
@@ -1563,6 +1745,120 @@ a.navbar__item[href="/docs/intro"] {
   text-transform: uppercase;
   letter-spacing: -0.01em;
 }
+
+/* ── Mobile navbar: hide jmdt.io + GitHub chips ─────────────────── */
+@media (max-width: 996px) {
+  .navbar__items--right a.navbar__link[href="https://jmdt.io"],
+  .navbar__items--right a.navbar__link[href="https://github.com/JupiterMetaLabs/docs"] {
+    display: none !important;
+  }
+
+  /* Compact navbar padding on mobile */
+  .navbar {
+    padding: 14px 20px;
+  }
+}
+
+/* ── Custom mobile menu overlay ─────────────────────────────────── */
+
+/* Disable Docusaurus sidebar entirely */
+.navbar-sidebar {
+  display: none !important;
+}
+.navbar-sidebar__backdrop {
+  display: none !important;
+}
+
+/* Hamburger: desktop hidden, mobile visible */
+.navbar__hamburger {
+  display: none;
+}
+@media (max-width: 996px) {
+  .navbar__hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Full-screen overlay */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  background: #000000;
+  animation: fadeIn 0.15s ease-out forwards;
+}
+
+/* Header row — X button right-aligned */
+.mobile-menu-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 73px;
+  padding: 0 24px;
+  flex-shrink: 0;
+}
+
+/* Body — centered nav links */
+.mobile-menu-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 0 24px 64px;
+}
+
+/* Nav link */
+.mobile-menu-link {
+  font-family: 'Iosevka Charon Mono', monospace;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #ffffff;
+}
+.mobile-menu-link:hover {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+}
+.mobile-menu-link.active {
+  color: #ECAA62;
+}
+
+/* Network switcher row */
+.mobile-menu-network {
+  display: flex;
+  gap: 16px;
+}
+.mobile-menu-network a {
+  text-decoration: none;
+}
+.mobile-menu-network button {
+  font-family: 'Iosevka Charon Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.mobile-menu-network button:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+.mobile-menu-network button.active {
+  color: #ECAA62;
+}
+
+/* ── end mobile menu ─────────────────────────────────────────────── */
 
 .homeCommunityButton {
   width: fit-content;
