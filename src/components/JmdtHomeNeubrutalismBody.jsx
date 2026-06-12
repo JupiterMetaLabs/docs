@@ -207,6 +207,19 @@ export default function JmdtHomeNeubrutalismBody() {
             </Link>
           </div>
 
+          {/* Search bar — mobile only, sits above the card.
+              Opens the same Zara search/chat overlay as the floating FAB. */}
+          <div className="mobileSearchWrap">
+            <button
+              type="button"
+              className="mobileSearchBox"
+              onClick={() => window.dispatchEvent(new CustomEvent('jmdt:open-search'))}
+            >
+              <img src="/icons/search_icon.svg" alt="" width="16" height="16" />
+              <span>Search docs</span>
+            </button>
+          </div>
+
           {/* Right card */}
           <aside className="homeHeroSide">
             <div className="homeStatement">

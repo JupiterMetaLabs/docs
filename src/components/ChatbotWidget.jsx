@@ -262,8 +262,14 @@ export default function ChatbotWidget() {
         setIsOpen(true);
       }
     };
+    // Allow other components (e.g. mobile inline search box) to open the overlay
+    const handleOpenSearch = () => setIsOpen(true);
     window.addEventListener('keydown', handleGlobalKeyDown);
-    return () => window.removeEventListener('keydown', handleGlobalKeyDown);
+    window.addEventListener('jmdt:open-search', handleOpenSearch);
+    return () => {
+      window.removeEventListener('keydown', handleGlobalKeyDown);
+      window.removeEventListener('jmdt:open-search', handleOpenSearch);
+    };
   }, []);
 
   useEffect(() => {
