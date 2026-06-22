@@ -123,15 +123,6 @@ module.exports = {
             },
             items: [
                 { type: 'doc', docId: 'intro', position: 'left', label: 'Docs' },
-                {
-                    type: 'dropdown',
-                    label: 'Networks',
-                    position: 'left',
-                    items: [
-                        { label: 'Mainnet', to: '/docs/mainnet/mainnet-overview' },
-                        { label: 'Testnet', to: '/docs/testnet/testnet-overview' },
-                    ],
-                },
                 { href: 'https://jmdt.io', label: 'jmdt.io', position: 'right' },
                 { href: 'https://github.com/JupiterMetaLabs/docs', label: 'GitHub', position: 'right' },
             ],
