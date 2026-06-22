@@ -52,14 +52,14 @@ module.exports = {
         // 'mempool-routing-engine', // Mempool Routing Engine — coming soon
       ]
     },
-    // {
-    //   type: 'category',
-    //   label: 'Development & Roadmap',
-    //   collapsed: false,
-    //   items: [
-    //     'roadmap',             // Roadmap — coming soon
-    //   ],
-    // },
+    {
+      type: 'category',
+      label: 'Development & Roadmap',
+      collapsed: false,
+      items: [
+        'roadmap',
+      ],
+    },
     {
       type: 'category',
       label: 'Mainnet',
