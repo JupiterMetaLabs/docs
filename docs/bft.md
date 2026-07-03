@@ -54,7 +54,7 @@ If buddy digests diverge, **Conflict-Free Replicated Data Type (CRDT)-based reco
 
 ### 6. Immutable Ledger via immudb
 
-Finalised blocks are committed to **immudb**, ensuring:
+Once quorum is reached, the block is written to the database **WAL-first** — the write-ahead log entry is durable before the block is acknowledged as committed, so a crash immediately after consensus can't lose a finalised block. Finalised blocks are then committed to **immudb**, ensuring:
 - **Append-only, tamper-proof history**
 - **Auditability** for enterprise use cases
 - Separate storage of flagged or invalid transactions for accountability
@@ -76,7 +76,7 @@ sequenceDiagram
     Buddies->>Buddies: Verify DID, signatures, zk-proof
     Buddies->>JMDN: Broadcast BuddyVote(digest)
     JMDN->>JMDN: Count votes — quorum >= ceil(2k/3)?
-    JMDN->>immudb: Commit finalised block (append-only)
+    JMDN->>immudb: Commit finalised block (WAL-first, append-only)
     JMDN->>L1: Submit STARK proof to Ethereum
 ```
 

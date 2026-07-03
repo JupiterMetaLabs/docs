@@ -12,6 +12,8 @@ This page covers the testnet-specific configuration for your JMDN node. The buil
 
 For the full binary build and service installation walkthrough, see [Running a JMDN Node →](/docs/running-a-node).
 
+> Prefer containers? See [Running JMDN with Docker →](/docs/docker) to run a node via `docker run` / `docker compose` instead of building from source.
+
 ---
 
 ## Step 1 — Clone the Repository

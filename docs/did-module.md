@@ -2,7 +2,7 @@
 
 ## Overview
 
-The DID (Decentralized Identity) module provides decentralized identity management for the JMZK network. It enables users to register, manage, and query decentralized identities with associated public keys, balances, and metadata.
+The DID (Decentralized Identity) module provides decentralized identity management for the JMDT network. It enables users to register, manage, and query decentralized identities with associated public keys, balances, and metadata.
 
 ## Purpose
 
@@ -104,7 +104,7 @@ err := DID.StartDIDServer(host, "localhost:15052", accountsClient)
 # Via gRPC client
 grpcurl -plaintext localhost:15052 proto.DIDService/RegisterDID <<EOF
 {
-  "did": "did:jmzk:0x1234...",
+  "did": "did:jmdt:0x1234...",
   "public_key": "0x5678..."
 }
 EOF
@@ -116,7 +116,7 @@ EOF
 # Via gRPC client
 grpcurl -plaintext localhost:15052 proto.DIDService/GetDID <<EOF
 {
-  "did": "did:jmzk:0x1234..."
+  "did": "did:jmdt:0x1234..."
 }
 EOF
 ```

@@ -2,7 +2,7 @@
 
 ## Overview
 
-The SeedNode module provides peer discovery and registration services for the JMZK network. It enables nodes to register with seed nodes, discover neighbors, and manage peer relationships.
+The SeedNode module provides peer discovery and registration services for the JMDT network. It enables nodes to register with seed nodes, discover neighbors, and manage peer relationships.
 
 ## Purpose
 

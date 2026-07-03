@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Explorer module provides a comprehensive blockchain explorer for the JMZK decentralized network. It offers both a web interface and RESTful API for viewing addresses, balances, transactions, and blocks.
+The Explorer module provides a comprehensive blockchain explorer for the JMDT decentralized network. It offers both a web interface and RESTful API for viewing addresses, balances, transactions, and blocks.
 
 ## Purpose
 
@@ -117,10 +117,14 @@ Modern, responsive web interface:
 
 ### Address Endpoints
 ```
-GET /api/addresses/                    # List all addresses with pagination
-GET /api/addresses/:address            # Get specific address details
-GET /api/addresses/:address/transactions # Get transactions for an address
+GET /api/addresses/                        # List all addresses with pagination
+GET /api/addresses/:address                # Get specific address details
+GET /api/addresses/:address/transactions   # Get transactions for an address
+GET /api/addresses/transactions/:address   # Get transactions for an address (paginated, JWT-authenticated)
+  ?page=N&limit=N
 ```
+
+The `/api/addresses/transactions/:address` endpoint is backed by JMDN's SQLite address→transaction index (see [DB_OPs →](/docs/db_ops)) and requires a valid **JWT** in the request's `Authorization` header. It returns the same sent/received transaction data as the RPC method [`eth_getTransactionsByAddress` →](/docs/gETH#eth_gettransactionsbyaddress), paginated via `page` and `limit` query parameters.
 
 ### Block Endpoints
 ```
@@ -186,6 +190,12 @@ curl "http://localhost:8085/api/addresses/0x1234567890abcdef1234567890abcdef1234
 **Get network statistics:**
 ```bash
 curl "http://localhost:8085/api/stats/"
+```
+
+**Get paginated transactions for an address (JWT-authenticated):**
+```bash
+curl "http://localhost:8085/api/addresses/transactions/0x1234567890abcdef1234567890abcdef12345678?page=1&limit=20" \
+  -H "Authorization: Bearer <jwt>"
 ```
 
 **Get latest blocks:**

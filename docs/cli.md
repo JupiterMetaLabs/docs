@@ -2,7 +2,7 @@
 
 ## Overview
 
-The CLI module provides a command-line interface and gRPC server for managing and interacting with the JMZK decentralized network node. It offers both interactive and programmatic access to node operations.
+The CLI module provides a command-line interface and gRPC server for managing and interacting with the JMDT decentralized network node. It offers both interactive and programmatic access to node operations.
 
 ## Purpose
 
@@ -51,6 +51,11 @@ Provides an interactive command-line interface with the following commands:
 - `discoverneighbors`: Discover and add neighbors from seed node
 - `seednodeStats`: Check seed node connection and statistics
 - `mempoolStats`: Show mempool statistics
+
+**Address Index Management:**
+- `rebuildindex`: Wipe and rebuild the address→transaction index from genesis
+- `rebuildrange <from> <to>`: Rebuild the address index for a specific block range (fills a gap without a full rebuild)
+- `txindexstatus`: Check index readiness and its current high-water mark (last block indexed)
 
 **System:**
 - `gethstatus`: Show gETH server status (chain ID, ports)
@@ -143,7 +148,7 @@ Execute commands directly via command-line flag:
 ./jmdn -cmd addpeer /ip4/192.168.1.100/tcp/15000/p2p/Qm...
 
 # Get DID
-./jmdn -cmd getdid did:jmzk:0x1234...
+./jmdn -cmd getdid did:jmdt:0x1234...
 
 # Fast sync
 ./jmdn -cmd fastsync /ip4/192.168.1.100/tcp/15000/p2p/Qm...
@@ -286,10 +291,10 @@ Test files:
 ### DID Operations
 ```bash
 # Propagate DID
->>> propagateDID did:jmzk:0x1234... 0x5678... "1000000000000000000"
+>>> propagateDID did:jmdt:0x1234... 0x5678... "1000000000000000000"
 
 # Get DID
->>> getdid did:jmzk:0x1234...
+>>> getdid did:jmdt:0x1234...
 ```
 
 ### Synchronization
@@ -300,6 +305,25 @@ Test files:
 # Show sync info
 >>> syncinfo
 ```
+
+### Address Index Management
+
+JMDN maintains a SQLite-backed address→transaction index that enables O(log n) address lookups without scanning the full block history. On node startup, the index is built incrementally and **non-blocking** — the node continues to serve other traffic while the index catches up — and it's updated in real time as new blocks are committed.
+
+Node operators can manage the index directly:
+
+```bash
+# Wipe and rebuild the index from genesis
+>>> rebuildindex
+
+# Rebuild a specific block range (e.g., to fill a gap)
+>>> rebuildrange 100000 105000
+
+# Check index readiness and current high-water mark
+>>> txindexstatus
+```
+
+While the initial index build is in progress, both `eth_getTransactionsByAddress` (JSON-RPC) and `/api/addresses/transactions/:address` (Explorer API) return HTTP 503, letting callers distinguish "no transactions" from "index not ready" — retry once `txindexstatus` reports the index has caught up.
 
 ## Future Enhancements
 

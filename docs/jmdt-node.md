@@ -102,14 +102,20 @@ Once running, the JMDN interactive console supports:
 
 ## Architecture Deep Dive
 
-### FastSync Protocol
+### JMDN-FastSync Protocol
 
-FastSync efficiently synchronises blockchain data between nodes using:
+New nodes bootstrap using **JMDN-FastSync**, a suite of 8 libp2p protocols that run in sequence to bring a node from genesis to chain tip:
 
-1. **Initial State Exchange** — Nodes exchange current chain height and Merkle roots
-2. **Bloom Filter Optimisation** — Identifies missing blocks using probabilistic data structures
-3. **Batch Processing** — Transfers missing blocks in optimised batches
-4. **Verification** — Final Merkle root comparison to ensure consistency
+1. **Availability Handshake** — Confirms which sync protocols a peer supports before sync begins
+2. **PriorSync Merkle Bisection** — Narrows down the sync range using Merkle root comparison and bisection, avoiding a full linear scan
+3. **HeaderSync** — Transfers block headers using concurrent workers for parallel throughput; uses **streaming heartbeats** so large sync ranges don't hit connection timeouts
+4. **DataSync** — Transfers full block bodies for the synced header range
+5. **PoTS (Proof of Time Sync)** — Handles blocks produced *during* the sync itself, so a node doesn't fall behind the tip while it's still catching up
+6. **AccountSync** — Synchronises accounts that have made zero transactions, which would otherwise be invisible to a transaction-range-based sync
+7. **On-Demand Merkle Sub-Range Requests** — Lets a syncing node request a narrower Merkle sub-range on demand if a discrepancy is found
+8. **GossipSub Block Announcements** — Once caught up, the node subscribes to GossipSub for new block announcements to stay at tip
+
+After sync completes, account balances are reconciled using **delta-based replay** — only accounts that changed within the synced range are replayed, rather than recomputing state for the entire chain.
 
 ### CRDT Implementation
 
@@ -141,6 +147,7 @@ When enabled, JMDN provides:
 ## Related
 
 - [Running a JMDN Node →](/docs/running-a-node) — Full build, install, and deployment guide
+- [Running JMDN with Docker →](/docs/docker) — Container-based deployment via `docker run` / `docker compose`
 - [AVC Module →](/docs/avc) — Consensus internals
 - [Sequencer →](/docs/sequencer) — Transaction ordering and batch proofing
 - [Seednode →](/docs/seednode) — Bootstrap and peer discovery infrastructure
