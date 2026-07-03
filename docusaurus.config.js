@@ -149,7 +149,7 @@ module.exports = {
             copyright: `© ${new Date().getFullYear()} JMDT. All Rights Reserved.`,
         },
         colorMode: {
-            defaultMode: 'dark', // Ensuring default dark mode to match ZKJM.io
+            defaultMode: 'dark', // Ensuring default dark mode to match JMDT.io
             disableSwitch: false,
             respectPrefersColorScheme: true,
         },

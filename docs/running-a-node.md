@@ -12,6 +12,8 @@ keywords: [JMDN node, run JMDT node, build JMDN, JMDT validator, node setup, imm
 
 This guide covers the complete workflow for setting up a **JMDN** (JMDT Decentralised Node): installing dependencies, building the binary, installing system services, and deploying updates. All scripts are cross-platform and support Linux, macOS, and FreeBSD.
 
+> Prefer containers? See [Running JMDN with Docker →](/docs/docker) for the `docker run` / `docker compose` path instead.
+
 ---
 
 ## Overview

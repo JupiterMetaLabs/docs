@@ -2,7 +2,7 @@
 
 ## Overview
 
-The DB_OPs module provides database operations for the JMZK decentralized network. It manages connections to ImmuDB (immutable database) for both main blockchain data and accounts/DID data, with connection pooling, transaction support, and comprehensive CRUD operations.
+The DB_OPs module provides database operations for the JMDT decentralized network. It manages connections to ImmuDB (immutable database) for both main blockchain data and accounts/DID data, with connection pooling, transaction support, and comprehensive CRUD operations.
 
 ## Purpose
 
@@ -178,7 +178,7 @@ block, err := DB_OPs.GetLatestBlock(mainClient)
 ```go
 // Create account
 account := &DB_OPs.Account{
-    DIDAddress: "did:jmzk:0x1234...",
+    DIDAddress: "did:jmdt:0x1234...",
     Address:    common.HexToAddress("0x1234..."),
     PublicKey:  "0x5678...",
     Balance:    "1000000000000000000",

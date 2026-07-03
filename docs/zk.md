@@ -38,7 +38,7 @@ By integrating both SNARKs and STARKs, JMDT achieves a balance of **efficiency, 
 
 ## RISC Zero zkVM
 
-JMDT employs a dual-layer ZK architecture, leveraging custom zk-circuits written in **Rust** and executed within the **RISC Zero Zero-Knowledge Virtual Machine (zkVM)** for high-assurance proofs.
+JMDT employs a dual-layer ZK architecture, leveraging custom zk-circuits written in **Rust** and executed within the **RISC Zero Zero-Knowledge Virtual Machine (zkVM)** for high-assurance proofs. JMDT's proof pipeline runs on **RISC Zero 3.0**.
 
 ### Why RISC Zero?
 
@@ -100,9 +100,28 @@ JMDT introduces a **DID-based querying mechanism** that enables privacy-preservi
 
 ---
 
+## L1 Finality — Ethereum Commitment
+
+Once a block is committed on JMDT L2, the Sequencer periodically anchors it to Ethereum for global finality:
+
+1. The Sequencer Orchestrator selects a committed block
+2. It generates a **RISC Zero STARK proof** (RISC Zero 3.0) of the block's commitment
+3. It calls **`commitRollup()`** on the **ZKRollup smart contract** deployed on Ethereum
+
+The `ZKRollup` contract enforces two invariants before accepting a commitment:
+
+- **Nonce ordering** — rollup commitments must be submitted in strict sequence; a commitment with an out-of-order nonce is rejected
+- **Double-commit protection** — the same block commitment cannot be submitted to L1 more than once
+
+Once `commitRollup()` succeeds, the block inherits Ethereum's censorship-resistance and finality guarantees.
+
+See [Transaction & Block Lifecycle →](/docs/transaction-lifecycle) for how this fits into the full flow.
+
+---
+
 ## Integration Points
 
 - **AVC Consensus** — Every block proposed by the Sequencer must include a valid zk-proof; all JMDN buddy nodes verify it independently. See [AVC Consensus →](/docs/bft)
 - **DID Engine** — ZKPs authenticate user identity without exposing PII. See [Decentralised Identity →](/docs/did)
 - **Sequencer & MemPool** — Aggregates DAG state and triggers zkVM proof generation. See [Sequencer →](/docs/sequencer)
-- **L1 Commitment** — STARK proofs submitted to the JMDT Ethereum smart contract for on-chain verification
+- **L1 Commitment** — STARK proofs submitted to the JMDT `ZKRollup` smart contract for on-chain verification via `commitRollup()`

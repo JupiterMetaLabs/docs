@@ -2,7 +2,7 @@
 
 ## Overview
 
-The SmartContract module provides smart contract compilation and execution capabilities for the JMZK network. It supports Solidity compilation, EVM execution, and state management for smart contracts.
+The SmartContract module provides smart contract compilation and execution capabilities for the JMDT network. It supports Solidity compilation, EVM execution, and state management for smart contracts.
 
 ## Purpose
 

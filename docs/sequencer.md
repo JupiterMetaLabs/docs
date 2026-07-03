@@ -10,7 +10,7 @@ keywords: [JMDT sequencer, transaction ordering, consensus orchestration, BFT, L
 
 > *The Truth Layer for Verifiable Information — transaction ordering and consensus orchestration on JMDT L2.*
 
-The **Sequencer** is the orchestration core of the JMDT Layer 2 chain. It drives the AVC consensus cycle: selecting buddy node committees via VRF, creating PubSub channels, collecting BuddyVotes, executing BFT consensus, and batching DAG state transitions into zk-proofs for L1 anchoring.
+The **Sequencer** is the orchestration core of the JMDT Layer 2 chain. It drives the AVC consensus cycle: pulling transactions from the mempool, submitting them to **Espresso** for deterministic ordering, selecting buddy node committees via VRF, creating PubSub channels, collecting BuddyVotes, executing BFT consensus, and generating zk-proofs for L1 anchoring.
 
 The Sequencer runs as a core component inside the **JMDN** (JMDT Decentralised Node) binary.
 
@@ -20,12 +20,32 @@ The Sequencer runs as a core component inside the **JMDN** (JMDT Decentralised N
 
 The Sequencer module enables:
 
+- Pulling pending transactions from the mempool pool and submitting them to Espresso for deterministic ordering
 - Consensus orchestration for block validation
 - Buddy node selection and management using VRF
 - Vote collection from buddy nodes
 - BFT consensus execution
 - PubSub channel management for consensus
 - CRDT synchronisation for buddy node state
+- Generating STARK proofs of committed blocks for L1 anchoring
+
+See [Transaction & Block Lifecycle →](/docs/transaction-lifecycle) for the full end-to-end flow.
+
+---
+
+## Transaction Ordering — Espresso
+
+Before a block reaches consensus, the Sequencer submits the pulled transaction set to **Espresso** for deterministic ordering. Espresso returns a single, agreed-upon transaction order, removing ordering ambiguity between competing mempools and giving every buddy node the same ordered set to validate.
+
+## Proof Generation — RISC Zero zkVM
+
+Once transactions are ordered, the Sequencer generates a **STARK proof** of the block using the **RISC Zero zkVM** (RISC Zero 3.0):
+
+- Each transaction is hashed individually with **SHA-256**, using per-transaction boundary separators
+- The block commitment is a **Blake2b-256** digest computed over all transaction fields
+- The resulting proof is attached to the block before it's submitted for BFT consensus
+
+See [Zero-Knowledge Proofs & RISC Zero zkVM →](/docs/zk) for details on the proof system.
 
 ---
 

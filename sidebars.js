@@ -21,6 +21,7 @@ module.exports = {
       collapsed: false,
       items: [
         'zk',
+        'transaction-lifecycle',
         'did',
         // 'did-registry',       // DIDCreatorLite Service — coming soon
         'tokenomics',
@@ -32,6 +33,7 @@ module.exports = {
           items: [
             'jmdt-node',
             'running-a-node',
+            'docker',
             // 'seednode',        // Seed Node — coming soon
             'node-selection',
             'avc',

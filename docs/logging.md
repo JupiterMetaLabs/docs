@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Logging module provides structured logging capabilities for the JMZK network. It supports both file-based logging and centralized logging via Loki, with async logging for performance.
+The Logging module provides structured logging capabilities for the JMDT network. It supports both file-based logging and centralized logging via Loki, with async logging for performance.
 
 ## Purpose
 

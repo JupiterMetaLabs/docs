@@ -1,8 +1,8 @@
-# gETH Module
+# gETH Module — JSON-RPC Reference
 
 ## Overview
 
-The gETH module provides Ethereum-compatible interfaces for the JMZK network. It offers gRPC services and HTTP/WebSocket facades that implement Ethereum JSON-RPC API, enabling compatibility with existing Ethereum tooling and applications.
+The gETH module provides Ethereum-compatible interfaces for the JMDT network. It offers gRPC services and HTTP/WebSocket facades that implement Ethereum JSON-RPC API, enabling compatibility with existing Ethereum tooling and applications.
 
 ## Purpose
 
@@ -176,6 +176,16 @@ curl -X POST http://localhost:8545 \
     "params": ["0x..."],
     "id": 1
   }'
+
+# Get transactions for an address (sent and received, paginated)
+curl -X POST http://localhost:8545 \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "eth_getTransactionsByAddress",
+    "params": ["0x1234567890abcdef1234567890abcdef12345678", 1, 20],
+    "id": 1
+  }'
 ```
 
 ### Using WebSocket Facade
@@ -198,6 +208,50 @@ ws.onmessage = (event) => {
   console.log('New block:', data);
 };
 ```
+
+## EIP-1559 Support
+
+JMDN's RPC layer accepts **EIP-1559 Type 2 transactions** in addition to legacy transactions. Type 2 transactions carry these fields:
+
+| Field | Description |
+|---|---|
+| `type` | Transaction type identifier (`2` for EIP-1559) |
+| `max_fee` | Maximum total fee per gas the sender will pay |
+| `max_priority_fee` | Maximum tip per gas paid to the block producer |
+| `gas_used` | Actual gas consumed by the transaction |
+
+No client-side changes are needed for wallets or SDKs that already support EIP-1559 on Ethereum mainnet.
+
+## eth_getTransactionsByAddress {#eth_gettransactionsbyaddress}
+
+Returns paginated transactions — both sent and received — for a given address, backed by JMDN's SQLite address→transaction index (see [DB_OPs →](/docs/db_ops) for index internals).
+
+**Method:** `eth_getTransactionsByAddress`
+
+**Params:** `[address, page, limit]`
+
+| Param | Type | Description |
+|---|---|---|
+| `address` | `string` | Address to look up |
+| `page` | `number` | Page number (1-indexed) |
+| `limit` | `number` | Number of transactions per page |
+
+**Example request:**
+
+```bash
+curl -X POST http://localhost:8545 \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "eth_getTransactionsByAddress",
+    "params": ["0x1234567890abcdef1234567890abcdef12345678", 1, 20],
+    "id": 1
+  }'
+```
+
+**Behavior during initial sync:** if the address index hasn't finished its initial build yet, the node returns HTTP **503**. This lets callers distinguish "this address genuinely has no transactions" (empty result) from "the index isn't ready yet" (503) — retry after a short delay.
+
+---
 
 ## Integration Points
 
