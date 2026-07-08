@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: 'Iosevka Charon Mono';
-  src: url('/fonts/IosevkaCharonMono-Light.ttf') format('truetype');
+  src: url('/fonts/IosevkaCharonMono-Light.woff2') format('woff2');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -12,7 +12,7 @@
 
 @font-face {
   font-family: 'Iosevka Charon Mono';
-  src: url('/fonts/IosevkaCharonMono-LightItalic.ttf') format('truetype');
+  src: url('/fonts/IosevkaCharonMono-LightItalic.woff2') format('woff2');
   font-weight: 300;
   font-style: italic;
   font-display: swap;
@@ -20,7 +20,7 @@
 
 @font-face {
   font-family: 'Iosevka Charon Mono';
-  src: url('/fonts/IosevkaCharonMono-Regular.ttf') format('truetype');
+  src: url('/fonts/IosevkaCharonMono-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -28,7 +28,7 @@
 
 @font-face {
   font-family: 'Iosevka Charon Mono';
-  src: url('/fonts/IosevkaCharonMono-Italic.ttf') format('truetype');
+  src: url('/fonts/IosevkaCharonMono-Italic.woff2') format('woff2');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
@@ -36,7 +36,7 @@
 
 @font-face {
   font-family: 'Iosevka Charon Mono';
-  src: url('/fonts/IosevkaCharonMono-Medium.ttf') format('truetype');
+  src: url('/fonts/IosevkaCharonMono-Medium.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -44,7 +44,7 @@
 
 @font-face {
   font-family: 'Iosevka Charon Mono';
-  src: url('/fonts/IosevkaCharonMono-Bold.ttf') format('truetype');
+  src: url('/fonts/IosevkaCharonMono-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
   font-display: swap;

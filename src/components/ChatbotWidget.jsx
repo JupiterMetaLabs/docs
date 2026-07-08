@@ -243,7 +243,10 @@ export default function ChatbotWidget() {
     })
   );
 
+  const indexLoadedRef = useRef(false);
   useEffect(() => {
+    if (!isOpen || indexLoadedRef.current) return;
+    indexLoadedRef.current = true;
     fetch('/docs-content.json')
       .then(r => r.json())
       .then(({ pages }) => {
@@ -252,8 +255,8 @@ export default function ChatbotWidget() {
           miniSearchRef.current.addAll(pages);
         }
       })
-      .catch(() => {});
-  }, []);
+      .catch(() => { indexLoadedRef.current = false; });
+  }, [isOpen]);
 
   useEffect(() => {
     const handleGlobalKeyDown = (e) => {

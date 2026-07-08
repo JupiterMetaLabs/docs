@@ -45,26 +45,37 @@ const ParticlesBackground = () => {
 
         const initParticles = () => {
             particles = [];
-            const numberOfParticles = Math.min(100, (canvas.width * canvas.height) / 10000);
+            const numberOfParticles = Math.min(50, (canvas.width * canvas.height) / 20000);
             for (let i = 0; i < numberOfParticles; i++) {
                 particles.push(new Particle());
             }
         };
 
-        const animate = () => {
+        const maxConnectDist = 150;
+        const maxConnectDistSq = maxConnectDist * maxConnectDist;
+        let lastFrameTime = 0;
+        const frameInterval = 1000 / 30; // cap at 30fps
+
+        const animate = (now) => {
+            animationFrameId = requestAnimationFrame(animate);
+
+            if (now - lastFrameTime < frameInterval) return;
+            lastFrameTime = now;
+
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             particles.forEach((particle, index) => {
                 particle.update();
                 particle.draw();
 
-                // Draw connections
-                for (let j = index; j < particles.length; j++) {
+                // Draw connections (squared-distance check avoids sqrt per pair)
+                for (let j = index + 1; j < particles.length; j++) {
                     const dx = particles[j].x - particle.x;
                     const dy = particles[j].y - particle.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    const distanceSq = dx * dx + dy * dy;
 
-                    if (distance < 150) {
+                    if (distanceSq < maxConnectDistSq) {
+                        const distance = Math.sqrt(distanceSq);
                         ctx.beginPath();
                         ctx.strokeStyle = `rgba(113, 162, 230, ${0.1 - distance / 1500})`;
                         ctx.lineWidth = 1;
@@ -74,12 +85,10 @@ const ParticlesBackground = () => {
                     }
                 }
             });
-
-            animationFrameId = requestAnimationFrame(animate);
         };
 
         initParticles();
-        animate();
+        animationFrameId = requestAnimationFrame(animate);
 
         return () => {
             window.removeEventListener('resize', resizeCanvas);
