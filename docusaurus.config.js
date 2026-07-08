@@ -111,6 +111,17 @@ module.exports = {
     projectName: 'docs',
     trailingSlash: false,
 
+    headTags: [
+        {
+            tagName: 'link',
+            attributes: { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+        },
+        {
+            tagName: 'link',
+            attributes: { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' },
+        },
+    ],
+
     themes: ['@docusaurus/theme-mermaid'],
 
     themeConfig: {
