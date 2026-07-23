@@ -53,8 +53,6 @@ On a healthy start you'll see output like:
 [INFO]  Starting JMDN...
 [INFO]  Binary: /usr/local/bin/jmdn
 [INFO]  Config: /etc/jmdn/jmdn.yaml
-[INFO]  Connecting to seed node: 34.174.94.172
-[INFO]  Peer connected: /ip4/34.174.94.172/tcp/15000/p2p/...
 [INFO]  Network: mainnet | Chain ID: 7000700
 [INFO]  Syncing blocks...
 ```
@@ -73,7 +71,6 @@ From the JMDN interactive console (if running in foreground mode):
 >>> listpeers
 ```
 
-You should see at least one peer entry — the mainnet seed node at `34.174.94.172`.
 
 ```
 >>> peers
@@ -107,7 +104,7 @@ When your local block height matches the network, your node is **fully synced**.
 If your node is many blocks behind, use FastSync to catch up quickly:
 
 ```bash
->>> fastsync /ip4/34.174.94.172/tcp/15000/p2p/<peer-id>
+>>> fastsync /ip4/<node-ip>/tcp/15000/p2p/<peer-id>
 ```
 
 FastSync uses Bloom filter optimisation to identify and batch-transfer only the missing blocks.
@@ -150,7 +147,6 @@ This performs a full rebuild, atomic binary swap, service restart, and health ch
 
 **Node won't connect to peers:**
 - Confirm port `15000` is open: `sudo ufw status`
-- Confirm the seed node is reachable: `nc -vz 34.174.94.172 15000`
 - Check logs for connection errors: `journalctl -u jmdn -n 50`
 
 **immudb fails to start:**
@@ -159,7 +155,6 @@ This performs a full rebuild, atomic binary swap, service restart, and health ch
 
 **Node starts but stays at block 0:**
 - Confirm `chain_id: 7000700` and `network: mainnet` in `/etc/jmdn/jmdn.yaml`
-- Confirm `seed_nodes` contains `34.174.94.172`
 - Try a manual FastSync to the seed node
 
 ---
