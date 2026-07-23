@@ -23,7 +23,6 @@ The **JMDT Mainnet** is the production Layer 2 network anchored to Ethereum. All
 | **Native Token** | JMDT |
 | **RPC URL (Primary)** | `https://mainnetrpc.jmdt.io` |
 | **RPC URL (Alias)** | `https://rpc.jmdt.io` |
-| **Seed Node** | `34.174.94.172` |
 | **Consensus** | AVC (Asynchronous Validation Consensus) |
 | **L1 Settlement** | Ethereum |
 
@@ -73,7 +72,7 @@ curl -X POST https://mainnetrpc.jmdt.io \
 The mainnet seed node handles peer discovery for new JMDN nodes joining the network:
 
 ```
-34.174.94.172
+contact JMDT team to setup Mainnet validator
 ```
 
 This address is configured in your `jmdn.yaml` during node setup. See [Install & Configure →](./install) for the full config.
