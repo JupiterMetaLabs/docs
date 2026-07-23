@@ -80,7 +80,7 @@ rpc_endpoint: https://mainnetrpc.jmdt.io
 
 # ── Peer Discovery ───────────────────────────────────────
 seed_nodes:
-  - 34.174.94.172
+  - [IP_ADDRESS]
 
 # ── Node Identity ────────────────────────────────────────
 # Your node's identity key — generated on first run if left blank
@@ -121,7 +121,6 @@ sudo chmod 600 /etc/jmdn/jmdn.yaml
 | `network` | `mainnet` |
 | `chain_id` | `7000700` |
 | `rpc_endpoint` | `https://mainnetrpc.jmdt.io` |
-| Seed node IP | `34.174.94.172` |
 | P2P port | `15000` |
 
 ---

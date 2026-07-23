@@ -64,7 +64,6 @@ Open the following ports on your server firewall and any upstream security group
 | `8080` | TCP | Inbound | Prometheus metrics (optional) |
 | `443` | TCP | Outbound | RPC calls to `mainnetrpc.jmdt.io` |
 
-The seed node at `34.174.94.172` must be reachable from your server on port `15000`.
 
 **Quick firewall setup (UFW):**
 

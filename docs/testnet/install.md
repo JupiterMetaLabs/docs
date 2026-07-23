@@ -109,7 +109,7 @@ The only differences between the two configs:
 | `network` | `testnet` | `mainnet` |
 | `chain_id` | `8000800` | `7000700` |
 | `rpc_endpoint` | `https://testnetrpc.jmdt.io` | `https://mainnetrpc.jmdt.io` |
-| Seed node IP | `34.134.156.196` | `34.174.94.172` |
+| Seed node IP | `[IP_ADDRESS]`  | `[IP_ADDRESS]` |
 
 > **Tip:** Keep separate config files if you plan to switch between networks. E.g. `/etc/jmdn/jmdn-testnet.yaml` and `/etc/jmdn/jmdn-mainnet.yaml`, then symlink the active one to `/etc/jmdn/jmdn.yaml`.
 
