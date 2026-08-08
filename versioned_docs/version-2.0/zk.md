@@ -1,0 +1,127 @@
+---
+id: zk
+title: Zero-Knowledge Proofs & RISC Zero zkVM
+sidebar_label: Zero-Knowledge Proofs
+description: How JMDT uses Zero-Knowledge Proofs (zk-SNARKs and zk-STARKs) via the RISC Zero zkVM and Rust-based circuits to batch transactions privately and anchor block commitments to Ethereum via the ZK rollup contract.
+keywords: [Zero-Knowledge Proofs, ZKP, zk-SNARKs, zk-STARKs, RISC Zero zkVM, JMDT ZK, private transactions, Ethereum ZK, L2 ZK proofs, Rust ZK circuits]
+---
+
+# Zero-Knowledge Proofs & RISC Zero zkVM
+
+> **The Truth Layer for Verifiable Information.** JMDT uses Zero-Knowledge Proofs as the cryptographic backbone for privacy-preserving identity, private transactions, and verifiable computation — without exposing any underlying data.
+
+Zero-Knowledge Proofs (ZKPs) allow one party to prove knowledge of certain information without revealing the information itself. In JMDT, ZKPs ensure **privacy and security while maintaining verifiability** across financial, identity, and enterprise applications.
+
+---
+
+## Two Types of ZK Proofs
+
+JMDT supports both primary ZKP variants, leveraging the **RISC Zero zkVM** for unified execution:
+
+### zk-SNARKs (Succinct Non-Interactive Argument of Knowledge)
+
+- Provide **short, efficient proofs** with minimal computational overhead
+- Widely used in privacy-preserving transactions and verifiable computations
+- Require a **trusted setup** (managed securely within JMDT's protocol)
+- Used for: transaction-level validation, DID authentication, L2 state checks
+
+### zk-STARKs (Scalable Transparent Argument of Knowledge)
+
+- Offer **enhanced scalability and transparency** with no trusted setup required
+- Use hash-based cryptography — **quantum-resistant** and highly secure
+- Particularly useful for large-scale computations in a trustless, decentralised manner
+- Used for: the L2 → L1 anchoring pipeline (full state-transition proving being completed) and, with the planned L3, DAG state commitments
+
+By integrating both SNARKs and STARKs, JMDT achieves a balance of **efficiency, security, and scalability** — eliminating trust dependencies while preserving computational performance.
+
+---
+
+## RISC Zero zkVM
+
+JMDT employs a dual-layer ZK architecture, leveraging custom zk-circuits written in **Rust** and executed within the **RISC Zero Zero-Knowledge Virtual Machine (zkVM)** for high-assurance proofs. JMDT's proof pipeline runs on **RISC Zero 3.0**.
+
+### Why RISC Zero?
+
+The RISC Zero zkVM acts as a **zk-powered virtual CPU** that proves the execution of arbitrary Rust code:
+
+- No need to define manual R1CS or arithmetic circuits
+- Enables fast iteration, modular upgrade paths, and readable cryptographic logic
+- Guarantees integrity and reproducibility of enterprise workflows and DAG transitions
+- Full **type safety and memory safety** via Rust; circuits are easy to audit and version-control
+
+### Workflow
+
+```mermaid
+graph LR
+    A["Rust ZK Circuit (guest program)"] -->|"Compiled by RISC Zero toolchain"| B["zkVM Guest Binary"]
+    B -->|"Rollup logic executed"| C["STARK Proof + Journal (public output)"]
+    C -->|"Block commitment submitted"| D["ZK Rollup Contract on L1"]
+    D -->|"Anchored on Ethereum"| E["L1 Finality"]
+```
+
+---
+
+## Circuit Types
+
+### 1. Transaction Validation Circuits (L2)
+
+- Written in Rust as deterministic logic
+- Validate balances, DID authentication, signature correctness, and state transitions within L2
+- Output a **commitment hash** consumed by the zk-rollup aggregator
+
+### 2. Aggregation & State Transition Circuits (L2 → L1)
+
+- Aggregate multiple rollup blocks (and, with the planned L3, DAG state transitions)
+- Execute recursive verification logic or Merkle root reconciliation
+- Generate a succinct **STARK proof** using RISC Zero's zkVM for Ethereum submission — full state-transition proving is being completed
+
+---
+
+## ZK in Practice: Privacy-Preserving Queries
+
+JMDT introduces a **DID-based querying mechanism** that enables privacy-preserving data access:
+
+1. Users and enterprises can query blockchain data **without exposing sensitive details**
+2. **Zero-Knowledge cryptography** prevents unauthorised access while allowing verifiable computations
+3. **Federated and differential privacy techniques** ensure compliance with GDPR, HIPAA, and data sovereignty regulations
+4. On-device ZK computation ensures personal data is verified without ever being shared
+
+---
+
+## Security Properties
+
+| Property | Guarantee |
+|---|---|
+| **Completeness** | An honest prover can always convince the verifier |
+| **Soundness** | A malicious prover cannot forge a valid proof |
+| **Zero-Knowledge** | The verifier learns nothing beyond the truth of the statement |
+| **Quantum Resistance** | zk-STARK proofs use hash-based cryptography — no elliptic curve assumptions |
+| **Reproducibility** | RISC Zero zkVM ensures deterministic proof generation across all nodes |
+
+---
+
+## L1 Finality — Ethereum Commitment
+
+Once a block is committed on JMDT L2, the Sequencer periodically anchors it to Ethereum for global finality:
+
+1. The Sequencer Orchestrator selects a committed block
+2. It generates a **RISC Zero STARK proof** (RISC Zero 3.0) of the block's commitment
+3. It calls **`commitRollup()`** on the **ZKRollup smart contract** deployed on Ethereum
+
+The `ZKRollup` contract enforces two invariants before accepting a commitment:
+
+- **Nonce ordering** — rollup commitments must be submitted in strict sequence; a commitment with an out-of-order nonce is rejected
+- **Double-commit protection** — the same block commitment cannot be submitted to L1 more than once
+
+Once `commitRollup()` succeeds, the block inherits Ethereum's censorship-resistance and finality guarantees.
+
+See [Transaction & Block Lifecycle →](/docs/transaction-lifecycle) for how this fits into the full flow.
+
+---
+
+## Integration Points
+
+- **AVC Consensus** — Buddy committees validate and finalise blocks; finalised blocks feed the ZK rollup anchoring pipeline. See [AVC Consensus →](/docs/bft)
+- **DID Engine** — ZKPs authenticate user identity without exposing PII. See [Decentralised Identity →](/docs/did)
+- **Sequencer & MemPool** — Orders and batches transactions; triggers zkVM proof generation. See [Sequencer →](/docs/sequencer)
+- **L1 Commitment** — Block commitments submitted to the JMDT `ZKRollup` contract via `commitRollup()`; full state-transition proving is being completed

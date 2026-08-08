@@ -1,0 +1,17 @@
+{
+  "docs": [
+    {
+      "type": "category",
+      "label": "v1.x (archived)",
+      "collapsed": false,
+      "items": [
+        "intro",
+        "architecture",
+        "advantages",
+        "tokenomics",
+        "use-cases",
+        "roadmap"
+      ]
+    }
+  ]
+}

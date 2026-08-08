@@ -1,0 +1,220 @@
+---
+id: sequencer
+title: Sequencer Module
+sidebar_label: Sequencer
+description: JMDT's Sequencer module — responsible for consensus orchestration, buddy node selection, vote collection, BFT consensus execution, and transaction ordering on the JMDT Layer 2 network.
+keywords: [JMDT sequencer, transaction ordering, consensus orchestration, BFT, Layer 2 sequencer, buddy nodes, JMDN]
+---
+
+# Sequencer Module
+
+> *The Truth Layer for Verifiable Information — transaction ordering and consensus orchestration on JMDT L2.*
+
+The **Sequencer** is the orchestration core of the JMDT Layer 2 chain. It drives the AVC consensus cycle: pulling transactions from the mempool, submitting them to **Espresso** for deterministic ordering, selecting buddy node committees via VRF, creating PubSub channels, collecting BuddyVotes, executing BFT consensus, and generating zk-proofs for L1 anchoring.
+
+The Sequencer runs as a core component inside the **JMDN** (JMDT Decentralised Node) binary.
+
+---
+
+## Overview
+
+The Sequencer module enables:
+
+- Pulling pending transactions from the mempool pool with **price-and-nonce selection** (per-sender strict nonce order, cross-sender fee priority, nonce gap-hold) and submitting them to the Espresso Sequencer for ordering
+- Consensus orchestration for block validation
+- Buddy node selection and management using VRF
+- Vote collection from buddy nodes
+- BFT consensus execution
+- PubSub channel management for consensus
+- CRDT synchronisation for buddy node state
+- Generating STARK proofs of committed blocks for L1 anchoring
+
+See [Transaction & Block Lifecycle →](/docs/transaction-lifecycle) for the full end-to-end flow.
+
+---
+
+## Transaction Ordering — Espresso Sequencer
+
+Before a block reaches consensus, the Sequencer submits the pulled transaction set to the **Espresso Sequencer** — an external, decentralised sequencing network — for ordering, under JMDT's **namespace 7000700**. Espresso returns a single, agreed-upon transaction order, removing ordering ambiguity between competing mempools and giving every buddy node the same ordered set to validate. As an external dependency, Espresso availability affects block production cadence; submission is retried until ordering is obtained.
+
+## Proof Generation — RISC Zero zkVM
+
+Once transactions are ordered, the Sequencer generates a **STARK proof of the block commitment** using the **RISC Zero zkVM** (RISC Zero 3.0); full state-transition proving is being completed:
+
+- Each transaction is hashed individually with **SHA-256**, using per-transaction boundary separators
+- The block commitment is a **Blake2b-256** digest computed over all transaction fields
+- The resulting proof is attached to the block before it's submitted for BFT consensus
+
+See [Zero-Knowledge Proofs & RISC Zero zkVM →](/docs/zk) for details on the proof system.
+
+---
+
+## Key Components
+
+### 1. Consensus
+
+Main consensus orchestration:
+
+- `NewConsensus` — Create a new consensus instance
+- `Start` — Begin the consensus process for a block
+- `QueryBuddyNodes` — Select buddy nodes via VRF for the current round
+- `RequestSubscriptionPermission` — Request subscription from selected buddy nodes
+- `CreatePubSubChannel` — Create the private PubSub channel for consensus
+
+### 2. Communication
+
+Communication with buddy nodes:
+
+- `AskForSubscription` — Ask buddy nodes to subscribe to the consensus channel
+- `RequestVoteResultsFromBuddies` — Collect vote results from the buddy committee
+- `StartBFTConsensus` — Trigger the BFT consensus phase
+
+### 3. Router
+
+Routing for consensus operations:
+
+- Message routing across JMDN peers
+- Vote aggregation and tallying
+- Response handling
+
+### 4. Metadata
+
+Consensus metadata management:
+
+- Block metadata
+- Vote metadata
+- Consensus state tracking
+
+### 5. Triggers
+
+Consensus triggers:
+
+- Trigger management for consensus phases
+- Vote result maps
+
+---
+
+## Key Functions
+
+### Start Consensus
+
+```go
+// Start consensus process for a block
+func (c *Consensus) Start(block *config.ZKBlock) error {
+    // Query buddy nodes via VRF
+    // Create PubSub channel
+    // Request subscriptions from selected buddies
+    // Collect BuddyVotes
+    // Execute BFT consensus
+}
+```
+
+### Query Buddy Nodes
+
+```go
+// Select buddy committee using VRF
+func (c *Consensus) QueryBuddyNodes() error {
+    // Use VRF to select buddy nodes
+    // Connect to selected peers
+    // Populate main and backup peer lists
+}
+```
+
+### Request Vote Results
+
+```go
+// Collect votes from the current buddy committee
+func RequestVoteResultsFromBuddies() error {
+    // Request votes from all buddy nodes
+    // Collect vote results
+    // Aggregate with quorum check: q = ⌈2k/3⌉
+}
+```
+
+---
+
+## Usage
+
+### Create Consensus Instance
+
+```go
+import "JMDN/Sequencer"
+
+// Initialise peer list
+peerList := Sequencer.PeerList{
+    MainPeers:   []peer.ID{},
+    BackupPeers: []peer.ID{},
+}
+
+// Create consensus instance
+consensus := Sequencer.NewConsensus(peerList, host)
+```
+
+### Start Consensus
+
+```go
+// Start consensus for a block
+err := consensus.Start(block)
+if err != nil {
+    log.Error(err)
+}
+```
+
+---
+
+## Integration Points
+
+- **AVC Module** — Uses BFT for consensus execution; see [AVC Module →](/docs/avc)
+- **PubSub** — Uses PubSub for consensus messaging and private channel management
+- **Messaging** — Uses the messaging layer for vote collection
+- **Block Module** — Initiates consensus for each new block; receives consensus results
+- **zkVM** — Batches validated transactions into RISC Zero STARK proofs for L1
+
+---
+
+## Configuration
+
+Key protocol configuration constants:
+
+| Constant | Default | Description |
+|---|---|---|
+| `MaxMainPeers` | 13 | Maximum main buddy nodes per round |
+| `MaxBackupPeers` | 10 | Maximum backup buddy nodes |
+| `ConsensusTimeout` | 20s | Consensus timeout |
+| `PubSub_ConsensusChannel` | — | Consensus channel name |
+| `Pubsub_CRDTSync` | — | CRDT sync channel name |
+
+---
+
+## Error Handling
+
+The module includes comprehensive error handling for:
+
+- Buddy node selection failures
+- Subscription errors
+- Vote collection timeouts
+- BFT consensus errors
+
+---
+
+## Security
+
+- Buddy node authentication via BLS signatures
+- Vote signature verification before aggregation
+- BFT consensus guarantees safety under Byzantine failures
+- Private PubSub channel access control per consensus round
+
+---
+
+## Performance
+
+- Efficient VRF-based buddy node selection
+- Concurrent vote collection from the full committee
+- Optimised BFT execution targeting ~3–10s L2 finality
+- PubSub channel lifecycle management per block
+
+---
+
+## Testing
+
+Each module ships with unit, integration, and consensus-simulation tests in the JMDN repository.

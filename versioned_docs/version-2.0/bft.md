@@ -1,0 +1,133 @@
+---
+id: bft
+title: AVC Consensus Mechanism
+sidebar_label: AVC Consensus
+description: JMDT's Asynchronous Validation Consensus (AVC) — a quorum-based, non-synchronous consensus model using VRF-based buddy selection, zk-proof validation, Gossip Protocol, CRDT conflict resolution, and immudb for tamper-proof finality.
+keywords: [AVC consensus, Asynchronous Validation Consensus, JMDT consensus, VRF buddy selection, BuddyVote, CRDT, immudb, JMDN, zk-proof consensus]
+---
+
+# AVC Consensus Mechanism
+
+> **JMDT — The Truth Layer for Verifiable Information.** To achieve fast, tamper-resistant, and scalable block finality in the JMDT Layer 2 blockchain, we implement **Asynchronous Validation Consensus (AVC)** — a quorum-based, non-synchronous consensus model designed for decentralised environments and strengthened with zk-proof guarantees.
+
+Unlike producer-driven consensus models, AVC relies on **collective validation by randomised buddy sets**, ensuring fairness, resilience, and transparency. JMDN nodes independently verify proposed blocks, align on Merkle digests, and reach quorum **without relying on fixed committees or synchronous rounds**.
+
+---
+
+## Key Components
+
+### 1. Asynchronous Validation
+
+When the Sequencer proposes a block, **all JMDN (JMDT Decentralised Node) nodes immediately enter validation mode**. This event-driven, non-blocking design allows **parallel validation** across the network without reliance on global timing or designated leaders.
+
+### 2. VRF-Based Buddy Node Selection
+
+A **Verifiable Random Function (VRF)-based Buddy Node Selection Algorithm**, weighted by Seed Node reputation feedback, selects a randomised buddy committee of *k* nodes from the authenticated validator set each round.
+
+- Ensures **fairness, geo-diversity, and resistance to Sybil or cartel attacks**
+- Buddies perform: signature and DID checks, balance sufficiency and ownership validation, and block-integrity checks
+- A block is accepted when **≥ q_buddy = ⌈2k/3⌉ buddies** — a ≥⅔ supermajority over the committee — sign and broadcast a `BuddyVote(digest)`
+- This threshold guarantees overlap between quorums and resilience against Byzantine behaviour; equivocating votes from the same validator are detected and rejected
+
+### 3. ZK Anchoring Integrity
+
+Finalised blocks feed the ZK rollup pipeline, built on the **RISC Zero zkVM** with Rust-based circuits compiled to zkVM-executable guest binaries:
+
+- Block commitments are **anchored to Ethereum L1 via the ZK rollup contract**
+- Proof generation is integrated into the pipeline, with full state-transition proving being completed
+- Preserves **privacy-preserving validation** without exposing internal state transitions
+
+### 4. Gossip Protocol
+
+A decentralised backbone for **disseminating transactions, buddy votes, and block commitments** efficiently across the JMDN network:
+
+- **Bloom Filters** prevent duplicate or replayed messages, reducing bandwidth overhead
+- Enables low-latency, fault-tolerant propagation of consensus-critical data across all peers
+
+### 5. CRDT-Based Conflict Resolution
+
+If buddy digests diverge, **Conflict-Free Replicated Data Type (CRDT)-based reconciliation** merges results to achieve eventual consistency:
+
+- A temporary scoped leader may coordinate the merge, but no permanent authority exists
+- Guarantees convergence even under network partitions
+- Used for votes, digests, and mempool views across buddy and network states
+
+### 6. Immutable Ledger via immudb
+
+Once quorum is reached, the block is written to the database **WAL-first** — the write-ahead log entry is durable before the block is acknowledged as committed, so a crash immediately after consensus can't lose a finalised block. Finalised blocks are then committed to **immudb**, ensuring:
+- **Append-only, tamper-proof history**
+- **Auditability** for enterprise use cases
+- Separate storage of flagged or invalid transactions for accountability
+
+---
+
+## Consensus Flow
+
+```mermaid
+sequenceDiagram
+    participant S as Sequencer
+    participant JMDN as JMDN Nodes
+    participant Buddies as Buddy Set (VRF-selected)
+    participant immudb as immudb Ledger
+    participant L1 as Ethereum L1
+
+    S->>JMDN: Propose Block
+    JMDN->>Buddies: Gossip Block
+    Buddies->>Buddies: Verify DID, signatures, block integrity
+    Buddies->>JMDN: Broadcast BuddyVote(digest)
+    JMDN->>JMDN: Count votes — quorum >= ceil(2k/3)?
+    JMDN->>immudb: Commit finalised block (WAL-first, append-only)
+    JMDN->>L1: Anchor block commitment via ZK rollup contract
+```
+
+---
+
+## Security & Operational Benefits
+
+| Feature | Benefit |
+|---|---|
+| **ZK rollup anchoring** | Block commitments anchored to Ethereum; full state-transition proving being completed |
+| **VRF + quorum** | Randomised, fair buddy sets; strong Byzantine fault tolerance |
+| **Gossip + Bloom Filters** | Efficient, low-latency peer-to-peer communication |
+| **CRDT-based reconciliation** | Convergent state even under partitions |
+| **Incentive alignment** | Sequencer rewarded only after quorum validation succeeds |
+| **Adaptive weighting** | Seed Nodes penalise malicious nodes and reward honest ones |
+
+---
+
+## Why AVC Matters
+
+The AVC protocol ensures that block finality in JMDT is:
+
+- **Verifiable** — block commitments anchored to Ethereum via the ZK rollup pipeline
+- **Decentralised** — randomised buddy-set validation; no fixed validators
+- **Responsive** — asynchronous quorum, no global coordination (~3–10s finality target)
+- **Audit-ready** — immudb-backed append-only history
+- **Adaptive** — dynamic Seed Node weight updates favour reliable nodes
+
+This design also forms the foundation for the planned **Layer 3 DAG extensions** and enterprise-specific consensus frameworks, making AVC a **future-proof consensus model** for data-driven blockchain applications.
+
+---
+
+## Implementation Reference
+
+The AVC module lives at `JMDN/AVC/` in the node codebase:
+
+```
+JMDN/AVC/
+├── BFT/              # BuddyVote PREPARE/COMMIT phases, Byzantine fault detection
+├── BLS/              # BLS signature generation, aggregation, and verification
+├── BuddyNodes/       # Buddy node selection, CRDT sync, message passing
+│   ├── MessagePassing/
+│   ├── CRDTSync/
+│   └── ServiceLayer/
+├── NodeSelection/    # VRF-based buddy selection (pkg/selection/vrf.go)
+└── VoteModule/       # Vote validation and aggregation
+```
+
+**Key configuration constants** (`config/constants.go`):
+- `MaxMainPeers` — Maximum main buddy nodes (default: 13)
+- `MaxBackupPeers` — Maximum backup buddy nodes (default: 10)
+- `ConsensusTimeout` — Timeout for consensus operations (default: 20s)
+
+See [JMDN Node →](/docs/jmdt-node) and [Sequencer →](/docs/sequencer) for integration details.
