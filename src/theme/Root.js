@@ -8,6 +8,7 @@
 
 import React, { useEffect } from 'react';
 import ChatbotWidget from '@site/src/components/ChatbotWidget';
+import ListingNotice from '@site/src/components/ListingNotice';
 
 export default function Root({ children }) {
   // Navbar: hide-on-scroll-down, show-on-scroll-up, blur when scrolled
@@ -69,6 +70,7 @@ export default function Root({ children }) {
       {children}
 
       <ChatbotWidget />
+      <ListingNotice />
     </>
   );
 }

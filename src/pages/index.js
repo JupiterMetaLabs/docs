@@ -322,7 +322,7 @@ gtag('config', 'G-8N3L9Z2Z9X');
       "name": "How do I buy JMDT tokens?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "When JMDT mainnet tokens go live, they are listed as available for purchase on Bitmart (per the Testnet vs Mainnet documentation)."
+        "text": "When JMDT mainnet tokens go live, they are listed as available for purchase exclusively on MEXC (JMDT/USDT pair)."
       }
     }
   ]
