@@ -8,8 +8,8 @@ keywords: [JMDT roadmap, blockchain roadmap, JupiterMeta milestones, JMDT mainne
 
 # JMDT Development Roadmap
 
-> **Current status (August 2026):** Phases 1–3 complete; Phase 4 in progress. The **L2 mainnet is operational** — ZK rollup anchoring to Ethereum, Decentralized Identity, and AVC consensus running in production — with **SuperJ** and **Hercules** as the live flagship dApps. The **L3 Enterprise DAG is a future phase** (see Phase 5), not part of the completed phases.
-> Token live on CoinMarketCap, CoinGecko, and BitMart.
+> **Current status:** Phases 1–3 complete. Token live on CoinMarketCap and CoinGecko; trading exclusively on MEXC (JMDT/USDT).
+> Mainnet operational. ZK proofs, Decentralized Identity, and AVC consensus running in production.
 
 ---
 
@@ -51,7 +51,8 @@ Production launch, token distribution, and first exchange presence.
 - **20M Verified User Capacity** — DID registry architected and tested to handle 20M+ verified identities
 - **CoinMarketCap Listing** — JMDT token listed and tracked on CoinMarketCap ✅
 - **CoinGecko Listing** — JMDT token listed and tracked on CoinGecko ✅
-- **BitMart CEX Listing** — JMDT listed on BitMart exchange, 9 December 2025 ✅
+- **First CEX Listing** — JMDT listed on a centralized exchange, 9 December 2025 ✅
+- **MEXC Listing** — JMDT trading moved exclusively to MEXC (JMDT/USDT), August 2026 ✅
 - **JMDT Documentation Portal** — public developer docs at docs.jmdt.io covering node setup, RPC API, DID spec, and ZK proof integration
 - **Block Explorer V1** — live explorer for blocks, transactions, accounts, and DID records
 
@@ -116,7 +117,7 @@ The long-term thesis: JMDT as the verification backbone for AI-generated content
 |---|---|---|---|
 | 1 | Q1–Q2 2024 | Research, ZK design, DID architecture, node prototype | ✅ Complete |
 | 2 | Q3 2024–Q1 2025 | Testnet, ZK-rollup aggregator, FastSync, enterprise beta | ✅ Complete |
-| 3 | Q2–Q4 2025 | Mainnet, 5K TPS, CMC/CoinGecko/BitMart listings | ✅ Complete |
+| 3 | Q2–Q4 2025 | Mainnet, 5K TPS, CMC/CoinGecko/CEX listings | ✅ Complete |
 | 4 | Q3–Q4 2026 | EVM, bridge, SDK, staking, CEX expansion | 🔨 In progress |
 | 5 | Q1–Q2 2027 | L3 enterprise DAG, verifiable credentials, ZK-VM | 🗓 Planned |
 | 6 | Q3–Q4 2027 | DAO governance, multi-chain, DEX, L3 chains | 🗓 Planned |
