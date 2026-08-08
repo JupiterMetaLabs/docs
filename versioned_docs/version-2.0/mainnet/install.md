@@ -127,4 +127,4 @@ sudo chmod 600 /etc/jmdn/jmdn.yaml
 
 ## What's Next
 
-Your node is installed and configured. Continue to [Connect & Verify →](./connect) to start it and confirm it's syncing with the mainnet.
+Your node is installed and configured. Continue to [Connect & Verify →](./connect.md) to start it and confirm it's syncing with the mainnet.

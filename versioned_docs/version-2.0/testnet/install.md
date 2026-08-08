@@ -134,4 +134,4 @@ Or just run the binary directly:
 
 ## What's Next
 
-Continue to [Connect & Verify →](./connect) to start the node and confirm it's syncing with the JMDT Testnet.
+Continue to [Connect & Verify →](./connect.md) to start the node and confirm it's syncing with the JMDT Testnet.

@@ -75,7 +75,7 @@ The mainnet seed node handles peer discovery for new JMDN nodes joining the netw
 contact JMDT team to setup Mainnet validator
 ```
 
-This address is configured in your `jmdn.yaml` during node setup. See [Install & Configure →](./install) for the full config.
+This address is configured in your `jmdn.yaml` during node setup. See [Install & Configure →](./install.md) for the full config.
 
 ---
 
@@ -93,9 +93,9 @@ This address is configured in your `jmdn.yaml` during node setup. See [Install &
 
 Running a mainnet node involves **real JMDT tokens** and connects to the live production network. Make sure you:
 
-- Have a server meeting the [hardware prerequisites](./prerequisites)
+- Have a server meeting the [hardware prerequisites](./prerequisites.md)
 - Have JMDT for gas fees (acquire via [Bitmart](/docs/get-jmdt))
 - Are familiar with the [JMDN build process](/docs/running-a-node)
 - Keep your node key and config files secured
 
-Ready? Continue to [Prerequisites →](./prerequisites)
+Ready? Continue to [Prerequisites →](./prerequisites.md)

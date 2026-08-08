@@ -39,7 +39,7 @@ JMDN is built on a modular architecture combining several advanced distributed s
 - **Heartbeat Monitoring** — Automatic health checks and peer status tracking
 - **Yggdrasil Integration** — Alternative encrypted mesh networking for improved privacy and connectivity
 - **Metrics & Monitoring** — Prometheus-compatible metrics for system performance
-- **Seed Node Discovery** — Bootstrap mechanism for network peer joining; see [Seednode →](/docs/seednode)
+- **Seed Node Discovery** — Bootstrap mechanism for network peer joining
 
 ---
 
@@ -150,4 +150,3 @@ When enabled, JMDN provides:
 - [Running JMDN with Docker →](/docs/docker) — Container-based deployment via `docker run` / `docker compose`
 - [AVC Module →](/docs/avc) — Consensus internals
 - [Sequencer →](/docs/sequencer) — Transaction ordering and batch proofing
-- [Seednode →](/docs/seednode) — Bootstrap and peer discovery infrastructure

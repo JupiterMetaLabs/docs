@@ -266,4 +266,3 @@ sudo ./Scripts/setup_dependencies.sh --go
 - [JMDN Node →](/docs/jmdt-node) — Architecture and technical reference
 - [AVC Module →](/docs/avc) — Consensus internals
 - [Sequencer →](/docs/sequencer) — Transaction ordering
-- [Seednode →](/docs/seednode) — Peer discovery and bootstrap infrastructure

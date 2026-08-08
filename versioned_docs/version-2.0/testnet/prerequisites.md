@@ -96,4 +96,4 @@ In the meantime, you can run a testnet node without any tokens — tokens are on
 - [ ] Git installed (`git --version`)
 - [ ] No real JMDT needed yet — faucet tokens available soon
 
-Ready? Continue to [Install & Configure →](./install)
+Ready? Continue to [Install & Configure →](./install.md)

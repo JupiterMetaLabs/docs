@@ -41,7 +41,7 @@ Before setting up a JMDT Mainnet node, make sure your environment meets the foll
 
 ## Software Dependencies
 
-The `setup_dependencies.sh` script installs these automatically (see [Install & Configure →](./install)), but it helps to know what's needed:
+The `setup_dependencies.sh` script installs these automatically (see [Install & Configure →](./install.md)), but it helps to know what's needed:
 
 | Dependency | Version | Purpose |
 |---|---|---|
@@ -98,4 +98,4 @@ Before proceeding to installation:
 - [ ] JMDT tokens acquired via Bitmart
 - [ ] Git installed (`git --version`)
 
-Ready? Continue to [Install & Configure →](./install)
+Ready? Continue to [Install & Configure →](./install.md)
