@@ -2,28 +2,32 @@
 id: get-jmdt
 title: How to Get JMDT
 sidebar_label: Get JMDT
-description: How to acquire JMDT tokens — purchase on Bitmart for mainnet, or claim testnet tokens from the upcoming JMDT faucet.
-keywords: [get JMDT, buy JMDT, JMDT token, Bitmart JMDT, JMDT faucet, testnet tokens, JMDT mainnet, acquire JMDT]
+description: How to acquire JMDT tokens — purchase on MEXC (JMDT/USDT) for mainnet, or claim testnet tokens from the JMDT faucet.
+keywords: [get JMDT, buy JMDT, JMDT token, MEXC JMDT, JMDT USDT, JMDT faucet, testnet tokens, JMDT mainnet, acquire JMDT]
 ---
 
 # How to Get JMDT
 
 > *The Truth Layer for Verifiable Information — JMDT is the native token powering the JMDT Layer 2 network.*
 
-JMDT is the utility token of the JMDT Layer 2 — used for gas fees, L2 commitments, and accessing enterprise data services. You can acquire JMDT on mainnet via a centralised exchange, or claim testnet tokens from the upcoming faucet.
+JMDT is the utility token of the JMDT Layer 2 — used for gas fees, L2 commitments, and accessing enterprise data services. You can acquire JMDT on mainnet via a centralised exchange, or claim testnet tokens from the faucet.
+
+:::warning Official listing notice
+JMDT is listed **exclusively on MEXC (JMDT/USDT)**. We have no other pairs on any CEX or DEX — treat any other listing, liquidity pool, presale, or airdrop claiming to be JMDT as a scam.
+:::
 
 ---
 
-## Mainnet — Buy on Bitmart
+## Mainnet — Buy on MEXC
 
-JMDT is listed on **[Bitmart](https://www.bitmart.com)**, a globally accessible centralised exchange. Bitmart supports trading pairs, spot purchases, and withdrawals to self-custodial wallets.
+JMDT is listed on **[MEXC](https://www.mexc.com/exchange/JMDT_USDT)**, a globally accessible centralised exchange, trading as the **JMDT/USDT** pair. MEXC supports spot purchases and withdrawals to self-custodial wallets.
 
 ### Steps to Purchase
 
-1. **Create a Bitmart account** at [bitmart.com](https://www.bitmart.com) if you don't already have one
-2. **Complete KYC** (identity verification) as required by Bitmart
-3. **Deposit funds** — use supported fiat on-ramps or deposit USDT/BTC/ETH
-4. **Search for JMDT** in the Bitmart trading interface
+1. **Create a MEXC account** at [mexc.com](https://www.mexc.com) if you don't already have one
+2. **Complete KYC** (identity verification) as required by MEXC
+3. **Deposit funds** — use supported fiat on-ramps or deposit USDT
+4. **Open the [JMDT/USDT pair](https://www.mexc.com/exchange/JMDT_USDT)** in the MEXC spot trading interface
 5. **Place a buy order** — market or limit, depending on your preference
 6. **Withdraw to your wallet** — send your JMDT to a self-custodial EVM-compatible wallet (e.g., MetaMask) for use on the JMDT network
 
@@ -31,17 +35,13 @@ JMDT is listed on **[Bitmart](https://www.bitmart.com)**, a globally accessible 
 
 ---
 
-## Testnet — Faucet (Coming Soon)
+## Testnet — Faucet
 
-If you are a developer building on JMDT or testing node operations, you will be able to claim **free testnet JMDT** from the official JMDT faucet.
-
-**The testnet faucet is coming soon.** Once live, you will be able to:
+If you are a developer building on JMDT or testing node operations, you can claim **free testnet JMDT** from the official faucet at **[faucet.jmdt.io](https://faucet.jmdt.io)**:
 
 1. Connect your EVM-compatible wallet
 2. Request a testnet JMDT allocation
 3. Start testing smart contracts, DID flows, and enterprise DAG integrations on the JMDT testnet
-
-Watch the [JMDT website](https://jmdt.io) and official channels for the faucet launch announcement.
 
 ---
 
@@ -61,8 +61,9 @@ For full token economics, see [Tokenomics →](/docs/tokenomics).
 
 ## Security Reminders
 
-- Only purchase JMDT from official, verified sources — JMDT is the native token of the JMDT Layer 2 and does not have a separate ERC-20 contract address. Always verify you are on the official [jmdt.io](https://jmdt.io) site or the official Bitmart listing
-- Be cautious of phishing sites or unofficial "JMDT faucet" pages before the official faucet launches
+- Only purchase JMDT from the official listing — the **JMDT/USDT pair on MEXC** — and always verify you are on the official [jmdt.io](https://jmdt.io) site or [mexc.com](https://www.mexc.com/exchange/JMDT_USDT)
+- Any other exchange listing, liquidity pool, presale, or airdrop claiming to be JMDT is fraudulent
+- Be cautious of phishing sites or unofficial "JMDT faucet" pages — the only faucet is [faucet.jmdt.io](https://faucet.jmdt.io)
 - Never share your private keys or seed phrase with anyone
 
 ---
