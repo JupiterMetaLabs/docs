@@ -32,8 +32,6 @@ The AVC module ensures secure, distributed consensus by:
 
 ### 1. BFT (Byzantine Fault Tolerance)
 
-**Location:** `JMDN/AVC/BFT/`
-
 Implements a Byzantine Fault Tolerant consensus protocol for validating blocks and reaching agreement among network participants.
 
 **Key Features:**
@@ -42,21 +40,9 @@ Implements a Byzantine Fault Tolerant consensus protocol for validating blocks a
 - GossipSub-based message passing
 - gRPC communication with Sequencer
 
-**Key Files:**
-- `bft/bft.go` — Main BFT consensus logic
-- `bft/engine.go` — PREPARE and COMMIT phase execution
-- `bft/byzantine.go` — Byzantine fault detection
-- `bft/buddy_service.go` — gRPC server for buddy nodes
-- `bft/sequencer_client.go` — Client for Sequencer communication
-- `network/libp2p_setup.go` — Network setup for BFT
-
-**Documentation:** See `JMDN/AVC/BFT/readme-bft.md` for full BFT implementation details.
-
 ---
 
 ### 2. BLS (Boneh-Lynn-Shacham) Signatures
-
-**Location:** `JMDN/AVC/BLS/`
 
 Provides BLS signature generation and verification for all cryptographic consensus operations.
 
@@ -65,15 +51,9 @@ Provides BLS signature generation and verification for all cryptographic consens
 - Signature verification across buddy committees
 - Router for signature routing
 
-**Key Files:**
-- `bls-sign/bls-sign.go` — BLS signature implementation
-- `Router/Router.go` — Signature routing logic
-
 ---
 
 ### 3. BuddyNodes
-
-**Location:** `JMDN/AVC/BuddyNodes/`
 
 Manages buddy node selection, communication, and consensus participation within each AVC round.
 
@@ -90,39 +70,21 @@ Manages buddy node selection, communication, and consensus participation within 
 - `ServiceLayer/` — Service layer for buddy node operations
 - `DataLayer/` — Data layer for buddy node storage
 
-**Key Files:**
-- `MessagePassing/BuddyNodeStream.go` — Stream handling for buddy messages
-- `MessagePassing/MessageListener.go` — Listens for buddy node messages
-- `MessagePassing/CRDTSyncHandler.go` — Handles CRDT synchronisation
-- `ServiceLayer/Service.go` — Service layer implementation
-
 ---
 
 ### 4. NodeSelection
 
-**Location:** `JMDN/AVC/NodeSelection/`
-
 Implements Verifiable Random Function (VRF)-based node selection for choosing buddy node committees each consensus round.
 
 **Key Features:**
-- VRF-based random, deterministic node selection
+- VRF-based randomised committee selection over the authenticated validator set
 - Node filtering and validation
 - Selection service for buddy node committees
 - Router for selection operations
 
-**Key Files:**
-- `pkg/selection/vrf.go` — VRF implementation
-- `pkg/selection/service.go` — Selection service
-- `pkg/selection/filter.go` — Node filtering logic
-- `Router/Router.go` — Selection routing
-
-**Documentation:** See `JMDN/AVC/NodeSelection/README.md` for full details.
-
 ---
 
 ### 5. VoteModule
-
-**Location:** `JMDN/AVC/VoteModule/`
 
 Handles the BuddyVote mechanism — validation, aggregation, and quorum calculation.
 
@@ -130,9 +92,6 @@ Handles the BuddyVote mechanism — validation, aggregation, and quorum calculat
 - Vote validation
 - Vote aggregation
 - Consensus quorum logic: `q_buddy = ⌈2k/3⌉`
-
-**Key Files:**
-- `vote_validation.go` — Vote validation logic
 
 ---
 
@@ -187,7 +146,7 @@ buddies, err := service.SelectBuddies(count)
 
 ## Configuration
 
-Key configuration constants in `config/constants.go`:
+Key protocol configuration constants:
 
 | Constant | Default | Description |
 |---|---|---|
@@ -217,9 +176,4 @@ Key configuration constants in `config/constants.go`:
 
 ## Testing
 
-Each submodule includes test files:
-
-- `JMDN/AVC/BFT/bft/bft_test.go` — BFT consensus tests
-- `JMDN/AVC/BLS/Router/Router_test.go` — BLS router tests
-- `JMDN/AVC/BuddyNodes/MessagePassing/MessageListener_test.go` — Message listener tests
-- `JMDN/AVC/NodeSelection/pkg/selection/vrf_test.go` — VRF selection tests
+Each module ships with unit, integration, and consensus-simulation tests in the JMDN repository.

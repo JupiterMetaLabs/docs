@@ -15,18 +15,18 @@ The CRDT module enables:
 
 ## Key Features
 
-### Yes **Offline/Online Sync**
+### **Offline/Online Sync**
 - Nodes can go offline and continue operating independently
 - Operations are stored for replay when nodes reconnect
 - Automatic synchronization on reconnection
 - Eventual consistency across all nodes
 
-### Yes **CRDT Types**
+### **CRDT Types**
 - **LWW-Set (Last-Writer-Wins Set)**: For concurrent add/remove operations
 - **G-Counter**: Growing counter for metrics and statistics
 - **Vector Clocks**: For causality tracking between distributed events
 
-### Yes **Synchronization Mechanisms**
+### **Synchronization Mechanisms**
 - **HashMap-based Diff**: Efficient identification of missing data
 - **IBLT (Invertible Bloom Lookup Table)**: Set reconciliation for large datasets
 - **Batch Processing**: Optimized data transfer in batches

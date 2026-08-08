@@ -53,8 +53,6 @@ See [Zero-Knowledge Proofs & RISC Zero zkVM →](/docs/zk) for details on the pr
 
 ### 1. Consensus
 
-**File:** `JMDN/Sequencer/Consensus.go`
-
 Main consensus orchestration:
 
 - `NewConsensus` — Create a new consensus instance
@@ -65,8 +63,6 @@ Main consensus orchestration:
 
 ### 2. Communication
 
-**File:** `JMDN/Sequencer/Communication.go`
-
 Communication with buddy nodes:
 
 - `AskForSubscription` — Ask buddy nodes to subscribe to the consensus channel
@@ -74,8 +70,6 @@ Communication with buddy nodes:
 - `StartBFTConsensus` — Trigger the BFT consensus phase
 
 ### 3. Router
-
-**File:** `JMDN/Sequencer/Router/Router.go`
 
 Routing for consensus operations:
 
@@ -85,8 +79,6 @@ Routing for consensus operations:
 
 ### 4. Metadata
 
-**File:** `JMDN/Sequencer/Metadata/Metadata.go`
-
 Consensus metadata management:
 
 - Block metadata
@@ -95,12 +87,10 @@ Consensus metadata management:
 
 ### 5. Triggers
 
-**File:** `JMDN/Sequencer/Triggers/`
-
 Consensus triggers:
 
-- `Triggers.go` — Trigger management for consensus phases
-- `Maps.go` — Vote result maps
+- Trigger management for consensus phases
+- Vote result maps
 
 ---
 
@@ -184,7 +174,7 @@ if err != nil {
 
 ## Configuration
 
-Key configuration in `JMDN/config/`:
+Key protocol configuration constants:
 
 | Constant | Default | Description |
 |---|---|---|
@@ -227,8 +217,4 @@ The module includes comprehensive error handling for:
 
 ## Testing
 
-Test files:
-
-- `JMDN/Sequencer/Sequencer_test.go` — Sequencer operation tests
-- Integration tests
-- Consensus simulation tests
+Each module ships with unit, integration, and consensus-simulation tests in the JMDN repository.
