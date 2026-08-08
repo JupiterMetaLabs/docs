@@ -22,24 +22,24 @@ When the Sequencer proposes a block, **all JMDN (JMDT Decentralised Node) nodes 
 
 ### 2. VRF-Based Buddy Node Selection
 
-A **Verifiable Random Function (VRF)-based Buddy Node Selection Algorithm**, weighted by Seed Node feedback, deterministically selects a buddy set of *k* nodes each round.
+A **Verifiable Random Function (VRF)-based Buddy Node Selection Algorithm**, weighted by Seed Node reputation feedback, selects a randomised buddy committee of *k* nodes from the authenticated validator set each round.
 
 - Ensures **fairness, geo-diversity, and resistance to Sybil or cartel attacks**
-- Buddies perform: signature and DID checks, balance sufficiency and ownership validation, and zk-proof verification for batch integrity
-- A block is accepted when **≥ q_buddy = ⌈2k/3⌉ buddies** sign and broadcast a `BuddyVote(digest)`
-- This threshold guarantees overlap between quorums and resilience against Byzantine behaviour
+- Buddies perform: signature and DID checks, balance sufficiency and ownership validation, and block-integrity checks
+- A block is accepted when **≥ q_buddy = ⌈2k/3⌉ buddies** — a ≥⅔ supermajority over the committee — sign and broadcast a `BuddyVote(digest)`
+- This threshold guarantees overlap between quorums and resilience against Byzantine behaviour; equivocating votes from the same validator are detected and rejected
 
-### 3. zk-Proof Integrity
+### 3. ZK Anchoring Integrity
 
-Each block must include a **zk-proof** (generated off-chain by the RISC Zero zkVM or a prover service):
+Finalised blocks feed the ZK rollup pipeline, built on the **RISC Zero zkVM** with Rust-based circuits compiled to zkVM-executable guest binaries:
 
-- zk-proofs validate batched execution correctness and are verified independently by all buddies
-- Ensures **privacy-preserving validation** without exposing internal state transitions
-- Proofs are generated using Rust-based circuits compiled to zkVM-executable guest binaries
+- Block commitments are **anchored to Ethereum L1 via the ZK rollup contract**
+- Proof generation is integrated into the pipeline, with full state-transition proving being completed
+- Preserves **privacy-preserving validation** without exposing internal state transitions
 
 ### 4. Gossip Protocol
 
-A decentralised backbone for **disseminating transactions, buddy votes, and zk-proofs** efficiently across the JMDN network:
+A decentralised backbone for **disseminating transactions, buddy votes, and block commitments** efficiently across the JMDN network:
 
 - **Bloom Filters** prevent duplicate or replayed messages, reducing bandwidth overhead
 - Enables low-latency, fault-tolerant propagation of consensus-critical data across all peers
@@ -71,13 +71,13 @@ sequenceDiagram
     participant immudb as immudb Ledger
     participant L1 as Ethereum L1
 
-    S->>JMDN: Propose Block + zk-proof
-    JMDN->>Buddies: Gossip Block + zk-proof
-    Buddies->>Buddies: Verify DID, signatures, zk-proof
+    S->>JMDN: Propose Block
+    JMDN->>Buddies: Gossip Block
+    Buddies->>Buddies: Verify DID, signatures, block integrity
     Buddies->>JMDN: Broadcast BuddyVote(digest)
     JMDN->>JMDN: Count votes — quorum >= ceil(2k/3)?
     JMDN->>immudb: Commit finalised block (WAL-first, append-only)
-    JMDN->>L1: Submit STARK proof to Ethereum
+    JMDN->>L1: Anchor block commitment via ZK rollup contract
 ```
 
 ---
@@ -86,7 +86,7 @@ sequenceDiagram
 
 | Feature | Benefit |
 |---|---|
-| **zk-proof validation** | Privacy-preserving and verifiable transaction proofs |
+| **ZK rollup anchoring** | Block commitments anchored to Ethereum; full state-transition proving being completed |
 | **VRF + quorum** | Randomised, fair buddy sets; strong Byzantine fault tolerance |
 | **Gossip + Bloom Filters** | Efficient, low-latency peer-to-peer communication |
 | **CRDT-based reconciliation** | Convergent state even under partitions |
@@ -99,13 +99,13 @@ sequenceDiagram
 
 The AVC protocol ensures that block finality in JMDT is:
 
-- **Verifiable** — through zk-proofs on every block
+- **Verifiable** — block commitments anchored to Ethereum via the ZK rollup pipeline
 - **Decentralised** — randomised buddy-set validation; no fixed validators
-- **Responsive** — asynchronous quorum, no global coordination (~3–10s finality)
+- **Responsive** — asynchronous quorum, no global coordination (~3–10s finality target)
 - **Audit-ready** — immudb-backed append-only history
 - **Adaptive** — dynamic Seed Node weight updates favour reliable nodes
 
-This design also forms the foundation for **Layer 3 DAG extensions** and enterprise-specific consensus frameworks, making AVC a **future-proof consensus model** for data-driven blockchain applications.
+This design also forms the foundation for the planned **Layer 3 DAG extensions** and enterprise-specific consensus frameworks, making AVC a **future-proof consensus model** for data-driven blockchain applications.
 
 ---
 

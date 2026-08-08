@@ -2,13 +2,13 @@
 id: zk
 title: Zero-Knowledge Proofs & RISC Zero zkVM
 sidebar_label: Zero-Knowledge Proofs
-description: How JMDT uses Zero-Knowledge Proofs (zk-SNARKs and zk-STARKs) via the RISC Zero zkVM and Rust-based circuits to batch transactions privately, verify state transitions, and commit succinct proofs to Ethereum.
+description: How JMDT uses Zero-Knowledge Proofs (zk-SNARKs and zk-STARKs) via the RISC Zero zkVM and Rust-based circuits to batch transactions privately and anchor block commitments to Ethereum via the ZK rollup contract.
 keywords: [Zero-Knowledge Proofs, ZKP, zk-SNARKs, zk-STARKs, RISC Zero zkVM, JMDT ZK, private transactions, Ethereum ZK, L2 ZK proofs, Rust ZK circuits]
 ---
 
 # Zero-Knowledge Proofs & RISC Zero zkVM
 
-> **The Truth Layer for Verifiable Information.** JMDT uses Zero-Knowledge Proofs as the cryptographic backbone for privacy-preserving identity, private transactions, and verifiable state transitions — without exposing any underlying data.
+> **The Truth Layer for Verifiable Information.** JMDT uses Zero-Knowledge Proofs as the cryptographic backbone for privacy-preserving identity, private transactions, and verifiable computation — without exposing any underlying data.
 
 Zero-Knowledge Proofs (ZKPs) allow one party to prove knowledge of certain information without revealing the information itself. In JMDT, ZKPs ensure **privacy and security while maintaining verifiability** across financial, identity, and enterprise applications.
 
@@ -30,7 +30,7 @@ JMDT supports both primary ZKP variants, leveraging the **RISC Zero zkVM** for u
 - Offer **enhanced scalability and transparency** with no trusted setup required
 - Use hash-based cryptography — **quantum-resistant** and highly secure
 - Particularly useful for large-scale computations in a trustless, decentralised manner
-- Used for: L2 → L1 aggregation proofs, DAG state transition commitments, Ethereum finality
+- Used for: the L2 → L1 anchoring pipeline (full state-transition proving being completed) and, with the planned L3, DAG state commitments
 
 By integrating both SNARKs and STARKs, JMDT achieves a balance of **efficiency, security, and scalability** — eliminating trust dependencies while preserving computational performance.
 
@@ -54,9 +54,9 @@ The RISC Zero zkVM acts as a **zk-powered virtual CPU** that proves the executio
 ```mermaid
 graph LR
     A["Rust ZK Circuit (guest program)"] -->|"Compiled by RISC Zero toolchain"| B["zkVM Guest Binary"]
-    B -->|"DAG state updates & rollup transitions executed"| C["STARK Proof + Journal (public output)"]
-    C -->|"Submitted to Ethereum"| D["JMDT Smart Contract on L1"]
-    D -->|"Verified on-chain"| E["L1 Finality"]
+    B -->|"Rollup logic executed"| C["STARK Proof + Journal (public output)"]
+    C -->|"Block commitment submitted"| D["ZK Rollup Contract on L1"]
+    D -->|"Anchored on Ethereum"| E["L1 Finality"]
 ```
 
 ---
@@ -71,9 +71,9 @@ graph LR
 
 ### 2. Aggregation & State Transition Circuits (L2 → L1)
 
-- Aggregate multiple rollup blocks or DAG state transitions
+- Aggregate multiple rollup blocks (and, with the planned L3, DAG state transitions)
 - Execute recursive verification logic or Merkle root reconciliation
-- Generate a succinct **STARK proof** using RISC Zero's zkVM for Ethereum submission
+- Generate a succinct **STARK proof** using RISC Zero's zkVM for Ethereum submission — full state-transition proving is being completed
 
 ---
 
@@ -121,7 +121,7 @@ See [Transaction & Block Lifecycle →](/docs/transaction-lifecycle) for how thi
 
 ## Integration Points
 
-- **AVC Consensus** — Every block proposed by the Sequencer must include a valid zk-proof; all JMDN buddy nodes verify it independently. See [AVC Consensus →](/docs/bft)
+- **AVC Consensus** — Buddy committees validate and finalise blocks; finalised blocks feed the ZK rollup anchoring pipeline. See [AVC Consensus →](/docs/bft)
 - **DID Engine** — ZKPs authenticate user identity without exposing PII. See [Decentralised Identity →](/docs/did)
-- **Sequencer & MemPool** — Aggregates DAG state and triggers zkVM proof generation. See [Sequencer →](/docs/sequencer)
-- **L1 Commitment** — STARK proofs submitted to the JMDT `ZKRollup` smart contract for on-chain verification via `commitRollup()`
+- **Sequencer & MemPool** — Orders and batches transactions; triggers zkVM proof generation. See [Sequencer →](/docs/sequencer)
+- **L1 Commitment** — Block commitments submitted to the JMDT `ZKRollup` contract via `commitRollup()`; full state-transition proving is being completed

@@ -2,7 +2,7 @@
 id: architecture
 title: Three-Layer Architecture
 sidebar_label: Architecture
-description: JMDT's three-layer architecture — L3 Enterprise DAG, L2 ZK-Rollup + AVC consensus, and L1 Ethereum settlement. Learn how each layer ensures scalability, security, and privacy.
+description: JMDT's architecture — L2 ZK-Rollup + AVC consensus anchored to L1 Ethereum settlement, with a planned L3 Enterprise DAG layer. Learn how each layer ensures scalability, security, and privacy.
 keywords: [JMDT architecture, Ethereum Layer 2, ZK-Rollups, AVC consensus, three-layer blockchain, L2 architecture, L3 DAG, enterprise blockchain]
 ---
 
@@ -10,13 +10,13 @@ keywords: [JMDT architecture, Ethereum Layer 2, ZK-Rollups, AVC consensus, three
 
 > JMDT is a multi-layered blockchain infrastructure designed to support **scalable, privacy-preserving**, and **enterprise-grade data processing** — from user consent to Ethereum finality.
 
-The architecture is divided into three core layers: **L3** (enterprise DAGs), **L2** (zkRollup + AVC consensus), and **L1** (Ethereum anchoring).
+The system that ships today comprises two layers: **L2** (zkRollup + AVC consensus) anchored to **L1** (Ethereum). A third layer — **L3** enterprise DAGs — is planned and described below as forward-looking design; see the [roadmap](/docs/roadmap) for its phase.
 
 ## Architecture Overview
 
 ```mermaid
 graph TD
-    subgraph L3["Layer 3 — Enterprise DAG"]
+    subgraph L3["Layer 3 — Enterprise DAG (planned)"]
         A1["Enterprise DAG Nodes (per org/dApp)"]
         A2["Pub/Sub DAG Mesh"]
         A3["InterDAG Bridge"]
@@ -46,36 +46,40 @@ graph TD
     end
     style L1 fill:#050508,stroke:#df77a8,stroke-width:2px,color:#fff
 
-    L3 -->|"DAG state transitions committed as zk-proofs"| L2
-    L2 -->|"STARK proofs submitted for L1 anchoring"| L1
+    L3 -->|"DAG state transitions committed as zk-proofs (planned)"| L2
+    L2 -->|"Block commitments anchored via ZK rollup contract"| L1
 ```
 
 ---
 
-## Layer 3 — Enterprise DAG & Consent Infrastructure
+## Layer 3 — Enterprise DAG & Consent Infrastructure *(planned)*
 
-Layer 3 is the enterprise data layer. Each organisation or dApp (e.g., SuperJ, Hercules, finance, healthcare) deploys a **private DAG (Directed Acyclic Graph) node** for high-throughput, localised operations.
+:::info Roadmap item
+Layer 3 is forward-looking design, not a live capability. This section describes the target architecture; see the [roadmap](/docs/roadmap) for its phase.
+:::
+
+Layer 3 will be the enterprise data layer. Each organisation or dApp (e.g., SuperJ, Hercules, finance, healthcare) will deploy a **private DAG (Directed Acyclic Graph) node** for high-throughput, localised operations.
 
 ### Enterprise DAG Nodes
 
-- DAG nodes are synchronised internally using **RAFT consensus**, while state transitions are periodically committed to L2
-- Supports **10,000+ TPS** for enterprise-scale data operations
-- Each node is permissioned, independently scalable, and anchored to JMDT Layer 2 for rollup-based finality and zk-proof auditability
+- DAG nodes will synchronise internally using **RAFT consensus**, with state transitions periodically committed to L2
+- Design target: **10,000+ TPS** for enterprise-scale data operations
+- Each node will be permissioned, independently scalable, and anchored to JMDT Layer 2 for rollup-based finality and zk-proof auditability
 
 ### Smart Contracts for Consent & Access
 
-- Govern user onboarding, consent capture, and access rights for data exchange
-- Only anonymised data is published to DAGs post-consent
+- Will govern user onboarding, consent capture, and access rights for data exchange
+- Only anonymised data will be published to DAGs post-consent
 
 ### InterDAG Bridge
 
-- Facilitates cross-enterprise collaboration using shared smart contracts
-- Enables access requests, logging, and secure off-chain queries between DAG nodes
+- Will facilitate cross-enterprise collaboration using shared smart contracts
+- Will enable access requests, logging, and secure off-chain queries between DAG nodes
 
 ### Pub/Sub DAG Mesh
 
-- Supports streaming analytics and real-time data ingestion via Pub/Sub architecture
-- Every node builds **vertices and branches**, logged with persistent storage and synchronised using RAFT
+- Will support streaming analytics and real-time data ingestion via Pub/Sub architecture
+- Every node will build **vertices and branches**, logged with persistent storage and synchronised using RAFT
 
 ---
 
@@ -85,11 +89,11 @@ Layer 2 is the core JMDT chain — where consensus is reached, identities are ve
 
 ### zk Engine (SNARK + STARK)
 
-Verifies DAG transactions and batch validity using zero-knowledge proofs. JMDT supports both:
+JMDT is built on the **RISC Zero zkVM**, with ZK circuits written in **Rust** as deterministic, auditable guest programs. The proof system supports both:
 - **zk-SNARKs** — efficient, minimal proof size for transaction-level validation
 - **zk-STARKs** — quantum-resistant, no trusted setup, for large-scale state aggregation
 
-All ZK circuits are written in **Rust** and executed within the **RISC Zero zkVM**, providing deterministic, auditable guest programs that output STARK proofs submitted to Ethereum.
+Blocks are committed and **anchored to Ethereum L1 via the ZK rollup contract**. Proof generation is integrated into the pipeline, with full state-transition proving being completed.
 
 ### DID Engine
 
@@ -98,21 +102,21 @@ Provides W3C-compliant Decentralised Identity, allowing private yet verifiable a
 ### AVC Consensus Mechanism
 
 JMDT's **Asynchronous Validation Consensus (AVC)** combines:
-- **VRF-based buddy selection** — deterministic, randomised validator sets each round
-- **Asynchronous quorum validation** — no global timing required; parallel validation across all JMDN nodes
-- **zk-proof enhanced verification** — each block includes a zk-proof verified independently by all buddies
-- **Gossip-based propagation** — efficient dissemination of transactions, votes, and zk-proofs
+- **VRF-based committee selection** — randomised validator committees drawn from an authenticated validator set
+- **Asynchronous quorum validation** — no global timing required; two-phase BFT with BLS aggregate signatures and a `(2n+2)/3` (≥⅔) quorum
+- **Equivocation detection** — conflicting votes from the same validator are detected and rejected
+- **Gossip-based propagation** — efficient dissemination of transactions, votes, and block commitments
 - **CRDT-driven conflict resolution** — convergence guaranteed even under network partitions
 
 See [AVC Consensus →](/docs/bft) for full details.
 
 ### Sequencer & MemPool
 
-Aggregates DAG state transitions into zk-proofs using a modular zkVM. Manages transaction ordering, batching, and DAG-to-L2 relay.
+Manages transaction ordering and batching for the L2 chain. External ordering is provided by the **Espresso Sequencer** (namespace 7000700) — see the [transaction lifecycle](/docs/transaction-lifecycle) for details.
 
 ### RISC Zero zkVM
 
-Executes rollup verification logic as a deterministic, auditable guest program. Outputs STARK proofs submitted to Ethereum for L1 anchoring.
+Executes rollup logic as a deterministic, auditable Rust guest program. Proof generation is integrated with the L1 anchoring pipeline, with full state-transition proving being completed.
 
 ### JMDN — JMDT Decentralised Node
 
@@ -126,7 +130,7 @@ Ethereum serves as the **foundational settlement layer** for JMDT, providing cen
 
 ### JMDT Smart Contracts
 
-- Receive L2 commitments, verify zkVM STARK proofs, and finalise state on Ethereum
+- Receive L2 block commitments and anchor them on Ethereum via the ZK rollup contract
 - Audited by independent firms prior to mainnet deployment
 - Open-sourced for full transparency
 
@@ -143,9 +147,9 @@ Ethereum serves as the **foundational settlement layer** for JMDT, providing cen
 | Property | Description |
 |---|---|
 | **Privacy-Preserving** | DID verification, ZK proof data validation — personal data is verified without being shared |
-| **Enterprise-First** | L3 DAG Mesh Network allows private computation, internal tokenisation, and industry-specific logic |
-| **Verifiable Rollups** | RISC Zero zkRollups provide immutable, trust-minimised proofs of all activity |
-| **Scalable** | L2: 2,000+ TPS; L3 DAG: 10,000+ TPS; ~3–10s L2 finality |
+| **Enterprise-First** | Planned L3 DAG Mesh Network for private computation, internal tokenisation, and industry-specific logic |
+| **Verifiable Rollups** | RISC Zero-based rollup pipeline anchors block commitments to Ethereum; full state-transition proving being completed |
+| **Scalable** | Design targets: 2,000+ TPS on L2; 10,000+ TPS on the planned L3 DAG |
 | **Composable** | Every layer is independently upgradeable and EVM-compatible |
 
 ---
@@ -156,6 +160,6 @@ Ethereum serves as the **foundational settlement layer** for JMDT, providing cen
 |---|---|---|
 | **L1 (Ethereum)** | Ethereum finality and censorship-resistance | Network reorgs, malicious smart contracts |
 | **L2 (JMDT Chain)** | ≥ 2/3 honest, randomised validators in AVC | Sybil attacks, block manipulation, equivocation |
-| **L3 (Enterprise DAG)** | Internal integrity within enterprise | Insider tampering, unauthorised data access |
+| **L3 (Enterprise DAG, planned)** | Internal integrity within enterprise | Insider tampering, unauthorised data access |
 | **ZK Proof System** | Soundness of zkSNARK/zkSTARK cryptographic assumptions | Proof forgery, data leakage |
 | **RISC Zero zkVM** | Deterministic Rust guest execution | Non-determinism, circuit manipulation |

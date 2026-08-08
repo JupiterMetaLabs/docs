@@ -82,7 +82,7 @@ This address is configured in your `jmdn.yaml` during node setup. See [Install &
 ## What's on Mainnet
 
 - **JMDT token** — The production ERC-20-compatible Layer 2 token (acquire via [Bitmart](/docs/get-jmdt))
-- **AVC consensus** — Live VRF-based buddy selection, BFT finality in ~3–10 seconds
+- **AVC consensus** — Live VRF-based buddy selection with BFT finality (~3–10s design target)
 - **Enterprise DAG (L3)** — Production DAG nodes operated by enterprise customers
 - **DID registry** — Live W3C-standard DID documents and key management
 - **Smart contracts** — EVM-compatible contracts deployed via Solidity or Rust (RISC Zero)

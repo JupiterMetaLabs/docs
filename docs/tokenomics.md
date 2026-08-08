@@ -21,17 +21,24 @@ The allocation is thoughtfully structured to incentivise participation, support 
 | **Token Name** | JMDT (Jupiter Meta Data Token) |
 | **Total Supply** | 1,000,000,000 (1 Billion) — hard cap |
 | **Token Type** | Utility |
-| **Primary Use** | DAG rollups, L2 commitments, enterprise access |
+| **Primary Use** | Transaction fees, network validation, DID operations, L2 commitments |
 
 ---
 
 ## Token Utility
 
-JMDT powers every layer of the protocol:
+JMDT powers the protocol today:
 
-- **DAG Rollups** — JMDT tokens are used to commit DAG state transitions to L2
-- **L2 Commitments** — Fuel Sequencer-submitted zkRollup batches to Ethereum
-- **Enterprise Access** — Enterprises receive JMDT via private allocation and grants to operate L3 DAG nodes
+- **Transaction Fees** — every L2 transaction pays its fees in JMDT
+- **Network Validation** — validators participate in AVC consensus, selected by VRF and reputation weighting
+- **DID Operations** — registering and managing Decentralised Identifiers
+- **L2 Commitments** — fuel Sequencer-submitted rollup batches anchored to Ethereum
+
+Planned utility, tied to roadmap phases (see the [roadmap](/docs/roadmap)):
+
+- **Validator Staking** — staking is part of the JMDT economic design and arrives with its roadmap phase
+- **DAG Rollups** — committing L3 DAG state transitions to L2 once the L3 layer ships
+- **Enterprise Access** — enterprises receive JMDT via private allocation and grants to operate planned L3 DAG nodes
 
 ---
 

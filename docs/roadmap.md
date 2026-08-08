@@ -8,8 +8,8 @@ keywords: [JMDT roadmap, blockchain roadmap, JupiterMeta milestones, JMDT mainne
 
 # JMDT Development Roadmap
 
-> **Current status:** Phases 1–3 complete. Token live on CoinMarketCap, CoinGecko, and BitMart.
-> Mainnet operational. ZK proofs, Decentralized Identity, and AVC consensus running in production.
+> **Current status (August 2026):** Phases 1–3 complete; Phase 4 in progress. The **L2 mainnet is operational** — ZK rollup anchoring to Ethereum, Decentralized Identity, and AVC consensus running in production — with **SuperJ** and **Hercules** as the live flagship dApps. The **L3 Enterprise DAG is a future phase** (see Phase 5), not part of the completed phases.
+> Token live on CoinMarketCap, CoinGecko, and BitMart.
 
 ---
 
@@ -63,6 +63,7 @@ Production launch, token distribution, and first exchange presence.
 Turning a live chain into a developer platform with real liquidity and tooling.
 
 - **Full EVM Compatibility** — deploy any Solidity/Vyper smart contract on JMDT L2 without modification; pass Ethereum's standard EVM test suite
+- **Validator Staking** — introduce staking to the validator economic model (today validators are selected by VRF + reputation and fees are paid transactionally)
 - **JMDT ↔ Ethereum Mainnet Bridge** — two-way asset bridge with ZK-proof-based fraud proofs; no centralized relayer
 - **Developer SDK** — Go, JavaScript, and Python SDKs; RPC-compatible with Hardhat, Foundry, and ethers.js
 - **Block Explorer V2** — real-time explorer for blocks, transactions, accounts, DID records, ZK proofs, and smart contracts
@@ -76,6 +77,7 @@ Turning a live chain into a developer platform with real liquidity and tooling.
 
 Turning the "Truth Layer" positioning into products enterprises and users actually ship with.
 
+- **L3 Enterprise DAG Layer** — design and build the enterprise data layer: RAFT-synchronised private DAG nodes, InterDAG bridge, and Pub/Sub mesh committing state to L2 (design target: 10K+ TPS)
 - **Verifiable Credential Marketplace** — issue, hold, and verify W3C-compliant credentials on-chain; revocation via ZK proofs without exposing PII
 - **ZK-VM (Zero Knowledge Virtual Machine)** — execute private smart contracts where inputs stay hidden; on-device proving at the application layer
 - **Verifiable Data Oracles** — on-chain attestation of real-world data (KYC outcomes, compliance checks, IoT readings) with ZK proof of source integrity
@@ -116,7 +118,7 @@ The long-term thesis: JMDT as the verification backbone for AI-generated content
 | 2 | Q3 2024–Q1 2025 | Testnet, ZK-rollup aggregator, FastSync, enterprise beta | ✅ Complete |
 | 3 | Q2–Q4 2025 | Mainnet, 5K TPS, CMC/CoinGecko/BitMart listings | ✅ Complete |
 | 4 | Q3–Q4 2026 | EVM, bridge, SDK, staking, CEX expansion | 🔨 In progress |
-| 5 | Q1–Q2 2027 | Verifiable credentials, ZK-VM, Sign-In with JMDT | 🗓 Planned |
+| 5 | Q1–Q2 2027 | L3 enterprise DAG, verifiable credentials, ZK-VM | 🗓 Planned |
 | 6 | Q3–Q4 2027 | DAO governance, multi-chain, DEX, L3 chains | 🗓 Planned |
 | 7 | 2028 | AI attestation, agent DIDs, truth score API | 🗓 Planned |
 

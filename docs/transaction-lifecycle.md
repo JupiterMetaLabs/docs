@@ -32,14 +32,14 @@ sequenceDiagram
     Wallet->>RPC: Submit signed transaction
     RPC->>MRE: Forward transaction (gRPC)
     MRE->>Mempools: Route across mempool pool
-    Seq->>Mempools: Pull pending transactions
-    Seq->>Espresso: Submit for deterministic ordering
+    Seq->>Mempools: Pull pending txs (price-and-nonce selection)
+    Seq->>Espresso: Submit for ordering (namespace 7000700)
     Espresso-->>Seq: Return ordered transaction set
-    Seq->>zkVM: Generate STARK proof of the block
-    Seq->>JMDN: Submit block + proof
+    Seq->>zkVM: Generate STARK proof of block commitment
+    Seq->>JMDN: Submit block + commitment
     JMDN->>JMDN: BFT consensus (BLS signatures, vote quorum)
     JMDN->>DB: Commit block (WAL-first)
-    Seq->>L1: Submit rollup proof — commitRollup()
+    Seq->>L1: Anchor block commitment — commitRollup()
 ```
 
 ---
@@ -54,17 +54,25 @@ JMDN supports both legacy and **EIP-1559 (Type 2)** transactions — see [EIP-15
 
 The RPC layer forwards the transaction over gRPC to the **Mempool Routing Engine**, which distributes incoming transactions across a pool of independent mempools. This spreads load across the network and avoids any single mempool becoming a bottleneck or point of failure.
 
-## Step 3 — Ordering via Espresso
+Routing uses **sender affinity**: transactions from the same sender are placed on the same mempool shard, so a sender's transactions can always be sequenced against each other in nonce order.
 
-The **Sequencer Orchestrator** pulls pending transactions from the mempool pool and submits them to **Espresso** for deterministic ordering. Espresso returns a single, agreed-upon ordering for the transaction set, which prevents ordering ambiguity and front-running before consensus even begins.
+## Step 3 — Selection & Ordering via the Espresso Sequencer
+
+The **Sequencer Orchestrator** pulls pending transactions from the mempool pool using **price-and-nonce selection**:
+
+- **Per-sender strict nonce order** — a sender's transactions are only ever taken in ascending nonce sequence
+- **Cross-sender fee priority** — among the head transaction of each sender, higher-fee transactions are selected first
+- **Nonce gap-hold** — a transaction whose nonce leaves a gap is held by the orchestrator until the gap fills, rather than being dropped or reordered
+
+The selected set is then submitted to the **Espresso Sequencer** — an external, decentralised sequencing network that provides the canonical transaction ordering for JMDT (transactions are submitted under **namespace 7000700**). Espresso returns a single, agreed-upon ordering for the transaction set, which prevents ordering ambiguity and front-running before consensus even begins. As an external dependency, Espresso availability affects block production cadence; the orchestrator retries submission until ordering is obtained.
 
 ## Step 4 — Proof Generation
 
-Once ordering is finalized, the Orchestrator generates a **zero-knowledge proof** of the block using the **RISC Zero zkVM** (a local, succinct STARK prover):
+Once ordering is finalized, the Orchestrator generates a **zero-knowledge proof of the block commitment** using the **RISC Zero zkVM** (a local, succinct STARK prover):
 
 - Each transaction is hashed individually with **SHA-256**, using per-transaction boundary separators to prevent hash-boundary ambiguity between adjacent transactions.
 - The block's overall commitment is a **Blake2b-256** digest computed over all transaction fields.
-- The proof pipeline runs on **RISC Zero 3.0**.
+- The proof pipeline runs on **RISC Zero 3.0**; full state-transition proving is being completed.
 
 See [Zero-Knowledge Proofs & RISC Zero zkVM →](/docs/zk) for the underlying proof system.
 

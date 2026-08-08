@@ -12,11 +12,11 @@ keywords: [JMDT use cases, SuperJ, Hercules, blockchain identity, enterprise DAG
 
 ---
 
-## Layer 3 Applications on JMDT
+## Flagship Applications on JMDT
 
 ### SuperJ — Consumer Intelligence & Reward Platform
 
-**SuperJ** is a decentralised consumer intelligence app built on JMDT's L3 DAG infrastructure. It currently enables **over 20 million users** to:
+**SuperJ** is a decentralised consumer intelligence app built on JMDT's decentralised identity and verifiable-data infrastructure. It currently enables **over 20 million users** to:
 
 - ZK-verify their identity without exposing personal information
 - Share data and provide verified insights to enterprises
@@ -51,20 +51,20 @@ SuperJ demonstrates JMDT's core value proposition: users own their data, enterpr
 3. Users can share credentials across **multiple platforms** without re-exposing identity
 4. Enterprise-managed DIDs enable department- or role-level access control
 
-### Private Enterprise Data Operations (L3 DAG)
+### Private Enterprise Data Operations (L3 DAG) *(planned)*
 
-Enterprises deploy private **DAG nodes** on JMDT's L3 for:
+Once the L3 DAG layer ships (see the [roadmap](/docs/roadmap)), enterprises will deploy private **DAG nodes** for:
 
-- **Supply chain tracking** — tamper-proof audit trails via immudb
+- **Supply chain tracking** — tamper-proof audit trails on an append-only ledger
 - **Compliance logging** — append-only, ZK-anchored activity records
 - **CRM and analytics** — AI-inference logs with verifiable provenance
 - **Internal tokenisation** — industry-specific logic and reward mechanisms
 
-All DAG activity is periodically committed to L2 as a zk-proof, providing global auditability without exposing raw enterprise data.
+DAG activity will be periodically committed to L2, providing global auditability without exposing raw enterprise data.
 
-### Cross-Enterprise Data Collaboration
+### Cross-Enterprise Data Collaboration *(planned)*
 
-Using the **InterDAG Bridge**, organisations can:
+Using the planned **InterDAG Bridge**, organisations will be able to:
 
 - Collaborate on shared datasets without centralising control
 - Enable access requests, logging, and secure off-chain queries
@@ -86,10 +86,10 @@ Using the **InterDAG Bridge**, organisations can:
 - DID-based access control ensures only authorised parties can query datasets
 - zk-proofed data capture enables GDPR-compliant, monetisable data flows
 
-### AI-Driven Analytics Pipelines
+### AI-Driven Analytics Pipelines *(planned with L3)*
 
-- Build AI inference pipelines on L3 DAG nodes
-- Outputs are cryptographically committed to L2 — audit-ready by design
+- Build AI inference pipelines on the planned L3 DAG nodes
+- Outputs will be cryptographically committed to L2 — audit-ready by design
 - Combine human-verified identity signals with enterprise data for trusted AI
 
 ---
@@ -98,10 +98,10 @@ Using the **InterDAG Bridge**, organisations can:
 
 | Step | Action |
 |---|---|
-| **1. Choose Your Layer** | Deploy an L3 DAG node for enterprise data, or build directly on L2 |
+| **1. Build on L2** | Deploy EVM-compatible smart contracts on JMDT L2 today (L3 DAG nodes arrive with the L3 roadmap phase) |
 | **2. Set Up DID & Access** | Register a DID, manage keys with secure wallets, issue sub-identities |
-| **3. Deploy Workflows** | Build DAG-based business logic in Python or Rust |
-| **4. Rollup to L2** | Batch DAG transactions into zk-SNARK proofs, submit to JMDT L2 |
-| **5. Use JMDT Token** | Fuel DAG rollups, L2 commitments, and node staking |
-| **6. Run Infrastructure** | Host on GCP, AWS, or on-prem with JMDT.io RPC and immudb-based logs |
-| **7. Monitor & Reward** | Use Explorer dashboards to visualise DAG graphs, rollup health, and proof verification |
+| **3. Deploy Workflows** | Build business logic in Solidity today; DAG-based Python/Rust workflows arrive with L3 |
+| **4. Commit to L2** | Transactions execute on JMDT L2 and are anchored to Ethereum via the ZK rollup contract |
+| **5. Use JMDT Token** | Fuel transaction fees, DID operations, and L2 commitments (staking is planned — see the roadmap) |
+| **6. Run Infrastructure** | Host on GCP, AWS, or on-prem with JMDT.io RPC and append-only verifiable logs |
+| **7. Monitor** | Use Explorer dashboards to track transactions, blocks, and network health |

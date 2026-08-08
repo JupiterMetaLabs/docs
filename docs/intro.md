@@ -16,11 +16,11 @@ keywords: [JMDT, Jupiter Meta Data Token, Ethereum Layer 2, Zero-Knowledge Proof
 
 Built with **Zero-Knowledge Proofs (ZKPs)**, **Decentralized Identity (DID)**, and the proprietary **Asynchronous Validation Consensus (AVC)**, JMDT delivers a high-performance, privacy-preserving infrastructure tailored for both decentralized applications and enterprise-grade solutions.
 
-JMDT's architecture spans three layers:
+JMDT ships today as a two-layer system, with a third layer on the roadmap:
 
-- **L3 DAG Layer** — enterprise-grade, high-throughput data operations (10,000+ TPS)
-- **L2 Rollup Layer** — privacy-preserving execution and zk-based consensus (2,000+ TPS, ~3–10s finality)
+- **L2 Rollup Layer** — privacy-preserving execution with AVC consensus (design target: 2,000+ TPS)
 - **L1 Finality Layer** — Ethereum anchoring and global settlement
+- **L3 DAG Layer** *(planned)* — enterprise-grade, high-throughput data operations (design target: 10,000+ TPS); see the [roadmap](/docs/roadmap)
 
 ## Why Choose JMDT?
 
@@ -36,7 +36,7 @@ Conventional blockchains struggle with performance, privacy, and real-world comp
 - Scalable and secure block finality via quorum-based buddy voting
 - Energy-efficient operation by eliminating mining
 - Low-latency, fault-tolerant propagation via Gossip Protocol
-- Seamless compatibility with DAG-based L3 enterprise extensions
+- Designed for compatibility with the planned DAG-based L3 enterprise extensions
 
 - **Ethereum Interoperability:** Full EVM compatibility — deploy existing Ethereum smart contracts on JMDT without modification. Supports DeFi, NFT marketplaces, DAOs, and enterprise solutions.
 
@@ -44,18 +44,18 @@ Conventional blockchains struggle with performance, privacy, and real-world comp
 
 - **Privacy-Preserving Queries:** DID-based access with zk-proofed data capture — enabling GDPR-compliant data sharing without exposing sensitive details.
 
-- **Enterprise Mesh Model:** Supports interoperable DAGs per organisation, enabling modular private ecosystems with shared L2 accountability.
+- **Enterprise Mesh Model** *(planned)*: Interoperable DAGs per organisation, enabling modular private ecosystems with shared L2 accountability — part of the L3 roadmap phase.
 
 ## Core Objectives
 
 | Objective | Description |
 |---|---|
-| **Scalability** | >2,000 TPS (L2) via zkRollups; 10K+ TPS (L3) via DAG batching |
+| **Scalability** | Design targets: >2,000 TPS on L2 via zkRollups; 10K+ TPS via the planned L3 DAG |
 | **Privacy** | End-to-end privacy via ZKPs and DID-based access controls |
-| **Security** | zkVM-based execution, AVC consensus, and stake-based accountability |
+| **Security** | zkVM-based execution, AVC consensus, and reputation-weighted validator accountability |
 | **Interoperability** | Fully compatible with Ethereum and Web3 SDKs |
 | **Efficiency** | Bloom Filters reduce propagation redundancy; zkRollups optimise gas fees for L1 finality |
-| **Utility Token** | JMDT fuels gas fees, enterprise DAG access, and L2 commitments |
+| **Utility Token** | JMDT fuels transaction fees, network validation, DID operations, and L2 commitments |
 
 ## JMDT at a Glance
 

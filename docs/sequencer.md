@@ -20,7 +20,7 @@ The Sequencer runs as a core component inside the **JMDN** (JMDT Decentralised N
 
 The Sequencer module enables:
 
-- Pulling pending transactions from the mempool pool and submitting them to Espresso for deterministic ordering
+- Pulling pending transactions from the mempool pool with **price-and-nonce selection** (per-sender strict nonce order, cross-sender fee priority, nonce gap-hold) and submitting them to the Espresso Sequencer for ordering
 - Consensus orchestration for block validation
 - Buddy node selection and management using VRF
 - Vote collection from buddy nodes
@@ -33,13 +33,13 @@ See [Transaction & Block Lifecycle →](/docs/transaction-lifecycle) for the ful
 
 ---
 
-## Transaction Ordering — Espresso
+## Transaction Ordering — Espresso Sequencer
 
-Before a block reaches consensus, the Sequencer submits the pulled transaction set to **Espresso** for deterministic ordering. Espresso returns a single, agreed-upon transaction order, removing ordering ambiguity between competing mempools and giving every buddy node the same ordered set to validate.
+Before a block reaches consensus, the Sequencer submits the pulled transaction set to the **Espresso Sequencer** — an external, decentralised sequencing network — for ordering, under JMDT's **namespace 7000700**. Espresso returns a single, agreed-upon transaction order, removing ordering ambiguity between competing mempools and giving every buddy node the same ordered set to validate. As an external dependency, Espresso availability affects block production cadence; submission is retried until ordering is obtained.
 
 ## Proof Generation — RISC Zero zkVM
 
-Once transactions are ordered, the Sequencer generates a **STARK proof** of the block using the **RISC Zero zkVM** (RISC Zero 3.0):
+Once transactions are ordered, the Sequencer generates a **STARK proof of the block commitment** using the **RISC Zero zkVM** (RISC Zero 3.0); full state-transition proving is being completed:
 
 - Each transaction is hashed individually with **SHA-256**, using per-transaction boundary separators
 - The block commitment is a **Blake2b-256** digest computed over all transaction fields
@@ -220,7 +220,7 @@ The module includes comprehensive error handling for:
 
 - Efficient VRF-based buddy node selection
 - Concurrent vote collection from the full committee
-- Optimised BFT execution for ~3–10s L2 finality
+- Optimised BFT execution targeting ~3–10s L2 finality
 - PubSub channel lifecycle management per block
 
 ---
