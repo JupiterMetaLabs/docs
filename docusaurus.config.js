@@ -134,6 +134,7 @@ module.exports = {
             },
             items: [
                 { type: 'doc', docId: 'intro', position: 'left', label: 'Docs' },
+                { type: 'docsVersionDropdown', position: 'right' },
                 { href: 'https://jmdt.io', label: 'jmdt.io', position: 'right' },
                 { href: 'https://github.com/JupiterMetaLabs/docs', label: 'GitHub', position: 'right' },
             ],
@@ -193,6 +194,14 @@ module.exports = {
                     editUrl: 'https://github.com/JupiterMetaLabs/docs/edit/main/',
                     // ── AEO: Breadcrumb structured data for every doc page ─────────
                     breadcrumbs: true,
+                    // ── Versioning: 2.0.x is what users see; 1.x is archived with
+                    //    Docusaurus's standard "unmaintained" banner on every page.
+                    lastVersion: '2.0',
+                    versions: {
+                        current: { label: 'Next (unreleased)', path: 'next' },
+                        '2.0': { label: '2.0.x (current)' },
+                        '1.x': { label: '1.x (deprecated)', banner: 'unmaintained' },
+                    },
                 },
                 // ── SEO: Sitemap auto-generation ─────────────────────────────────
                 sitemap: {

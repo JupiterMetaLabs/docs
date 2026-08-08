@@ -83,7 +83,7 @@ Running a mainnet JMDN node requires JMDT for:
 - **Gas fees** — Paying for transactions you submit
 - **Enterprise access** — Paying for L3 DAG node allocations and data services
 
-Acquire JMDT on **MEXC (JMDT/USDT)** — see [How to Get JMDT →](/docs/get-jmdt)
+Acquire JMDT on **Bitmart** — see [How to Get JMDT →](/docs/get-jmdt)
 
 ---
 
@@ -95,7 +95,7 @@ Before proceeding to installation:
 - [ ] Ubuntu 20.04+ or supported OS installed
 - [ ] Port 15000 open and reachable
 - [ ] SSH access to the server confirmed
-- [ ] JMDT tokens acquired via MEXC
+- [ ] JMDT tokens acquired via Bitmart
 - [ ] Git installed (`git --version`)
 
 Ready? Continue to [Install & Configure →](./install.md)
