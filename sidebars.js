@@ -21,10 +21,9 @@ module.exports = {
       collapsed: false,
       items: [
         'zk',
+        'transaction-lifecycle',
         'did',
-        // 'did-registry',       // DIDCreatorLite Service — coming soon
         'tokenomics',
-        // 'seednode-core',      // Seed Node — coming soon
         {
           type: 'category',
           label: 'JMDT Decentralized Node',
@@ -32,7 +31,7 @@ module.exports = {
           items: [
             'jmdt-node',
             'running-a-node',
-            // 'seednode',        // Seed Node — coming soon
+            'docker',
             'node-selection',
             'avc',
             'bft',
@@ -49,17 +48,18 @@ module.exports = {
             'explorer',
           ],
         },
-        // 'mempool-routing-engine', // Mempool Routing Engine — coming soon
       ]
     },
-    // {
-    //   type: 'category',
-    //   label: 'Development & Roadmap',
-    //   collapsed: false,
-    //   items: [
-    //     'roadmap',             // Roadmap — coming soon
-    //   ],
-    // },
+    {
+      type: 'category',
+      label: 'Development & Roadmap',
+      collapsed: false,
+      items: [
+        'roadmap',
+        'migration-v1-to-v2',
+        'changelog',
+      ],
+    },
     {
       type: 'category',
       label: 'Mainnet',

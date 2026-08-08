@@ -49,7 +49,7 @@ Summary: JMDT compared to Polygon zkEVM, Starknet, Aztec, and Hyperledger Fabric
 
 ## How to Get JMDT
 URL: https://docs.jmdt.io/docs/get-jmdt
-Summary: How to acquire JMDT tokens. Mainnet: purchase on Bitmart (listed exchange). Testnet: faucet coming soon for developers and node operators.
+Summary: How to acquire JMDT tokens. Mainnet: purchase exclusively on MEXC (JMDT/USDT pair). Testnet: free tokens from the faucet at faucet.jmdt.io.
 
 ## Consensus: AVC
 URL: https://docs.jmdt.io/docs/bft

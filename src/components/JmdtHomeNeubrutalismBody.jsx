@@ -151,7 +151,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'How do I buy JMDT tokens?',
-    a: 'When JMDT mainnet tokens go live, they are listed as available for purchase on Bitmart (per the Testnet vs Mainnet documentation).',
+    a: 'When JMDT mainnet tokens go live, they are listed as available for purchase exclusively on MEXC (JMDT/USDT pair).',
   },
 ];
 
@@ -201,9 +201,21 @@ export default function JmdtHomeNeubrutalismBody() {
               </Link>
             </div>
 
-            <Link className="homeTelegramBtn" to="https://t.me/JMDT_token" target="_blank" rel="noopener noreferrer">
+            <Link className="homeTelegramBtn" to="https://t.me/JMDT_Blockchain" target="_blank" rel="noopener noreferrer">
               JOIN TELEGRAM GROUP
               <img src="/icons/join_telegram_arrow.svg" alt="" width="15" height="10" />
+            </Link>
+
+            <Link
+              className="homeMexcChip"
+              to="https://www.mexc.com/exchange/JMDT_USDT"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="JMDT is listed on MEXC — trade JMDT/USDT"
+            >
+              LISTED ON
+              <img src="/img/mexc_dark.svg" alt="MEXC" height="12" style={{ height: 12, width: 'auto', display: 'block' }} />
+              <span className="homeMexcPair">JMDT/USDT</span>
             </Link>
           </div>
 
@@ -367,7 +379,7 @@ export default function JmdtHomeNeubrutalismBody() {
             <div className="homeCommunityTitle">Still have questions? Join our community.</div>
             <a
               className="button button--primary button--lg homeCommunityButton"
-              href="https://t.me/JMDT_token"
+              href="https://t.me/JMDT_Blockchain"
               target="_blank"
               rel="noopener noreferrer"
             >

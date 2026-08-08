@@ -23,7 +23,6 @@ The **JMDT Mainnet** is the production Layer 2 network anchored to Ethereum. All
 | **Native Token** | JMDT |
 | **RPC URL (Primary)** | `https://mainnetrpc.jmdt.io` |
 | **RPC URL (Alias)** | `https://rpc.jmdt.io` |
-| **Seed Node** | `34.174.94.172` |
 | **Consensus** | AVC (Asynchronous Validation Consensus) |
 | **L1 Settlement** | Ethereum |
 
@@ -73,16 +72,16 @@ curl -X POST https://mainnetrpc.jmdt.io \
 The mainnet seed node handles peer discovery for new JMDN nodes joining the network:
 
 ```
-34.174.94.172
+contact JMDT team to setup Mainnet validator
 ```
 
-This address is configured in your `jmdn.yaml` during node setup. See [Install & Configure →](./install) for the full config.
+This address is configured in your `jmdn.yaml` during node setup. See [Install & Configure →](./install.md) for the full config.
 
 ---
 
 ## What's on Mainnet
 
-- **JMDT token** — The production ERC-20-compatible Layer 2 token (acquire via [Bitmart](/docs/get-jmdt))
+- **JMDT token** — The production ERC-20-compatible Layer 2 token (acquire via [MEXC](/docs/get-jmdt))
 - **AVC consensus** — Live VRF-based buddy selection, BFT finality in ~3–10 seconds
 - **Enterprise DAG (L3)** — Production DAG nodes operated by enterprise customers
 - **DID registry** — Live W3C-standard DID documents and key management
@@ -95,8 +94,8 @@ This address is configured in your `jmdn.yaml` during node setup. See [Install &
 Running a mainnet node involves **real JMDT tokens** and connects to the live production network. Make sure you:
 
 - Have a server meeting the [hardware prerequisites](./prerequisites)
-- Have JMDT for gas fees (acquire via [Bitmart](/docs/get-jmdt))
+- Have JMDT for gas fees (acquire via [MEXC](/docs/get-jmdt))
 - Are familiar with the [JMDN build process](/docs/running-a-node)
 - Keep your node key and config files secured
 
-Ready? Continue to [Prerequisites →](./prerequisites)
+Ready? Continue to [Prerequisites →](./prerequisites.md)

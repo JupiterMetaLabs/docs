@@ -70,7 +70,7 @@ The testnet seed node handles peer discovery for JMDN nodes joining the testnet:
 34.134.156.196
 ```
 
-This address is configured in your `jmdn.yaml` during node setup. See [Install & Configure →](./install) for the full config.
+This address is configured in your `jmdn.yaml` during node setup. See [Install & Configure →](./install.md) for the full config.
 
 ---
 
@@ -105,8 +105,8 @@ Watch [jmdt.io](https://jmdt.io) for the faucet launch announcement.
 |---|---|---|
 | Chain ID | `8000800` | `7000700` |
 | RPC | `testnetrpc.jmdt.io` | `mainnetrpc.jmdt.io` |
-| Seed node | `34.134.156.196` | `34.174.94.172` |
-| Tokens | Free via faucet | Purchase on Bitmart |
+| Seed node | `34.134.156.196` | Will be provided post onboarding |
+| Tokens | Free via faucet | Purchase on MEXC (JMDT/USDT) |
 | Real value | No — None | Yes — Real JMDT |
 | L1 settlement | Ethereum Sepolia | Ethereum |
 
@@ -118,4 +118,4 @@ Watch [jmdt.io](https://jmdt.io) for the faucet launch announcement.
 - The same `jmdn` binary is used for both testnet and mainnet; only the config differs
 - Testnet may be reset periodically; don't rely on testnet data for production
 
-Ready? Continue to [Prerequisites →](./prerequisites)
+Ready? Continue to [Prerequisites →](./prerequisites.md)

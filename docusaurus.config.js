@@ -134,15 +134,7 @@ module.exports = {
             },
             items: [
                 { type: 'doc', docId: 'intro', position: 'left', label: 'Docs' },
-                {
-                    type: 'dropdown',
-                    label: 'Networks',
-                    position: 'left',
-                    items: [
-                        { label: 'Mainnet', to: '/docs/mainnet/mainnet-overview' },
-                        { label: 'Testnet', to: '/docs/testnet/testnet-overview' },
-                    ],
-                },
+                { type: 'docsVersionDropdown', position: 'right' },
                 { href: 'https://jmdt.io', label: 'jmdt.io', position: 'right' },
                 { href: 'https://github.com/JupiterMetaLabs/docs', label: 'GitHub', position: 'right' },
             ],
@@ -169,7 +161,7 @@ module.exports = {
             copyright: `© ${new Date().getFullYear()} JMDT. All Rights Reserved.`,
         },
         colorMode: {
-            defaultMode: 'dark', // Ensuring default dark mode to match ZKJM.io
+            defaultMode: 'dark', // Ensuring default dark mode to match JMDT.io
             disableSwitch: false,
             respectPrefersColorScheme: true,
         },
@@ -202,6 +194,14 @@ module.exports = {
                     editUrl: 'https://github.com/JupiterMetaLabs/docs/edit/main/',
                     // ── AEO: Breadcrumb structured data for every doc page ─────────
                     breadcrumbs: true,
+                    // ── Versioning: 2.0.x is what users see; 1.x is archived with
+                    //    Docusaurus's standard "unmaintained" banner on every page.
+                    lastVersion: '2.0',
+                    versions: {
+                        current: { label: 'Next (unreleased)', path: 'next' },
+                        '2.0': { label: '2.0.x (current)' },
+                        '1.x': { label: '1.x (deprecated)', banner: 'unmaintained' },
+                    },
                 },
                 // ── SEO: Sitemap auto-generation ─────────────────────────────────
                 sitemap: {

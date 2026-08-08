@@ -21,6 +21,7 @@
     "start": "docusaurus start",
     "build": "docusaurus build",
     "deploy": "GIT_USER=JupiterMetaZK docusaurus deploy",
-    "serve": "serve -s build"
+    "serve": "serve -s build",
+    "docusaurus": "docusaurus"
   }
 }
