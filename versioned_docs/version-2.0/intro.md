@@ -26,7 +26,7 @@ JMDT ships today as a two-layer system, with a third layer on the roadmap:
 
 Conventional blockchains struggle with performance, privacy, and real-world compliance. JMDT addresses these through a tightly integrated architecture:
 
-- **Zero-Knowledge Proofs (ZKPs):** Enabling identity verification, private transaction validation, and 100% data privacy through trustless infrastructure. JMDT supports both **zk-SNARKs** and **zk-STARKs** via the **RISC Zero zkVM**, with ZK circuits authored in Rust for auditability and reproducibility.
+- **Zero-Knowledge Proofs (ZKPs):** Enabling identity verification, private transaction validation, and strong data privacy through trustless infrastructure. JMDT uses **zk-STARKs** via the **RISC Zero zkVM**, with ZK circuits authored in Rust for auditability and reproducibility.
 
 - **Decentralized Identity (DID):** W3C-compliant, privacy-preserving authentication that verifies PII with on-chain records without accessing any personal information. Supports self-sovereign, enterprise-managed, and service-issued DIDs.
 
@@ -59,7 +59,7 @@ Conventional blockchains struggle with performance, privacy, and real-world comp
 
 ## JMDT at a Glance
 
-JMDT has cryptographically verified **over 20 million humans** through its ecosystem without exposing their identity — empowering users to monetise authentic data they actually own, and giving enterprises a verifiable chain of custody from human consent to predictive insight.
+JMDT cryptographically verifies humans through its ecosystem without exposing their identity — empowering users to monetise authentic data they actually own, and giving enterprises a verifiable chain of custody from human consent to predictive insight.
 
 → [Explore the Architecture](/docs/architecture)
 → [Understand AVC Consensus](/docs/bft)

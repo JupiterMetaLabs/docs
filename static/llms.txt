@@ -69,7 +69,7 @@ Summary: On-chain registry for DID documents and resolution on the JMDT L2.
 
 ## ZK Proofs
 URL: https://docs.jmdt.io/docs/zk
-Summary: Zero-Knowledge Proofs in JMDT — zk-SNARKs for transaction-level validation, zk-STARKs for large-scale state aggregation, and the RISC Zero zkVM executing Rust ZK circuits for L1 STARK proof submission.
+Summary: Zero-Knowledge Proofs in JMDT — zk-STARKs for transaction validation and large-scale state aggregation, and the RISC Zero zkVM executing Rust ZK circuits for L1 STARK proof submission.
 
 ## Tokenomics
 URL: https://docs.jmdt.io/docs/tokenomics

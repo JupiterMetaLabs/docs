@@ -27,7 +27,7 @@ graph TD
     style L3 fill:#1a1a2e,stroke:#71a2e6,stroke-width:2px,color:#fff
 
     subgraph L2["Layer 2 — ZK-Rollup & AVC"]
-        B1["zk Engine (SNARK + STARK)"]
+        B1["zk Engine (STARK)"]
         B2["DID Engine"]
         B3["AVC Consensus Mechanism"]
         B4["Sequencer + MemPool"]
@@ -87,11 +87,10 @@ Layer 3 will be the enterprise data layer. Each organisation or dApp (e.g., Supe
 
 Layer 2 is the core JMDT chain — where consensus is reached, identities are verified, and zk-proofs are generated and aggregated before Ethereum settlement.
 
-### zk Engine (SNARK + STARK)
+### zk Engine (STARK)
 
-JMDT is built on the **RISC Zero zkVM**, with ZK circuits written in **Rust** as deterministic, auditable guest programs. The proof system supports both:
-- **zk-SNARKs** — efficient, minimal proof size for transaction-level validation
-- **zk-STARKs** — quantum-resistant, no trusted setup, for large-scale state aggregation
+JMDT is built on the **RISC Zero zkVM**, with ZK circuits written in **Rust** as deterministic, auditable guest programs. The proof system is STARK-based:
+- **zk-STARKs** — quantum-resistant, no trusted setup; used for transaction-level validation and large-scale state aggregation
 
 Blocks are committed and **anchored to Ethereum L1 via the ZK rollup contract**. Proof generation is integrated into the pipeline, with full state-transition proving being completed.
 
@@ -161,5 +160,5 @@ Ethereum serves as the **foundational settlement layer** for JMDT, providing cen
 | **L1 (Ethereum)** | Ethereum finality and censorship-resistance | Network reorgs, malicious smart contracts |
 | **L2 (JMDT Chain)** | ≥ 2/3 honest, randomised validators in AVC | Sybil attacks, block manipulation, equivocation |
 | **L3 (Enterprise DAG, planned)** | Internal integrity within enterprise | Insider tampering, unauthorised data access |
-| **ZK Proof System** | Soundness of zkSNARK/zkSTARK cryptographic assumptions | Proof forgery, data leakage |
+| **ZK Proof System** | Soundness of zk-STARK cryptographic assumptions | Proof forgery, data leakage |
 | **RISC Zero zkVM** | Deterministic Rust guest execution | Non-determinism, circuit manipulation |

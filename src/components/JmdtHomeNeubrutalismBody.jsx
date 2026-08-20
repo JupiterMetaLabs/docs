@@ -51,12 +51,6 @@ const IconEthereum = () => (
   </svg>
 );
 
-const HERO_METRICS = [
-  { value: '5,000+', label: 'TPS' },
-  { value: '20M', label: 'Verified Users' },
-  { value: '100%', label: 'ZK Privacy' },
-];
-
 const MISSION_PILLARS = [
   {
     number: '01',
@@ -66,7 +60,7 @@ const MISSION_PILLARS = [
   {
     number: '02',
     title: 'Zero-Knowledge Innovation',
-    description: 'zk-STARK and SNARK proof systems enable privacy-preserving verification without compromising security.',
+    description: 'zk-STARK proof systems enable privacy-preserving verification without compromising security.',
   },
   {
     number: '03',
@@ -111,7 +105,7 @@ const LATEST_INSIGHTS = [
 const FAQ_ITEMS = [
   {
     q: "What is JMDT's L3 DAG architecture?",
-    a: "JMDT (Jupiter Meta Data Token) uses a Layer 3 Directed Acyclic Graph (DAG) architecture. Unlike linear blockchains, the DAG enables asynchronous verification and parallel processing, delivering ultra-high throughput (5,000+ TPS) and near-instant finality for real-time, high-frequency use cases.",
+    a: "JMDT (Jupiter Meta Data Token) uses a Layer 3 Directed Acyclic Graph (DAG) architecture. Unlike linear blockchains, the DAG enables asynchronous verification and parallel processing, delivering ultra-high throughput and near-instant finality for real-time, high-frequency use cases.",
   },
   {
     q: 'How does Zero-Knowledge DID protect my privacy?',
@@ -139,7 +133,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'Is the JMDT network secure against quantum computing?',
-    a: 'JMDT is designed with quantum-robust proof systems in mind (zk-STARK and zk-SNARK proof oracles) so verifiable computation can remain reliable under stronger adversarial assumptions.',
+    a: 'JMDT is designed with quantum-robust proof systems in mind (zk-STARK proof systems) so verifiable computation can remain reliable under stronger adversarial assumptions.',
   },
   {
     q: 'How do I set up the JMDT Testnet in my wallet?',
@@ -294,20 +288,6 @@ export default function JmdtHomeNeubrutalismBody() {
           </aside>
         </div>
 
-        {/* Stats bar */}
-        <div className="homeHeroStatsBar">
-          <div className="section-container homeStatsRow">
-            {HERO_METRICS.map((m, i) => (
-              <React.Fragment key={m.label}>
-                {i > 0 && <span className="homeStatDivider" aria-hidden="true" />}
-                <div className="homeStatItem">
-                  <div className="homeStatValue">{m.value}</div>
-                  <div className="homeStatLabel">{m.label}</div>
-                </div>
-              </React.Fragment>
-            ))}
-          </div>
-        </div>
       </header>
 
       {false && <main className="homeMain">

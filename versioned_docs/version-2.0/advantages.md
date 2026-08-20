@@ -20,7 +20,7 @@ The following table compares **Jupiter Meta Data Token (JMDT)** with leading L2 
 |---|---|---|---|---|---|
 | **Layer Type** | L2 (+ planned L3 Enterprise DAG) | L2 (zkEVM) | L2 (STARK Rollup) | L2 (Private zk-SNARKs) | Private Consortium |
 | **Scalability (TPS)** | Targets: 2,000+ (L2); 10K+ (planned L3 DAG) | 2,000–4,000 | 3,000+ | &lt;100 (privacy bottleneck) | Depends on config |
-| **Privacy Model** | zk-SNARK/STARK + DID + zkVM | zk-SNARKs | zk-STARKs (public) | zk-SNARKs (Private Tx) | No native privacy |
+| **Privacy Model** | zk-STARK + DID + zkVM | zk-SNARKs | zk-STARKs (public) | zk-SNARKs (Private Tx) | No native privacy |
 | **ZK Circuit Strategy** | Rust + RISC Zero zkVM | Circom + Groth16 | Cairo VM | Circom + Aztec Noir | None |
 | **Finality Time (L2)** | ~3–10 sec (design target) | ~5–10 min | ~10–15 min | ~30–60 min | Instant (centralised) |
 | **L1 Settlement** | Dynamic zk-rollup to L1 | Periodic zk-rollup | STARK rollup | Delayed zk-rollup | Not applicable |
@@ -36,7 +36,7 @@ The following table compares **Jupiter Meta Data Token (JMDT)** with leading L2 
 
 **JMDT uniquely bridges the gap** between public zk-rollups (like Starknet) and enterprise-grade blockchains (like Hyperledger):
 
-- **Privacy-first by design** — ZK-SNARK/STARK proofs, DID-based authentication, and on-device ZK computation ensure no PII is ever exposed on-chain
+- **Privacy-first by design** — zk-STARK proofs, DID-based authentication, and on-device ZK computation ensure no PII is ever exposed on-chain
 - **Enterprise DAG architecture** *(planned)* — L3 DAG nodes targeting 10K+ TPS for private, high-throughput business logic, with zkRollup commitments to L2 for global auditability
 - **Fast L2 finality** — AVC consensus targets ~3–10s finality vs. 5–60 minutes for alternatives
 - **RISC Zero zkVM** — Rust-based circuits are auditable, version-controlled, and quantum-resistant (STARKs), unlike Cairo or Circom approaches
