@@ -195,7 +195,7 @@ export default function JmdtHomeNeubrutalismBody() {
               </Link>
             </div>
 
-            <Link className="homeTelegramBtn" to="https://t.me/JMDT_Blockchain" target="_blank" rel="noopener noreferrer">
+            <Link className="homeTelegramBtn" to="https://t.me/jmdtblockchain" target="_blank" rel="noopener noreferrer">
               JOIN TELEGRAM GROUP
               <img src="/icons/join_telegram_arrow.svg" alt="" width="15" height="10" />
             </Link>
@@ -359,7 +359,7 @@ export default function JmdtHomeNeubrutalismBody() {
             <div className="homeCommunityTitle">Still have questions? Join our community.</div>
             <a
               className="button button--primary button--lg homeCommunityButton"
-              href="https://t.me/JMDT_Blockchain"
+              href="https://t.me/jmdtblockchain"
               target="_blank"
               rel="noopener noreferrer"
             >

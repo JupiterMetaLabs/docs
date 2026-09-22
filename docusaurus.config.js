@@ -174,6 +174,7 @@ module.exports = {
                     items: [
                         { label: 'LinkedIn', href: 'https://www.linkedin.com/company/jmdt-blockchain' },
                         { label: 'Twitter', href: 'https://x.com/jmdtblockchain' },
+                        { label: 'Farcaster', href: 'https://farcaster.xyz/jmdt' },
                         { label: 'Discord', href: 'https://discord.gg/ntNU3Qed' },
                     ],
                 },
