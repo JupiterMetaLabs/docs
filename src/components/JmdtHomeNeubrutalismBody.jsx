@@ -105,7 +105,7 @@ const LATEST_INSIGHTS = [
 const FAQ_ITEMS = [
   {
     q: "What is JMDT's L3 DAG architecture?",
-    a: "JMDT (Jupiter Meta Data Token) uses a Layer 3 Directed Acyclic Graph (DAG) architecture. Unlike linear blockchains, the DAG enables asynchronous verification and parallel processing, delivering ultra-high throughput and near-instant finality for real-time, high-frequency use cases.",
+    a: "JMDT (Jupiter Meta Data Token) uses a Layer 3 Directed Acyclic Graph (DAG) architecture. Unlike linear blockchains, the DAG enables asynchronous verification and parallel processing, delivering ultra-high throughput and fast finality for real-time, high-frequency use cases.",
   },
   {
     q: 'How does Zero-Knowledge DID protect my privacy?',

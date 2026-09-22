@@ -173,7 +173,7 @@ module.exports = {
                     title: 'Community',
                     items: [
                         { label: 'LinkedIn', href: 'https://www.linkedin.com/company/jmdt-blockchain' },
-                        { label: 'Twitter', href: 'https://x.com/JMDT_Blockchain' },
+                        { label: 'Twitter', href: 'https://x.com/jmdtblockchain' },
                         { label: 'Discord', href: 'https://discord.gg/ntNU3Qed' },
                     ],
                 },
