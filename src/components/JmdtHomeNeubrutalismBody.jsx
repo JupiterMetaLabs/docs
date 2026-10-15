@@ -145,7 +145,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'How do I buy JMDT tokens?',
-    a: 'When JMDT mainnet tokens go live, they are listed as available for purchase exclusively on MEXC (JMDT/USDT pair).',
+    a: 'When JMDT mainnet tokens go live, they are available for purchase on MEXC and Coinstore (JMDT/USDT pairs).',
   },
 ];
 

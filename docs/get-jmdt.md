@@ -2,8 +2,8 @@
 id: get-jmdt
 title: How to Get JMDT
 sidebar_label: Get JMDT
-description: How to acquire JMDT tokens — purchase on MEXC (JMDT/USDT) for mainnet, or claim testnet tokens from the JMDT faucet.
-keywords: [get JMDT, buy JMDT, JMDT token, MEXC JMDT, JMDT USDT, JMDT faucet, testnet tokens, JMDT mainnet, acquire JMDT]
+description: How to acquire JMDT tokens — purchase on MEXC or Coinstore (JMDT/USDT) for mainnet, or claim testnet tokens from the JMDT faucet.
+keywords: [get JMDT, buy JMDT, JMDT token, MEXC JMDT, Coinstore JMDT, JMDT USDT, JMDT faucet, testnet tokens, JMDT mainnet, acquire JMDT]
 ---
 
 # How to Get JMDT
@@ -13,14 +13,14 @@ keywords: [get JMDT, buy JMDT, JMDT token, MEXC JMDT, JMDT USDT, JMDT faucet, te
 JMDT is the utility token of the JMDT Layer 2 — used for gas fees, L2 commitments, and accessing enterprise data services. You can acquire JMDT on mainnet via a centralised exchange, or claim testnet tokens from the faucet.
 
 :::warning Official listing notice
-JMDT is listed **exclusively on MEXC (JMDT/USDT)**. We have no other pairs on any CEX or DEX — treat any other listing, liquidity pool, presale, or airdrop claiming to be JMDT as a scam.
+JMDT is listed only on **[MEXC](https://www.mexc.com/exchange/JMDT_USDT)** and **[Coinstore](https://www.coinstore.com/spot/JMDTUSDT)** (JMDT/USDT). We have no other pairs on any CEX or DEX — treat any other listing, liquidity pool, presale, or airdrop claiming to be JMDT as a scam.
 :::
 
 ---
 
-## Mainnet — Buy on MEXC
+## Mainnet — Buy on MEXC or Coinstore
 
-JMDT is listed on **[MEXC](https://www.mexc.com/exchange/JMDT_USDT)**, a globally accessible centralised exchange, trading as the **JMDT/USDT** pair. MEXC supports spot purchases and withdrawals to self-custodial wallets.
+JMDT trades as the **JMDT/USDT** pair on two centralised exchanges: **[MEXC](https://www.mexc.com/exchange/JMDT_USDT)** and **[Coinstore](https://www.coinstore.com/spot/JMDTUSDT)**. Both support spot purchases and withdrawals to self-custodial wallets; the steps below use MEXC, and the Coinstore flow is equivalent (create an account, complete KYC, deposit USDT, trade [JMDT/USDT](https://www.coinstore.com/spot/JMDTUSDT), withdraw to your wallet).
 
 ### Steps to Purchase
 

@@ -8,7 +8,7 @@ keywords: [JMDT roadmap, blockchain roadmap, JupiterMeta milestones, JMDT mainne
 
 # JMDT Development Roadmap
 
-> **Current status:** Phases 1–3 complete. Token live on CoinMarketCap and CoinGecko; trading exclusively on MEXC (JMDT/USDT).
+> **Current status:** Phases 1–3 complete. Token live on CoinMarketCap and CoinGecko; trading on MEXC and Coinstore (JMDT/USDT).
 > Mainnet operational. ZK proofs, Decentralized Identity, and AVC consensus running in production.
 
 ---
@@ -53,6 +53,7 @@ Production launch, token distribution, and first exchange presence.
 - **CoinGecko Listing** — JMDT token listed and tracked on CoinGecko ✅
 - **First CEX Listing** — JMDT listed on a centralized exchange, 9 December 2025 ✅
 - **MEXC Listing** — JMDT trading moved exclusively to MEXC (JMDT/USDT), August 2026 ✅
+- **Coinstore Listing** — JMDT/USDT live on Coinstore, October 2026 ✅
 - **JMDT Documentation Portal** — public developer docs at docs.jmdt.io covering node setup, RPC API, DID spec, and ZK proof integration
 - **Block Explorer V1** — live explorer for blocks, transactions, accounts, and DID records
 
