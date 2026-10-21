@@ -56,6 +56,7 @@ module.exports = {
       collapsed: false,
       items: [
         'roadmap',
+        'chain-upgrade-2026',
         'migration-v1-to-v2',
         'changelog',
       ],
