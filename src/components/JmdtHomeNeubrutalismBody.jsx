@@ -200,17 +200,30 @@ export default function JmdtHomeNeubrutalismBody() {
               <img src="/icons/join_telegram_arrow.svg" alt="" width="15" height="10" />
             </Link>
 
-            <Link
-              className="homeMexcChip"
-              to="https://www.mexc.com/exchange/JMDT_USDT"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="JMDT is listed on MEXC — trade JMDT/USDT"
-            >
+            {/* Official venues — each logo links to its JMDT/USDT pair */}
+            <div className="homeMexcChip">
               LISTED ON
-              <img src="/img/mexc_dark.svg" alt="MEXC" height="12" style={{ height: 12, width: 'auto', display: 'block' }} />
+              <a
+                href="https://www.mexc.com/exchange/JMDT_USDT"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Trade JMDT/USDT on MEXC"
+                className="homeChipVenue"
+              >
+                <img src="/img/mexc_dark.svg" alt="MEXC" style={{ height: 12, width: 'auto', display: 'block' }} />
+              </a>
+              <span className="homeChipDivider" aria-hidden="true" />
+              <a
+                href="https://www.coinstore.com/spot/JMDTUSDT"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Trade JMDT/USDT on Coinstore"
+                className="homeChipVenue"
+              >
+                <img src="/img/coinstore_logo.png" alt="Coinstore" style={{ height: 12, width: 'auto', display: 'block' }} />
+              </a>
               <span className="homeMexcPair">JMDT/USDT</span>
-            </Link>
+            </div>
           </div>
 
           {/* Search bar — mobile only, sits above the card.

@@ -1309,10 +1309,14 @@ a.navbar__item[href="/docs/intro"] {
 
 /* "Listed on MEXC" chip — sits under the Telegram CTA on the docs home. */
 .homeMexcChip {
-  display: inline-flex;
+  /* flex (block-level), NOT inline-flex: as an inline-level box this chip
+     shared a line with the (also inline) Telegram link and floated beside
+     it with mismatched margins. Block-level puts it on its own row, under
+     the Telegram CTA as intended. */
+  display: flex;
   align-items: center;
-  gap: 8px;
-  margin-top: 14px;
+  gap: 10px;
+  margin-top: 22px;
   padding: 6px 14px;
   border: 1px solid #2a2a2a;
   border-radius: 999px;
@@ -1326,6 +1330,23 @@ a.navbar__item[href="/docs/intro"] {
   transition: border-color 0.2s ease, color 0.2s ease;
   width: fit-content;
   white-space: nowrap;
+}
+
+.homeChipVenue {
+  display: flex;
+  align-items: center;
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+}
+
+.homeChipVenue:hover {
+  opacity: 1;
+}
+
+.homeChipDivider {
+  width: 1px;
+  height: 12px;
+  background: #2a2a2a;
 }
 
 .homeMexcChip:hover {
