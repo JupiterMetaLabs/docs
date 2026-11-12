@@ -217,10 +217,11 @@ module.exports = {
                     breadcrumbs: true,
                     // ── Versioning: 2.0.x is what users see; 1.x is archived with
                     //    Docusaurus's standard "unmaintained" banner on every page.
-                    lastVersion: '2.0',
+                    lastVersion: '3.0.0',
                     versions: {
                         current: { label: 'Next (unreleased)', path: 'next' },
-                        '2.0': { label: '2.0.x (current)' },
+                        '3.0.0': { label: '3.0.0 (current)' },
+                        '2.0': { label: '2.0.x', banner: 'unmaintained' },
                         '1.x': { label: '1.x (deprecated)', banner: 'unmaintained' },
                     },
                 },
