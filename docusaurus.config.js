@@ -124,6 +124,26 @@ module.exports = {
 
     themes: ['@docusaurus/theme-mermaid'],
 
+    plugins: [
+        // X (Twitter) conversion tracking base code — headTags does not support
+        // inline scripts, so this is injected via the plugin injectHtmlTags API.
+        function xConversionPixel() {
+            return {
+                name: 'x-conversion-pixel',
+                injectHtmlTags() {
+                    return {
+                        headTags: [
+                            {
+                                tagName: 'script',
+                                innerHTML: `!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');twq('config','recrv');`,
+                            },
+                        ],
+                    };
+                },
+            };
+        },
+    ],
+
     themeConfig: {
         navbar: {
             title: '',
@@ -153,7 +173,8 @@ module.exports = {
                     title: 'Community',
                     items: [
                         { label: 'LinkedIn', href: 'https://www.linkedin.com/company/jmdt-blockchain' },
-                        { label: 'Twitter', href: 'https://x.com/JMDT_Blockchain' },
+                        { label: 'Twitter', href: 'https://x.com/jmdtblockchain' },
+                        { label: 'Farcaster', href: 'https://farcaster.xyz/jmdt' },
                         { label: 'Discord', href: 'https://discord.gg/ntNU3Qed' },
                     ],
                 },
@@ -196,10 +217,11 @@ module.exports = {
                     breadcrumbs: true,
                     // ── Versioning: 2.0.x is what users see; 1.x is archived with
                     //    Docusaurus's standard "unmaintained" banner on every page.
-                    lastVersion: '2.0',
+                    lastVersion: '3.0.0',
                     versions: {
                         current: { label: 'Next (unreleased)', path: 'next' },
-                        '2.0': { label: '2.0.x (current)' },
+                        '3.0.0': { label: '3.0.0 (current)' },
+                        '2.0': { label: '2.0.x', banner: 'unmaintained' },
                         '1.x': { label: '1.x (deprecated)', banner: 'unmaintained' },
                     },
                 },

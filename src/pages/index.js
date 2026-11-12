@@ -242,7 +242,7 @@ gtag('config', 'G-8N3L9Z2Z9X');
       "name": "What is JMDT's L3 DAG architecture?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "JMDT (Jupiter Meta Data Token) uses a Layer 3 Directed Acyclic Graph (DAG) architecture. Unlike linear blockchains, the DAG enables asynchronous verification and parallel processing, delivering ultra-high throughput (5,000+ TPS) and near-instant finality for real-time, high-frequency use cases."
+        "text": "JMDT (Jupiter Meta Data Token) uses a Layer 3 Directed Acyclic Graph (DAG) architecture. Unlike linear blockchains, the DAG enables asynchronous verification and parallel processing, delivering ultra-high throughput and fast finality for real-time, high-frequency use cases."
       }
     },
     {
@@ -298,7 +298,7 @@ gtag('config', 'G-8N3L9Z2Z9X');
       "name": "Is the JMDT network secure against quantum computing?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "JMDT is designed with quantum-robust proof systems in mind (zk-STARK and zk-SNARK proof oracles) so verifiable computation can remain reliable under stronger adversarial assumptions."
+        "text": "JMDT's zk-STARK proof layer is hash-based and believed to resist quantum attacks, and node transport uses post-quantum hybrid key exchange. Signatures are classical today, as on other EVM chains; a post-quantum migration programme and TLA+ formal modelling of the consensus protocol are underway."
       }
     },
     {
@@ -322,7 +322,7 @@ gtag('config', 'G-8N3L9Z2Z9X');
       "name": "How do I buy JMDT tokens?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "When JMDT mainnet tokens go live, they are listed as available for purchase exclusively on MEXC (JMDT/USDT pair)."
+        "text": "When JMDT mainnet tokens go live, they are available for purchase on MEXC and Coinstore (JMDT/USDT pairs)."
       }
     }
   ]

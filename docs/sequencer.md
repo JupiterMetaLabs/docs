@@ -37,15 +37,15 @@ See [Transaction & Block Lifecycle →](/docs/transaction-lifecycle) for the ful
 
 Before a block reaches consensus, the Sequencer submits the pulled transaction set to the **Espresso Sequencer** — an external, decentralised sequencing network — for ordering, under JMDT's **namespace 7000700**. Espresso returns a single, agreed-upon transaction order, removing ordering ambiguity between competing mempools and giving every buddy node the same ordered set to validate. As an external dependency, Espresso availability affects block production cadence; submission is retried until ordering is obtained.
 
-## Proof Generation — RISC Zero zkVM
+## Proof Generation — Auspex
 
-Once transactions are ordered, the Sequencer generates a **STARK proof of the block commitment** using the **RISC Zero zkVM** (RISC Zero 3.0); full state-transition proving is being completed:
+Once transactions are ordered, the Sequencer generates a **STARK proof of the block commitment** using **Auspex**, JMDT’s in-house FRI STARK prover; full state-transition proving is being completed:
 
 - Each transaction is hashed individually with **SHA-256**, using per-transaction boundary separators
 - The block commitment is a **Blake2b-256** digest computed over all transaction fields
 - The resulting proof is attached to the block before it's submitted for BFT consensus
 
-See [Zero-Knowledge Proofs & RISC Zero zkVM →](/docs/zk) for details on the proof system.
+See [Zero-Knowledge Proofs & Auspex →](/docs/zk) for details on the proof system.
 
 ---
 
@@ -168,7 +168,7 @@ if err != nil {
 - **PubSub** — Uses PubSub for consensus messaging and private channel management
 - **Messaging** — Uses the messaging layer for vote collection
 - **Block Module** — Initiates consensus for each new block; receives consensus results
-- **zkVM** — Batches validated transactions into RISC Zero STARK proofs for L1
+- **Auspex** — Batches validated transactions into STARK proofs for L1
 
 ---
 

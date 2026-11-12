@@ -169,7 +169,7 @@ Key protocol configuration constants:
 
 - BFT consensus requires a `(2n+2)/3` (= ⌈2n/3⌉, ≥⅔ supermajority) quorum over the authenticated committee of size `n`
 - Buddy node selection uses efficient VRF algorithms
-- Message passing optimised for sub-second latency
+- Message passing optimised for low latency
 - CRDT synchronisation guarantees eventual consistency under network partitions
 
 ---

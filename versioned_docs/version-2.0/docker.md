@@ -3,7 +3,7 @@ id: docker
 title: Running JMDN with Docker
 sidebar_label: Docker
 description: Run a JMDN node with Docker or Docker Compose — quick start, configuration, ports, health checks, backups, and upgrades.
-keywords: [JMDN docker, docker compose, run JMDT node, JMDN container, immudb docker, JMDT node deployment]
+keywords: [JMDN docker, docker compose, run JMDT node, JMDN container, ThebeDB, PostgreSQL docker, JMDT node deployment]
 ---
 
 # Running JMDN with Docker
@@ -35,11 +35,11 @@ Images are published for `linux/amd64`, `linux/arm64`, and `linux/arm/v7` — Do
 
 The recommended Docker Compose stack runs three services:
 
-- **`jmdn`** — the node process. Listens on the JSON-RPC, WebSocket, and DID service ports.
-- **`immudb`** — the tamper-proof append-only ledger, run as its own container. `jmdn` connects to it over gRPC.
-- **`redis`** — an account-sync worker queue. Because immudb's commit latency is on the order of seconds, account writes are enqueued to Redis and drained by a background worker instead of blocking on every write.
+- **`jmdn`** — the node process. ThebeDB's canonical log (BadgerDB) and CDC event log (DuckDB) are embedded here, stored in the `jmdn-state` volume.
+- **`postgres`** — ThebeDB's SQL projection (`postgres:16-alpine`, started with `wal_level=logical` for CDC). `jmdn` reaches it over the internal compose network via `THEBE_SQL_DSN`.
+- **`redis`** — the account-sync worker queue (Redis Streams). It decouples account writes from synchronous DB commit latency.
 
-Running immudb and Redis as separate containers means each can restart, upgrade, and be backed up independently of the node process.
+Running Postgres and Redis as separate containers means each can restart, upgrade, and be backed up independently of the node process.
 
 A fourth, one-time **bootstrap** service downloads a chain snapshot before the first start, so a new node doesn't have to sync from genesis.
 
@@ -72,19 +72,25 @@ Edit `jmdn.yaml` and set at minimum: `node.alias`, `network.seednode`, and `netw
 
 > `docker-compose.yml` always mounts `./jmdn.yaml` into the container at `/etc/jmdn/jmdn.yaml`. This file must exist before running `docker compose up`.
 
-### Step 2 — Set container passwords
+### Step 2 — Create `.env`
 
-`immudb` and `redis` run as separate containers and read their passwords from environment variables rather than `jmdn.yaml`. Create a `.env` file next to `docker-compose.yml`:
+`postgres` and `redis` read their passwords from environment variables, and Compose
+refuses to start without them (no baked defaults). Create a `.env` file next to
+`docker-compose.yml` (see `.env.docker.example` in the repo):
 
 ```bash
-cat > .env << 'EOF'
-IMMUDB_PASSWORD=$(openssl rand -base64 32)
+cat > .env << EOF
+COMPOSE_PROJECT_NAME=jmdn
+JMDN_VERSION=latest
+POSTGRES_PASSWORD=$(openssl rand -base64 32)
 REDIS_PASSWORD=$(openssl rand -base64 32)
 JMDN_SECURITY_EXPLORER_API_KEY=$(openssl rand -base64 32)
 EOF
 ```
 
-These must match `database.password`, `database.redis.password`, and `security.explorer_api_key` in `jmdn.yaml` — leave those fields blank in `jmdn.yaml` when using Compose, since Compose injects them automatically.
+- `COMPOSE_PROJECT_NAME=jmdn` keeps volume names stable regardless of the checkout directory
+- `JMDN_VERSION` pins the image tag — set it here, never by editing `docker-compose.yml`
+- Compose builds `THEBE_SQL_DSN` from `POSTGRES_PASSWORD` and injects the Redis password as `JMDN_DATABASE_REDIS_PASSWORD` — nothing to duplicate in `jmdn.yaml`
 
 ### Step 3 — Bootstrap the chain snapshot (first time only)
 
@@ -92,7 +98,15 @@ These must match `database.password`, `database.redis.password`, and `security.e
 docker compose run --rm jmdn-bootstrap
 ```
 
-This downloads a chain snapshot into the `immudb-data` volume so the node doesn't have to sync from genesis. It writes a sentinel file when done, so it's safe to run again — it will just skip if already bootstrapped.
+This downloads a chain snapshot archive into the **`jmdn-state`** volume
+(`storage/` and `DB/`) so the node doesn't have to sync from genesis. It writes a
+sentinel file when done, so it's safe to run again — it will just skip if already
+bootstrapped.
+
+The published **`SNAPSHOT_SHA256`** of the archive is **required** in `.env`:
+without it the script exits and the node falls back to syncing from peers.
+(`ALLOW_UNVERIFIED_SNAPSHOT=1` skips the check — development only.) The download
+comes over public HTTP from the configured snapshot bucket.
 
 ### Step 4 — Start the stack
 
@@ -117,20 +131,24 @@ curl -s http://localhost:8545 -X POST \
 
 ## Running Standalone (`docker run`)
 
-For quick tests or a minimal single-container setup with embedded ImmuDB (no separate `immudb`/`redis` containers):
+`docker run` without Compose is possible, but you must provide PostgreSQL yourself —
+ThebeDB's SQL projection is mandatory and lives outside the node container:
 
 ```bash
 docker run -d \
   --name jmdn \
   -v $(pwd)/jmdn.yaml:/etc/jmdn/jmdn.yaml:ro \
-  -v jmdn-data:/opt/jmdn \
+  -v jmdn-state:/opt/jmdn \
+  -e THEBE_SQL_DSN="postgres://jmdn:<password>@<postgres-host>:5432/jmdn?sslmode=disable" \
+  -p 15000:15000 -p 15000:15000/udp \
   -p 8545:8545 \
   -p 8546:8546 \
-  -p 15052:15052 \
   ghcr.io/jupitermetalabs/jmdn:latest
 ```
 
-On first start, the container bootstraps its chain snapshot automatically before starting the node — this can take a while depending on bandwidth. Subsequent starts skip this once the snapshot is in place.
+The Postgres instance needs `wal_level=logical` and the `thebe_pub` publication in
+the `jmdn` database (see `Scripts/setup_postgres.sh`). For anything beyond a quick
+experiment, use the Compose stack.
 
 To enable the Explorer API, add `-p 8090:8090 -e JMDN_PORTS_API=8090`.
 
@@ -144,9 +162,10 @@ Most configuration lives in `jmdn.yaml`, mounted read-only into the container. A
 
 | Variable | Purpose |
 |---|---|
-| `IMMUDB_EXTERNAL` | Set `true` when using Compose (separate immudb container) |
-| `JMDN_DATABASE_ADDRESS` / `JMDN_DATABASE_PORT` | Where to reach immudb — Compose sets this to the `immudb` service automatically |
-| `IMMUDB_PASSWORD` / `REDIS_PASSWORD` | Container passwords, injected from `.env` |
+| `THEBE_SQL_DSN` | Postgres DSN for ThebeDB's SQL projection — Compose builds it from `POSTGRES_PASSWORD` and points it at the `postgres` service (`sslmode=disable` on the internal network; bare-metal defaults use `sslmode=require`) |
+| `POSTGRES_PASSWORD` / `REDIS_PASSWORD` | Container passwords, required in `.env` (Compose fails closed without them) |
+| `JMDN_DATABASE_REDIS_PASSWORD` | How `jmdn` receives the Redis password (injected from `.env`) |
+| `SNAPSHOT_SHA256` | Published checksum of the bootstrap snapshot — required to install it |
 | `JMDN_SECURITY_EXPLORER_API_KEY` | Forwarded into the container so the health check can authenticate |
 
 Any `jmdn.yaml` key can also be set via environment variable using the `JMDN_` prefix with underscores as separators — for example, `JMDN_NETWORK_CHAIN_ID=7000700` sets `network.chain_id`.
@@ -175,7 +194,7 @@ volumes:
 
 ## Health Checks
 
-The `jmdn` container's health check polls the Explorer API's `/api/v1/node/version` endpoint, so the Explorer API port must be enabled for the container to report as `healthy`. `docker compose ps` shows current health status.
+The `jmdn` container's health check is two-tier: it polls the Explorer API's `/api/v1/node/version` first and falls back to JSON-RPC `eth_blockNumber` on `:8545` — so nodes running with the Explorer API disabled still report healthy while serving RPC. `docker compose ps` shows current health status.
 
 ```bash
 docker compose ps
@@ -186,37 +205,40 @@ docker inspect --format='{{json .State.Health}}' jmdn
 
 ## Backup and Restore
 
-Stop the node cleanly before backing up its volumes:
+Stop the node cleanly before backing up (the canonical log lives in `jmdn-state`;
+the SQL projection lives in Postgres):
 
 ```bash
-docker compose stop jmdn immudb
+docker compose stop jmdn
 
-docker run --rm -v jmdn_immudb-data:/data -v $(pwd)/backups:/backups \
-  alpine tar czf /backups/immudb-data-$(date +%Y%m%d).tar.gz -C /data .
-
+# Canonical node state (ThebeDB KV log, CDC log, DB/, config, certs)
 docker run --rm -v jmdn_jmdn-state:/data -v $(pwd)/backups:/backups \
   alpine tar czf /backups/jmdn-state-$(date +%Y%m%d).tar.gz -C /data .
 
-docker compose start immudb jmdn
+# SQL projection (consistent dump while Postgres is running)
+docker exec jmdn-postgres pg_dump -U jmdn -Fc jmdn > backups/jmdn-sql-$(date +%Y%m%d).dump
+
+docker compose start jmdn
 ```
 
-Restore by reversing the `tar` commands (`xzf` instead of `czf`) into fresh volumes before `docker compose up -d`.
+Restore the state volume by reversing the `tar` command (`xzf` into a fresh volume)
+and the SQL dump with `pg_restore` before `docker compose up -d`.
 
-> The address→transaction index (`DB/txindex.db`) is a derived index and doesn't need to be backed up — it's rebuilt automatically from ImmuDB in the background if missing. See [Address Index Management →](/docs/cli#address-index-management).
+> The address→transaction index (`DB/txindex.db`) is a derived index and doesn't need to be backed up — it's rebuilt automatically from the canonical log in the background if missing. See [Address Index Management →](/docs/cli#address-index-management).
 
 ---
 
 ## Upgrading
 
 ```bash
-# 1. Update the image tag in docker-compose.yml, e.g.:
-#      image: ghcr.io/jupitermetalabs/jmdn:v1.3.0
+# 1. Update the pinned version in .env, e.g.:
+#      JMDN_VERSION=v2.1.0
 
 docker compose pull jmdn
 docker compose up -d jmdn
 ```
 
-`immudb` and `redis` can be upgraded independently by updating their image tags and running `docker compose pull <service> && docker compose up -d <service>`.
+`postgres` and `redis` can be upgraded independently by updating their image tags and running `docker compose pull <service> && docker compose up -d <service>`. Upgrade the node by changing `JMDN_VERSION` in `.env` — never by editing `docker-compose.yml`.
 
 ---
 

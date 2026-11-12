@@ -51,12 +51,6 @@ const IconEthereum = () => (
   </svg>
 );
 
-const HERO_METRICS = [
-  { value: '5,000+', label: 'TPS' },
-  { value: '20M', label: 'Verified Users' },
-  { value: '100%', label: 'ZK Privacy' },
-];
-
 const MISSION_PILLARS = [
   {
     number: '01',
@@ -66,7 +60,7 @@ const MISSION_PILLARS = [
   {
     number: '02',
     title: 'Zero-Knowledge Innovation',
-    description: 'zk-STARK and SNARK proof systems enable privacy-preserving verification without compromising security.',
+    description: 'zk-STARK proof systems enable privacy-preserving verification without compromising security.',
   },
   {
     number: '03',
@@ -111,7 +105,7 @@ const LATEST_INSIGHTS = [
 const FAQ_ITEMS = [
   {
     q: "What is JMDT's L3 DAG architecture?",
-    a: "JMDT (Jupiter Meta Data Token) uses a Layer 3 Directed Acyclic Graph (DAG) architecture. Unlike linear blockchains, the DAG enables asynchronous verification and parallel processing, delivering ultra-high throughput (5,000+ TPS) and near-instant finality for real-time, high-frequency use cases.",
+    a: "JMDT (Jupiter Meta Data Token) uses a Layer 3 Directed Acyclic Graph (DAG) architecture. Unlike linear blockchains, the DAG enables asynchronous verification and parallel processing, delivering ultra-high throughput and fast finality for real-time, high-frequency use cases.",
   },
   {
     q: 'How does Zero-Knowledge DID protect my privacy?',
@@ -139,7 +133,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'Is the JMDT network secure against quantum computing?',
-    a: 'JMDT is designed with quantum-robust proof systems in mind (zk-STARK and zk-SNARK proof oracles) so verifiable computation can remain reliable under stronger adversarial assumptions.',
+    a: 'JMDT\u2019s zk-STARK proof layer is hash-based and believed to resist quantum attacks, and node transport uses post-quantum hybrid key exchange. Signatures are classical today, as on other EVM chains; a post-quantum migration programme and TLA+ formal modelling of the consensus protocol are underway.',
   },
   {
     q: 'How do I set up the JMDT Testnet in my wallet?',
@@ -151,7 +145,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'How do I buy JMDT tokens?',
-    a: 'When JMDT mainnet tokens go live, they are listed as available for purchase exclusively on MEXC (JMDT/USDT pair).',
+    a: 'When JMDT mainnet tokens go live, they are available for purchase on MEXC and Coinstore (JMDT/USDT pairs).',
   },
 ];
 
@@ -201,22 +195,35 @@ export default function JmdtHomeNeubrutalismBody() {
               </Link>
             </div>
 
-            <Link className="homeTelegramBtn" to="https://t.me/JMDT_Blockchain" target="_blank" rel="noopener noreferrer">
+            <Link className="homeTelegramBtn" to="https://t.me/jmdtblockchain" target="_blank" rel="noopener noreferrer">
               JOIN TELEGRAM GROUP
               <img src="/icons/join_telegram_arrow.svg" alt="" width="15" height="10" />
             </Link>
 
-            <Link
-              className="homeMexcChip"
-              to="https://www.mexc.com/exchange/JMDT_USDT"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="JMDT is listed on MEXC — trade JMDT/USDT"
-            >
+            {/* Official venues — each logo links to its JMDT/USDT pair */}
+            <div className="homeMexcChip">
               LISTED ON
-              <img src="/img/mexc_dark.svg" alt="MEXC" height="12" style={{ height: 12, width: 'auto', display: 'block' }} />
+              <a
+                href="https://www.mexc.com/exchange/JMDT_USDT"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Trade JMDT/USDT on MEXC"
+                className="homeChipVenue"
+              >
+                <img src="/img/mexc_dark.svg" alt="MEXC" style={{ height: 12, width: 'auto', display: 'block' }} />
+              </a>
+              <span className="homeChipDivider" aria-hidden="true" />
+              <a
+                href="https://www.coinstore.com/spot/JMDTUSDT"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Trade JMDT/USDT on Coinstore"
+                className="homeChipVenue"
+              >
+                <img src="/img/coinstore_logo.png" alt="Coinstore" style={{ height: 12, width: 'auto', display: 'block' }} />
+              </a>
               <span className="homeMexcPair">JMDT/USDT</span>
-            </Link>
+            </div>
           </div>
 
           {/* Search bar — mobile only, sits above the card.
@@ -294,20 +301,6 @@ export default function JmdtHomeNeubrutalismBody() {
           </aside>
         </div>
 
-        {/* Stats bar */}
-        <div className="homeHeroStatsBar">
-          <div className="section-container homeStatsRow">
-            {HERO_METRICS.map((m, i) => (
-              <React.Fragment key={m.label}>
-                {i > 0 && <span className="homeStatDivider" aria-hidden="true" />}
-                <div className="homeStatItem">
-                  <div className="homeStatValue">{m.value}</div>
-                  <div className="homeStatLabel">{m.label}</div>
-                </div>
-              </React.Fragment>
-            ))}
-          </div>
-        </div>
       </header>
 
       {false && <main className="homeMain">
@@ -379,7 +372,7 @@ export default function JmdtHomeNeubrutalismBody() {
             <div className="homeCommunityTitle">Still have questions? Join our community.</div>
             <a
               className="button button--primary button--lg homeCommunityButton"
-              href="https://t.me/JMDT_Blockchain"
+              href="https://t.me/jmdtblockchain"
               target="_blank"
               rel="noopener noreferrer"
             >

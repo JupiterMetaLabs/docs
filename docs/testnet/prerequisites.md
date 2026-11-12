@@ -46,7 +46,8 @@ The `setup_dependencies.sh` script installs these automatically:
 |---|---|---|
 | **Go** | 1.21+ | Compile the JMDN binary |
 | **GCC / build-essential** | Any | CGO compilation |
-| **immudb** | 1.10.0+ | Local chain ledger |
+| **PostgreSQL** | 15+ | ThebeDB SQL projection (external service) |
+| **Redis** | 5+ | Account-sync queue (installed by default; optional) |
 | **Yggdrasil** | 0.5.12+ | Encrypted P2P messaging |
 | **Git** | Any | Clone the repository |
 

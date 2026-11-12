@@ -18,7 +18,7 @@ keywords: [JMDT roadmap, blockchain roadmap, JupiterMeta milestones, JMDT mainne
 
 Laying the cryptographic and architectural groundwork before a single line of node code ships.
 
-- **ZK Proof Research** — deep-dive into ZK-SNARK/STARK primitives; select proof system suited for L2 throughput and on-chain verification cost
+- **ZK Proof Research** — deep-dive into ZK proof primitives; select proof system suited for L2 throughput and on-chain verification cost
 - **DID Architecture Design** — design W3C-compliant Decentralized Identity framework; define key schema, resolution protocol, and revocation model
 - **AVC Consensus Design** — design Asynchronous Validation Consensus with BFT safety, BLS aggregate signatures, and VRF-based leader election
 - **Immutable Ledger Selection** — evaluate and adopt ImmuDB as the append-only, tamper-proof backing store for the JMDN node

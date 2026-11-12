@@ -3,14 +3,14 @@ id: jmdt-node
 title: JMDN — JMDT Decentralised Node
 sidebar_label: JMDN Node
 description: The JMDT Decentralised Node (JMDN) — peer-to-peer communication, blockchain synchronisation, AVC consensus, and resilient messaging for the JMDT Layer 2 network.
-keywords: [JMDN, JMDT node, P2P communication, blockchain sync, libp2p, immudb, FastSync, CRDT, AVC consensus, JMDT Layer 2]
+keywords: [JMDN, JMDT node, P2P communication, blockchain sync, libp2p, ThebeDB, FastSync, CRDT, AVC consensus, JMDT Layer 2]
 ---
 
 # JMDN — JMDT Decentralised Node
 
 > *The Truth Layer for Verifiable Information — every JMDN node anchors verifiable state to the JMDT chain.*
 
-**JMDN** (JMDT Decentralised Node) is the primary network binary for the JMDT Layer 2. It combines peer-to-peer communication, AVC consensus participation, blockchain synchronisation via FastSync, and an immudb-backed immutable ledger — all in a single, cross-platform binary.
+**JMDN** (JMDT Decentralised Node) is the primary network binary for the JMDT Layer 2. It combines peer-to-peer communication, AVC consensus participation, blockchain synchronisation via FastSync, and the embedded ThebeDB immutable ledger — all in a single, cross-platform binary (PostgreSQL holds ThebeDB’s SQL projection).
 
 For build and deployment instructions, see [Running a JMDN Node →](/docs/running-a-node).
 
@@ -21,7 +21,7 @@ For build and deployment instructions, see [Running a JMDN Node →](/docs/runni
 JMDN is built on a modular architecture combining several advanced distributed systems concepts:
 
 - **Libp2p Network Layer** — Foundation for peer discovery, connection management, and direct messaging
-- **immudb Integration** — Tamper-proof immutable database with Merkle trees for the local ledger
+- **ThebeDB Integration** — Tamper-proof immutable database backing the local ledger
 - **FastSync Protocol** — Efficient blockchain state synchronisation between nodes
 - **Gossip Protocol** — Reliable information dissemination across the JMDT network
 - **CRDT Engine** — Conflict-free replicated data types ensuring eventual consistency
@@ -75,7 +75,7 @@ Basic node startup after installation:
 | `-console` | Log to console | `false` |
 | `-ygg` | Enable Yggdrasil messaging | `true` |
 | `-explorer <port>` | Run block explorer (0=disabled) | `0` |
-| `-api <port>` | Run immudb API (0=disabled) | `0` |
+| `-api <port>` | Run Explorer API on the specified port (0=disabled) | `0` |
 
 ---
 
@@ -95,7 +95,7 @@ Once running, the JMDN interactive console supports:
 | `stats` | Show messaging statistics |
 | `broadcast <message>` | Broadcast to all connected peers |
 | `fastsync <peer_multiaddr>` | Fast sync blockchain data with a peer |
-| `dbstate` | Show current immudb database state |
+| `dbstate` | Show current ThebeDB state (Postgres): latest block number, hash, gas used |
 | `exit` | Exit the node |
 
 ---
@@ -139,7 +139,7 @@ JMDN uses Conflict-free Replicated Data Types (CRDTs) to ensure data consistency
 When enabled, JMDN provides:
 
 - **Block Explorer** — Web interface for viewing chain data at the configured port
-- **RESTful API** — HTTP endpoints for programmatic immudb access
+- **RESTful API** — HTTP endpoints for programmatic chain-data access (Explorer API)
 - **Metrics Dashboard** — Prometheus-compatible performance and health monitoring
 
 ---

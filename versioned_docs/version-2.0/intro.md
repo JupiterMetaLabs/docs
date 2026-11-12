@@ -26,11 +26,11 @@ JMDT ships today as a two-layer system, with a third layer on the roadmap:
 
 Conventional blockchains struggle with performance, privacy, and real-world compliance. JMDT addresses these through a tightly integrated architecture:
 
-- **Zero-Knowledge Proofs (ZKPs):** Enabling identity verification, private transaction validation, and 100% data privacy through trustless infrastructure. JMDT supports both **zk-SNARKs** and **zk-STARKs** via the **RISC Zero zkVM**, with ZK circuits authored in Rust for auditability and reproducibility.
+- **Zero-Knowledge Proofs (ZKPs):** Enabling identity verification, private transaction validation, and strong data privacy through trustless infrastructure. JMDT uses **zk-STARKs** via **Auspex**, its in-house FRI STARK prover, developed and audited alongside the protocol.
 
 - **Decentralized Identity (DID):** W3C-compliant, privacy-preserving authentication that verifies PII with on-chain records without accessing any personal information. Supports self-sovereign, enterprise-managed, and service-issued DIDs.
 
-- **Layer 2 Scaling:** High-throughput zkRollup engine built using RISC Zero zkVM for verifiable Rust-based execution. Designed for faster settlements and large-scale concurrent transactions.
+- **Layer 2 Scaling:** High-throughput zkRollup engine built on Auspex, JMDT’s in-house STARK prover, for verifiable execution. Designed for faster settlements and large-scale concurrent transactions.
 
 - **AVC Consensus:** JMDT's **Asynchronous Validation Consensus** delivers:
 - Scalable and secure block finality via quorum-based buddy voting
@@ -40,7 +40,7 @@ Conventional blockchains struggle with performance, privacy, and real-world comp
 
 - **Ethereum Interoperability:** Full EVM compatibility — deploy existing Ethereum smart contracts on JMDT without modification. Supports DeFi, NFT marketplaces, DAOs, and enterprise solutions.
 
-- **Immutable Storage via immudb:** Tamper-proof, append-only audit trails across all data and DAG activity.
+- **Immutable Storage via ThebeDB:** Tamper-proof, append-only audit trails across all data and DAG activity.
 
 - **Privacy-Preserving Queries:** DID-based access with zk-proofed data capture — enabling GDPR-compliant data sharing without exposing sensitive details.
 
@@ -59,7 +59,7 @@ Conventional blockchains struggle with performance, privacy, and real-world comp
 
 ## JMDT at a Glance
 
-JMDT has cryptographically verified **over 20 million humans** through its ecosystem without exposing their identity — empowering users to monetise authentic data they actually own, and giving enterprises a verifiable chain of custody from human consent to predictive insight.
+JMDT cryptographically verifies humans through its ecosystem without exposing their identity — empowering users to monetise authentic data they actually own, and giving enterprises a verifiable chain of custody from human consent to predictive insight.
 
 → [Explore the Architecture](/docs/architecture)
 → [Understand AVC Consensus](/docs/bft)

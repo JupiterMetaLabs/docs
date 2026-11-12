@@ -76,7 +76,7 @@ directory are replaced.
 Yes — the same v2.0 requirement applies on both networks.
 
 **Where do I get help?**
-The [Telegram community](https://t.me/JMDT_Blockchain) and the install guides above. For
+The [Telegram community](https://t.me/jmdtblockchain) and the install guides above. For
 suspected bugs, open an issue on [GitHub](https://github.com/JupiterMetaLabs).
 
 ---

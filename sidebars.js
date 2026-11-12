@@ -40,7 +40,6 @@ module.exports = {
             'block-gRPC',
             'smart-contract',
             'gETH',
-            'db_ops',
             'crdt',
             'did-module',
             'logging',
@@ -56,6 +55,7 @@ module.exports = {
       collapsed: false,
       items: [
         'roadmap',
+        'chain-upgrade-2026',
         'migration-v1-to-v2',
         'changelog',
       ],

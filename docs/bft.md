@@ -2,8 +2,8 @@
 id: bft
 title: AVC Consensus Mechanism
 sidebar_label: AVC Consensus
-description: JMDT's Asynchronous Validation Consensus (AVC) — a quorum-based, non-synchronous consensus model using VRF-based buddy selection, zk-proof validation, Gossip Protocol, CRDT conflict resolution, and immudb for tamper-proof finality.
-keywords: [AVC consensus, Asynchronous Validation Consensus, JMDT consensus, VRF buddy selection, BuddyVote, CRDT, immudb, JMDN, zk-proof consensus]
+description: JMDT's Asynchronous Validation Consensus (AVC) — a quorum-based, non-synchronous consensus model using VRF-based buddy selection, zk-proof validation, Gossip Protocol, CRDT conflict resolution, and ThebeDB for tamper-proof finality.
+keywords: [AVC consensus, Asynchronous Validation Consensus, JMDT consensus, VRF buddy selection, BuddyVote, CRDT, ThebeDB, JMDN, zk-proof consensus]
 ---
 
 # AVC Consensus Mechanism
@@ -31,7 +31,7 @@ A **Verifiable Random Function (VRF)-based Buddy Node Selection Algorithm**, wei
 
 ### 3. ZK Anchoring Integrity
 
-Finalised blocks feed the ZK rollup pipeline, built on the **RISC Zero zkVM** with Rust-based circuits compiled to zkVM-executable guest binaries:
+Finalised blocks feed the ZK rollup pipeline, built on **Auspex**, JMDT’s in-house FRI STARK prover:
 
 - Block commitments are **anchored to Ethereum L1 via the ZK rollup contract**
 - Proof generation is integrated into the pipeline, with full state-transition proving being completed
@@ -52,9 +52,9 @@ If buddy digests diverge, **Conflict-Free Replicated Data Type (CRDT)-based reco
 - Guarantees convergence even under network partitions
 - Used for votes, digests, and mempool views across buddy and network states
 
-### 6. Immutable Ledger via immudb
+### 6. Immutable Ledger via ThebeDB
 
-Once quorum is reached, the block is written to the database **WAL-first** — the write-ahead log entry is durable before the block is acknowledged as committed, so a crash immediately after consensus can't lose a finalised block. Finalised blocks are then committed to **immudb**, ensuring:
+Once quorum is reached, the block is written to the database **WAL-first** — the write-ahead log entry is durable before the block is acknowledged as committed, so a crash immediately after consensus can't lose a finalised block. Finalised blocks are then committed to **ThebeDB**, ensuring:
 - **Append-only, tamper-proof history**
 - **Auditability** for enterprise use cases
 - Separate storage of flagged or invalid transactions for accountability
@@ -68,7 +68,7 @@ sequenceDiagram
     participant S as Sequencer
     participant JMDN as JMDN Nodes
     participant Buddies as Buddy Set (VRF-selected)
-    participant immudb as immudb Ledger
+    participant ThebeDB as ThebeDB Ledger
     participant L1 as Ethereum L1
 
     S->>JMDN: Propose Block
@@ -76,7 +76,7 @@ sequenceDiagram
     Buddies->>Buddies: Verify DID, signatures, block integrity
     Buddies->>JMDN: Broadcast BuddyVote(digest)
     JMDN->>JMDN: Count votes — quorum >= ceil(2k/3)?
-    JMDN->>immudb: Commit finalised block (WAL-first, append-only)
+    JMDN->>ThebeDB: Commit finalised block (WAL-first, append-only)
     JMDN->>L1: Anchor block commitment via ZK rollup contract
 ```
 
@@ -102,7 +102,7 @@ The AVC protocol ensures that block finality in JMDT is:
 - **Verifiable** — block commitments anchored to Ethereum via the ZK rollup pipeline
 - **Decentralised** — randomised buddy-set validation; no fixed validators
 - **Responsive** — asynchronous quorum, no global coordination (~3–10s finality target)
-- **Audit-ready** — immudb-backed append-only history
+- **Audit-ready** — ThebeDB-backed append-only history
 - **Adaptive** — dynamic Seed Node weight updates favour reliable nodes
 
 This design also forms the foundation for the planned **Layer 3 DAG extensions** and enterprise-specific consensus frameworks, making AVC a **future-proof consensus model** for data-driven blockchain applications.
