@@ -17,11 +17,9 @@ With your node configured for testnet, this page walks you through starting it, 
 ### Using systemd (recommended)
 
 ```bash
-sudo systemctl start immudb
-sudo systemctl start jmdn
+sudo systemctl start jmdn   # Postgres/Redis start automatically (service dependencies)
 
 # Enable on boot
-sudo systemctl enable immudb
 sudo systemctl enable jmdn
 ```
 
@@ -111,11 +109,11 @@ If you're many blocks behind, use FastSync:
 Confirm your node's local RPC is working:
 
 ```bash
-# If running explorer on port 8081
-curl http://localhost:8081/api/blocks
+# If running the Explorer API (start jmdn with -api <port>)
+curl http://localhost:8090/api/v1/node/version
 
-# Or check immudb API
-curl http://localhost:8080/metrics
+# Or Prometheus metrics (only when started with -metrics <port>)
+curl http://localhost:<metrics-port>/metrics
 ```
 
 ---
@@ -150,9 +148,10 @@ networks: {
 - Confirm `seed_nodes` contains `34.134.156.196`
 - Test connectivity: `nc -vz 34.134.156.196 15000`
 
-**immudb not starting:**
-- Check logs: `journalctl -u immudb -n 30`
-- Ensure `/var/lib/jmdn/data` exists and has correct permissions
+**Node exits at boot with storage errors:**
+- Postgres must be up and reachable at `thebe.sql_dsn`: `pg_isready -h 127.0.0.1 -p 5430 -U jmdn`
+- CDC is on by default; verify publication and slot exist in the `jmdn` database, or re-run `sudo ./Scripts/setup_postgres.sh --mode local`
+- Against a non-TLS local Postgres, the DSN needs `sslmode=disable`
 
 **Peer count stays at 0:**
 - Confirm port 15000 is open: `sudo ufw status`
@@ -168,7 +167,7 @@ networks: {
 
 | Step | Command |
 |---|---|
-| Start services | `sudo systemctl start immudb && sudo systemctl start jmdn` |
+| Start services | `sudo systemctl start jmdn` |
 | View logs | `journalctl -u jmdn -f` |
 | Check peers | `listpeers` in JMDN console |
 | Check sync | `dbstate` in JMDN console |

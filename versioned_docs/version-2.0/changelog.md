@@ -13,6 +13,19 @@ status claims (roadmap, network overviews) carry their own dates.
 
 ---
 
+## 2026-11-12 — Proof system and storage naming
+
+- **Proof system** — **Auspex**, JMDT's in-house FRI STARK prover (Goldilocks field,
+  keccak-256), replaces the RISC Zero zkVM across the proof-pipeline documentation
+- **Storage** — **ThebeDB** replaces immudb as the node's immutable ledger across
+  architecture pages and all node-operation runbooks: ThebeDB's log is embedded in
+  `jmdn`, PostgreSQL 15+ is the external dependency (SQL projection, logical
+  replication for CDC), and Redis remains the optional account-sync queue
+- **Retired** — the Database Operations page (`db_ops`): it documented the old
+  ImmuDB client module, which is no longer an operator-facing surface
+
+---
+
 ## 2026-08-09 — Docs 2.0 baseline
 
 Knowledge-base synchronisation pass across the site:

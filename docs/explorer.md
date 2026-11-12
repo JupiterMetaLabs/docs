@@ -124,7 +124,7 @@ GET /api/addresses/transactions/:address   # Get transactions for an address (pa
   ?page=N&limit=N
 ```
 
-The `/api/addresses/transactions/:address` endpoint is backed by JMDN's SQLite address→transaction index (see [DB_OPs →](/docs/db_ops)) and requires a valid **JWT** in the request's `Authorization` header. It returns the same sent/received transaction data as the RPC method [`eth_getTransactionsByAddress` →](/docs/gETH#eth_gettransactionsbyaddress), paginated via `page` and `limit` query parameters.
+The `/api/addresses/transactions/:address` endpoint is backed by JMDN's SQLite address→transaction index and requires a valid **JWT** in the request's `Authorization` header. It returns the same sent/received transaction data as the RPC method [`eth_getTransactionsByAddress` →](/docs/gETH#eth_gettransactionsbyaddress), paginated via `page` and `limit` query parameters.
 
 ### Block Endpoints
 ```

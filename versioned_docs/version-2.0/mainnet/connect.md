@@ -17,12 +17,9 @@ With your node installed and configured, this page walks you through starting it
 ### Using systemd (Linux — recommended)
 
 ```bash
-# Start immudb first (JMDN depends on it)
-sudo systemctl start immudb
-sudo systemctl start jmdn
+sudo systemctl start jmdn   # Postgres/Redis start automatically (service dependencies)
 
-# Enable both to start on boot
-sudo systemctl enable immudb
+# Enable on boot
 sudo systemctl enable jmdn
 ```
 
@@ -30,10 +27,9 @@ sudo systemctl enable jmdn
 
 ```bash
 sudo systemctl status jmdn
-sudo systemctl status immudb
 ```
 
-You should see `active (running)` for both services.
+You should see `active (running)`.
 
 ---
 
@@ -86,7 +82,7 @@ Requests an updated peer list from the seed node. After a few minutes, your node
 >>> dbstate
 ```
 
-This shows your current immudb state — block height and Merkle root. Compare your block height against the latest block from the RPC:
+This prints the current ThebeDB state (Postgres) — the latest block number, hash, and gas used. Compare your block height against the latest block from the RPC:
 
 ```bash
 curl -s -X POST https://mainnetrpc.jmdt.io \
@@ -127,7 +123,7 @@ Key metrics to monitor:
 | `jmdn_block_height` | Current local chain height |
 | `jmdn_consensus_rounds_total` | AVC consensus rounds participated in |
 | `jmdn_sync_lag_blocks` | Blocks behind the network tip |
-| `immudb_entries_total` | Total entries in the local immudb ledger |
+| `jmdn_db_task_pool_*` | Postgres connection-pool stats (open, in_use, idle, waits) |
 
 ---
 
@@ -149,9 +145,10 @@ This performs a full rebuild, atomic binary swap, service restart, and health ch
 - Confirm port `15000` is open: `sudo ufw status`
 - Check logs for connection errors: `journalctl -u jmdn -n 50`
 
-**immudb fails to start:**
-- Check disk space: `df -h /var/lib/jmdn`
-- Check immudb logs: `journalctl -u immudb -n 50`
+**Node exits at boot with storage errors:**
+- Postgres must be up and reachable at `thebe.sql_dsn`: `pg_isready -h 127.0.0.1 -p 5430 -U jmdn`
+- CDC is on by default; verify publication and slot exist in the `jmdn` database, or re-run `sudo ./Scripts/setup_postgres.sh --mode local`
+- Against a non-TLS local Postgres, the DSN needs `sslmode=disable`
 
 **Node starts but stays at block 0:**
 - Confirm `chain_id: 7000700` and `network: mainnet` in `/etc/jmdn/jmdn.yaml`
@@ -163,7 +160,7 @@ This performs a full rebuild, atomic binary swap, service restart, and health ch
 
 | Step | Command |
 |---|---|
-| Start services | `sudo systemctl start immudb && sudo systemctl start jmdn` |
+| Start services | `sudo systemctl start jmdn` |
 | View logs | `journalctl -u jmdn -f` |
 | Check peers | `listpeers` in JMDN console |
 | Check sync | `dbstate` in JMDN console |

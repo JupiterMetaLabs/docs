@@ -85,7 +85,7 @@ This address is configured in your `jmdn.yaml` during node setup. See [Install &
 - **AVC consensus** — Live VRF-based buddy selection, BFT finality in ~3–10 seconds
 - **Enterprise DAG (L3)** — Production DAG nodes operated by enterprise customers
 - **DID registry** — Live W3C-standard DID documents and key management
-- **Smart contracts** — EVM-compatible contracts deployed via Solidity or Rust (RISC Zero)
+- **Smart contracts** — EVM-compatible contracts deployed via Solidity
 
 ---
 

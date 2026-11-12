@@ -3,7 +3,7 @@ id: transaction-lifecycle
 title: Transaction & Block Lifecycle
 sidebar_label: Transaction Lifecycle
 description: The full path a JMDT transaction takes — from wallet submission through the JSON-RPC layer, mempool routing, Espresso ordering, ZK proof generation, BFT consensus, and Ethereum L1 finality.
-keywords: [JMDT transaction lifecycle, block production, Espresso ordering, RISC Zero, BFT consensus, L1 finality, JMDN, EIP-1559]
+keywords: [JMDT transaction lifecycle, block production, Espresso ordering, Auspex, BFT consensus, L1 finality, JMDN, EIP-1559]
 ---
 
 # Transaction & Block Lifecycle
@@ -24,7 +24,7 @@ sequenceDiagram
     participant Mempools as Mempool Pool
     participant Seq as Sequencer Orchestrator
     participant Espresso as Espresso
-    participant zkVM as RISC Zero zkVM
+    participant zkVM as Auspex Prover
     participant JMDN as JMDN (BFT Consensus)
     participant DB as Database
     participant L1 as Ethereum L1
@@ -68,13 +68,13 @@ The selected set is then submitted to the **Espresso Sequencer** — an external
 
 ## Step 4 — Proof Generation
 
-Once ordering is finalized, the Orchestrator generates a **zero-knowledge proof of the block commitment** using the **RISC Zero zkVM** (a local, succinct STARK prover):
+Once ordering is finalized, the Orchestrator generates a **zero-knowledge proof of the block commitment** using **Auspex** (JMDT’s local, succinct STARK prover):
 
 - Each transaction is hashed individually with **SHA-256**, using per-transaction boundary separators to prevent hash-boundary ambiguity between adjacent transactions.
 - The block's overall commitment is a **Blake2b-256** digest computed over all transaction fields.
-- The proof pipeline runs on **RISC Zero 3.0**; full state-transition proving is being completed.
+- The proof pipeline runs on **Auspex**, JMDT’s in-house FRI STARK prover; full state-transition proving is being completed.
 
-See [Zero-Knowledge Proofs & RISC Zero zkVM →](/docs/zk) for the underlying proof system.
+See [Zero-Knowledge Proofs & Auspex →](/docs/zk) for the underlying proof system.
 
 ## Step 5 — BFT Consensus & Storage
 
@@ -84,7 +84,7 @@ See [AVC Consensus Mechanism →](/docs/bft) for the full consensus protocol.
 
 ## Step 6 — L1 Finality
 
-For Ethereum finality, the Orchestrator periodically selects committed blocks, generates a **RISC Zero STARK proof** of the block commitment, and calls **`commitRollup()`** on the **ZKRollup smart contract** deployed on Ethereum. The contract enforces:
+For Ethereum finality, the Orchestrator periodically selects committed blocks, generates an **Auspex STARK proof** of the block commitment, and calls **`commitRollup()`** on the **ZKRollup smart contract** deployed on Ethereum. The contract enforces:
 
 - **Nonce ordering** — rollup commitments must be submitted in sequence
 - **Double-commit protection** — a block commitment cannot be submitted to L1 more than once
@@ -112,5 +112,5 @@ Wallets and tooling that already support EIP-1559 on Ethereum mainnet work again
 
 - [AVC Consensus Mechanism →](/docs/bft) — Consensus internals
 - [Sequencer Module →](/docs/sequencer) — Ordering and proof orchestration
-- [Zero-Knowledge Proofs & RISC Zero zkVM →](/docs/zk) — Proof generation details
+- [Zero-Knowledge Proofs & Auspex →](/docs/zk) — Proof generation details
 - [JSON-RPC Reference →](/docs/gETH) — `eth_sendRawTransaction` and other RPC methods

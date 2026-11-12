@@ -40,7 +40,6 @@ module.exports = {
             'block-gRPC',
             'smart-contract',
             'gETH',
-            'db_ops',
             'crdt',
             'did-module',
             'logging',

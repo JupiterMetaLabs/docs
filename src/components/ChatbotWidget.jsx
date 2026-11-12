@@ -20,7 +20,7 @@ JMDT CORE CONCEPTS
 - **JMDN**: JMDT Decentralized Network node. Usually started via './jmdn' or './gossipnode'.
 - **Consensus**: NNSS (Non-Negotiable Sequential Synchronization), a hybrid of Raft, Gossip Protocol, and Bloom Filters.
 - **Privacy**: Uses Zero-Knowledge Proofs (ZKPs) and W3C-standard Decentralized Identity (DID).
-- **Storage**: Integrates ImmuDB (tamper-proof database).
+- **Storage**: Integrates ThebeDB (tamper-proof database).
 - **Sync**: FastSync protocol for efficient blockchain state synchronization.
 
 TERMINOLOGY MAPPING

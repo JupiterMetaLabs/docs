@@ -298,7 +298,7 @@ gtag('config', 'G-8N3L9Z2Z9X');
       "name": "Is the JMDT network secure against quantum computing?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "JMDT is designed with quantum-robust proof systems in mind (zk-STARK proof systems) so verifiable computation can remain reliable under stronger adversarial assumptions."
+        "text": "JMDT's zk-STARK proof layer is hash-based and believed to resist quantum attacks, and node transport uses post-quantum hybrid key exchange. Signatures are classical today, as on other EVM chains; a post-quantum migration programme and TLA+ formal modelling of the consensus protocol are underway."
       }
     },
     {

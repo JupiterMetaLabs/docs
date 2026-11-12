@@ -29,7 +29,7 @@ cd jmdn
 sudo ./Scripts/setup_dependencies.sh --all
 ```
 
-This installs Go, immudb, Yggdrasil, and GCC. Full details in [Running a JMDN Node →](/docs/running-a-node#step-1--install-dependencies).
+This installs Go, PostgreSQL + Redis (choose native or Docker storage when prompted), Yggdrasil, and GCC. Full details in [Running a JMDN Node →](/docs/running-a-node#step-1--install-dependencies).
 
 ---
 
@@ -53,7 +53,13 @@ On success, you'll have a `jmdn` binary in the current directory:
 sudo ./Scripts/install_services.sh
 ```
 
-This installs the `jmdn` and `immudb` system services and creates the required directories.
+This installs the `jmdn` system service (pass `--mode local` or `--mode docker`) and creates the required directories. Then initialise PostgreSQL for ThebeDB:
+
+```bash
+sudo ./Scripts/setup_postgres.sh --mode local
+```
+
+ThebeDB's log is embedded in `jmdn`; Postgres (its SQL projection) must be reachable at `thebe.sql_dsn` before the node starts.
 
 ---
 

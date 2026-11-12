@@ -224,7 +224,7 @@ No client-side changes are needed for wallets or SDKs that already support EIP-1
 
 ## eth_getTransactionsByAddress {#eth_gettransactionsbyaddress}
 
-Returns paginated transactions — both sent and received — for a given address, backed by JMDN's SQLite address→transaction index (see [DB_OPs →](/docs/db_ops) for index internals).
+Returns paginated transactions — both sent and received — for a given address, backed by JMDN's SQLite address→transaction index.
 
 **Method:** `eth_getTransactionsByAddress`
 

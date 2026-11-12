@@ -22,7 +22,7 @@ Before setting up a JMDT Mainnet node, make sure your environment meets the foll
 | **Network** | 100 Mbps | 1 Gbps |
 | **Uptime** | — | 99%+ for validators |
 
-> **Storage note:** Chain state grows over time. Start with at least 100 GB and plan for expansion. NVMe SSD is strongly recommended for immudb write performance.
+> **Storage note:** Chain state grows over time. Start with at least 100 GB and plan for expansion. NVMe SSD is strongly recommended for ThebeDB and PostgreSQL write performance.
 
 ---
 
@@ -47,7 +47,8 @@ The `setup_dependencies.sh` script installs these automatically (see [Install & 
 |---|---|---|
 | **Go** | 1.21+ | Compile the JMDN binary |
 | **GCC / build-essential** | Any | CGO compilation (required) |
-| **immudb** | 1.10.0+ | Tamper-proof local chain ledger |
+| **PostgreSQL** | 15+ | ThebeDB SQL projection (external service) |
+| **Redis** | 5+ | Account-sync queue (installed by default; optional) |
 | **Yggdrasil** | 0.5.12+ | Encrypted mesh P2P messaging |
 | **Git** | Any | Clone the JMDN repository |
 

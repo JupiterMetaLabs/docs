@@ -3,7 +3,7 @@ id: running-a-node
 title: Running a JMDN Node
 sidebar_label: Running a Node
 description: Complete guide to building, installing, and running a JMDT Decentralised Node (JMDN) — covering dependency setup, cross-platform binary compilation, service installation, and deployment.
-keywords: [JMDN node, run JMDT node, build JMDN, JMDT validator, node setup, immudb, Yggdrasil, deploy JMDN, JMDT Layer 2 node]
+keywords: [JMDN node, run JMDT node, build JMDN, JMDT validator, node setup, ThebeDB, PostgreSQL, Yggdrasil, deploy JMDN, JMDT Layer 2 node]
 ---
 
 # Running a JMDN Node
@@ -22,9 +22,10 @@ The JMDN setup workflow uses four scripts in the `Scripts/` directory:
 
 | Script | Purpose |
 |---|---|
-| `Scripts/setup_dependencies.sh` | Install Go, immudb, Yggdrasil, and build tools |
+| `Scripts/setup_dependencies.sh` | Install Go, PostgreSQL + Redis (storage), Yggdrasil, and build tools |
+| `Scripts/setup_postgres.sh` | Initialise PostgreSQL for ThebeDB (user, database, logical replication) |
 | `Scripts/build.sh` | Compile the `jmdn` binary from source |
-| `Scripts/install_services.sh` | Register `jmdn` and `immudb` as system services |
+| `Scripts/install_services.sh` | Register `jmdn` as a system service (`--mode local` or `--mode docker`) |
 | `Scripts/deploy.sh` | Full automated build + atomic swap + service restart |
 | `Scripts/start_jmdn_wrapper.sh` | Runtime wrapper invoked by the init system |
 
@@ -53,7 +54,7 @@ sudo ./Scripts/setup_dependencies.sh --all
 
 This installs:
 - **Go** (minimum version per `GO_FALLBACK_VER` in the script) — required to compile JMDN
-- **immudb** — the tamper-proof immutable ledger used by JMDN for local chain storage
+- **PostgreSQL 15+ and Redis** — ThebeDB's SQL projection and the account-sync queue (`--all` asks whether to install them natively or as Docker containers)
 - **Yggdrasil** — encrypted mesh network used for alternative peer messaging
 - **GCC / build-essential** — C toolchain required for CGO compilation
 
@@ -61,9 +62,33 @@ You can install individual components if needed:
 
 ```bash
 sudo ./Scripts/setup_dependencies.sh --go
-sudo ./Scripts/setup_dependencies.sh --immudb
+sudo ./Scripts/setup_dependencies.sh --storage-local    # PostgreSQL + Redis as native services
+sudo ./Scripts/setup_dependencies.sh --storage-docker   # PostgreSQL + Redis in Docker
+sudo ./Scripts/setup_dependencies.sh --storage-none     # you provide Postgres/Redis yourself
 sudo ./Scripts/setup_dependencies.sh --yggdrasil
 ```
+
+### Storage model — ThebeDB
+
+JMDN's storage backend is **ThebeDB**. Its canonical append-only log (BadgerDB) and
+CDC event log (DuckDB) are **embedded in the `jmdn` process** — there is no separate
+database service to start for them. The one external dependency is **PostgreSQL**,
+which holds ThebeDB's queryable SQL projection and must be up and reachable at
+`thebe.sql_dsn` before `jmdn` starts. Redis (account-sync queue) is on by default
+and optional: setting `database.redis.url: ""` makes account writes synchronous.
+
+After installing dependencies, initialise Postgres with the provided script:
+
+```bash
+sudo ./Scripts/setup_postgres.sh --mode local
+```
+
+This creates the `jmdn` user and database, sets `wal_level=logical`, creates the
+`thebe_pub` publication and `thebe_eventlog` replication slot (required — CDC is on
+by default and the node exits if it cannot start), caps slot WAL retention at 2 GB,
+and prints the DSN plus a ready-to-paste yaml snippet. Use this script rather than
+creating the publication by hand — a manual `CREATE PUBLICATION` without `-d jmdn`
+lands in the wrong database.
 
 > **Note:** The script detects your platform and package manager automatically. It also checks for existing installations and only upgrades if your current version is older than the target.
 
@@ -80,7 +105,7 @@ After installing dependencies, build the `jmdn` binary:
 This will:
 1. Run `go mod tidy` to clean up dependencies
 2. Embed git metadata (commit, branch, tag, build time) into the binary via ldflags
-3. Compile with `CGO_ENABLED=1` (required for immudb's SQLite integration)
+3. Compile with `CGO_ENABLED=1` — required by go-ethereum, SQLite (`DB/gossipnode.db`), and the DuckDB CDC bindings
 4. Output the binary as `./jmdn` in the current directory
 
 To build into a specific output directory:
@@ -98,10 +123,12 @@ To build into a specific output directory:
 
 ## Step 3 — Install System Services
 
-Install `jmdn` and `immudb` as system services so they start automatically on boot:
+Install `jmdn` as a system service so it starts automatically on boot:
 
 ```bash
-sudo ./Scripts/install_services.sh
+sudo ./Scripts/install_services.sh --mode local    # native PostgreSQL/Redis
+# or
+sudo ./Scripts/install_services.sh --mode docker   # PostgreSQL/Redis via a generated compose file
 ```
 
 This script:
@@ -111,10 +138,13 @@ This script:
 
 ### Service Definitions Installed
 
-Two services are created:
+One `jmdn` service is created (there is no separate database unit — ThebeDB is embedded):
 
-- **`immudb`** — The immutable ledger backing JMDN's local chain state
-- **`jmdn`** — The JMDT Decentralised Node (depends on immudb)
+- **`--mode local`** — the `jmdn` unit declares `Requires=postgresql.service redis.service`, and the installer enables the distro's PostgreSQL and Redis units
+- **`--mode docker`** — the `jmdn` unit brings the Postgres/Redis containers up via `docker compose` before starting the node (`ExecStartPre`)
+
+Node state lives under the working directory (`/opt/jmdn` by default): `storage/thebe-kv/`
+(canonical log), `data/eventlog.duckdb` (CDC log), `DB/gossipnode.db`, `config/`, `certs/`.
 
 ### Configuration File
 
@@ -128,6 +158,10 @@ cp jmdn_default.yaml /etc/jmdn/jmdn.yaml
 nano /etc/jmdn/jmdn.yaml
 ```
 
+Set `thebe.sql_dsn` to your Postgres DSN (or export `THEBE_SQL_DSN`). The shipped
+default uses `sslmode=require`; for a local Postgres without TLS, use
+`sslmode=disable` in the DSN. No password ships in the template — put it in the DSN.
+
 > If `/etc/jmdn/jmdn.yaml` is missing, `start_jmdn_wrapper.sh` will automatically fall back to `./jmdn.yaml` in the working directory — useful for local development.
 
 ### Starting Services Manually
@@ -136,8 +170,7 @@ After installation, start the services using the commands for your platform:
 
 **Linux (systemd):**
 ```bash
-sudo systemctl start immudb
-sudo systemctl start jmdn
+sudo systemctl start jmdn   # Postgres/Redis start automatically (Requires=/ExecStartPre=)
 
 # Check status
 sudo systemctl status jmdn
@@ -145,19 +178,16 @@ sudo systemctl status jmdn
 
 **macOS (launchd):**
 ```bash
-launchctl start com.jmdn.immudb
 launchctl start com.jmdn.jmdn
 ```
 
 **Alpine Linux (OpenRC):**
 ```bash
-sudo rc-service immudb start
 sudo rc-service jmdn start
 ```
 
 **FreeBSD (rc.d):**
 ```bash
-sudo service immudb start
 sudo service jmdn start
 ```
 
@@ -217,7 +247,7 @@ View node logs using your platform's log viewer:
 **Linux (systemd):**
 ```bash
 journalctl -u jmdn -f
-journalctl -u immudb -f
+journalctl -u postgresql -f   # SQL projection (unit name varies by distro)
 ```
 
 **macOS (launchd):**
@@ -242,14 +272,21 @@ ls -la /usr/local/bin/jmdn
 ./Scripts/build.sh && sudo ./Scripts/install_services.sh
 ```
 
-**immudb fails to start:**
+**jmdn exits at boot — storage errors:**
 ```bash
-# Check disk space and data directory permissions
-df -h
-ls -la /var/lib/jmdn/
-# Restart immudb manually
-sudo systemctl restart immudb
+# Postgres must be up and reachable at thebe.sql_dsn before jmdn starts
+pg_isready -h 127.0.0.1 -p 5430 -U jmdn
+
+# CDC is on by default and the node exits if it cannot start. Verify the
+# publication and slot exist IN THE jmdn DATABASE:
+sudo -u postgres psql -d jmdn -c "SELECT pubname FROM pg_publication;"
+sudo -u postgres psql -d jmdn -c "SELECT slot_name, active FROM pg_replication_slots;"
+
+# If missing, (re)run the setup script — it creates both in the right database:
+sudo ./Scripts/setup_postgres.sh --mode local
 ```
+- A DSN with `sslmode=require` against a non-TLS Postgres fails — use `sslmode=disable` locally
+- If the CDC consumer stalls, Postgres invalidates the slot once its WAL exceeds the 2 GB cap; jmdn warns at boot about an inactive, lagging, or invalidated slot
 
 **Go not found during build:**
 ```bash

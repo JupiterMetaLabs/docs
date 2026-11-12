@@ -27,8 +27,8 @@
 # Sequencer     = The node responsible for ordering and batching transactions
 # Seednode      = Bootstrap nodes that facilitate peer discovery on the JMDT network
 # gETH          = JMDT's Go-Ethereum fork, adapted for AVC consensus
-# RISC Zero     = zkVM used by JMDT to execute and verify ZK circuits in Rust
-# immudb        = Tamper-proof immutable database backing the JMDN local ledger
+# Auspex        = JMDT's in-house FRI STARK prover (Goldilocks field, keccak-256)
+# ThebeDB       = Tamper-proof immutable database backing the JMDN local ledger
 # SuperJ        = Consumer rewards dApp built on JMDT; 20M+ users
 # Hercules      = AI research assistant dApp leveraging JMDT's verifiable data layer
 # InterDAG Bridge = Cross-enterprise DAG bridge for secure data collaboration
@@ -41,11 +41,11 @@ Summary: High-level overview of JMDT — what it is, why it was built, and its c
 
 ## Architecture
 URL: https://docs.jmdt.io/docs/architecture
-Summary: Three-layer architecture overview — L3 Enterprise DAG (10,000+ TPS, RAFT, InterDAG Bridge), L2 JMDT core (AVC, RISC Zero zkVM, JMDN, immudb, ~3–10s finality), and L1 Ethereum settlement. Includes Mermaid diagrams and trust model table.
+Summary: Three-layer architecture overview — L3 Enterprise DAG (10,000+ TPS, RAFT, InterDAG Bridge), L2 JMDT core (AVC, Auspex (in-house STARK prover), JMDN, ThebeDB, ~3–10s finality), and L1 Ethereum settlement. Includes Mermaid diagrams and trust model table.
 
 ## Advantages
 URL: https://docs.jmdt.io/docs/advantages
-Summary: JMDT compared to Polygon zkEVM, Starknet, Aztec, and Hyperledger Fabric — covering AVC finality (~3–10s), privacy, DID, L3 enterprise DAG, and RISC Zero ZK advantages.
+Summary: JMDT compared to Polygon zkEVM, Starknet, Aztec, and Hyperledger Fabric — covering AVC finality (~3–10s), privacy, DID, L3 enterprise DAG, and Auspex ZK advantages.
 
 ## How to Get JMDT
 URL: https://docs.jmdt.io/docs/get-jmdt
@@ -53,7 +53,7 @@ Summary: How to acquire JMDT tokens. Mainnet: purchase on MEXC or Coinstore (JMD
 
 ## Consensus: AVC
 URL: https://docs.jmdt.io/docs/bft
-Summary: Explains the Asynchronous Validation Consensus (AVC) mechanism — VRF-based buddy selection, asynchronous quorum validation, zk-proof integrity, Gossip Protocol propagation, CRDT conflict resolution, and immudb immutable ledger.
+Summary: Explains the Asynchronous Validation Consensus (AVC) mechanism — VRF-based buddy selection, asynchronous quorum validation, zk-proof integrity, Gossip Protocol propagation, CRDT conflict resolution, and the ThebeDB immutable ledger.
 
 ## Decentralized Identity (DID)
 URL: https://docs.jmdt.io/docs/did
@@ -69,7 +69,7 @@ Summary: On-chain registry for DID documents and resolution on the JMDT L2.
 
 ## ZK Proofs
 URL: https://docs.jmdt.io/docs/zk
-Summary: Zero-Knowledge Proofs in JMDT — zk-STARKs for transaction validation and large-scale state aggregation, and the RISC Zero zkVM executing Rust ZK circuits for L1 STARK proof submission.
+Summary: Zero-Knowledge Proofs in JMDT — zk-STARKs for transaction validation and large-scale state aggregation, and the Auspex (in-house STARK prover) executing Rust ZK circuits for L1 STARK proof submission.
 
 ## Tokenomics
 URL: https://docs.jmdt.io/docs/tokenomics
@@ -81,7 +81,7 @@ Summary: Real-world applications of JMDT — SuperJ (20M+ users, ZK identity, re
 
 ## Sequencer
 URL: https://docs.jmdt.io/docs/sequencer
-Summary: JMDN Sequencer module — VRF-based buddy selection, PubSub consensus channels, BuddyVote collection, BFT execution, and transaction batching into RISC Zero zk-proofs for L1 anchoring.
+Summary: JMDN Sequencer module — VRF-based buddy selection, PubSub consensus channels, BuddyVote collection, BFT execution, and transaction batching into Auspex zk-proofs for L1 anchoring.
 
 ## Seednode
 URL: https://docs.jmdt.io/docs/seednode
@@ -93,11 +93,11 @@ Summary: Core library powering seednode functionality.
 
 ## JMDN Node
 URL: https://docs.jmdt.io/docs/jmdt-node
-Summary: JMDT Decentralised Node (JMDN) architecture — libp2p, immudb, FastSync, Gossip Protocol, CRDT, AVC consensus, Yggdrasil mesh, block explorer and REST API.
+Summary: JMDT Decentralised Node (JMDN) architecture — libp2p, ThebeDB, FastSync, Gossip Protocol, CRDT, AVC consensus, Yggdrasil mesh, block explorer and REST API.
 
 ## Running a JMDN Node
 URL: https://docs.jmdt.io/docs/running-a-node
-Summary: Complete guide to building, installing, and deploying a JMDN node — setup_dependencies.sh (Go, immudb, Yggdrasil), build.sh (CGO binary), install_services.sh (systemd/launchd/OpenRC/rc.d), deploy.sh (atomic swap + rollback), and start_jmdn_wrapper.sh runtime wrapper.
+Summary: Complete guide to building, installing, and deploying a JMDN node — setup_dependencies.sh (Go, PostgreSQL + Redis, Yggdrasil), build.sh (CGO binary), install_services.sh (systemd/launchd/OpenRC/rc.d), deploy.sh (atomic swap + rollback), and start_jmdn_wrapper.sh runtime wrapper.
 
 ## AVC Module
 URL: https://docs.jmdt.io/docs/avc
@@ -126,10 +126,6 @@ Summary: How transactions are routed, prioritized, and batched in the JMDT mempo
 ## CRDT
 URL: https://docs.jmdt.io/docs/crdt
 Summary: Conflict-free Replicated Data Types used in JMDT for distributed state synchronization across JMDN nodes.
-
-## Database Operations
-URL: https://docs.jmdt.io/docs/db_ops
-Summary: Internal database layer operations for JMDN node storage using immudb.
 
 ## Explorer
 URL: https://docs.jmdt.io/docs/explorer
