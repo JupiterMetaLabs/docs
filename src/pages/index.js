@@ -306,7 +306,7 @@ gtag('config', 'G-8N3L9Z2Z9X');
       "name": "How do I set up the JMDT Testnet in my wallet?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "To add JMDT Testnet to an EVM wallet, use RPC URL https://testnetrpc.jmdt.io and Chain ID 8000800 (Network name: JMDT Testnet, Currency symbol: JMDT). After saving, switch your wallet to the Testnet network."
+        "text": "To add JMDT Testnet to an EVM wallet, use RPC URL https://testnetrpc.jmdt.io and Chain ID 8000800 (Network name: JMDT Testnet, Currency symbol: tJMDT, Block explorer: https://explorer.jmdt.io/testnet). After saving, switch your wallet to the Testnet network. Testnet tokens (tJMDT, 1 trillion pre-mined) are free and carry no value."
       }
     },
     {
