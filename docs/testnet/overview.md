@@ -78,7 +78,7 @@ This address is configured in your `jmdn.yaml` during node setup. See [Install &
 
 ## Testnet Faucet
 
-Testnet JMDT tokens are free and available via the **JMDT Faucet** — coming soon.
+Testnet JMDT tokens (tJMDT) are free and available via the **JMDT Faucet** at [faucet.jmdt.io](https://faucet.jmdt.io).
 
 Once live, the faucet will allow you to:
 - Connect your EVM-compatible wallet
@@ -116,7 +116,7 @@ Watch [jmdt.io](https://jmdt.io) for the faucet launch announcement.
 
 ## Before You Begin
 
-- No real tokens are required — use the faucet (coming soon)
+- No real tokens are required — claim free tJMDT from the [faucet](https://faucet.jmdt.io)
 - The same `jmdn` binary is used for both testnet and mainnet; only the config differs
 - Testnet may be reset periodically; don't rely on testnet data for production
 

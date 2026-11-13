@@ -79,13 +79,13 @@ nc -vz 34.134.156.196 15000
 
 Testnet tokens are **free** — no purchase required.
 
-**Faucet — coming soon.** Once the JMDT Testnet Faucet launches, you'll be able to:
+Claim free tJMDT from the official faucet:
 
-1. Visit the faucet URL (announced on [jmdt.io](https://jmdt.io))
-2. Connect your EVM-compatible wallet (MetaMask, etc.)
-3. Request testnet JMDT — instantly credited to your wallet
+1. Visit **[faucet.jmdt.io](https://faucet.jmdt.io)**
+2. Connect your EVM-compatible wallet (MetaMask, etc.) or paste your address
+3. Request testnet tJMDT — credited to your wallet
 
-In the meantime, you can run a testnet node without any tokens — tokens are only required once you begin submitting transactions.
+You can run a testnet node without any tokens — they are only required once you begin submitting transactions.
 
 ---
 
@@ -95,6 +95,6 @@ In the meantime, you can run a testnet node without any tokens — tokens are on
 - [ ] Port 15000 open and accessible
 - [ ] Testnet seed node reachable (`nc -vz 34.134.156.196 15000`)
 - [ ] Git installed (`git --version`)
-- [ ] No real JMDT needed yet — faucet tokens available soon
+- [ ] No real JMDT needed — free tJMDT at [faucet.jmdt.io](https://faucet.jmdt.io)
 
 Ready? Continue to [Install & Configure →](./install.md)

@@ -314,7 +314,7 @@ gtag('config', 'G-8N3L9Z2Z9X');
       "name": "Where can I get Testnet JMDT tokens?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Testnet JMDT tokens are free via the JMDT Faucet. The faucet is listed as coming soon in the Testnet documentation, and will provide tokens for development and testing."
+        "text": "Testnet JMDT tokens (tJMDT) are free via the JMDT Faucet at https://faucet.jmdt.io — connect a wallet or paste your address to claim tokens for development and testing."
       }
     },
     {

@@ -141,7 +141,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'Where can I get Testnet JMDT tokens?',
-    a: 'Testnet JMDT tokens are free via the JMDT Faucet. The faucet is listed as "coming soon" in the Testnet documentation, and will provide tokens for development and testing.',
+    a: 'Testnet JMDT tokens (tJMDT) are free via the JMDT Faucet at https://faucet.jmdt.io — connect a wallet or paste your address to claim tokens for development and testing.',
   },
   {
     q: 'How do I buy JMDT tokens?',
