@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
-const DISMISS_KEY = 'jmdt_listing_notice_dismissed_v3';
+const DISMISS_KEY = 'jmdt_listing_notice_dismissed_v4';
 
 /**
- * Anti-scam listing notice: JMDT trades only on MEXC and Coinstore. Standard closable
+ * Anti-scam listing notice: JMDT trades only on Coinstore. Standard closable
  * warning ribbon fixed at the bottom of the viewport — same style and copy
  * as jmdt.io, explorer.jmdt.io and faucet.jmdt.io. Inline-styled (the docs
  * site has no Tailwind); dismissal persists in localStorage.
@@ -75,15 +75,6 @@ export default function ListingNotice() {
             Official listing notice:
           </span>{' '}
           JMDT is listed only on{' '}
-          <a
-            href="https://www.mexc.com/exchange/JMDT_USDT"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: '#ffffff', textDecoration: 'underline', textDecorationColor: 'rgba(236,170,98,0.5)' }}
-          >
-            MEXC
-          </a>{' '}
-          and{' '}
           <a
             href="https://www.coinstore.com/spot/JMDTUSDT"
             target="_blank"

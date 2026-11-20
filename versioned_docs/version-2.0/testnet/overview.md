@@ -40,7 +40,9 @@ To connect MetaMask or any EVM-compatible wallet to JMDT Testnet:
 | Network Name | `JMDT Testnet` |
 | RPC URL | `https://testnetrpc.jmdt.io` |
 | Chain ID | `8000800` |
-| Currency Symbol | `JMDT` |
+| Currency Symbol | `tJMDT` |
+| Block Explorer | `https://explorer.jmdt.io/testnet` |
+| Supply | 1 trillion tJMDT, pre-mined (testnet only — tokens carry no value) |
 
 3. Save and switch to the JMDT Testnet network
 

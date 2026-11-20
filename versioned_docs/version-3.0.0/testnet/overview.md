@@ -40,7 +40,9 @@ To connect MetaMask or any EVM-compatible wallet to JMDT Testnet:
 | Network Name | `JMDT Testnet` |
 | RPC URL | `https://testnetrpc.jmdt.io` |
 | Chain ID | `8000800` |
-| Currency Symbol | `JMDT` |
+| Currency Symbol | `tJMDT` |
+| Block Explorer | `https://explorer.jmdt.io/testnet` |
+| Supply | 1 trillion tJMDT, pre-mined (testnet only — tokens carry no value) |
 
 3. Save and switch to the JMDT Testnet network
 
@@ -76,7 +78,7 @@ This address is configured in your `jmdn.yaml` during node setup. See [Install &
 
 ## Testnet Faucet
 
-Testnet JMDT tokens are free and available via the **JMDT Faucet** — coming soon.
+Testnet JMDT tokens (tJMDT) are free and available via the **JMDT Faucet** at [faucet.jmdt.io](https://faucet.jmdt.io).
 
 Once live, the faucet will allow you to:
 - Connect your EVM-compatible wallet
@@ -106,7 +108,7 @@ Watch [jmdt.io](https://jmdt.io) for the faucet launch announcement.
 | Chain ID | `8000800` | `7000700` |
 | RPC | `testnetrpc.jmdt.io` | `mainnetrpc.jmdt.io` |
 | Seed node | `34.134.156.196` | Will be provided post onboarding |
-| Tokens | Free via faucet | Purchase on MEXC (JMDT/USDT) |
+| Tokens | Free via faucet | Purchase on Coinstore (JMDT/USDT) |
 | Real value | No — None | Yes — Real JMDT |
 | L1 settlement | Ethereum Sepolia | Ethereum |
 
@@ -114,7 +116,7 @@ Watch [jmdt.io](https://jmdt.io) for the faucet launch announcement.
 
 ## Before You Begin
 
-- No real tokens are required — use the faucet (coming soon)
+- No real tokens are required — claim free tJMDT from the [faucet](https://faucet.jmdt.io)
 - The same `jmdn` binary is used for both testnet and mainnet; only the config differs
 - Testnet may be reset periodically; don't rely on testnet data for production
 

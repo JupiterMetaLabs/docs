@@ -137,15 +137,15 @@ const FAQ_ITEMS = [
   },
   {
     q: 'How do I set up the JMDT Testnet in my wallet?',
-    a: 'To add JMDT Testnet to an EVM wallet, use RPC URL https://testnetrpc.jmdt.io and Chain ID 8000800 (Network name: JMDT Testnet, Currency symbol: JMDT). After saving, switch your wallet to the Testnet network.',
+    a: 'To add JMDT Testnet to an EVM wallet, use RPC URL https://testnetrpc.jmdt.io and Chain ID 8000800 (Network name: JMDT Testnet, Currency symbol: tJMDT, Block explorer: https://explorer.jmdt.io/testnet). After saving, switch your wallet to the Testnet network. Testnet tokens (tJMDT, 1 trillion pre-mined) are free and carry no value.',
   },
   {
     q: 'Where can I get Testnet JMDT tokens?',
-    a: 'Testnet JMDT tokens are free via the JMDT Faucet. The faucet is listed as "coming soon" in the Testnet documentation, and will provide tokens for development and testing.',
+    a: 'Testnet JMDT tokens (tJMDT) are free via the JMDT Faucet at https://faucet.jmdt.io — connect a wallet or paste your address to claim tokens for development and testing.',
   },
   {
     q: 'How do I buy JMDT tokens?',
-    a: 'When JMDT mainnet tokens go live, they are available for purchase on MEXC and Coinstore (JMDT/USDT pairs).',
+    a: 'When JMDT mainnet tokens go live, they are available for purchase on Coinstore (JMDT/USDT pair).',
   },
 ];
 
@@ -200,19 +200,9 @@ export default function JmdtHomeNeubrutalismBody() {
               <img src="/icons/join_telegram_arrow.svg" alt="" width="15" height="10" />
             </Link>
 
-            {/* Official venues — each logo links to its JMDT/USDT pair */}
-            <div className="homeMexcChip">
+            {/* Official venue — logo links to the JMDT/USDT pair */}
+            <div className="homeListingChip">
               LISTED ON
-              <a
-                href="https://www.mexc.com/exchange/JMDT_USDT"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Trade JMDT/USDT on MEXC"
-                className="homeChipVenue"
-              >
-                <img src="/img/mexc_dark.svg" alt="MEXC" style={{ height: 12, width: 'auto', display: 'block' }} />
-              </a>
-              <span className="homeChipDivider" aria-hidden="true" />
               <a
                 href="https://www.coinstore.com/spot/JMDTUSDT"
                 target="_blank"
@@ -222,7 +212,7 @@ export default function JmdtHomeNeubrutalismBody() {
               >
                 <img src="/img/coinstore_logo.png" alt="Coinstore" style={{ height: 12, width: 'auto', display: 'block' }} />
               </a>
-              <span className="homeMexcPair">JMDT/USDT</span>
+              <span className="homeListingPair">JMDT/USDT</span>
             </div>
           </div>
 
