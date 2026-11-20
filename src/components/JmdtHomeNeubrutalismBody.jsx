@@ -145,7 +145,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'How do I buy JMDT tokens?',
-    a: 'When JMDT mainnet tokens go live, they are available for purchase on MEXC and Coinstore (JMDT/USDT pairs).',
+    a: 'When JMDT mainnet tokens go live, they are available for purchase on Coinstore (JMDT/USDT pair).',
   },
 ];
 
@@ -200,19 +200,9 @@ export default function JmdtHomeNeubrutalismBody() {
               <img src="/icons/join_telegram_arrow.svg" alt="" width="15" height="10" />
             </Link>
 
-            {/* Official venues — each logo links to its JMDT/USDT pair */}
-            <div className="homeMexcChip">
+            {/* Official venue — logo links to the JMDT/USDT pair */}
+            <div className="homeListingChip">
               LISTED ON
-              <a
-                href="https://www.mexc.com/exchange/JMDT_USDT"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Trade JMDT/USDT on MEXC"
-                className="homeChipVenue"
-              >
-                <img src="/img/mexc_dark.svg" alt="MEXC" style={{ height: 12, width: 'auto', display: 'block' }} />
-              </a>
-              <span className="homeChipDivider" aria-hidden="true" />
               <a
                 href="https://www.coinstore.com/spot/JMDTUSDT"
                 target="_blank"
@@ -222,7 +212,7 @@ export default function JmdtHomeNeubrutalismBody() {
               >
                 <img src="/img/coinstore_logo.png" alt="Coinstore" style={{ height: 12, width: 'auto', display: 'block' }} />
               </a>
-              <span className="homeMexcPair">JMDT/USDT</span>
+              <span className="homeListingPair">JMDT/USDT</span>
             </div>
           </div>
 
